@@ -1,0 +1,133 @@
+(* Copyright (C) 1987 Jensen & Partners International *)
+DEFINITION MODULE FIO;
+
+IMPORT Str, Lib;
+
+
+CONST
+  MaxOpenFiles = 15;
+
+TYPE
+  File = CARDINAL;
+
+CONST
+  DiskFull       = 0F0H ; (* Error if Write fails with disk full *)
+
+  StandardInput  = 0 ;    (* MSDOS standard handles *)
+  StandardOutput = 1 ;
+  ErrorOutput    = 2 ;
+  AuxDevice      = 3 ;
+  PrinterDevice  = 4 ;
+
+TYPE
+  BufRec =  RECORD
+              RWPos,
+              EOB,
+              BufSize : CARDINAL;
+              Buffer  : ARRAY[0..0] OF SHORTCARD;
+            END;
+
+CONST
+  BufferOverhead = SIZE(BufRec)-1;
+
+VAR
+  IOcheck : BOOLEAN;      (* if true errors terminate program with report *)
+  EOF     : BOOLEAN;
+
+
+PROCEDURE IOresult() : CARDINAL;
+
+PROCEDURE Open  (Name: ARRAY OF CHAR) : File;
+PROCEDURE Create(Name: ARRAY OF CHAR) : File;
+PROCEDURE Append(Name: ARRAY OF CHAR) : File;
+PROCEDURE Close (F: File);
+PROCEDURE Size  (F: File) : LONGCARD;
+PROCEDURE GetPos(F: File) : LONGCARD;
+PROCEDURE Seek  (F: File; Pos: LONGCARD);
+PROCEDURE Truncate(F: File);
+PROCEDURE Exists(Name: ARRAY OF CHAR) : BOOLEAN;
+PROCEDURE Erase (Name: ARRAY OF CHAR);
+PROCEDURE Rename(Name,NewName : ARRAY OF CHAR);
+
+PROCEDURE AssignBuffer(F : File; VAR Buf: ARRAY OF BYTE);
+
+
+PROCEDURE ChDir (Name: ARRAY OF CHAR);
+PROCEDURE MkDir (Name: ARRAY OF CHAR);
+PROCEDURE RmDir (Name: ARRAY OF CHAR);
+PROCEDURE GetDir(Drive: SHORTCARD; VAR Name: ARRAY OF CHAR);
+
+
+TYPE
+  PathStr  = ARRAY[0..64] OF CHAR;
+  PathTail = ARRAY[0..12] OF CHAR;
+
+TYPE
+  FileAttr = SET OF (readonly,hidden,system,volume,directory,archive);
+  DirEntry = RECORD
+               rsvd : ARRAY[0..20] OF SHORTCARD;
+               attr : FileAttr;
+               time : CARDINAL;
+               date : CARDINAL;
+               size : LONGCARD;
+               Name : PathTail;
+             END;
+
+
+PROCEDURE ReadFirstEntry(DirName : ARRAY OF CHAR;
+                         Attr    : FileAttr;
+                         VAR D   : DirEntry) : BOOLEAN;
+
+PROCEDURE ReadNextEntry (VAR D   : DirEntry) : BOOLEAN;
+
+
+PROCEDURE WrChar   (F: File; V: CHAR );
+PROCEDURE WrBool   (F: File; V: BOOLEAN  ; Length: INTEGER);
+PROCEDURE WrShtInt (F: File; V: SHORTINT ; Length: INTEGER);
+PROCEDURE WrInt    (F: File; V: INTEGER  ; Length: INTEGER);
+PROCEDURE WrLngInt (F: File; V: LONGINT  ; Length: INTEGER);
+PROCEDURE WrShtCard(F: File; V: SHORTCARD; Length: INTEGER);
+PROCEDURE WrCard   (F: File; V: CARDINAL ; Length: INTEGER);
+PROCEDURE WrLngCard(F: File; V: LONGCARD ; Length: INTEGER);
+PROCEDURE WrShtHex (F: File; V: SHORTCARD; Length: INTEGER);
+PROCEDURE WrHex    (F: File; V: CARDINAL ; Length: INTEGER);
+PROCEDURE WrLngHex (F: File; V: LONGCARD ; Length: INTEGER);
+PROCEDURE WrReal   (F: File; V: REAL     ; Precision: CARDINAL; Length: INTEGER);
+PROCEDURE WrLngReal(F: File; V: LONGREAL ; Precision: CARDINAL; Length: INTEGER);
+
+PROCEDURE WrStr    (F: File; V: ARRAY OF CHAR);
+PROCEDURE WrStrAdj (F: File; S: ARRAY OF CHAR; Length: INTEGER);
+PROCEDURE WrLn     (F: File);
+PROCEDURE WrCharRep(F: File; V: CHAR; Count: CARDINAL );
+
+PROCEDURE WrBin    (F: File; Buf: ARRAY OF BYTE; Count: CARDINAL);
+
+
+
+PROCEDURE RdChar   (F: File) : CHAR;
+PROCEDURE RdBool   (F: File) : BOOLEAN;
+PROCEDURE RdShtInt (F: File) : SHORTINT;
+PROCEDURE RdInt    (F: File) : INTEGER;
+PROCEDURE RdLngInt (F: File) : LONGINT;
+PROCEDURE RdShtCard(F: File) : SHORTCARD;
+PROCEDURE RdCard   (F: File) : CARDINAL;
+PROCEDURE RdLngCard(F: File) : LONGCARD;
+PROCEDURE RdShtHex (F: File) : SHORTCARD;
+PROCEDURE RdHex    (F: File) : CARDINAL;
+PROCEDURE RdLngHex (F: File) : LONGCARD;
+PROCEDURE RdReal   (F: File) : REAL;
+PROCEDURE RdLngReal(F: File) : LONGREAL;
+
+PROCEDURE RdItem   (F: File; VAR V: ARRAY OF CHAR);
+PROCEDURE RdStr    (F: File; VAR V: ARRAY OF CHAR);
+
+PROCEDURE RdBin    (F: File; VAR Buf: ARRAY OF BYTE; Count: CARDINAL) : CARDINAL;
+
+
+VAR Separators  : Str.CHARSET;
+VAR OK          : BOOLEAN;
+VAR ChopOff     : BOOLEAN;
+VAR Eng         : BOOLEAN;      (* Engineering notation *)
+
+
+END FIO.

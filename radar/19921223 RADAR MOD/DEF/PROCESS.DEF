@@ -1,0 +1,55 @@
+(* Copyright (C) 1987 Jensen & Partners International *)
+DEFINITION MODULE Process;
+
+TYPE SIGNAL;
+
+
+PROCEDURE StartScheduler;
+(* start the time sliced scheduler *)
+
+PROCEDURE StopScheduler;
+(* stops the time sliced scheduler *)
+
+PROCEDURE StartProcess(P: PROC; N: CARDINAL; Pr: CARDINAL);
+(* Start a new process *)
+
+
+PROCEDURE SEND(s: SIGNAL);
+(* Send a signal *)
+
+PROCEDURE WAIT(s: SIGNAL);
+(* Wait for signal *)
+
+PROCEDURE Notify(s: SIGNAL);
+(*
+   Causes a task waiting on signal s to be scheduled when possible,
+   (e.g. at next time slice).
+   If no-one is waiting on s then the call has NO effect.
+   This call CANNOT cause reschedule, so may be used by an interrupt
+   handler to safely notify another process of an events occurance.
+*)
+
+PROCEDURE Awaited(s: SIGNAL) : BOOLEAN;
+(* Returns if any process are waiting on signal *)
+
+PROCEDURE Init(VAR s: SIGNAL);
+(* Initialize a signal *)
+
+
+PROCEDURE Delay(T: CARDINAL);
+(* delays for at least T timeslices *)
+
+PROCEDURE Lock;
+(*
+   Critical region lock. Prevents the current process from
+   being de-scheduled by timeslicing, until a call to Unlock.
+   Calls to Lock may be nested.
+*)
+
+PROCEDURE Unlock;
+(* Unlock procedure, always paired with a call to Lock. *)
+
+
+
+END Process.
+
