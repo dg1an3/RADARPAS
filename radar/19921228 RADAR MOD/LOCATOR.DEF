@@ -1,0 +1,17 @@
+DEFINITION MODULE Locator;
+
+VAR
+
+  CurrRange,
+   CurrTilt : CARDINAL;
+   CursorOn : BOOLEAN;
+     CX, CY : CARDINAL;
+
+PROCEDURE WriteRangeBear( X, Y : INTEGER );
+
+
+PROCEDURE DrawCursor;
+
+
+END Locator.
+
