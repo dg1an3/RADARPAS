@@ -1,0 +1,14 @@
+DEFINITION MODULE Auto;
+
+
+FROM Stations IMPORT
+    StationPtr;
+
+PROCEDURE DoAuto( CurrentStation : StationPtr );
+
+
+PROCEDURE ProgramMenu( CurrentStation : StationPtr );
+
+PROCEDURE UpdateTimes( VAR At : ARRAY OF BYTE );
+
+END Auto.
