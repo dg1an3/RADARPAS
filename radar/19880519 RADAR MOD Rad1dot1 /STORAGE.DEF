@@ -1,0 +1,39 @@
+DEFINITION MODULE Storage; (* For E300 Radar Terminal *)
+
+FROM SYSTEM IMPORT BYTE;
+
+EXPORT QUALIFIED 
+  Initialize, Deinit,
+  SelectStation,
+  PhoneNum, PicBuf,
+  ParamType, CurrParams;
+
+PROCEDURE Initialize;
+  (* Initializes storage space and variables *)
+
+PROCEDURE Deinit;
+
+PROCEDURE SelectStation;
+  (* Displays list of stations, and, if one is selected, dials it *)
+
+TYPE
+  ParamType = RECORD
+    Tilt   : CARDINAL;
+    Range  : CARDINAL;
+    Gain   : CARDINAL;
+    Hour   : CARDINAL;
+    Minute : CARDINAL;
+  END;
+
+VAR
+  CurrParams : ParamType;
+  (* Current Radar Parameters *)
+
+  PhoneNum : ARRAY [1..50] OF CHAR;
+  (* Current station's phone number *)
+
+  PicBuf : ARRAY[1..40000] OF BYTE;
+  (* Current Picture *)
+
+END Storage.
+

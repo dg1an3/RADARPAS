@@ -1,0 +1,34 @@
+턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬턬g data at *)
+
+  BufferAt : CARDINAL;
+  (* Current offset in buffer *)
+
+TYPE
+  ModeType = (Modem, Online, RxPic);
+
+PROCEDURE Mode(IsMode : ModeType) : BOOLEAN;
+  (* Returns whether current mode is IsMode *)
+
+PROCEDURE SetMode(ToMode : ModeType);
+  (* Sets the current mode to ToMode *)
+
+CONST
+  TiltUp    = 1;
+  TiltDown  = 2;
+  RangeUp   = 3;
+  RangeDown = 4;
+  GainUp    = 5;
+  GainDown  = 6;
+  SendPic   = 7;
+  CheckMap  = 8;
+  SendMap   = 9;
+  SendParam = 10;
+
+VAR
+  Response : BOOLEAN;
+
+PROCEDURE SendCom(RadarCom : CARDINAL);
+  (* Sends Z RadarCom over RS232 *)
+
+END RS232.
+
