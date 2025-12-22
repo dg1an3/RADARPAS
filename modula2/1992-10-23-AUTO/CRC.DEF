@@ -1,0 +1,23 @@
+DEFINITION MODULE CRC;
+(*
+ *  REPERTOIRE
+ *  Release 1.5
+ *  (c) Copyright 1986, 1987 PMI
+ *  Portland, Oregon
+ *  All rights reserved
+ *  Compuserve:  74706,262
+ *  BIX:  pmi
+ *
+ *  Written and contributed by David Tingler of
+ *  Telepath Systems, Inc., in Norman, Oklahoma.
+ *
+ *)
+
+FROM SYSTEM IMPORT ADDRESS, BYTE;
+
+  PROCEDURE CalcCRC( BufAdr: ADDRESS; BufSize: CARDINAL
+      ): CARDINAL;
+
+  PROCEDURE AddCRC(VAR crc: CARDINAL; ch: BYTE);
+
+END CRC.

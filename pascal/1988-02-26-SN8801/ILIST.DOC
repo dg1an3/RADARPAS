@@ -1,0 +1,177 @@
+listing 1 
+
+/*  Point process area starting at x,y = 0,0 and of size *
+ *  XSIZE,YSIZE.					 */
+  for (y = 0 ; y < YSIZE ; y++) {
+	for (x = 0 ; x < XSIZE ; x++) {
+		write_pixel(x,y,  pfun(read_pixel(x,y),x,y) );
+	}
+  }
+
+
+
+
+listing 2 
+
+/* Use long values as sum could be over 16 bits */
+  long h[256];
+/* zero histogram array */
+  for (i = 0 ; i < 256 ; i++) h[i] = 0L;
+/* Scan area and count pixel values */
+  for (y = 0 ; y < YSIZE ; y++) {
+	for (x = 0 ; x < XSIZE ; x++) {
+		h[read_pixel(x,y)] = h[read_pixel(x,y)] + 1L;
+	}
+  }
+
+
+
+listing 3 
+
+  long h[256];
+
+/* Histogram area, result into array h */
+  histogram(x,y,dx,dy,h);		/* SIMPP routine */
+/* Find the low and high bins based on minimum count of 30 */
+  clip_histo(h,30,&low_bin,&high_bin);	/* SIMPP routine */
+/* Compute the factor for stretching the in between values */
+  step = 256.0/(double)(high_bin-low_bin+1);  /* step delta */
+  step_value = 0.0;			/* Step value */
+/* Form a translation table (LUT), tran[] for enhancing
+   contrast */
+/* Values below low_bin are set to minimum pixel value */
+  for (i = 0 ; i < low_bin ; i++) tran[i] = 0;
+/* Values between low_bin and high_bin are stretched to range
+   from 0 to 255 */
+  for (i = low_bin ; i <= high_bin ; i++) {
+	tran[i] = step_value;
+	step_value += step;
+  }
+/* Values above high_bin are set to maximum pixel value */
+  for (i = high_bin+1 ; i < 256 ; i++) tran[i] = 255;
+/* Now point process area using the translation table, tran[] */
+  while (dy--) {
+	for (i = x; i < x + dx; i++) {
+		write_pixel(i,y,  tran[read_pixel(i,y)] );
+	}
+  }
+
+
+
+listing 4
+
+/* Change the output LUTs to display the pixel values *
+ * ranging from v_begin to v_end in red.	      */
+LUT_highlight(v_begin,v_end)
+{
+  int i;
+
+/* Set output tables to "linear".  This will display
+   the image in normal, monochrome fashion */
+  for (i = 0 ; i < 256 ; i++) {
+	write_LUT(RED,i,i);
+	write_LUT(GREEN,i,i);
+	write_LUT(BLUE,i,i);
+  }
+/* Set the desired range so that ONLY red is displayed */
+  for (i = v_begin ; i <= v_end ; i++) {
+	write_LUT(RED,i,255);	/* Full red */
+	write_LUT(GREEN,i,0);	/* No green */
+	write_LUT(BLUE,i,0);	/* No blue */
+  }
+
+
+
+listing 5 
+
+/* Set up kernel for "sharpening" (high-frequency boosting)
+   the image */
+  static int kernel[9] = {-1,-1,-1,
+			  -1, 9,-1,
+			  -1,-1,-1,};
+
+/* Increment starting position and decrement image size to accommodate the
+   convolution edge effects */
+  x++; y++; dx--; dy--;
+/* Set up address offsets for the output */
+  xx = 0; yy = 0;
+/* Scan through source image, output to destination */
+  for (i = y ; i < y+dy ; i++) {
+     xx = 0;			/* Reset x output index */
+     for (j = x ; j < x+dx ; j++) {
+	sum = 0;		/* Zero convolution sum */
+	k_pointer = kernel;	/* Pointer to kernel values */
+/* Inner loop to do convolution (correlation!) */
+	for ( n = -1 ; n <= 1 ; n++) {
+	  for (m = -1 ; m <= 1 ; m++)
+		sum = sum + read_pixel(j+m,i+n)*(*k_pointer++);
+	 }
+/* Output processing */
+	if (sum < 0) sum = 0;
+	write_pixel(x_out + xx, y_out + yy, sum);
+	xx++;		/* Increment output X address offset */
+    } yy++;		/* Increment output Y address offset */
+  }
+
+
+
+listing 6 
+
+/* Variables used in labeling */
+  static int count;
+  static int newval = 1;
+
+/* Search image area for target values == 255 */
+  for (y = 0 ; y < YSIZE ; y++) {
+    for (x = 0 ; x < XSIZE ; x++) {
+/* If we find a target value, recursively label
+   the connected pixels with a new value (newval) */
+	if (read_pixel(x,y) == 255) {
+		count = 0;	/* Zero pixel count */
+		recursive_label(x,y);
+		newval ++j
+	}
+    }
+  }
+
+  recursive_label(x,y)
+  {
+	write_pixel(x,y,newval);	/* Replace with newval */
+	count++;			/* Increment count */
+
+/* Recurse left */
+	x--;
+	if (read_pixel(x,y) == 255) recursive_label(x,y);
+/* Recurse right */
+	x += 2;
+	if (read_pixel(x,y) == 255) recursive_label(x,y);
+	x--;
+/* Recurse up (remember: video coordinates!) */
+	y--;
+	if (read_pixel(x,y) == 255) recursive_label(x,y);
+/* Recurse down */
+	y += 2;
+	if (read_pixel(x,y) == 255) recursive_label(x,y);
+  }
+
+
+
+listing 7 
+
+  int xs,ys;	/* Start of source */
+  int x,y;	/* Start of destination */
+  int dx,dy;	/* Size of destination area */
+  double a,b;	/* x,y scale factors */
+  xa,ya;	/* x and y addresses for source */
+
+  for (i = 0 ; i < dy ; i++) {
+    for (j = 0 ; j < dx ; j++) {
+	xa = xs + (int)((double)j/a);	/* x address */
+	ya = ys + (int)((double)i/b);	/* y address */
+/* Write out new value to destination */
+	write_pixel(x+j, y+i, read_pixel(xa,ya));
+    }
+  }
+
+
+

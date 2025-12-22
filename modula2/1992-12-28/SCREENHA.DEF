@@ -1,0 +1,91 @@
+DEFINITION MODULE ScreenHandler;
+
+(*********************************************************)
+(* Created   : 1/26/87                                   *)
+(* Last Edit : 2/9/87                                    *)
+(* Author    : Derek Lane                                *)
+(* System    : LOGITECH MODULA-2/86                      *)
+(*                                                       *)
+(* Screen handler for radar terminal.  Controls most     *)
+(* elements of the screen.                               *)
+(*********************************************************)
+
+FROM SYSTEM IMPORT ADDRESS;
+FROM TimeDate IMPORT Time;
+FROM E300Interface IMPORT RTState, Map;
+
+VAR
+  ArmyTime : BOOLEAN;
+(* Set to TRUE to write time in 24 hour format, FALSE for am/pm format *)
+
+PROCEDURE WriteTime(ForTime : Time);
+(* Writes the time in 7 spaces, with am/pm if ArmyTime is TRUE *)
+
+PROCEDURE WriteDate(ForTime : Time);
+(* Writes the date in 8 spaces *)
+
+PROCEDURE WriteTilt(Tilt : CARDINAL);
+(* Writes the tilt in 2 spaces, right justified *)
+
+PROCEDURE WriteRange(Range : CARDINAL);
+(* Writes the range in 3 spaces, right justified.
+   Writing the range sets the range for map drawing,
+   and causes any maps to be redrawn. *)
+
+PROCEDURE WriteGain(Gain : CARDINAL);
+(* Writes the gain in 3 spaces, right justified *)
+
+PROCEDURE WriteParams(Tilt, Range, Gain : CARDINAL;
+                                ForTime : Time;
+                                     RT : RTState );
+(* Writes the parameters in the four screen corners.  If maps are
+   on, redraws them to new range. *)
+
+VAR
+  RngMksOn : BOOLEAN;
+
+PROCEDURE WriteRngMks( On : BOOLEAN );
+
+VAR
+  ScrnMap : ARRAY [ 1..2 ] OF Map;
+  MapOn   : ARRAY [ 1..2 ] OF BOOLEAN;
+
+PROCEDURE WriteMap( Number : CARDINAL; On : BOOLEAN );
+
+PROCEDURE SetHelpMode( Mode : CARDINAL );
+
+VAR
+  HelpOn : BOOLEAN;
+
+PROCEDURE WriteHelp( On : BOOLEAN );
+
+PROCEDURE DrawScale;
+
+PROCEDURE ComprLine( Number        : CARDINAL;
+                     VAR Red, Grn  : ARRAY OF BYTE;
+                     VAR Buffer    : ARRAY OF BYTE;
+                     VAR Length    : CARDINAL );
+
+VAR
+    FullPic  :  BOOLEAN;
+
+PROCEDURE WritePic( VAR Buffer : ARRAY OF BYTE; BufSize : CARDINAL );
+
+PROCEDURE ClearScreen;
+
+PROCEDURE Redraw;
+(* Redraws the maps and range marks at indicated range *)
+
+PROCEDURE ToggleGraphics;
+
+PROCEDURE Message(String : ARRAY OF CHAR);
+(* Prints message at bottom of screen.  Call Message('') to turn off *)
+
+PROCEDURE Prompt(String : ARRAY OF CHAR; VAR Response : ARRAY OF CHAR);
+(* Prints String and then reads in Response *)
+
+PROCEDURE Pause(String : ARRAY OF CHAR) : CHAR;
+(* Prints String and waits for a key press, then returns key pressed *)
+
+END ScreenHandler.
+

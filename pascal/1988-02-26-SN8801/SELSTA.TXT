@@ -1,0 +1,16 @@
+อออออ SELECT STATION อออออ
+
+
+
+
+
+
+
+
+
+
+ออออออออออออออออออออออออออ
+ F1  ๚ Add station
+ F2  ๚ Remove station
+ ESC ๚ Exit
+

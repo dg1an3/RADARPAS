@@ -1,0 +1,131 @@
+(* Copyright (C) 1987 Jensen & Partners International *)
+DEFINITION MODULE Graph; (* Basic graphics routines *)
+
+
+(* Filling functions take a combination of two colors
+   encoded as Color1 + NumColor * Color2 *)
+
+(* Device independant routines
+   provided as procedure variables
+   (see below)
+
+PROCEDURE GraphMode;
+
+PROCEDURE TextMode;
+
+PROCEDURE Plot(x,y: CARDINAL; Color: CARDINAL);
+(* set a single pixel to given color *)
+
+PROCEDURE Point(x,y: CARDINAL) : CARDINAL;
+(* read a pixel of the screen *)
+
+PROCEDURE HLine(x,y,x2: CARDINAL; FillColor: CARDINAL);
+(* draw a horizontal line of given color (used for filling) *)
+
+
+End of device dependant routines
+*)
+
+PROCEDURE Line(x1,y1,x2,y2: CARDINAL; Color: CARDINAL);
+(* draw an arbitrary line in given color *)
+
+PROCEDURE Circle(x0,y0,r: CARDINAL; c: CARDINAL);
+(* centre x0,y0; radius r *)
+
+PROCEDURE Disc(x0,y0,r : CARDINAL; FillColor: CARDINAL);
+(* filled circle, centre x0,y0; radius r *)
+
+PROCEDURE Ellipse ( x0,y0 : CARDINAL ;  (* center *)
+                    a0,b0 : CARDINAL ;  (* semi-axes *)
+                    c     : CARDINAL ;  (* color *)
+                    fill  : BOOLEAN ) ; (* wether filled *)
+
+
+
+PROCEDURE Polygon(n: CARDINAL; px,py: ARRAY OF CARDINAL; FillColor: CARDINAL);
+(* filled polygon of n points *)
+
+
+(*
+   Initialization routines.
+   Called to setup display output type.
+*)
+
+PROCEDURE InitCGA ;    (* Default *)
+PROCEDURE InitEGA ;
+PROCEDURE InitVGA ;
+PROCEDURE InitHerc ;
+PROCEDURE InitATT ;
+
+
+TYPE
+  PlotProc     = PROCEDURE ((* x *) CARDINAL,(* y *)CARDINAL,(* c *)CARDINAL);
+  PointProc    = PROCEDURE ((* x *) CARDINAL,(* y *)CARDINAL) : CARDINAL ;
+  HLineProc    = PROCEDURE ((* x *) CARDINAL,(* y *)CARDINAL,(* x2 *)CARDINAL,
+                            (* FillColor *)CARDINAL);
+VAR
+  Width    : CARDINAL ;     (* x values are 0..Width-1  *)
+  Depth    : CARDINAL ;     (* y values are 0..Depth-1  *)
+  NumColor : CARDINAL ;     (* Colors are 0..NumColor-1 *)
+
+(*
+  procedure variables for device dependant routines
+*)
+
+  GraphMode,TextMode     : PROC ;
+  Plot                   : PlotProc ;
+  Point                  : PointProc ;
+  HLine                  : HLineProc ;
+
+(*
+    Device specific constants and routines
+    equivalent to the variables Width, Depth and NumColors
+*)
+PROCEDURE CGAGraphMode;
+PROCEDURE CGATextMode;
+PROCEDURE CGAPlot(x,y:CARDINAL;c:CARDINAL);
+PROCEDURE CGAPoint(x,y:CARDINAL) : CARDINAL;
+PROCEDURE CGAHLine ( x,y,x2 : CARDINAL; c:CARDINAL );
+PROCEDURE EGAGraphMode;
+PROCEDURE EGAPlot( x,y,c : CARDINAL);
+PROCEDURE EGAPoint(x,y:CARDINAL) : CARDINAL;
+PROCEDURE EGAHLine ( x,y,x2 : CARDINAL; c:CARDINAL );
+PROCEDURE HercGraphMode;
+PROCEDURE HercTextMode;
+PROCEDURE HercPlot(x,y:CARDINAL;c:CARDINAL);
+PROCEDURE HercPoint(x,y:CARDINAL) : CARDINAL;
+PROCEDURE HercHLine ( x,y,x2 : CARDINAL; c:CARDINAL );
+PROCEDURE ATTGraphMode;
+PROCEDURE ATTPlot(x,y:CARDINAL;c:CARDINAL);
+PROCEDURE ATTPoint(x,y:CARDINAL) : CARDINAL;
+PROCEDURE ATTHLine ( x,y,x2 : CARDINAL; c:CARDINAL );
+CONST
+  VGAGraphMode = EGAGraphMode ;
+  VGAPlot      = EGAPlot ;
+  VGAPoint     = EGAPoint ;
+  VGAHLine     = EGAHLine ;
+  EGATextMode  = CGATextMode ;
+  VGATextMode  = CGATextMode ;
+  ATTTextMode  = CGATextMode ;
+
+CONST
+  CGAWidth           = 320 ;
+  CGADepth           = 200 ;
+  CGANumColor        = 4 ;
+  EGAWidth           = 640 ;
+  EGADepth           = 350 ;
+  EGANumColor        = 16 ;
+  VGAWidth           = 640 ;
+  VGADepth           = 480 ;
+  VGANumColor        = 16 ;
+  HercWidth          = 720 ;
+  HercDepth          = 348 ;
+  HercNumColor       = 2 ;
+  ATTWidth           = 640 ;
+  ATTDepth           = 400 ;
+  ATTNumColor        = 2 ;
+
+
+
+END Graph.
+

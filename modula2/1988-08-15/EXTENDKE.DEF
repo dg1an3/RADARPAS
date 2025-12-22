@@ -1,0 +1,42 @@
+DEFINITION MODULE ExtendKey;
+
+(*********************************************************)
+(* Created   : 2/22/87                                   *)
+(* Last Edit : 2/22/87                                   *)
+(* Author    : Derek Lane                                *)
+(* System    : LOGITECH MODULA-2/86                      *)
+(*                                                       *)
+(* Extended ASCII support for IBM keyboard, including    *)
+(* function and cursor key codes.                        *)
+(*                                                       *)
+(*********************************************************)
+
+CONST
+  F1 = 073C; F2 = 074C; F3 = 075C; F4 = 076C;
+  F5 = 077C; F6 = 100C; F7 = 101C; F8 = 102C;
+  F9 = 103C; F10 = 104C;
+
+  shftF1 = 073C; shftF2 = 074C; shftF3 = 075C; shftF4 = 076C;
+  shftF5 = 077C; shftF6 = 100C; shftF7 = 101C; shftF8 = 102C;
+  shftF9 = 103C; shftF10 = 104C;
+
+  ctrlF1 = 073C; ctrlF2 = 074C; ctrlF3 = 075C; ctrlF4 = 076C;
+  ctrlF5 = 077C; ctrlF6 = 100C; ctrlF7 = 101C; ctrlF8 = 102C;
+  ctrlF9 = 103C; ctrlF10 = 104C;
+
+  altF1 = 073C; altF2 = 074C; altF3 = 075C; altF4 = 076C;
+  altF5 = 077C; altF6 = 100C; altF7 = 101C; altF8 = 102C;
+  altF9 = 103C; altF10 = 104C;
+
+  larr  = 113C; rarr  = 115C;
+  uarr  = 110C; darr  = 120C;
+  Home  = 107C; End   = 117C;
+  PgUp  = 111C; PgDn  = 121C;
+  Ins   = 122C; Del   = 123C;
+
+PROCEDURE ExtRead(VAR Code : CHAR; VAR Extended : BOOLEAN);
+(* Read a key from the keyboard, checking to see if it is an extended
+   key code *)
+
+END ExtendKey.
+
