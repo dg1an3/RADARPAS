@@ -1,0 +1,464 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix radar: <http://example.org/radarpas/ontology#> .
+@prefix src: <http://example.org/radarpas/source#> .
+
+# =============================================================================
+# RADARPAS Data Types and Structures
+# =============================================================================
+
+# =============================================================================
+# Pascal/Modula-2 Subrange Types
+# =============================================================================
+
+src:Type_TiltType a radar:SubrangeType ;
+    rdfs:label "TiltType" ;
+    dc:description "Radar tilt angle index (0-11 representing 0,1,2,3,4,5,6,8,10,12,15,20 degrees)" ;
+    radar:lowBound 0 ;
+    radar:highBound 11 ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Type_RangeType a radar:SubrangeType ;
+    rdfs:label "RangeType" ;
+    dc:description "Radar range index (0-4 representing 10, 25, 50, 100, 200 nautical miles)" ;
+    radar:lowBound 0 ;
+    radar:highBound 4 ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Type_GainType a radar:SubrangeType ;
+    rdfs:label "GainType" ;
+    dc:description "Radar gain level (1-17 preset or dynamic levels)" ;
+    radar:lowBound 1 ;
+    radar:highBound 17 ;
+    radar:definedIn src:File_RADAR_PAS .
+
+# =============================================================================
+# Enumeration Types
+# =============================================================================
+
+src:Type_ModeType a radar:EnumerationType ;
+    rdfs:label "ModeType" ;
+    dc:description "Operating mode of the terminal" ;
+    radar:hasEnumValue "Modem", "Interactive", "WaitPic", "RxPic", "RxGraph" ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Type_M2_ModeType a radar:EnumerationType ;
+    rdfs:label "ModeType (M2)" ;
+    dc:description "Operating mode in Modula-2 version" ;
+    radar:hasEnumValue "Modem", "Interactive", "RxPic", "RxGraph" ;
+    radar:definedIn src:File_MAIN_MOD .
+
+src:Type_RTState a radar:EnumerationType ;
+    rdfs:label "RTState" ;
+    dc:description "Real-time state of the radar" ;
+    radar:hasEnumValue "NoRT" ;
+    radar:definedIn src:File_E300INTE_MOD .
+
+src:Type_ResultCode a radar:EnumerationType ;
+    rdfs:label "ResultCode" ;
+    dc:description "Modem result codes" ;
+    radar:definedIn src:File_MODEM_MOD .
+
+src:Type_PicFlag a radar:EnumerationType ;
+    rdfs:label "PicFlag" ;
+    dc:description "Picture status flags" ;
+    radar:hasEnumValue "NotSaved" ;
+    radar:definedIn src:File_PICTURES_MOD .
+
+# =============================================================================
+# Record Types - Pascal
+# =============================================================================
+
+src:Type_TimeRec a radar:RecordType ;
+    rdfs:label "TimeRec" ;
+    dc:description "Time and date record structure" ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:hasField src:Field_Hour, src:Field_Minute, src:Field_Month,
+                   src:Field_Day, src:Field_Year .
+
+src:Field_Hour a radar:Field ;
+    rdfs:label "Hour" ;
+    dc:description "Hour component (0-23)" .
+
+src:Field_Minute a radar:Field ;
+    rdfs:label "Minute" ;
+    dc:description "Minute component (0-59)" .
+
+src:Field_Month a radar:Field ;
+    rdfs:label "Month" ;
+    dc:description "Month component (1-12)" .
+
+src:Field_Day a radar:Field ;
+    rdfs:label "Day" ;
+    dc:description "Day component (1-31)" .
+
+src:Field_Year a radar:Field ;
+    rdfs:label "Year" ;
+    dc:description "Year component" .
+
+src:Type_PicRec a radar:RecordType ;
+    rdfs:label "PicRec" ;
+    dc:description "Picture metadata record" ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:hasField src:Field_PicFileName, src:Field_PicTime, src:Field_PicTilt,
+                   src:Field_PicRange, src:Field_PicGain, src:Field_FileDate,
+                   src:Field_FileTime .
+
+src:Field_PicFileName a radar:Field ;
+    rdfs:label "FileName" ;
+    dc:description "Name of the picture file" .
+
+src:Field_PicTime a radar:Field ;
+    rdfs:label "Time" ;
+    dc:description "Time the picture was taken" .
+
+src:Field_PicTilt a radar:Field ;
+    rdfs:label "Tilt" ;
+    dc:description "Tilt angle when picture was taken" .
+
+src:Field_PicRange a radar:Field ;
+    rdfs:label "Range" ;
+    dc:description "Range setting when picture was taken" .
+
+src:Field_PicGain a radar:Field ;
+    rdfs:label "Gain" ;
+    dc:description "Gain setting when picture was taken" .
+
+src:Field_FileDate a radar:Field ;
+    rdfs:label "FileDate" ;
+    dc:description "DOS file date" .
+
+src:Field_FileTime a radar:Field ;
+    rdfs:label "FileTime" ;
+    dc:description "DOS file time" .
+
+# =============================================================================
+# Record Types - Modula-2
+# =============================================================================
+
+src:Type_M2_Time a radar:RecordType ;
+    rdfs:label "Time" ;
+    dc:description "TimeDate module time structure" ;
+    radar:definedIn src:File_TIMEDATE_MOD ;
+    radar:hasField src:Field_M2_day, src:Field_M2_minute .
+
+src:Field_M2_day a radar:Field ;
+    rdfs:label "day" ;
+    dc:description "Day number" .
+
+src:Field_M2_minute a radar:Field ;
+    rdfs:label "minute" ;
+    dc:description "Minute of day (0-1439)" .
+
+src:Type_M2_PictureRec a radar:RecordType ;
+    rdfs:label "PictureRec" ;
+    dc:description "Picture record with metadata and data pointer" ;
+    radar:definedIn src:File_PICTURES_MOD ;
+    radar:hasField src:Field_M2_TimeofPic, src:Field_M2_Tilt, src:Field_M2_Range,
+                   src:Field_M2_Gain, src:Field_M2_Data, src:Field_M2_Size,
+                   src:Field_M2_Flags, src:Field_M2_Purge .
+
+src:Field_M2_TimeofPic a radar:Field ;
+    rdfs:label "TimeofPic" ;
+    dc:description "Time picture was captured" .
+
+src:Field_M2_Tilt a radar:Field ;
+    rdfs:label "Tilt" ;
+    dc:description "Tilt angle index" .
+
+src:Field_M2_Range a radar:Field ;
+    rdfs:label "Range" ;
+    dc:description "Range setting index" .
+
+src:Field_M2_Gain a radar:Field ;
+    rdfs:label "Gain" ;
+    dc:description "Gain setting" .
+
+src:Field_M2_Data a radar:Field ;
+    rdfs:label "Data" ;
+    dc:description "Pointer to compressed picture data" .
+
+src:Field_M2_Size a radar:Field ;
+    rdfs:label "Size" ;
+    dc:description "Size of picture data in bytes" .
+
+src:Field_M2_Flags a radar:Field ;
+    rdfs:label "Flags" ;
+    dc:description "Picture status flags (PicFlagSet)" .
+
+src:Field_M2_Purge a radar:Field ;
+    rdfs:label "Purge" ;
+    dc:description "Purge priority number for memory management" .
+
+src:Type_M2_StationRec a radar:RecordType ;
+    rdfs:label "StationRec" ;
+    dc:description "Station configuration and picture list" ;
+    radar:definedIn src:File_STATIONS_MOD ;
+    radar:hasField src:Field_M2_StationName, src:Field_M2_PhoneNumber,
+                   src:Field_M2_Picture, src:Field_M2_NumofPictures,
+                   src:Field_M2_CurrentPicture .
+
+src:Field_M2_StationName a radar:Field ;
+    rdfs:label "Name" ;
+    dc:description "Station identifier name" .
+
+src:Field_M2_PhoneNumber a radar:Field ;
+    rdfs:label "PhoneNumber" ;
+    dc:description "Station phone number for modem dialing" .
+
+src:Field_M2_Picture a radar:Field ;
+    rdfs:label "Picture" ;
+    dc:description "Array of picture records (max 100)" .
+
+src:Field_M2_NumofPictures a radar:Field ;
+    rdfs:label "NumofPictures" ;
+    dc:description "Count of pictures for this station" .
+
+src:Field_M2_CurrentPicture a radar:Field ;
+    rdfs:label "CurrentPicture" ;
+    dc:description "Index of currently displayed picture" .
+
+src:Type_M2_Options a radar:RecordType ;
+    rdfs:label "Options" ;
+    dc:description "Program configuration options" ;
+    radar:definedIn src:File_MAIN_MOD ;
+    radar:hasField src:Field_M2_Baud, src:Field_M2_ComPort, src:Field_M2_Update,
+                   src:Field_M2_ArmyTime, src:Field_M2_Maps, src:Field_M2_Banner .
+
+src:Field_M2_Baud a radar:Field ;
+    rdfs:label "Baud" ;
+    dc:description "Serial port baud rate (300, 1200, 2400, 9600, 19200)" .
+
+src:Field_M2_ComPort a radar:Field ;
+    rdfs:label "ComPort" ;
+    dc:description "COM port number (1 or 2)" .
+
+src:Field_M2_Update a radar:Field ;
+    rdfs:label "Update" ;
+    dc:description "Auto-update interval in minutes (0=off)" .
+
+src:Field_M2_ArmyTime a radar:Field ;
+    rdfs:label "ArmyTime" ;
+    dc:description "Use 24-hour clock format (TRUE) or 12-hour (FALSE)" .
+
+src:Field_M2_Maps a radar:Field ;
+    rdfs:label "Maps" ;
+    dc:description "Draw maps in front (TRUE) or behind (FALSE)" .
+
+src:Field_M2_Banner a radar:Field ;
+    rdfs:label "Banner" ;
+    dc:description "Custom banner text (40 chars max)" .
+
+# =============================================================================
+# Array Types
+# =============================================================================
+
+src:Type_PictureArray a radar:ArrayType ;
+    rdfs:label "Picture Array" ;
+    dc:description "Array of up to 100 picture records per station" ;
+    radar:lowBound 1 ;
+    radar:highBound 100 .
+
+src:Type_LandmarkArray a radar:ArrayType ;
+    rdfs:label "Landmark Array" ;
+    dc:description "Array of up to 100 landmarks per map" ;
+    radar:lowBound 0 ;
+    radar:highBound 99 .
+
+src:Type_SegmentArray a radar:ArrayType ;
+    rdfs:label "Segment Array" ;
+    dc:description "Array of up to 1000 segments per map" ;
+    radar:lowBound 0 ;
+    radar:highBound 999 .
+
+src:Type_LineBuffer a radar:ArrayType ;
+    rdfs:label "Line Buffer" ;
+    dc:description "Buffer for radar picture line (160 bytes each for Red and Green)" ;
+    radar:lowBound 0 ;
+    radar:highBound 159 .
+
+# =============================================================================
+# Set Types
+# =============================================================================
+
+src:Type_PicFlagSet a radar:DataType ;
+    rdfs:label "PicFlagSet" ;
+    dc:description "Set of PicFlag values for picture status" ;
+    radar:definedIn src:File_PICTURES_MOD .
+
+src:Type_PlaneSet a radar:DataType ;
+    rdfs:label "PlaneSet" ;
+    dc:description "Set of VGA plane numbers for drawing operations" ;
+    radar:definedIn src:File_GRAPHICS_MOD .
+
+# =============================================================================
+# Pointer Types
+# =============================================================================
+
+src:Type_StationPtr a radar:PointerType ;
+    rdfs:label "StationPtr" ;
+    dc:description "Pointer to StationRec" ;
+    radar:definedIn src:File_STATIONS_MOD .
+
+src:Type_ADDRESS a radar:PointerType ;
+    rdfs:label "ADDRESS" ;
+    dc:description "Generic memory address pointer from SYSTEM module" ;
+    radar:definedIn src:File_SYSTEM_MOD .
+
+# =============================================================================
+# Constants
+# =============================================================================
+
+src:Const_MaxPictures a radar:Constant ;
+    rdfs:label "MaxPictures" ;
+    dc:description "Maximum number of pictures per station" ;
+    rdf:value 100 .
+
+src:Const_MaxLandmarks a radar:Constant ;
+    rdfs:label "MaxLandmarks" ;
+    dc:description "Maximum number of landmarks per map" ;
+    rdf:value 100 .
+
+src:Const_MaxSegments a radar:Constant ;
+    rdfs:label "MaxSegments" ;
+    dc:description "Maximum number of segments per map" ;
+    rdf:value 1000 .
+
+src:Const_ScreenWidth a radar:Constant ;
+    rdfs:label "ScreenWidth" ;
+    dc:description "EGA screen width in pixels" ;
+    rdf:value 640 .
+
+src:Const_ScreenHeight a radar:Constant ;
+    rdfs:label "ScreenHeight" ;
+    dc:description "EGA screen height in pixels" ;
+    rdf:value 350 .
+
+src:Const_NumPlanes a radar:Constant ;
+    rdfs:label "NumPlanes" ;
+    dc:description "Number of VGA display planes" ;
+    rdf:value 4 .
+
+# Plane assignments
+src:Const_PlaneRed a radar:Constant ;
+    rdfs:label "Plane 0 (Red)" ;
+    dc:description "VGA plane 0 for red color channel" ;
+    rdf:value 0 .
+
+src:Const_PlaneGreen a radar:Constant ;
+    rdfs:label "Plane 1 (Green)" ;
+    dc:description "VGA plane 1 for green color channel" ;
+    rdf:value 1 .
+
+src:Const_PlaneCyan a radar:Constant ;
+    rdfs:label "Plane 2 (Cyan overlay)" ;
+    dc:description "VGA plane 2 for cyan overlay (maps, range marks)" ;
+    rdf:value 2 .
+
+src:Const_PlaneStatus a radar:Constant ;
+    rdfs:label "Plane 3 (Status)" ;
+    dc:description "VGA plane 3 for status text and UI" ;
+    rdf:value 3 .
+
+# Baud rate options
+src:Const_Baud300 a radar:Constant ;
+    rdfs:label "Baud 300" ;
+    rdf:value 300 .
+
+src:Const_Baud1200 a radar:Constant ;
+    rdfs:label "Baud 1200" ;
+    rdf:value 1200 .
+
+src:Const_Baud2400 a radar:Constant ;
+    rdfs:label "Baud 2400" ;
+    rdf:value 2400 .
+
+src:Const_Baud9600 a radar:Constant ;
+    rdfs:label "Baud 9600" ;
+    rdf:value 9600 .
+
+src:Const_Baud19200 a radar:Constant ;
+    rdfs:label "Baud 19200" ;
+    rdf:value 19200 .
+
+# Radar command codes
+src:Const_Cmd_OnOff a radar:Constant ;
+    rdfs:label "Command #1 (OnOff)" ;
+    dc:description "Power on/off command" ;
+    rdf:value 1 .
+
+src:Const_Cmd_TiltUp a radar:Constant ;
+    rdfs:label "Command #2 (TiltUp)" ;
+    dc:description "Increase tilt angle" ;
+    rdf:value 2 .
+
+src:Const_Cmd_RangeUp a radar:Constant ;
+    rdfs:label "Command #3 (RangeUp)" ;
+    dc:description "Increase range" ;
+    rdf:value 3 .
+
+src:Const_Cmd_SendPic a radar:Constant ;
+    rdfs:label "Command #4 (SendPic)" ;
+    dc:description "Request picture transmission" ;
+    rdf:value 4 .
+
+src:Const_Cmd_TiltDown a radar:Constant ;
+    rdfs:label "Command #5 (TiltDown)" ;
+    dc:description "Decrease tilt angle" ;
+    rdf:value 5 .
+
+src:Const_Cmd_RangeDown a radar:Constant ;
+    rdfs:label "Command #6 (RangeDown)" ;
+    dc:description "Decrease range" ;
+    rdf:value 6 .
+
+src:Const_Cmd_SendGraph a radar:Constant ;
+    rdfs:label "Command #10 (SendGraph)" ;
+    dc:description "Request map overlay transmission" ;
+    rdf:value 10 .
+
+src:Const_Cmd_GainUp a radar:Constant ;
+    rdfs:label "Command #13 (GainUp)" ;
+    dc:description "Increase gain" ;
+    rdf:value 13 .
+
+src:Const_Cmd_GainDown a radar:Constant ;
+    rdfs:label "Command #14 (GainDown)" ;
+    dc:description "Decrease gain" ;
+    rdf:value 14 .
+
+src:Const_Cmd_CheckGraph a radar:Constant ;
+    rdfs:label "Command #16 (CheckGraph)" ;
+    dc:description "Check if new maps available" ;
+    rdf:value 16 .
+
+# Function key codes
+src:Const_F1 a radar:Constant ;
+    rdfs:label "F1" ;
+    dc:description "Function key F1 extended code" .
+
+src:Const_F2 a radar:Constant ;
+    rdfs:label "F2" ;
+    dc:description "Function key F2 extended code" .
+
+src:Const_F3 a radar:Constant ;
+    rdfs:label "F3" ;
+    dc:description "Function key F3 extended code" .
+
+src:Const_F4 a radar:Constant ;
+    rdfs:label "F4" ;
+    dc:description "Function key F4 extended code" .
+
+src:Const_F5 a radar:Constant ;
+    rdfs:label "F5" ;
+    dc:description "Function key F5 extended code" .
+
+src:Const_F6 a radar:Constant ;
+    rdfs:label "F6" ;
+    dc:description "Function key F6 extended code" .
+
+src:Const_F7 a radar:Constant ;
+    rdfs:label "F7" ;
+    dc:description "Function key F7 - Request picture" .
