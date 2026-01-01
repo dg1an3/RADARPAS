@@ -1,0 +1,697 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix radar: <http://example.org/radarpas/ontology#> .
+@prefix src: <http://example.org/radarpas/source#> .
+
+# =============================================================================
+# Main Product Modules
+# =============================================================================
+
+src:GDEM a radar:Program ;
+    rdfs:label "GDEM" ;
+    dc:title "Graphical Data Entry Manager" ;
+    dc:description "Digital map and geographic data entry tool for acetate/protractor coordinates" ;
+    radar:purpose "Line-based map data entry with bearing/range coordinate system" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfVersion src:GDEM_v2 .
+
+src:RADARPAS_Main a radar:Program ;
+    rdfs:label "RADAR.PAS Main Program" ;
+    dc:title "RADARPAS Main Terminal" ;
+    dc:description "Weather radar terminal main program for E300 interface" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:lineCount 1895 ;
+    radar:partOfVersion src:RADARPAS_v2_1 .
+
+src:E300PC a radar:Program ;
+    rdfs:label "E300PC" ;
+    dc:title "E300PC Radar Terminal" ;
+    dc:description "Modula-2 rewrite of RADARPAS for E300 radar" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfVersion src:E300PC_v3_1 .
+
+src:E250Term a radar:Program ;
+    rdfs:label "E250Term" ;
+    dc:title "E250 Terminal System" ;
+    dc:description "Terminal program for E250 radar with TSR screen transmission" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfVersion src:E250Term_v3 .
+
+# =============================================================================
+# Modula-2 Modules - Core
+# =============================================================================
+
+src:Module_MAIN a radar:Module ;
+    rdfs:label "MAIN" ;
+    dc:description "Master control loop and station management" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:definedIn src:File_MAIN_MOD_1988,    # 1988-08-15 initial port
+                    src:File_MAIN_MOD ;         # 1992-12-28 final E300PC 3.1
+    radar:imports src:Module_ANALYSIS, src:Module_DB, src:Module_E300INTE,
+                  src:Module_GRAPHICS, src:Module_LOCATOR, src:Module_MODEM,
+                  src:Module_PICTURES, src:Module_RS, src:Module_SCREENHA,
+                  src:Module_SELECTOR, src:Module_STATIONS .
+
+src:Module_ANALYSIS a radar:Module ;
+    rdfs:label "ANALYSIS" ;
+    dc:description "Real-time storm cell recognition algorithms" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_ANALYSIS_MOD ;     # 1992-10-23
+    radar:purpose "Marker tracking and radar analysis" .
+
+src:Module_AUTO a radar:Module ;
+    rdfs:label "AUTO" ;
+    dc:description "Automated picture capture and processing" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_AUTO_MOD_1988,     # 1988-08-15
+                    src:File_AUTO_MOD .          # 1992-10-23
+
+src:Module_CRC a radar:Module ;
+    rdfs:label "CRC" ;
+    dc:description "Cyclic redundancy check for data integrity" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_CRC_MOD .
+
+src:Module_COMPR a radar:Module ;
+    rdfs:label "COMPR" ;
+    dc:description "Picture compression/decompression algorithms" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_COMPR_MOD .
+
+src:Module_CONVERT a radar:Module ;
+    rdfs:label "CONVERT" ;
+    dc:description "Data format conversion utilities" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_CONVERT_MOD .
+
+src:Module_DB a radar:Module ;
+    rdfs:label "DB" ;
+    dc:description "Database operations for stations and pictures" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:definedIn src:File_DB_MOD .
+
+src:Module_E300INTE a radar:Module ;
+    rdfs:label "E300INTE" ;
+    dc:description "Hardware interface abstraction for E300 radar" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_E300INTE_MOD .
+
+src:Module_EXTENDKE a radar:Module ;
+    rdfs:label "EXTENDKE" ;
+    dc:description "Function key parsing for extended keyboard" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:UICategory .
+
+src:Module_GRAPHICS a radar:Module ;
+    rdfs:label "GRAPHICS" ;
+    dc:description "EGA graphics wrapper module" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_GRAPHICS_MOD .
+
+src:Module_GRAPH a radar:Module ;
+    rdfs:label "GRAPH" ;
+    dc:description "Low-level graphics primitives (circles, lines)" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_GRAPH_MOD .
+
+src:Module_LOCATOR a radar:Module ;
+    rdfs:label "LOCATOR" ;
+    dc:description "Cursor and bearing/range calculation" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:definedIn src:File_LOCATOR_MOD_1988,  # 1988-08-15
+                    src:File_LOCATOR_MOD .       # 1992-12-28
+
+src:Module_MODEM a radar:Module ;
+    rdfs:label "MODEM" ;
+    dc:description "Modem communication (Hayes/Racal-Vadic)" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:ModemCategory ;
+    radar:definedIn src:File_MODEM_MOD_1988 ;
+    radar:imports src:Module_RS .
+
+src:Module_PICTURES a radar:Module ;
+    rdfs:label "PICTURES" ;
+    dc:description "Picture file management and storage" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:definedIn src:File_PICTURES_MOD_1988, # 1988-08-15
+                    src:File_PICTURES_MOD .      # 1992-11-04
+
+src:Module_RADARRX a radar:Module ;
+    rdfs:label "RADARRX" ;
+    dc:description "Radar data reception handler" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_RADARRX_MOD ;
+    radar:imports src:Module_RS .
+
+src:Module_RADARTX a radar:Module ;
+    rdfs:label "RADARTX" ;
+    dc:description "Radar command transmission handler" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_RADARTX_MOD ;
+    radar:imports src:Module_RS .
+
+src:Module_RADIORX a radar:Module ;
+    rdfs:label "RADIORX" ;
+    dc:description "Radio reception handling" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:SerialCommCategory .
+
+src:Module_RADIOTX a radar:Module ;
+    rdfs:label "RADIOTX" ;
+    dc:description "Radio transmission handling" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:SerialCommCategory .
+
+src:Module_RS a radar:Module ;
+    rdfs:label "RS" ;
+    dc:description "RS-232 serial communication (primary)" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:SerialCommCategory ;
+    radar:definedIn src:File_RS_MOD .
+
+src:Module_RS2 a radar:Module ;
+    rdfs:label "RS2" ;
+    dc:description "RS-232 serial communication (secondary port)" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:SerialCommCategory ;
+    radar:definedIn src:File_RS2_MOD .
+
+src:Module_SCREENHA a radar:Module ;
+    rdfs:label "SCREENHA" ;
+    dc:description "Screen display and formatting" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_SCREENHA_MOD_1988, # 1988-08-15
+                    src:File_SCREENHA_MOD ;      # 1992-11-04
+    radar:imports src:Module_GRAPHICS, src:Module_LOCATOR .
+
+src:Module_STATIONS a radar:Module ;
+    rdfs:label "STATIONS" ;
+    dc:description "Station directory and calling management" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:definedIn src:File_STATIONS_MOD_1988, # 1988-08-15
+                    src:File_STATIONS_MOD ;      # 1992-11-04
+    radar:imports src:Module_MODEM, src:Module_PICTURES, src:Module_SCREENHA .
+
+src:Module_SELECTOR a radar:Module ;
+    rdfs:label "SELECTOR" ;
+    dc:description "UI menu selection interface" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:UICategory .
+
+# =============================================================================
+# Modula-2 Modules - Specialized Extensions
+# =============================================================================
+
+src:Module_PICANAL a radar:Module ;
+    rdfs:label "PICANAL" ;
+    dc:description "Picture analysis routines for storm detection" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_PICANAL_MOD ;
+    radar:partOfArchive src:Archive_19890314 .
+
+src:Module_RS811A_I a radar:Module ;
+    rdfs:label "RS811A_I" ;
+    dc:description "RS-811A radar interface module" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_RS811A_I_MOD ;
+    radar:partOfArchive src:Archive_19890316 .
+
+src:Module_SWEEP a radar:Module ;
+    rdfs:label "SWEEP" ;
+    dc:description "Sweep visualization for radar display" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_SWEEP_MOD ;
+    radar:partOfArchive src:Archive_19890319 .
+
+src:Module_TESTCHAN a radar:Module ;
+    rdfs:label "TESTCHAN" ;
+    dc:description "Test channel for communication verification" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921021 .
+
+# =============================================================================
+# Modula-2 Library Modules (1992-12-23)
+# =============================================================================
+
+src:Module_ASCII a radar:Library ;
+    rdfs:label "ASCII" ;
+    dc:description "Character constants and ASCII utilities" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:File_ASCII_MOD .
+
+src:Module_FIO a radar:Library ;
+    rdfs:label "FIO" ;
+    dc:description "File I/O abstraction layer" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:definedIn src:File_FIO_MOD .
+
+src:Module_FRACGEN a radar:Library ;
+    rdfs:label "FRACGEN" ;
+    dc:description "Fractal generation utilities" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:GraphicsCategory .
+
+src:Module_IO a radar:Library ;
+    rdfs:label "IO" ;
+    dc:description "Console I/O operations" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:definedIn src:File_IO_MOD .
+
+src:Module_LIB a radar:Library ;
+    rdfs:label "LIB" ;
+    dc:description "Low-level utility functions" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:File_LIB_MOD .
+
+src:Module_PROCESS a radar:Library ;
+    rdfs:label "PROCESS" ;
+    dc:description "Process and coroutine control" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:File_PROCESS_MOD .
+
+src:Module_STORAGE a radar:Library ;
+    rdfs:label "STORAGE" ;
+    dc:description "Memory allocation and management" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:File_STORAGE_MOD .
+
+src:Module_STR a radar:Library ;
+    rdfs:label "STR" ;
+    dc:description "String handling utilities" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:File_STR_MOD .
+
+src:Module_TIMEDATE a radar:Library ;
+    rdfs:label "TIMEDATE" ;
+    dc:description "Date and time utilities" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:File_TIMEDATE_MOD .
+
+# =============================================================================
+# E250Term Modules
+# =============================================================================
+
+src:Module_E250TERM a radar:Module ;
+    rdfs:label "E250TERM" ;
+    dc:description "Main terminal program for E250 radar" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:definedIn src:File_E250TERM_MOD ;
+    radar:partOfVersion src:E250Term_v3 .
+
+src:Module_E250SCRN a radar:Module ;
+    rdfs:label "E250SCRN" ;
+    dc:description "Screen handling for E250 display" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_E250SCRN_MOD ;
+    radar:partOfVersion src:E250Term_v3 .
+
+src:Module_E250DRAW a radar:Module ;
+    rdfs:label "E250DRAW" ;
+    dc:description "Drawing primitives for E250" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_E250DRAW_MOD ;
+    radar:partOfVersion src:E250Term_v3 .
+
+src:Module_E250EDIT a radar:Module ;
+    rdfs:label "E250EDIT" ;
+    dc:description "Editing features for E250 terminal" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:definedIn src:File_E250EDIT_MOD ;
+    radar:partOfVersion src:E250Term_v3 .
+
+src:Module_SCRNSEND a radar:Module ;
+    rdfs:label "SCRNSEND" ;
+    dc:description "TSR screen transmission module" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:SerialCommCategory ;
+    radar:definedIn src:File_SCRNSEND_MOD ;
+    radar:partOfVersion src:E250Term_v3 .
+
+# =============================================================================
+# Assembly Modules (Sweep Optimization)
+# =============================================================================
+
+src:Module_ALTSWP a radar:Module ;
+    rdfs:label "ALTSWP" ;
+    dc:description "Alternative sweep implementation in x86 assembly" ;
+    radar:programmingLanguage "x86 Assembly" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_ALTSWP_ASM ;
+    radar:partOfArchive src:Archive_19890326 .
+
+src:Module_SWEEP2 a radar:Module ;
+    rdfs:label "SWEEP2" ;
+    dc:description "Core sweep algorithm in assembly" ;
+    radar:programmingLanguage "x86 Assembly" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_SWEEP2_ASM ;
+    radar:partOfArchive src:Archive_19890326 .
+
+src:Module_SWPLNE a radar:Module ;
+    rdfs:label "SWPLNE" ;
+    dc:description "Sweep line drawing in assembly" ;
+    radar:programmingLanguage "x86 Assembly" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_SWPLNE_ASM ;
+    radar:partOfArchive src:Archive_19890326 .
+
+src:Module_INCTABX a radar:Module ;
+    rdfs:label "INCTABX" ;
+    dc:description "X increment lookup table" ;
+    radar:programmingLanguage "x86 Assembly" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_INCTABX_ASM ;
+    radar:partOfArchive src:Archive_19890326 .
+
+src:Module_INCTABY a radar:Module ;
+    rdfs:label "INCTABY" ;
+    dc:description "Y increment lookup table" ;
+    radar:programmingLanguage "x86 Assembly" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_INCTABY_ASM ;
+    radar:partOfArchive src:Archive_19890326 .
+
+# =============================================================================
+# Pascal Include/Resource Files (.RDR - Pascal source with non-standard extension)
+# =============================================================================
+
+src:Resource_SCREEN_RDR a radar:PascalFile ;
+    rdfs:label "SCREEN.RDR" ;
+    dc:description "Screen layout/template Pascal include file (.RDR extension)" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:purpose "Pascal source with non-standard .RDR extension" .
+
+src:Resource_GRAPH_RDR a radar:PascalFile ;
+    rdfs:label "GRAPH.RDR" ;
+    dc:description "Graphics routines Pascal include file (.RDR extension)" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:purpose "Pascal source with non-standard .RDR extension" .
+
+src:Resource_GRAPHBAK_RDR a radar:PascalFile ;
+    rdfs:label "GRAPHBAK.RDR" ;
+    dc:description "Graphics routines backup Pascal include file" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:purpose "Pascal source with non-standard .RDR extension" .
+
+src:Resource_MISC_RDR a radar:PascalFile ;
+    rdfs:label "MISC.RDR" ;
+    dc:description "Miscellaneous routines Pascal include file" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:purpose "Pascal source with non-standard .RDR extension" .
+
+src:Resource_GRAPH_BIN a radar:SourceFile ;
+    rdfs:label "GRAPH.BIN" ;
+    dc:description "Binary graphics data file" ;
+    radar:programmingLanguage "Binary" ;
+    radar:belongsToCategory radar:GraphicsCategory .
+
+src:Resource_E300DB_DAT a radar:SourceFile ;
+    rdfs:label "E300DB.DAT" ;
+    dc:description "E300 database configuration file" ;
+    radar:programmingLanguage "Data File" ;
+    radar:belongsToCategory radar:ConfigCategory .
+
+src:Resource_E300PC_DAT a radar:SourceFile ;
+    rdfs:label "E300PC.DAT" ;
+    dc:description "E300PC configuration data" ;
+    radar:programmingLanguage "Data File" ;
+    radar:belongsToCategory radar:ConfigCategory .
+
+# =============================================================================
+# Modula-2 Definition Files (.DEF)
+# =============================================================================
+
+src:Def_LOCATOR a radar:DefinitionFile ;
+    rdfs:label "LOCATOR.DEF" ;
+    dc:description "Definition file for LOCATOR module" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_LOCATOR .
+
+src:Def_STATIONS a radar:DefinitionFile ;
+    rdfs:label "STATIONS.DEF" ;
+    dc:description "Definition file for STATIONS module" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_STATIONS .
+
+src:Def_RS a radar:DefinitionFile ;
+    rdfs:label "RS.DEF" ;
+    dc:description "Definition file for RS-232 module" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_RS .
+
+src:Def_SELECTOR a radar:DefinitionFile ;
+    rdfs:label "SELECTOR.DEF" ;
+    dc:description "Definition file for SELECTOR module" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_SELECTOR .
+
+src:Def_MODEM a radar:DefinitionFile ;
+    rdfs:label "MODEM.DEF" ;
+    dc:description "Definition file for MODEM module" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_MODEM .
+
+src:Def_OPTIONS a radar:DefinitionFile ;
+    rdfs:label "OPTIONS.DEF" ;
+    dc:description "Definition file for OPTIONS module" ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Def_EXTENDKE a radar:DefinitionFile ;
+    rdfs:label "EXTENDKE.DEF" ;
+    dc:description "Definition file for extended keyboard module" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_EXTENDKE .
+
+src:Def_GRAPHICS a radar:DefinitionFile ;
+    rdfs:label "GRAPHICS.DEF" ;
+    dc:description "Definition file for GRAPHICS module" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_GRAPHICS .
+
+src:Def_IO a radar:DefinitionFile ;
+    rdfs:label "IO.DEF" ;
+    dc:description "Definition file for IO module" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_IO .
+
+src:Def_TIMEDATE a radar:DefinitionFile ;
+    rdfs:label "TIMEDATE.DEF" ;
+    dc:description "Definition file for TIMEDATE module" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_TIMEDATE .
+
+src:Def_ASCII a radar:DefinitionFile ;
+    rdfs:label "ASCII.DEF" ;
+    dc:description "Definition file for ASCII constants" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_ASCII .
+
+src:Def_MEMCOMPR a radar:DefinitionFile ;
+    rdfs:label "MEMCOMPR.DEF" ;
+    dc:description "Definition file for memory compression module" ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Def_CRC a radar:DefinitionFile ;
+    rdfs:label "CRC.DEF" ;
+    dc:description "Definition file for CRC module" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_CRC .
+
+src:Def_GRAPH a radar:DefinitionFile ;
+    rdfs:label "GRAPH.DEF" ;
+    dc:description "Definition file for low-level graphics" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_GRAPH .
+
+src:Def_AUTO a radar:DefinitionFile ;
+    rdfs:label "AUTO.DEF" ;
+    dc:description "Definition file for AUTO module" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_AUTO .
+
+src:Def_STR a radar:DefinitionFile ;
+    rdfs:label "STR.DEF" ;
+    dc:description "Definition file for string handling" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_STR .
+
+src:Def_LOWLEVEL a radar:DefinitionFile ;
+    rdfs:label "LOWLEVEL.DEF" ;
+    dc:description "Definition file for low-level operations" ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Def_PICTURES a radar:DefinitionFile ;
+    rdfs:label "PICTURES.DEF" ;
+    dc:description "Definition file for PICTURES module" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_PICTURES .
+
+src:Def_RS2 a radar:DefinitionFile ;
+    rdfs:label "RS2.DEF" ;
+    dc:description "Definition file for secondary RS-232 port" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_RS2 .
+
+src:Def_SCREENHA a radar:DefinitionFile ;
+    rdfs:label "SCREENHA.DEF" ;
+    dc:description "Definition file for screen handler" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_SCREENHA .
+
+src:Def_ASMLIB a radar:DefinitionFile ;
+    rdfs:label "ASMLIB.DEF" ;
+    dc:description "Definition file for assembly library interface" ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Def_SYSTEM a radar:DefinitionFile ;
+    rdfs:label "SYSTEM.DEF" ;
+    dc:description "Definition file for system module" ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Def_FIO a radar:DefinitionFile ;
+    rdfs:label "FIO.DEF" ;
+    dc:description "Definition file for file I/O" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_FIO .
+
+src:Def_PROCESS a radar:DefinitionFile ;
+    rdfs:label "PROCESS.DEF" ;
+    dc:description "Definition file for process control" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_PROCESS .
+
+src:Def_LIB a radar:DefinitionFile ;
+    rdfs:label "LIB.DEF" ;
+    dc:description "Definition file for utility library" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_LIB .
+
+src:Def_MATHLIB a radar:DefinitionFile ;
+    rdfs:label "MATHLIB.DEF" ;
+    dc:description "Definition file for math library" ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Def_STORAGE a radar:DefinitionFile ;
+    rdfs:label "STORAGE.DEF" ;
+    dc:description "Definition file for memory storage" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_STORAGE .
+
+src:Def_E300INTE a radar:DefinitionFile ;
+    rdfs:label "E300INTE.DEF" ;
+    dc:description "Definition file for E300 interface" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_E300INTE .
+
+src:Def_DB a radar:DefinitionFile ;
+    rdfs:label "DB.DEF" ;
+    dc:description "Definition file for database module" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_DB .
+
+src:Def_E250SCRN a radar:DefinitionFile ;
+    rdfs:label "E250SCRN.DEF" ;
+    dc:description "Definition file for E250 screen handler" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_E250SCRN .
+
+src:Def_PICANAL a radar:DefinitionFile ;
+    rdfs:label "PICANAL.DEF" ;
+    dc:description "Definition file for picture analysis" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:definedIn src:Module_PICANAL .
+
+# =============================================================================
+# Additional Modula-2 Implementation Modules
+# =============================================================================
+
+src:Module_LOWLEVEL a radar:Module ;
+    rdfs:label "LOWLEVEL" ;
+    dc:description "Low-level hardware and BIOS interface operations" ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Module_OPTIONS a radar:Module ;
+    rdfs:label "OPTIONS" ;
+    dc:description "Program options and configuration settings" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:ConfigCategory .
+
+src:Module_OPTIONFI a radar:Module ;
+    rdfs:label "OPTIONFI" ;
+    dc:description "Option file handling" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:ConfigCategory .
+
+src:Module_MEMCOMPR a radar:Module ;
+    rdfs:label "MEMCOMPR" ;
+    dc:description "Memory compression utilities" ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Module_CDSCRN a radar:Module ;
+    rdfs:label "CDSCRN" ;
+    dc:description "CD screen handling module" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:GraphicsCategory .
+
+src:Module_CREATDAT a radar:Module ;
+    rdfs:label "CREATDAT" ;
+    dc:description "Create data file utility" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:FileIOCategory .
+
+src:Module_MAINRX a radar:Module ;
+    rdfs:label "MAINRX" ;
+    dc:description "Main receiver program" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:ProtocolCategory .
+
+src:Module_TESTRX a radar:Module ;
+    rdfs:label "TESTRX" ;
+    dc:description "Test receiver module for debugging" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:belongsToCategory radar:ProtocolCategory .
+
+src:Module_TEST a radar:Module ;
+    rdfs:label "TEST" ;
+    dc:description "General test module" ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Module_ASMLIB a radar:Module ;
+    rdfs:label "ASMLIB" ;
+    dc:description "Assembly language library interface" ;
+    radar:programmingLanguage "x86 Assembly" .
+
+src:Module_MATHLIB a radar:Module ;
+    rdfs:label "MATHLIB" ;
+    dc:description "Mathematical function library" ;
+    radar:programmingLanguage "Modula-2" .

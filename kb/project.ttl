@@ -1,0 +1,253 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema: <http://schema.org/> .
+@prefix radar: <http://example.org/radarpas/ontology#> .
+@prefix src: <http://example.org/radarpas/source#> .
+
+# =============================================================================
+# RADARPAS Project Metadata (Dublin Core aligned)
+# =============================================================================
+
+src:RADARPAS a radar:SoftwareProject, schema:SoftwareApplication ;
+    dc:title "RADARPAS - Radar Terminal Software" ;
+    dc:description """Historical source code archives for weather radar terminal software
+    developed in the 1980s-1990s for interfacing IBM PCs with Ellason E300/E250
+    Color Weather Radar systems.""" ;
+    dc:creator src:DerekLane ;
+    dc:publisher "D. G. Lane" ;
+    dc:rights "Copyright (C) D. G. Lane, 1987-1998. All rights reserved." ;
+    dc:language "en" ;
+    dc:type "Software" ;
+    dcterms:created "1985"^^xsd:gYear ;
+    dcterms:modified "1998"^^xsd:gYear ;
+    dcterms:temporal "1985/1998" ;
+    schema:programmingLanguage "Turbo Pascal", "Modula-2", "x86 Assembly" ;
+    schema:operatingSystem "MS-DOS" ;
+    radar:containsModule src:GDEM, src:RADARPAS_Main, src:E300PC, src:E250Term ;
+    foaf:homepage <https://github.com/DLaneAtElekta/RADARPAS> .
+
+# =============================================================================
+# Creator/Author Information (FOAF)
+# =============================================================================
+
+src:DerekLane a foaf:Person ;
+    foaf:name "Derek Lane" ;
+    foaf:nick "D. G. Lane" ;
+    foaf:mbox_sha1sum "author@radarpas" .
+
+# =============================================================================
+# Product Versions (Provenance)
+# =============================================================================
+
+src:GDEM_v1 a radar:ProductVersion ;
+    rdfs:label "GDEM 1.0" ;
+    dc:title "Graphical Data Entry Manager" ;
+    dc:description "Digital map and geographic data entry tool for acetate/protractor coordinates" ;
+    radar:versionNumber "1.0" ;
+    radar:dateCreated "1984"^^xsd:gYear ;
+    radar:programmingLanguage "Commodore BASIC" ;
+    prov:wasAttributedTo src:DerekLane .
+
+src:GDEM_v2 a radar:ProductVersion ;
+    rdfs:label "GDEM 2.0" ;
+    dc:title "Graphical Data Entry Manager (Pascal Rewrite)" ;
+    radar:versionNumber "2.0" ;
+    radar:dateCreated "1985"^^xsd:gYear ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:derivedFrom src:GDEM_v1 ;
+    prov:wasAttributedTo src:DerekLane .
+
+src:RADARPAS_v1 a radar:ProductVersion ;
+    rdfs:label "RADARPAS 1.0" ;
+    dc:title "RADARPAS Initial Commercial Release" ;
+    radar:versionNumber "1.0" ;
+    radar:dateCreated "1985"^^xsd:gYear ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    prov:wasAttributedTo src:DerekLane .
+
+src:RADARPAS_v2 a radar:ProductVersion ;
+    rdfs:label "RADARPAS 2.0" ;
+    dc:title "RADARPAS Enhanced Version" ;
+    radar:versionNumber "2.0" ;
+    radar:dateCreated "1987"^^xsd:gYear ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:derivedFrom src:RADARPAS_v1 ;
+    prov:wasAttributedTo src:DerekLane .
+
+src:RADARPAS_v2_1 a radar:ProductVersion ;
+    rdfs:label "RADARPAS 2.1" ;
+    dc:title "RADARPAS Final Pascal Version" ;
+    radar:versionNumber "2.1" ;
+    radar:dateCreated "1988-01-14"^^xsd:date ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:derivedFrom src:RADARPAS_v2 ;
+    prov:wasAttributedTo src:DerekLane .
+
+src:E300PC_v1 a radar:ProductVersion ;
+    rdfs:label "E300PC v1" ;
+    dc:title "E300PC Modula-2 Port" ;
+    radar:versionNumber "1.0" ;
+    radar:dateCreated "1988-08"^^xsd:gYearMonth ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:derivedFrom src:RADARPAS_v2_1 ;
+    prov:wasAttributedTo src:DerekLane .
+
+src:E300PC_v2 a radar:ProductVersion ;
+    rdfs:label "E300PC v2" ;
+    dc:title "E300PC with Extensions" ;
+    dc:description "Added picture analysis, RS-811A interface, sweep visualization" ;
+    radar:versionNumber "2.0" ;
+    radar:dateCreated "1989-03"^^xsd:gYearMonth ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:derivedFrom src:E300PC_v1 ;
+    prov:wasAttributedTo src:DerekLane .
+
+src:E300PC_v3 a radar:ProductVersion ;
+    rdfs:label "E300PC v3" ;
+    dc:title "E300PC Automation" ;
+    dc:description "Automated picture capture and processing" ;
+    radar:versionNumber "3.0" ;
+    radar:dateCreated "1992-10"^^xsd:gYearMonth ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:derivedFrom src:E300PC_v2 ;
+    prov:wasAttributedTo src:DerekLane .
+
+src:E300PC_v3_1 a radar:ProductVersion ;
+    rdfs:label "E300PC 3.1" ;
+    dc:title "E300PC Final Version" ;
+    dc:description "Final release with standardized libraries" ;
+    radar:versionNumber "3.1" ;
+    radar:dateCreated "1992-12-28"^^xsd:date ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:derivedFrom src:E300PC_v3 ;
+    prov:wasAttributedTo src:DerekLane .
+
+src:E250Term_v3 a radar:ProductVersion ;
+    rdfs:label "E250Term 3.0" ;
+    dc:title "E250 Terminal System" ;
+    dc:description "Terminal for E250 radar with TSR screen transmission" ;
+    radar:versionNumber "3.0" ;
+    radar:dateCreated "1991"^^xsd:gYear ;
+    radar:programmingLanguage "Modula-2" ;
+    prov:wasAttributedTo src:DerekLane .
+
+# =============================================================================
+# Source Archives (Provenance Collections)
+# =============================================================================
+
+src:Archive_19880114 a radar:Archive ;
+    rdfs:label "1988-01-14 RADAR.PAS" ;
+    dc:description "Original Turbo Pascal source - final release" ;
+    dcterms:created "1988-01-14"^^xsd:date ;
+    radar:partOfVersion src:RADARPAS_v2_1 .
+
+src:Archive_19870416 a radar:Archive ;
+    rdfs:label "1987-04-16 RadioTx Enhanced" ;
+    dc:description "Early radio transmission version" ;
+    dcterms:created "1987-04-16"^^xsd:date ;
+    radar:partOfVersion src:RADARPAS_v2 .
+
+src:Archive_19880226 a radar:Archive ;
+    rdfs:label "1988-02-26 SN8801" ;
+    dc:description "Serial version development" ;
+    dcterms:created "1988-02-26"^^xsd:date ;
+    radar:partOfVersion src:RADARPAS_v2_1 .
+
+src:Archive_19880801 a radar:Archive ;
+    rdfs:label "1988-08-01 RADIO" ;
+    dc:description "Final Pascal generation" ;
+    dcterms:created "1988-08-01"^^xsd:date ;
+    radar:partOfVersion src:RADARPAS_v2_1 .
+
+src:Archive_19880815 a radar:Archive ;
+    rdfs:label "1988-08-15 Initial M2 Port" ;
+    dc:description "Initial Modula-2 port" ;
+    dcterms:created "1988-08-15"^^xsd:date ;
+    radar:partOfVersion src:E300PC_v1 .
+
+src:Archive_19890314 a radar:Archive ;
+    rdfs:label "1989-03-14 Pic-Analysis" ;
+    dc:description "Picture analysis additions" ;
+    dcterms:created "1989-03-14"^^xsd:date ;
+    radar:partOfVersion src:E300PC_v2 .
+
+src:Archive_19890316 a radar:Archive ;
+    rdfs:label "1989-03-16 RS811A-Interface" ;
+    dc:description "RS-811A interface module" ;
+    dcterms:created "1989-03-16"^^xsd:date ;
+    radar:partOfVersion src:E300PC_v2 .
+
+src:Archive_19890319 a radar:Archive ;
+    rdfs:label "1989-03-19 Sweep" ;
+    dc:description "Sweep visualization" ;
+    dcterms:created "1989-03-19"^^xsd:date ;
+    radar:partOfVersion src:E300PC_v2 .
+
+src:Archive_19890326 a radar:Archive ;
+    rdfs:label "1989-03-26 Sweep ASM" ;
+    dc:description "Optimized sweep in x86 assembly" ;
+    dcterms:created "1989-03-26"^^xsd:date ;
+    radar:partOfVersion src:E300PC_v2 .
+
+src:Archive_19921021 a radar:Archive ;
+    rdfs:label "1992-10-21 Testchan" ;
+    dc:description "Test channel version" ;
+    dcterms:created "1992-10-21"^^xsd:date ;
+    radar:partOfVersion src:E300PC_v3 .
+
+src:Archive_19921023 a radar:Archive ;
+    rdfs:label "1992-10-23 AUTO" ;
+    dc:description "Automated features" ;
+    dcterms:created "1992-10-23"^^xsd:date ;
+    radar:partOfVersion src:E300PC_v3 .
+
+src:Archive_19921104 a radar:Archive ;
+    rdfs:label "1992-11-04 AUTO Enhanced" ;
+    dc:description "Enhanced automation" ;
+    dcterms:created "1992-11-04"^^xsd:date ;
+    radar:partOfVersion src:E300PC_v3 .
+
+src:Archive_19921223 a radar:Archive ;
+    rdfs:label "1992-12-23 Library" ;
+    dc:description "Library standardization" ;
+    dcterms:created "1992-12-23"^^xsd:date ;
+    radar:partOfVersion src:E300PC_v3_1 .
+
+src:Archive_19921228 a radar:Archive ;
+    rdfs:label "1992-12-28 Final E300PC" ;
+    dc:description "Final E300PC 3.1 release" ;
+    dcterms:created "1992-12-28"^^xsd:date ;
+    radar:partOfVersion src:E300PC_v3_1 .
+
+# =============================================================================
+# Hardware Context (Schema.org)
+# =============================================================================
+
+src:TargetHardware a schema:ComputerHardware ;
+    schema:name "IBM PC Compatible" ;
+    schema:description "Intel 8088/8086 @ 4.77 MHz, 640 KB RAM, EGA display" .
+
+src:RadarHardware_E300 a schema:Product ;
+    schema:name "Ellason E300 Color Weather Radar" ;
+    schema:manufacturer "Ellason" .
+
+src:RadarHardware_E250 a schema:Product ;
+    schema:name "Ellason E250 Color Weather Radar" ;
+    schema:manufacturer "Ellason" .
+
+# =============================================================================
+# Technical Specifications
+# =============================================================================
+
+src:DisplaySpec a schema:PropertyValue ;
+    schema:name "Display Specifications" ;
+    schema:value "EGA 640x350, 16 colors, 4 VGA planes" .
+
+src:CommunicationSpec a schema:PropertyValue ;
+    schema:name "Communication Specifications" ;
+    schema:value "RS-232, 2400 baud, Hayes/Racal-Vadic modem" .

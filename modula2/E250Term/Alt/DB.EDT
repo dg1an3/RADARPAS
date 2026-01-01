@@ -1,0 +1,109 @@
+============================================================
+:Banner
+
+    Normal Next: MainMenu
+
+    Window:{
+        No box
+        Position: (1, 256, 80, 256)
+    }
+
+    Colors:{
+        NormalText = (blue,brightWhite) plain
+        PointerBar = (blue,darkGrey) underScored
+        Border = (blue,brightWhite) plain
+        Prompts = (red,brightWhite) bold
+        Messages = (red,brightWhite) bold
+        SelectedText = (blue,lightBlue) bold
+    }
+
+    Fields:{
+        () 'message' String
+    }
+
+------------------------------------------------------------
+#               Copyright (C) 1990, D. G. Lane -- All rights reserved          #
+============================================================
+:MainMenu
+
+    Parent Frame: 0    (* Go to DOS on exit *)
+
+    Window:{
+        No box
+        Position: (1, 1, 80, 25)
+    }
+
+(*    Help:{ Banner } *)
+
+    Fields:{
+        () 'bytesFree' String
+        () 'todaysDate' String
+        (V) '' GoTo Banner
+        (R) '' GoTo Banner
+        (M) '' GoTo Banner
+        (U) '' GoTo UtilitiesAndOptions
+        (Q) '' GoTo Banner
+    }
+
+------------------------------------------------------------
+ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÑÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+º                                          ³ Topeka Highway Department         º
+º     K S N T   Weather Radar Terminal     ³ Range: 15 miles                   º
+º           Software version 2.1           ³ Terminal ID: KSNT-0001            º
+º                                          ³ #36,535 bytes free disk space    #  º
+ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+º                          #   August 27, 1990   11:00pm   #                     º
+ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
+º  ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿  º
+º  ³                              M A I N   M E N U                         ³  º
+º  ³                                                                        ³  º
+º  ³             Press  [ V ] # to View current weather radar picture #       ³  º
+º  ³                    [ R ] # to Retrieve past picture #                    ³  º
+º  ³                                                                        ³  º
+º  ³                    [ M ] # to view Message board #                       ³  º
+º  ³                                                                        ³  º
+º  ³                    [ U ] # for Utilities and options #                   ³  º
+º  ³                                                                        ³  º
+º  ³                    [ Q ] # to Quit this program #                        ³  º
+º  ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ  º
+º  ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿  º
+º  ³  ---------------->    PRESS F1 ANY TIME FOR HELP    <----------------  ³  º
+º  ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ  º
+ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+============================================================
+:UtilitiesAndOptions
+
+    Parent Frame: MainMenu
+
+    Window:{
+        No box
+        Position: (1, 1, 80, 25)
+    }
+
+    Hit any key
+
+------------------------------------------------------------
+ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÑÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
+º                                          ³ Topeka Highway Department         º
+º     K S N T   Weather Radar Terminal     ³ Range: 15 miles                   º
+º           Software version 2.1           ³ Terminal ID: KSNT-0001            º
+º                                          ³ 36,535 bytes free disk space      º
+ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÁÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶
+º                          August 27, 1990   11:00pm                           º
+ÌÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¹
+º  ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿  º
+º  ³          U T I L I T I E S   A N D   O P T I O N S   M E N U           ³  º
+º  ³                                                                        ³  º
+º  ³             Press  [ E ]  to Erase a file                              ³  º
+º  ³                                                                        ³  º
+º  ³                    [ L ] to prepare Log disk                           ³  º
+º  ³                    [ M ]  to view Message board                        ³  º
+º  ³                                                                        ³  º
+º  ³                    [ U ]  for Utilities and options                    ³  º
+º  ³                                                                        ³  º
+º  ³                    [ Q ]  to Quit this menu                            ³  º
+º  ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ  º
+º  ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿  º
+º  ³  ---------------->    PRESS F1 ANY TIME FOR HELP    <----------------  ³  º
+º  ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ  º
+ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ Copyright (C) 1990, D. G. Lane ÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼ 

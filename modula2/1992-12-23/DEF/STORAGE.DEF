@@ -1,0 +1,74 @@
+(* Copyright (C) 1987 Jensen & Partners International *)
+DEFINITION MODULE Storage;
+
+TYPE
+  HeapRecPtr = POINTER TO HeapRec;
+  HeapRec    = RECORD
+                 size : CARDINAL;
+                 next : HeapRecPtr;
+               END;
+
+VAR
+  MainHeap : HeapRecPtr;
+  ClearOnAllocate : BOOLEAN;
+
+
+(* Main heap procedures *)
+
+PROCEDURE ALLOCATE  (VAR a: ADDRESS; size: CARDINAL);
+
+PROCEDURE DEALLOCATE(VAR a: ADDRESS; size: CARDINAL);
+
+PROCEDURE Available (size : CARDINAL) : BOOLEAN;
+
+
+(* Other heap procedures *)
+
+PROCEDURE MakeHeap( Source  : CARDINAL;           (* base segment of heap *)
+                    Size    : CARDINAL            (* size in paragraphs   *)
+                   ) : HeapRecPtr;
+
+PROCEDURE HeapAllocate  ( Source : HeapRecPtr;     (* source heap         *)
+                          VAR A  : ADDRESS;        (* result              *)
+                          Size   : CARDINAL);      (* size in paragraphs  *)
+
+PROCEDURE HeapDeallocate( Source : HeapRecPtr;     (* source heap         *)
+                          VAR A  : ADDRESS;        (* block to deallocate *)
+                          Size   : CARDINAL);      (* size in paragraphs  *)
+
+
+
+PROCEDURE HeapAvail(Source: HeapRecPtr) : CARDINAL;
+(* returns the largest block size available for allocation in paragraphs *)
+
+PROCEDURE HeapTotalAvail(Source: HeapRecPtr) : CARDINAL;
+(* returns the total size available for allocation in paragraphs *)
+
+
+PROCEDURE HeapChangeSize( Source : HeapRecPtr;     (* source heap        *)
+                          VAR A  : ADDRESS;        (* block to change    *)
+                          OldSize,                 (* old size of block  *)
+                          NewSize: CARDINAL);      (* new size of block  *)
+                                                   (* in paragraphs      *)
+
+(*
+   This procedure will change the size of an allocated block
+   avoiding any copy of data if possible. Calls HeapChangeAlloc
+*)
+
+PROCEDURE HeapChangeAlloc(Source : HeapRecPtr;     (* source heap        *)
+                          A      : ADDRESS;        (* block to change    *)
+                          OldSize,                 (* old size of block  *)
+                          NewSize: CARDINAL)       (* new size of block  *)
+                                                   (* in paragraphs      *)
+                          : BOOLEAN ;              (* If sucessful       *)
+
+(*
+   This procedure attempts to change the size of an allocated block.
+   It returns TRUE if succeeded (only expansion can fail).
+   If it fails no action is taken.
+*)
+
+
+END Storage.
+

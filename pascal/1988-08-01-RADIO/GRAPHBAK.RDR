@@ -1,0 +1,343 @@
+{.PA}
+{*****************************************************************************}
+{* Graphics Routines                                                         *}
+{*****************************************************************************}
+
+type
+  CharTab14Type    = array[0..127,0..13] of byte;
+  CharTab8Type     = array[0..127,0..7] of byte;
+  PlaneSet         = set of 0..3;
+  FuncType         = (Rot1,Rot2,Rot3,Rot4,Rot5,Rot6,Rot7,_Clr,_And,_Or,_Xor);
+  ListType         = array[1..640] of byte;
+
+var
+  CharTab14        : ^CharTab14Type;
+  CharTab8         : ^CharTab8Type;
+  CharSize         : byte;
+
+const
+  Colors           : array[0..15] of byte =
+    ($00,36,50,54,$3F,$3F,$3F,$3F,$09,$09,$09,$09,$09,$09,$09,$09);
+
+var CurrPlane      : PlaneSet;
+procedure SelectPlane(ForPlanes : PlaneSet);
+  var
+    Data           : byte absolute ForPlanes;
+  begin
+(*    port[$3C4]:=$02;
+    port[$3C5]:=Data;
+    CurrPlane:=ForPlanes;*)
+  end;
+
+procedure ShowPlane(ForPlanes : PlaneSet);
+  var
+    Data           : byte absolute ForPlanes;
+    Q              : byte;
+  begin
+(*    Q:=port[$3DA];
+    port[$3C0]:=$12;
+    port[$3C0]:=Data;
+    port[$3C0]:=$20;*)
+  end;
+
+var CurrFunc       : FuncType;
+procedure SelectFunc(ForFunc : FuncType);
+  begin
+(*    port[$3CE]:=$03;
+    if ForFunc in [Rot1..Rot7] then port[$3CF]:=Ord(ForFunc)+1
+      else port[$3CF]:=(Ord(ForFunc)-7) shl 3;
+    CurrFunc:=ForFunc; *)
+  end;
+
+var CurrMask       : byte;
+procedure SetMask(ToMask : byte);
+  begin
+(*    port[$3CE]:=$08;
+    port[$3CF]:=ToMask;
+    CurrMask:=ToMask;*)
+  end;
+
+var
+  CursX,CursY      : byte;
+  XPos,YPos        : byte;
+  XMax,YMax        : byte;
+
+procedure XGoto(X,Y : integer);
+begin
+  GotoXY(X+1,Y+1);
+end;
+
+procedure GotoXY(X,Y : integer);
+  begin
+    XGoto(X+1,Y+1);
+(*    CursX:=X; CursY:=Y; *)
+  end;
+
+procedure ConOut(ForChar : char);
+  var
+    I,Q            : byte;
+    CharPos        : integer;
+  begin
+(*    case ForChar of
+      #8  : if CursX>0 then CursX:=CursX-1;
+      #10 : if CursY<YMax then CursY:=CursY+1;
+      #13 : CursX:=0;
+      else begin
+        CharPos:=(CursX+XPos)+(CursY+YPos)*CharSize*80;
+        for I:=0 to CharSize-1 do
+          case CharSize of
+            8  : Mem[$A000:CharPos+I*80]:=CharTab8^[Ord(ForChar),I];
+            14 : Mem[$A000:CharPos+I*80]:=CharTab14^[Ord(ForChar),I];
+          end;
+        if CursX<XMax then CursX:=CursX+1
+        else begin
+          CursX:=0;
+          CursY:=CursY+1;
+        end;
+      end;
+    end; *)
+  end;
+
+function ReadStr(Len : byte) : LineType;
+  var
+    Line           : LineType;
+    I,TempX        : byte;
+  begin
+    TempX:=CursX;
+    for I:=1 to Len do Write(' ');
+    CursX:=TempX;
+    Line:=''; Write('Û');
+    repeat
+      ReadKbd; Key:=UpCase(Key);
+      case Key of
+        #32..#126 : begin
+          Line:=Line+Key;
+          Write(^H,Key,'Û');
+        end;
+        ^H : if Length(Line)>0 then begin
+          Write(^H,^H,'Û ',^H);
+          Line:=Copy(Line,1,Length(Line)-1);
+        end;
+      end;
+    until (Key=#13) or (Length(Line)=Len);
+    Write(^H,' '); ReadStr:=Line;
+  end;
+
+procedure GRWrite(ForStr : linetype;X,Y : integer);
+  var
+    I,J,Q,
+    AdjX,Rot       : byte;
+  begin
+(*    AdjX:=X div 8; Rot:=X mod 8;
+    for I:=2 to Length(ForStr) do
+      for J:=0 to 7 do begin
+        Q:=Mem[$A000:(Y+J)*80+AdjX+I-1];
+        Mem[$A000:(Y+J)*80+AdjX+I-1]:=
+          (CharTab8^[Ord(ForStr[I-1]),J] shl (8-Rot)) or
+          (CharTab8^[Ord(ForStr[I]),J] shr Rot);
+      end *)
+    GotoXY(X div 8, Y div 14); Write(ForStr);
+  end;
+
+procedure GRPlot(X,Y : integer);
+  var
+    AtByte         : integer;
+    Q,AtBit        : byte;
+  begin
+(*    AtByte:=Y*80+(X shr 3);
+    AtBit:=$80 shr (X and $07);
+    SetMask(AtBit);
+    Q:=Mem[$A000:AtByte];
+    Mem[$A000:AtByte]:=$FF;
+    SetMask($FF);*)
+  end;
+
+procedure GRLine(X1,Y1,X2,Y2 : integer);
+  var
+    Add            : real;
+    Dir            : integer;
+    XReal,YReal    : real;
+  begin
+    XReal:=X1; YReal:=Y1;
+    if Abs(Y2-Y1)>Abs(X2-X1) then begin
+      Add:=(X2-X1)/Abs(Y2-Y1);
+      if Y2>Y1 then Dir:=1 else Dir:=-1;
+      while Y1<>Y2 do begin
+        GRPlot(Trunc(XReal),Y1);
+        XReal:=XReal+Add;
+        Y1:=Y1+Dir;
+      end;
+    end else begin
+      if X2<>X1 then Add:=(Y2-Y1)/Abs(X2-X1) else Add:=0;
+      if X2>X1 then Dir:=1 else Dir:=-1;
+      while X1<>X2 do begin
+        GRPlot(X1,Trunc(YReal));
+        YReal:=YReal+Add;
+        X1:=X1+Dir;
+      end;
+    end;
+  end;
+
+procedure Window(X,Y,XSize,YSize : byte);
+  begin
+(*    for I:=Y to Y+YSize do
+      for J:=0 to CharSize-1 do begin
+        SelectPlane([2]);
+        FillChar(Mem[$A000:(I*CharSize+J)*80+X],XSize+1,$FF);
+        SelectPlane([3]);
+        FillChar(Mem[$A000:(I*CharSize+J)*80+X],XSize+1,$00);
+      end;
+    XPos:=0; YPos:=0; XMax:=79; YMax:=24;
+    XPos:=X; YPos:=Y;
+    XMax:=XSize; YMax:=YSize;
+    CursX:=0; CursY:=0; *)
+  end;
+
+var LastMess       : linetype;
+procedure GRMessage(ForStr : linetype; WaitKey : boolean);
+  var
+    I,J,Left       : integer;
+    OXPos,OYPos    : byte;
+    OXMax,OYMax    : byte;
+  const
+    Space : string[50] = '                                                  ';
+  begin
+    OXPos:=XPos; OYPos:=YPos; OXMax:=XMax; OYMax:=YMax;
+    SelectFunc(_Clr);
+    SelectPlane([2]);
+    if Length(LastMess)>0 then begin
+      Window(40-Length(LastMess) shr 1,24,Length(LastMess)-1,1);
+      SelectPlane([2,3]);
+      Write(Copy(Space,1,Length(LastMess)));
+      SelectPlane([3]);
+    end;
+    LastMess:=ForStr;
+    if Length(LastMess)>0 then begin
+      Window(40-Length(LastMess) shr 1,24,Length(LastMess)-1,1);
+      Write(LastMess);
+      if WaitKey then begin
+        ReadKbd;
+        GRMessage('',false);
+      end;
+    end;
+    XPos:=OXPos; YPos:=OYPos; XMax:=OXMax; YMax:=OYMax;
+  end;
+
+function Ask(ForStr : linetype) : boolean;
+  begin
+    GRMessage(ForStr+' (Y/N)?',true);
+    Ask:=UpCase(Key)='Y';
+  end;
+
+procedure ToggleGraphics;
+  begin
+    if GraphicsOn then ShowPlane([0,1]) else ShowPlane([0..3]);
+    GraphicsOn:=not(GraphicsOn);
+  end;
+
+var
+  LastLine         : integer;
+  LineSize         : integer;
+procedure DispLine( var LinePtr );
+  var
+    LineNum        : integer absolute LinePtr;
+    Line           : array[0..1279] of byte absolute LinePtr;
+    count,rept     : integer;
+    AtByte         : integer;
+    AtBit          : byte;
+    ROn,GOn        : boolean;
+    RByte,GByte    : byte;
+    Size           : integer;
+  begin
+    AtByte:=LineNum*80; AtBit:=0;
+    RByte:=$00; GByte:=$00;
+    Count:=2; LastLine:=LineNum;
+    SelectFunc(_Clr);
+    repeat
+      Size:=((Line[Count] and $07) shl 8) or Line[Count+1];
+      case (Line[Count] shr 5) and $03 of
+        0 : begin ROn:=false; GOn:=false; end;
+        1 : begin ROn:= true; GOn:=false; end;
+        2 : begin ROn:=false; GOn:= true; end;
+        3 : begin ROn:= true; GOn:= true; end;
+      end;
+      if Size+AtBit<=8 then begin
+        if ROn then RByte:=RByte or ($FF shr (8-Size) shl AtBit);
+        if GOn then GByte:=GByte or ($FF shr (8-Size) shl AtBit);
+        AtBit:=AtBit+Size;
+      end else begin
+        if ROn then RByte:=RByte or ($FF shl AtBit);
+        if GOn then GByte:=GByte or ($FF shl AtBit);
+(*        SelectPlane([0]); Mem[$A000:AtByte]:=RByte;
+        SelectPlane([1]); Mem[$A000:AtByte]:=GByte;*)
+        Size:=Size-8+AtBit;
+        AtBit:=0; AtByte:=AtByte+1;
+        if Size+AtBit>8 then begin
+(*          SelectPlane([0]); if ROn then RByte:=$FF else RByte:=$00;
+          FillChar(Mem[$A000:AtByte],Size shr 3,RByte);
+          SelectPlane([1]); if GOn then GByte:=$FF else GByte:=$00;
+          FillChar(Mem[$A000:AtByte],Size shr 3,GByte); *)
+          AtByte:=AtByte+(Size shr 3); AtBit:=Size and $07;
+        end else AtBit:=Size;
+        if ROn then RByte:=$FF shr (8-AtBit) else RByte:=$00;
+        if GOn then GByte:=$FF shr (8-AtBit) else GByte:=$00;
+      end;
+      if AtBit=8 then begin
+(*        SelectPlane([0]); Mem[$A000:AtByte]:=RByte;
+        SelectPlane([1]); Mem[$A000:AtByte]:=GByte; *)
+        AtByte:=AtByte+1; AtBit:=0;
+        RByte:=$00; GByte:=$00;
+      end;
+      Count:=Count+2;
+    until (Line[Count]=$18) or KeyPressed;
+    LineSize:=Count+2;
+    GotoXY(35,1); Write(LineNum);
+  end;
+
+procedure DrawScale;
+  var
+    I              : integer;
+    WriteVal       : byte;
+  begin
+    SelectPlane([0,1]); SelectFunc(_Clr);
+    for I:=0 to 349 do begin
+      WriteVal:=$C0;
+      if (I mod 10)=0 then WriteVal:=$F0;
+      if (I mod 50)=0 then WriteVal:=$FC;
+      if (I mod 100)=0 then WriteVal:=$FF;
+(*      Mem[$A000:I*80]:=WriteVal; *)
+    end;
+  end;
+
+procedure InitEGA;
+  var
+    I,Q            : byte;
+    Time           : TimeRec;
+  begin
+(*    with Registers do begin  {Set 640 x 350 Hi-Res mode}
+      AH:=$00; AL:=$10;
+      Intr($10,Registers);
+      AX:=$1130; BH:=$02;    {Set address for character table pointer - size 14}
+      Intr($10,Registers);
+      CharTab14:=Ptr(ES,BP);
+      AX:=$1130; BH:=$03;    {Set address for character table pointer - size 8}
+      Intr($10,Registers);
+      CharTab8:=Ptr(ES,BP);
+      AH:=$2C;               {Get Time}
+      Time.Hour:=CH; Time.Minute:=CL;
+    end;
+    for I:=0 to 15 do begin   {Initialize palette registers}
+      Q:=port[$3DA];
+      port[$3C0]:=I; port[$3C0]:=Colors[I];
+    end;
+    port[$3C0]:=$20;         {Enable palette registers} *)
+    CharSize:=14; XMax:=79; YMax:=24;
+    SelectPlane([2]);
+    GotoXY(0,0); Write('TILT  : XXX');
+    GotoXY(65,0); Write('TIME : '); WriteTime(Time);
+    GotoXY(0,24); Write('RANGE : XXX'); GotoXY(65,24); Write('GAIN  : XXX');
+    GotoXY(0,22); Write('H = HELP');
+  end;
+
+
+

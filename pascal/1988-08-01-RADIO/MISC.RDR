@@ -1,0 +1,70 @@
+{.PA}
+{*****************************************************************************}
+{* Miscellaneous Routines                                                    *}
+{*****************************************************************************}
+procedure SetDTA(var DTA);
+  begin
+    with Registers do begin
+      AH:=$1A;
+      DS:=Seg(DTA);
+      DX:=Ofs(DTA);
+      MsDos(Registers);
+      ErrorFlag:=(Flags and $01)<>0;
+    end;
+  end;
+
+procedure SetDir(Mask : LineType;Attr : byte);
+  begin
+    SetDTA(DTA);
+    with Registers do begin
+      AH:=$4E;
+      DS:=Seg(Mask);
+      DX:=Ofs(Mask)+1;
+      CX:=Attr;
+      MsDos(Registers);
+      ErrorFlag:=(Flags and $01)<>0;
+    end;
+  end;
+
+function DirEntry : LineType;
+  var
+    Line           : LineType;
+  begin
+    Line:='';I:=30;
+    repeat
+      Line:=Line+Chr(DTA[I]);
+      I:=I+1;
+    until DTA[I]=0;
+    DirEntry:=Line;
+    with Registers do begin
+      AH:=$4F;
+      CX:=22;
+      MSDos(Registers);
+      ErrorFlag:=(Flags and $01)<>0;
+    end;
+  end;
+
+procedure ReadKbd;
+  begin
+    Read(Kbd,Key);
+    if KeyPressed then begin
+      Read(Kbd,Key);
+      Escape:=true;
+    end else Escape:=false;
+  end;
+
+procedure WriteTime(Time : TimeRec);
+  begin
+    case Clock of
+      0 : if Time.Hour<13 then Write(Time.Hour:2,':')
+             else Write((Time.Hour-12):2,':');
+      1 : Write(Time.Hour:2,':');
+    end;
+    if Time.Minute<10 then Write('0');
+    Write(Time.Minute);
+    if Clock=0 then if Time.Hour>12 then Write('pm') else Write('am')
+      else Write('  ');
+  end;
+
+
+

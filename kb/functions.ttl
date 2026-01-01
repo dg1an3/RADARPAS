@@ -1,0 +1,562 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix radar: <http://example.org/radarpas/ontology#> .
+@prefix src: <http://example.org/radarpas/source#> .
+
+# =============================================================================
+# RADARPAS Pascal Procedures and Functions
+# Organized by Functional Category
+# =============================================================================
+
+# =============================================================================
+# DOS/BIOS Interface Routines
+# =============================================================================
+
+src:Proc_SetDTA a radar:Procedure ;
+    rdfs:label "SetDTA" ;
+    dc:description "Set Disk Transfer Area for DOS file operations" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:purpose "Configure DOS DTA pointer for directory operations" .
+
+src:Proc_SetDir a radar:Procedure ;
+    rdfs:label "SetDir" ;
+    dc:description "Initialize directory enumeration" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Func_DirEntry a radar:Function ;
+    rdfs:label "DirEntry" ;
+    dc:description "Get next directory entry" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:hasReturnType src:Type_Boolean .
+
+src:Func_ReadKbd a radar:Function ;
+    rdfs:label "ReadKbd" ;
+    dc:description "Read keyboard input without echo" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:hasReturnType src:Type_Char .
+
+src:Proc_WriteTime a radar:Procedure ;
+    rdfs:label "WriteTime" ;
+    dc:description "Format and write time to screen" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+# =============================================================================
+# Graphics Routines (EGA 640x350 @ 16 colors)
+# =============================================================================
+
+src:Proc_InitEGA a radar:Procedure ;
+    rdfs:label "InitEGA" ;
+    dc:description "Initialize EGA graphics mode 0x10 (640x350, 16 colors)" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:purpose "Set up EGA display with 4 VGA planes" .
+
+src:Proc_SelectPlane a radar:Procedure ;
+    rdfs:label "SelectPlane" ;
+    dc:description "Select VGA write plane (0-3: Red, Green, Cyan, Status)" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:hasParameter src:Param_PlaneNum .
+
+src:Proc_SelectFunc a radar:Procedure ;
+    rdfs:label "SelectFunc" ;
+    dc:description "Set graphics raster operation (ROP) mode" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Proc_GRPlot a radar:Procedure ;
+    rdfs:label "GRPlot" ;
+    dc:description "Plot individual pixel at coordinates" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:hasParameter src:Param_X, src:Param_Y .
+
+src:Proc_GRLine a radar:Procedure ;
+    rdfs:label "GRLine" ;
+    dc:description "Draw line using Bresenham algorithm" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:hasParameter src:Param_X1, src:Param_Y1, src:Param_X2, src:Param_Y2 .
+
+src:Proc_DispLine a radar:Procedure ;
+    rdfs:label "DispLine" ;
+    dc:description "Decompress and display radar picture line" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:purpose "Decode RLE compressed line data and render to screen" .
+
+src:Proc_ConOut a radar:Procedure ;
+    rdfs:label "ConOut" ;
+    dc:description "Output character to screen in graphics mode" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:hasParameter src:Param_Char .
+
+src:Proc_GRWrite a radar:Procedure ;
+    rdfs:label "GRWrite" ;
+    dc:description "Write graphical text string to screen" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:hasParameter src:Param_Text .
+
+src:Proc_Window a radar:Procedure ;
+    rdfs:label "Window" ;
+    dc:description "Create and manage text window on screen" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Proc_WriteRngMks a radar:Procedure ;
+    rdfs:label "WriteRngMks" ;
+    dc:description "Draw range circle overlay using lookup tables" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:purpose "Render range markers at 10, 25, 50, 100, 200 nm" .
+
+src:Proc_WriteGfx a radar:Procedure ;
+    rdfs:label "WriteGfx" ;
+    dc:description "Render landmarks and map segments" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Proc_WriteParams a radar:Procedure ;
+    rdfs:label "WriteParams" ;
+    dc:description "Display radar parameter values on screen" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Proc_WriteHelp a radar:Procedure ;
+    rdfs:label "WriteHelp" ;
+    dc:description "Display help screen with command reference" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Proc_ClearScreen a radar:Procedure ;
+    rdfs:label "ClearScreen" ;
+    dc:description "Clear graphics screen" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+# =============================================================================
+# RS-232 Serial Communication (2400 baud)
+# =============================================================================
+
+src:Proc_RS232Interrupt a radar:InterruptHandler ;
+    rdfs:label "RS232Interrupt" ;
+    dc:description "Interrupt service routine for COM port" ;
+    radar:belongsToCategory radar:SerialCommCategory ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:purpose "Handle serial port receive interrupts and buffer data" .
+
+src:Proc_Tx a radar:Procedure ;
+    rdfs:label "Tx" ;
+    dc:description "Transmit single character over serial port" ;
+    radar:belongsToCategory radar:SerialCommCategory ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:hasParameter src:Param_Char .
+
+src:Func_Rx a radar:Function ;
+    rdfs:label "Rx" ;
+    dc:description "Receive character from serial buffer" ;
+    radar:belongsToCategory radar:SerialCommCategory ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:hasReturnType src:Type_Char .
+
+src:Func_SendCom a radar:Function ;
+    rdfs:label "SendCom" ;
+    dc:description "Send command and wait for response with timeout" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:hasReturnType src:Type_Boolean ;
+    radar:calls src:Proc_Tx, src:Func_Rx .
+
+src:Proc_SetParams a radar:Procedure ;
+    rdfs:label "SetParams" ;
+    dc:description "Parse radar response and extract parameters" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Proc_InitRS232 a radar:Procedure ;
+    rdfs:label "InitRS232" ;
+    dc:description "Initialize serial port (8 data, 1 stop, no parity, 2400 baud)" ;
+    radar:belongsToCategory radar:SerialCommCategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Proc_ResetBuf a radar:Procedure ;
+    rdfs:label "ResetBuf" ;
+    dc:description "Clear serial receive buffer" ;
+    radar:belongsToCategory radar:SerialCommCategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+# =============================================================================
+# File Storage and Management
+# =============================================================================
+
+src:Proc_FetchPic a radar:Procedure ;
+    rdfs:label "FetchPic" ;
+    dc:description "Load picture file from disk storage" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Proc_SavePic a radar:Procedure ;
+    rdfs:label "SavePic" ;
+    dc:description "Save received picture to disk" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Proc_LoadStation a radar:Procedure ;
+    rdfs:label "LoadStation" ;
+    dc:description "Load station maps and configuration data" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Proc_SelectStation a radar:Procedure ;
+    rdfs:label "SelectStation" ;
+    dc:description "Display station selection menu" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Proc_Storage a radar:Procedure ;
+    rdfs:label "Storage" ;
+    dc:description "Picture gallery browser interface" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Proc_InsertPic a radar:Procedure ;
+    rdfs:label "InsertPic" ;
+    dc:description "Insert picture into gallery" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Proc_DeletePicture a radar:Procedure ;
+    rdfs:label "DeletePicture" ;
+    dc:description "Remove picture from gallery" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+# =============================================================================
+# Modem Control
+# =============================================================================
+
+src:Proc_CallStation a radar:Procedure ;
+    rdfs:label "CallStation" ;
+    dc:description "Dial station via Hayes or Racal-Vadic modem" ;
+    radar:belongsToCategory radar:ModemCategory ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:calls src:Proc_Tx .
+
+src:Proc_HangUp a radar:Procedure ;
+    rdfs:label "HangUp" ;
+    dc:description "Disconnect call by dropping DTR/RTS" ;
+    radar:belongsToCategory radar:ModemCategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+# =============================================================================
+# Screen Dump and Printing
+# =============================================================================
+
+src:Proc_EpsonMX80PrtSc a radar:Procedure ;
+    rdfs:label "EpsonMX80PrtSc" ;
+    dc:description "Print screen to Epson MX80 dot matrix with RLE compression" ;
+    radar:belongsToCategory radar:PrintingCategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Proc_ColorJetPrtSc a radar:Procedure ;
+    rdfs:label "ColorJetPrtSc" ;
+    dc:description "Print screen to color inkjet printer" ;
+    radar:belongsToCategory radar:PrintingCategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+# =============================================================================
+# Configuration
+# =============================================================================
+
+src:Proc_Config a radar:Procedure ;
+    rdfs:label "Config" ;
+    dc:description "Display configuration options menu (modem type, port, printer, clock)" ;
+    radar:belongsToCategory radar:ConfigCategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Proc_Initialize a radar:Procedure ;
+    rdfs:label "Initialize" ;
+    dc:description "Startup initialization sequence" ;
+    radar:belongsToCategory radar:ConfigCategory ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:calls src:Proc_InitEGA, src:Proc_InitRS232 .
+
+src:Proc_DeInit a radar:Procedure ;
+    rdfs:label "DeInit" ;
+    dc:description "Shutdown cleanup and resource release" ;
+    radar:belongsToCategory radar:ConfigCategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+# =============================================================================
+# Main Control Loops
+# =============================================================================
+
+src:Proc_ModemLoop a radar:Procedure ;
+    rdfs:label "ModemLoop" ;
+    dc:description "Main loop for modem idle state" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Proc_InterLoop a radar:Procedure ;
+    rdfs:label "InterLoop" ;
+    dc:description "Connected/interactive mode loop with parameter control" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Proc_RxPicLoop a radar:Procedure ;
+    rdfs:label "RxPicLoop" ;
+    dc:description "Main picture reception loop" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:calls src:Proc_DispLine .
+
+src:Proc_RxGraphLoop a radar:Procedure ;
+    rdfs:label "RxGraphLoop" ;
+    dc:description "Map overlay reception loop" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_RADAR_PAS .
+
+src:Proc_ExecCom a radar:Procedure ;
+    rdfs:label "ExecCom" ;
+    dc:description "Execute radar command" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:calls src:Func_SendCom .
+
+# =============================================================================
+# Modula-2 Analysis Module Functions
+# =============================================================================
+
+src:Proc_LastMarker a radar:Procedure ;
+    rdfs:label "LastMarker" ;
+    dc:description "Track last storm marker position" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_ANALYSIS_MOD .
+
+src:Proc_Trail a radar:Procedure ;
+    rdfs:label "Trail" ;
+    dc:description "Compute storm cell trail/trajectory" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_ANALYSIS_MOD .
+
+src:Proc_DrawMarkers a radar:Procedure ;
+    rdfs:label "DrawMarkers" ;
+    dc:description "Render storm markers on display" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_ANALYSIS_MOD .
+
+# =============================================================================
+# Modula-2 MAIN Module Procedures (E300PC 3.1)
+# =============================================================================
+
+src:Proc_M2_ExecCom a radar:Procedure ;
+    rdfs:label "ExecCom" ;
+    dc:description "Process regular key codes and execute corresponding commands" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:definedIn src:File_MAIN_MOD ;
+    radar:lineNumber 102 ;
+    radar:hasParameter src:Param_Key .
+
+src:Proc_M2_OptionMenu a radar:Procedure ;
+    rdfs:label "OptionMenu" ;
+    dc:description "Display and manage program options (baud rate, COM port, update interval, clock format)" ;
+    radar:belongsToCategory radar:ConfigCategory ;
+    radar:definedIn src:File_MAIN_MOD ;
+    radar:lineNumber 140 .
+
+src:Proc_M2_DoAuto a radar:Procedure ;
+    rdfs:label "DoAuto" ;
+    dc:description "Perform automatic picture capture on scheduled interval" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_MAIN_MOD ;
+    radar:lineNumber 237 ;
+    radar:calls src:Proc_M2_CallStation, src:Proc_M2_MakePic, src:Proc_M2_SavePicture .
+
+src:Proc_M2_InterLoop a radar:Procedure ;
+    rdfs:label "InterLoop" ;
+    dc:description "Interactive mode loop - connected station with parameter control and picture download" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_MAIN_MOD ;
+    radar:lineNumber 432 ;
+    radar:calls src:Proc_M2_CallStation, src:Proc_M2_ExecCom .
+
+src:Proc_M2_AutoMenu a radar:Procedure ;
+    rdfs:label "AutoMenu" ;
+    dc:description "Set automatic update interval via user prompt" ;
+    radar:belongsToCategory radar:ConfigCategory ;
+    radar:definedIn src:File_MAIN_MOD ;
+    radar:lineNumber 749 .
+
+src:Proc_M2_ModemLoop a radar:Procedure ;
+    rdfs:label "ModemLoop" ;
+    dc:description "Main modem idle state loop with keyboard input and cursor navigation" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_MAIN_MOD ;
+    radar:lineNumber 762 ;
+    radar:calls src:Proc_M2_DoAuto, src:Proc_M2_ExecCom, src:Proc_M2_InterLoop .
+
+# =============================================================================
+# Modula-2 PICTURES Module Procedures
+# =============================================================================
+
+src:Proc_M2_FileName a radar:Procedure ;
+    rdfs:label "FileName" ;
+    dc:description "Generate filename for picture file from PictureRec (time+tilt+range+gain.WX)" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:definedIn src:File_PICTURES_MOD ;
+    radar:lineNumber 50 .
+
+src:Proc_M2_FileParam a radar:Procedure ;
+    rdfs:label "FileParam" ;
+    dc:description "Parse filename to extract picture parameters (reverse of FileName)" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:definedIn src:File_PICTURES_MOD ;
+    radar:lineNumber 96 .
+
+src:Proc_M2_SavePicture a radar:Procedure ;
+    rdfs:label "SavePicture" ;
+    dc:description "Save picture to disk file in station directory" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:definedIn src:File_PICTURES_MOD ;
+    radar:lineNumber 136 .
+
+src:Proc_M2_ReserveMem a radar:Procedure ;
+    rdfs:label "ReserveMem" ;
+    dc:description "Allocate memory for picture, purging oldest pictures if needed" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:definedIn src:File_PICTURES_MOD ;
+    radar:lineNumber 176 ;
+    radar:calls src:Proc_M2_SavePicture .
+
+src:Proc_M2_SelectPicture a radar:Procedure ;
+    rdfs:label "SelectPicture" ;
+    dc:description "Display indicated picture, loading from disk if needed" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:definedIn src:File_PICTURES_MOD ;
+    radar:lineNumber 244 ;
+    radar:calls src:Proc_M2_FileName, src:Proc_M2_WriteParams, src:Proc_M2_WritePic .
+
+src:Proc_M2_AddPicture a radar:Procedure ;
+    rdfs:label "AddPicture" ;
+    dc:description "Insert new picture into sorted position in picture list" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:definedIn src:File_PICTURES_MOD ;
+    radar:lineNumber 315 .
+
+src:Proc_M2_DeletePicture a radar:Procedure ;
+    rdfs:label "DeletePicture" ;
+    dc:description "Delete picture from list and remove corresponding file" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:definedIn src:File_PICTURES_MOD ;
+    radar:lineNumber 403 .
+
+src:Proc_M2_WritePictureEntry a radar:Procedure ;
+    rdfs:label "WritePictureEntry" ;
+    dc:description "Write one entry of picture list (date, time, tilt, range, gain)" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:definedIn src:File_PICTURES_MOD ;
+    radar:lineNumber 450 .
+
+src:Proc_M2_PictureMenu a radar:Procedure ;
+    rdfs:label "PictureMenu" ;
+    dc:description "Menu-driven picture management with select and delete operations" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:definedIn src:File_PICTURES_MOD ;
+    radar:lineNumber 479 ;
+    radar:calls src:Proc_M2_SelectPicture, src:Proc_M2_DeletePicture .
+
+# =============================================================================
+# Modula-2 ANALYSIS Module Procedures
+# =============================================================================
+
+src:Proc_M2_DefineArea a radar:Procedure ;
+    rdfs:label "DefineArea" ;
+    dc:description "Define analysis area for storm cell detection" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_ANALYSIS_MOD ;
+    radar:lineNumber 3 .
+
+src:Proc_M2_Analyze a radar:Procedure ;
+    rdfs:label "Analyze" ;
+    dc:description "Perform storm cell analysis on current picture" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:definedIn src:File_ANALYSIS_MOD ;
+    radar:lineNumber 10 .
+
+# =============================================================================
+# GDEM Functions
+# =============================================================================
+
+src:Proc_DrawSegment a radar:Procedure ;
+    rdfs:label "DrawSegment" ;
+    dc:description "Draw map segment (landmark or line)" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:definedIn src:File_EME_PAS .
+
+src:Proc_EnterCoordinates a radar:Procedure ;
+    rdfs:label "EnterCoordinates" ;
+    dc:description "Input bearing/range coordinates from user" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:definedIn src:File_EME_PAS .
+
+src:Proc_SaveMap a radar:Procedure ;
+    rdfs:label "SaveMap" ;
+    dc:description "Save map to binary format" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:definedIn src:File_EME_PAS .
+
+src:Proc_LoadMap a radar:Procedure ;
+    rdfs:label "LoadMap" ;
+    dc:description "Load map from binary format" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:definedIn src:File_EME_PAS .
+
+# =============================================================================
+# Parameters (representative examples)
+# =============================================================================
+
+src:Param_PlaneNum a radar:Parameter ;
+    rdfs:label "PlaneNum" ;
+    dc:description "VGA plane number (0-3)" ;
+    radar:hasReturnType src:Type_Integer .
+
+src:Param_X a radar:Parameter ;
+    rdfs:label "X" ;
+    dc:description "X coordinate" .
+
+src:Param_Y a radar:Parameter ;
+    rdfs:label "Y" ;
+    dc:description "Y coordinate" .
+
+src:Param_X1 a radar:Parameter ;
+    rdfs:label "X1" ;
+    dc:description "Start X coordinate" .
+
+src:Param_Y1 a radar:Parameter ;
+    rdfs:label "Y1" ;
+    dc:description "Start Y coordinate" .
+
+src:Param_X2 a radar:Parameter ;
+    rdfs:label "X2" ;
+    dc:description "End X coordinate" .
+
+src:Param_Y2 a radar:Parameter ;
+    rdfs:label "Y2" ;
+    dc:description "End Y coordinate" .
+
+src:Param_Char a radar:Parameter ;
+    rdfs:label "Ch" ;
+    dc:description "Character value" .
+
+src:Param_Text a radar:Parameter ;
+    rdfs:label "Text" ;
+    dc:description "Text string" .

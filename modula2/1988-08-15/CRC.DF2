@@ -1,0 +1,26 @@
+DEFINITION MODULE CRC;
+
+(*
+========================================================
+
+ Created   : 8/10/87
+ Last Edit : 8/10/87
+ Author    : Derek Lane
+ System    : LOGITECH MODULA-2/86
+
+ Calculates the cyclic redundancy check for a block of
+ data.
+========================================================
+*)
+
+FROM SYSTEM IMPORT
+  BYTE;
+EXPORT QUALIFIED
+  CalcCRC;
+
+PROCEDURE CalcCRC
+( ForBuffer : ARRAY OF BYTE;
+  VAR CRC   : CARDINAL);
+
+END CRC.
+
