@@ -1,0 +1,51 @@
+DEFINITION MODULE Fonts;
+
+(*
+========================================================
+
+ Created   : 7/7/87
+ Last Edit : 7/7/87
+ Author    : Derek Lane
+ System    : LOGITECH MODULA-2/86
+
+ Text writing for EGA HiRes mode.  Uses EGALib.  Can
+ italicize, bold, and underline.
+========================================================
+*)
+
+EXPORT QUALIFIED 
+  SetFont, SetBold, SetItalic, SetUnderline, GotoRowCol, 
+  GotoXY, Write;
+
+PROCEDURE SetFont
+( Size : CARDINAL );
+(* Currently only supports 8 and 14 sizes. *)
+
+PROCEDURE SetBold
+( OnOff : BOOLEAN );
+(* Sets bold printing on or off. *)
+
+PROCEDURE SetItalic
+( OnOff : BOOLEAN );
+(* Sets italic printing on or off. *)
+
+PROCEDURE SetUnderline
+( OnOff : BOOLEAN );
+(* Sets underline on or off. *)
+
+PROCEDURE GotoRowCol
+( Row,Col : CARDINAL );
+(* Positions cursor at row and column specified in current
+   window.  X in [0..79], Y in [0..24] or [0..42], depending 
+   on font. *)
+
+PROCEDURE GotoXY
+( X,Y : CARDINAL );
+(* Positions cursor at X and Y pixel positions in current
+   window.  X in [0..639], Y in [0..349]. *)
+
+PROCEDURE Write(ForChar : CHAR);
+(* This replaces standard output of InOut. *)
+
+END Fonts.
+

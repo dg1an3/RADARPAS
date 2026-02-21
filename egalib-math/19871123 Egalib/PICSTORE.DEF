@@ -1,0 +1,39 @@
+DEFINITION MODULE PicStore;
+
+(*
+========================================================
+
+ Created   : 8/12/87
+ Last Edit : 8/12/87
+ Author    : Derek Lane
+ System    : LOGITECH MODULA-2/86
+
+ Provides routines for storing and retrieving portions
+ of the picture on the EGA screen.  The pictures are
+ stored in a compressed, run-length encoded form.
+========================================================
+*)
+
+FROM SYSTEM IMPORT
+  BYTE;
+
+EXPORT QUALIFIED
+  GetPicture, PutPicture;
+
+PROCEDURE GetPicture
+( X1, Y1,
+  XSize, YSize : CARDINAL;
+  VAR ToBuffer : ADDRESS );
+(* Stores the area defined by (X1,Y1) to (X1+XSize,Y1+YSize)
+   in the buffer ToBuffer.  The variable Size tells how much
+   of ToBuffer was used.  If ToBuffer isn't big enough, then
+   Size will be zero. *)
+
+PROCEDURE PutPicture
+( X, Y       : CARDINAL;
+  FromBuffer : ADDRESS );
+(* Retrieves the picture previously stored in FromBuffer at
+   the position (X1,Y1). *)
+
+END PicStore.
+

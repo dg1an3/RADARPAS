@@ -1,0 +1,45 @@
+DEFINITION MODULE Figures;
+
+(*
+========================================================
+
+ Created   : 7/7/87
+ Last Edit : 7/8/87
+ Author    : Derek Lane
+ System    : LOGITECH MODULA-2/86
+
+ Provides some basic geometric shape-drawing routines.
+========================================================
+*)
+
+EXPORT QUALIFIED
+  Point, AtPoint, Line, Ellipse, Arc;
+
+PROCEDURE Point
+( X,Y : INTEGER );
+(* Plots the specified point. *)
+
+PROCEDURE AtPoint
+( X,Y : INTEGER ) : CARDINAL;
+(* Returns color at point (X,Y). *)
+
+PROCEDURE Line
+( X1,Y1,X2,Y2 : INTEGER );
+(* Draws the specified line. *)
+
+PROCEDURE Ellipse
+( X,Y        : INTEGER;
+  Radius     : CARDINAL;
+  Aspect     : REAL ); (* X/Y aspect ratio of ellipse.
+                          Use .7292 for circle on EGA. *)
+(* Draws the indicated ellipse. *)
+
+PROCEDURE Arc
+( X,Y        : INTEGER;
+  Radius     : CARDINAL;
+  Aspect     : REAL;
+  Start,End  : REAL ); (* Starting and ending angles in radians. *)
+(* Draws the indicated arc. *)
+
+END Figures.
+
