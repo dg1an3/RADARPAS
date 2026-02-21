@@ -1,0 +1,95 @@
+DEFINITION MODULE E300Interface;
+
+(* CREATED : 5/17/88
+ *  EDITED : 5/18/88
+ *  AUTHOR : Derek Lane
+ *  SYSTEM : Logitech Modula-2/86, version 3.03
+ *
+ *  Consolidates all information of the communications interface
+ *  with an E300 Weather Radar.
+ *
+ *  GetParam and SetParam are for getting and setting the radar's
+ *  parameters.  The three parameters Range, Gain, and Tilt may
+ *  be set with SetParam, are read with GetParam.  Both return
+ *  the TimeofPic and the RT state.
+ *  
+ *  MakePic and GetLine are for downloading the weather picture.
+ *  Once the parameters are set satisfactorily, a call to MakePic
+ *  will initiate
+ *)
+
+FROM TimeDate IMPORT Time;
+FROM SYSTEM IMPORT WORD, BYTE;
+
+TYPE
+  TiltType  = [ 0..11 ];
+  RangeType = [ 0..4 ];
+  GainType  = [ 0..17 ];
+  RTState   = ( NoRT, RTOn, RTOff, RTFault );
+
+PROCEDURE GetParam
+ ( VAR Tilt      : TiltType;
+   VAR Range     : RangeType;
+   VAR Gain      : GainType;
+   VAR TimeofPic : Time;
+   VAR RT        : RTState );
+
+PROCEDURE SetParam
+ (     Tilt      : TiltType;
+       Range     : RangeType;
+       Gain      : GainType;
+   VAR TimeofPic : Time;
+   VAR RT        : RTState );
+
+PROCEDURE MakePic;
+(* Initiates the radar to send the picture, but the
+   radar might need to paint a new one first, so
+   call PicReady() until it returns TRUE *)
+
+PROCEDURE PicReady() : BOOLEAN;
+
+PROCEDURE GetLine
+ ( VAR LineNum   : CARDINAL;
+   VAR RedBitMap : ARRAY OF BYTE;
+   VAR GrnBitMap : ARRAY OF BYTE );
+(* Successive calls return the picture one line at
+   a time as red and green bit maps.  LineNum tells
+   the line number, ranging from 0 to 479 by 2 (since
+   each line sent is actually two screen lines).
+   Currently, the bit maps are each 1280 pixels wide, which means
+   160 bytes or 80 words for each bit map. *)
+
+PROCEDURE AbortPic;
+(* Aborts picture reception.  Call only if downloading a picture. *)
+
+TYPE
+  MapEntry = RECORD
+
+      CASE : CARDINAL OF
+
+      1 : Ident : ARRAY [ 0..2 ] OF CHAR;
+          Range,
+           Bear : CARDINAL; |
+
+      2 : Range1,
+          Bear1,
+          Range2,
+          Bear2 : CARDINAL; |
+
+      END (* CASE *);
+
+  END (* RECORD *);
+
+  Map = ARRAY [ 0..1023 ] OF MapEntry;
+
+PROCEDURE CheckMaps( Map1 : Map ) : BOOLEAN;
+(* Calls a map check for the remote radar to see if a new version
+   of the map needs to be downloaded.  If so, the new version is
+   downloaded and stored in Map1 and Map2, and New is returned
+   TRUE. *)
+
+PROCEDURE GetMaps( VAR Map1, Map2 : Map );
+(* Downloads new maps. *)
+
+END E300Interface.
+

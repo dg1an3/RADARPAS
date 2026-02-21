@@ -1,0 +1,22 @@
+DEFINITION MODULE Print;
+
+(*********************************************************)
+(* VERSION : 2/1/86                                      *)
+(* CREATED : 2/1/86                                      *)
+(*  AUTHOR : Derek Lane                                  *)
+(*  SYSTEM : LOGITECH MODULA-2/86                        *)
+(*                                                       *)
+(*  Allows a screen dump to a dot-matrix or jet printer. *)
+(*  Printer to be used is assumed Epson or compatible    *)
+(*  unless another is declared by SetPrinter.            *)
+(*                                                       *)
+(*********************************************************)
+
+TYPE
+  PrinterType = (EpsonMX80,IBMColorJet,IBMPersonalColor);
+                                      (* NOT SUPPORTED *)
+
+PROCEDURE SetPrinter(ToPrinter : PrinterType);
+
+END Print.
+

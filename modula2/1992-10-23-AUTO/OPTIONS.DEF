@@ -1,6 +1,0 @@
-DEFINITIOM MODULE Options;
-
-PROCEDURE OptionMenu;
-
-END Options.
-

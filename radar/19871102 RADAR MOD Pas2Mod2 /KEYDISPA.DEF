@@ -1,0 +1,136 @@
+DEFINITION MODULE KeyDispatch;
+
+(*
+========================================================
+
+ Created   : 6/30/87
+ Last Edit : 6/30/87
+ Author    : Derek Lane
+ System    : LOGITECH MODULA-2/86
+
+
+DoKey provides a way to assign a task to be performed
+when a key is pressed.  Though not as fast as a CASE 
+statement, it is more flexible, because a procedure can
+be linked to a keystroke in the initialization code of
+a module, and the main module will never need to be
+aware of that modules interface at all.
+
+DoKey also provides uses extended key codes by the Read
+procedure, which indicates an extended key sequence by
+returning CHR(128+code), rather than returning a NUL or
+ESC before the code.  This is a more efficient system,
+but prevents entering extended characters.  Certain
+extended strokes have codes higher than 127; these are
+simply returned without adding 128.
+      
+Notice that the key interpretation procedure, GoKey,
+requires a list of keys to be interpreted.  For use with
+the self-assigned keystrokes, use GoKey(MainKeys).  You
+can also use GoKey with custom keystroke assignments.
+========================================================
+*)
+
+EXPORT QUALIFIED
+  F1, ShiftF1, CtrlF1, AltF1, F2, ShiftF2, CtrlF2, AltF2,
+  F3, ShiftF3, CtrlF3, AltF3, F4, ShiftF4, CtrlF4, AltF4,
+  F5, ShiftF5, CtrlF5, AltF5, F6, ShiftF6, CtrlF6, AltF6,
+  F7, ShiftF7, CtrlF7, AltF7, F8, ShiftF8, CtrlF8, AltF8,
+  F9, ShiftF9, CtrlF9, AltF9, F10, ShiftF10, CtrlF10, AltF10,
+  LArr, CtrlLArr, RArr, CtrlRArr, UArr, DArr,
+  Home, End, CtrlEnd, PgUp, CtrlPgUp, PgDn, CtrlPgDn,
+  Ins, Del,
+  AltA, AltB, AltC, AltD, AltE, AltF, AltG, AltH, AltI, AltJ,
+  AltK, AltL, AltM, AltN, AltO, AltP, AltQ, AltR, AltS, AltT,
+  AltU, AltV, AltW, AltX, AltY, AltZ,
+  Alt0, Alt1, Alt2, Alt3, Alt4, Alt5, Alt6, Alt7, Alt8, Alt9,
+  AltMinus, AltEqual,
+  KeyAssignment, MainKeys,
+  KeyPressed, Read, Peek,
+  AssignKey, GoKey;
+
+CONST (* Key Codes *)
+  F1 = 273c;   ShiftF1 = 324c;   CtrlF1 = 336c;   AltF1 = 350c;
+  F2 = 274c;   ShiftF2 = 325c;   CtrlF2 = 337c;   AltF2 = 351c;
+  F3 = 275c;   ShiftF3 = 326c;   CtrlF3 = 340c;   AltF3 = 352c;
+  F4 = 276c;   ShiftF4 = 327c;   CtrlF4 = 341c;   AltF4 = 353c;
+  F5 = 277c;   ShiftF5 = 330c;   CtrlF5 = 342c;   AltF5 = 354c;
+  F6 = 300c;   ShiftF6 = 331c;   CtrlF6 = 343c;   AltF6 = 355c;
+  F7 = 301c;   ShiftF7 = 332c;   CtrlF7 = 344c;   AltF7 = 356c;
+  F8 = 302c;   ShiftF8 = 333c;   CtrlF8 = 345c;   AltF8 = 357c;
+  F9 = 303c;   ShiftF9 = 334c;   CtrlF9 = 346c;   AltF9 = 360c;
+  F10 = 304c;  ShiftF10 = 335c;  CtrlF10 = 347c;  AltF10 = 361c;
+
+  LArr = 313c; CtrlLArr = 363c;
+  RArr = 315c; CtrlRArr = 364c;
+  UArr = 310c;
+  DArr = 320c;
+  Home = 307c;
+  End  = 317c; CtrlEnd  = 365c;
+  PgUp = 311c; CtrlPgUp = 204c;
+  PgDn = 321c; CtrlPgDn = 366c;
+  Ins  = 322c;
+  Del  = 323c;
+
+  AltA = 236c;  AltB = 260c;  AltC = 256c;  AltD = 240c;
+  AltE = 222c;  AltF = 241c;  AltG = 242c;  AltH = 243c;
+  AltI = 227c;  AltJ = 244c;  AltK = 245c;  AltL = 246c;
+  AltM = 262c;  AltN = 261c;  AltO = 230c;  AltP = 231c;
+  AltQ = 220c;  AltR = 223c;  AltS = 237c;  AltT = 224c;
+  AltU = 226c;  AltV = 257c;  AltW = 221c;  AltX = 255c;
+  AltY = 225c;  AltZ = 254c;
+  
+  Alt0 = 201c;  Alt1 = 370c;  Alt2 = 371c;  Alt3 = 372c;
+  Alt4 = 373c;  Alt5 = 374c;  Alt6 = 375c;  Alt7 = 376c;
+  Alt8 = 377c;  Alt9 = 200c;
+
+  AltMinus = 202c;  AltEqual = 203c;
+
+TYPE
+  KeyAssignment = RECORD
+    WhenKey     :   CHAR;
+    DoProc      :   PROC;
+  END; (* RECORD *)
+
+VAR
+  MainKeys : ARRAY[0..63] OF KeyAssignment;
+  (* This is the main keystroke list, assigned by AssignKey.
+     Begin main key interpretation by GoKey(MainKeys).  Don't
+     change this! *)
+
+PROCEDURE KeyPressed() : BOOLEAN;
+(* TRUE if a key is ready. *)
+
+PROCEDURE Read
+( VAR Key : CHAR
+);
+(* Reads a regular or extended code, returns as Key. *)
+
+PROCEDURE Peek
+( VAR Key : CHAR
+);
+(* 'Peeks' at the next keystroke.  Consecutive callings of
+   Peek will return the same key over and over.  If your 
+   procedure decides to use the key read, be sure to call
+   Read to clear it. *)
+
+PROCEDURE AssignKey
+( WhenKey  : CHAR;    (* Key stroke *)
+  DoProc   : PROC;    (* Procedure to be called *)
+  Priority : BOOLEAN; (* Priority of keystroke *)
+  VAR OK   : BOOLEAN  (* TRUE if installation successful *)
+);
+(* Assigns the procedure Do to be called when Key is pressed. 
+   Set Priority to true for speed-intensive keys, such as 
+   cursor controls.  Priority simply has the procedure install
+   the key at the beginning of the list, rather than the end. *)
+   
+PROCEDURE GoKey
+( ForKeys : ARRAY OF KeyAssignment
+);
+(* Begins reading keys and calling the assigned procedure.
+   Returns when it reads a key which is assigned to a NIL
+   procedure. *)
+   
+END KeyDispatch.
+

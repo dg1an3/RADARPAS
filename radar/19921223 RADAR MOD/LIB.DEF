@@ -1,0 +1,156 @@
+(* Copyright (C) 1987 Jensen & Partners International *)
+DEFINITION MODULE Lib;
+
+IMPORT AsmLib;
+
+
+PROCEDURE MathError (    R: LONGREAL; S: ARRAY OF CHAR);
+
+PROCEDURE MathError2(R1,R2: LONGREAL; S: ARRAY OF CHAR);
+
+
+TYPE
+  CompareProc = PROCEDURE(CARDINAL, CARDINAL) : BOOLEAN;
+  SwapProc    = PROCEDURE(CARDINAL, CARDINAL);
+
+PROCEDURE QSort(N: CARDINAL; Less: CompareProc; Swap: SwapProc);
+
+PROCEDURE HSort(N: CARDINAL; Less: CompareProc; Swap: SwapProc);
+
+
+PROCEDURE RANDOM(Range: CARDINAL) : CARDINAL;
+
+PROCEDURE RAND() : REAL;
+
+PROCEDURE RANDOMIZE;
+
+
+PROCEDURE Execute (Name        : ARRAY OF CHAR ; (* full name of program *)
+                   CommandLine : ARRAY OF CHAR ; (* command line for program *)
+                   StoreAddr   : ADDRESS ;       (* storage to execute in *)
+                   StoreLen    : CARDINAL        (* length in paragraphs *)
+                  ) : CARDINAL ;                 (* DOS reply (0=OK) *)
+
+
+(*
+
+PROCEDURE Sound(FreqHz: CARDINAL);
+
+PROCEDURE NoSound;
+
+PROCEDURE Delay(Time: CARDINAL);
+
+
+TYPE
+  CommandType = POINTER TO ARRAY[0..126] OF CHAR;
+
+VAR
+  PSP         : CARDINAL;
+  CommandLine : CommandType;
+
+PROCEDURE Environment(N: CARDINAL) : CommmandType;
+
+PROCEDURE Dos(VAR R: SYSTEM.Registers); (* INT 21H Function Call *)
+
+PROCEDURE Intr(VAR R: SYSTEM.Registers; I: CARDINAL);
+
+PROCEDURE ParamCount() : CARDINAL;
+
+PROCEDURE ParamStr(VAR S: ARRAY OF CHAR ; N: CARDINAL );
+
+PROCEDURE HashString(S: ARRAY OF CHAR; Range: CARDINAL) : CARDINAL;
+
+PROCEDURE Move(Source,Dest: ADDRESS; Count: CARDINAL);
+
+PROCEDURE Fill(Dest: ADDRESS; Count: CARDINAL; Value: BYTE);
+
+PROCEDURE WordFill(Dest: ADDRESS; WordCount: CARDINAL; Value: WORD);
+
+PROCEDURE WordMove(Source,Dest: ADDRESS; WordCount: CARDINAL);
+
+
+PROCEDURE AddAddr(A: ADDRESS; increment: CARDINAL) : ADDRESS;
+
+PROCEDURE SubAddr(A: ADDRESS; decrement: CARDINAL) : ADDRESS;
+
+PROCEDURE IncAddr(VAR A: ADDRESS; increment: CARDINAL);
+
+PROCEDURE DecAddr(VAR A: ADDRESS; decrement: CARDINAL);
+
+
+PROCEDURE UserBreak;
+
+PROCEDURE FatalError(S : ARRAY OF CHAR);
+
+PROCEDURE Terminate(P : PROC; VAR C: PROC);
+
+PROCEDURE SetReturnCode(code: SHORTCARD);
+
+PROCEDURE EnableBreakCheck;
+
+PROCEDURE DisableBreakCheck;
+
+
+TYPE
+  LongLabel = ARRAY[0..3] OF CARDINAL ;
+
+(*$C 00*) (* save no registers *)
+PROCEDURE SetJmp (VAR Lbl: LongLabel) : CARDINAL;
+
+(*$C FF*) (* no return *)
+PROCEDURE LongJmp(VAR Lbl: LongLabel; result: CARDINAL);
+(*$C F0*) (* restore default register save mask *)
+
+PROCEDURE ScanR  (Dest: ADDRESS; Count: CARDINAL; Value: BYTE) : CARDINAL;
+
+PROCEDURE ScanL  (Dest: ADDRESS; Count: CARDINAL; Value: BYTE) : CARDINAL;
+
+PROCEDURE ScanNeR(Dest: ADDRESS; Count: CARDINAL; Value: BYTE) : CARDINAL;
+
+PROCEDURE ScanNeL(Dest: ADDRESS; Count: CARDINAL; Value: BYTE) : CARDINAL;
+
+PROCEDURE Compare(Source,Dest: ADDRESS; Len: CARDINAL) : CARDINAL;
+
+*)
+
+CONST
+  Sound             = AsmLib.Sound;
+  NoSound           = AsmLib.NoSound;
+  Delay             = AsmLib.Delay;
+  Environment       = AsmLib.Environment;
+  Dos               = AsmLib.Dos;
+  Intr              = AsmLib.Intr;
+  ParamStr          = AsmLib.ParamStr;
+  ParamCount        = AsmLib.ParamCount;
+  PSP             ::= AsmLib.PSP;
+  CommandLine     ::= AsmLib.CommandLine;
+  HashString        = AsmLib.HashString;
+  Move              = AsmLib.Move;
+  Fill              = AsmLib.Fill;
+  WordFill          = AsmLib.WordFill;
+  WordMove          = AsmLib.WordMove;
+  AddAddr           = AsmLib.AddAddr;
+  SubAddr           = AsmLib.SubAddr;
+  IncAddr           = AsmLib.IncAddr;
+  DecAddr           = AsmLib.DecAddr;
+  UserBreak         = AsmLib.UserBreak;
+  FatalError        = AsmLib.FatalError;
+  Terminate         = AsmLib.Terminate;
+  SetReturnCode     = AsmLib.SetReturnCode;
+  EnableBreakCheck  = AsmLib.EnableBreakCheck;
+  DisableBreakCheck = AsmLib.DisableBreakCheck;
+  SetJmp            = AsmLib.SetJmp;
+  LongJmp           = AsmLib.LongJmp;
+  ScanR             = AsmLib.ScanR;
+  ScanL             = AsmLib.ScanL;
+  ScanNeR           = AsmLib.ScanNeR;
+  ScanNeL           = AsmLib.ScanNeL;
+  Compare           = AsmLib.Compare;
+
+TYPE
+  CommandType       = AsmLib.CommandType;
+  LongLabel         = AsmLib.LongLabel;
+
+
+END Lib.
+

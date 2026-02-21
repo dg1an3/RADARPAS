@@ -1,0 +1,70 @@
+(* Copyright (C) 1987 Jensen & Partners International *)
+DEFINITION MODULE SYSTEM;
+
+TYPE
+  PROCESS   = ADDRESS;
+
+  Registers = RECORD
+                CASE : BOOLEAN OF
+                | TRUE  : AX,BX,CX,DX,BP,SI,DI,DS,ES : CARDINAL;
+                          Flags                      : BITSET;
+                | FALSE : AL,AH,BL,BH,CL,CH,DL,DH    : SHORTCARD;
+                END;
+              END;
+
+CONST
+   CarryFlag = 0;
+   ZeroFlag  = 6;
+
+VAR
+   HeapBase    : CARDINAL;  (* Base segment of heap *)
+
+
+PROCEDURE NEWPROCESS(P: PROC; A: ADDRESS; S: CARDINAL; VAR P1: ADDRESS);
+
+PROCEDURE TRANSFER(VAR P1,P2: ADDRESS);
+
+PROCEDURE IOTRANSFER (VAR P1,P2: ADDRESS; I: CARDINAL);
+
+PROCEDURE InterruptRegisters(P: ADDRESS) : ADDRESS;
+
+PROCEDURE CurrentProcess() : ADDRESS;
+
+PROCEDURE CurrentPriority() : CARDINAL;
+
+PROCEDURE NewPriority(PR: CARDINAL);
+
+PROCEDURE Listen(Mask: BITSET);
+
+
+PROCEDURE DI();  (* Disable Interupts *)
+
+PROCEDURE EI();  (* Enable Interupts *)
+
+PROCEDURE Ofs(A: ARRAY OF WORD) : CARDINAL;
+
+PROCEDURE Seg(A: ARRAY OF WORD) : CARDINAL;
+
+PROCEDURE Out(P: CARDINAL; V: SHORTCARD);
+
+PROCEDURE In(P: CARDINAL) : SHORTCARD;
+
+PROCEDURE GetFlags() : CARDINAL;
+
+PROCEDURE SetFlags(F: CARDINAL);
+
+
+CONST
+    ADDRESS ::= ADDRESS;
+    ADR     ::= ADR;
+    SIZE    ::= SIZE;
+    TSIZE   ::= SIZE;
+    WORD    ::= WORD;
+    BYTE    ::= BYTE;
+
+    SHORTADDR ::= SHORTADDR;
+    LONGWORD  ::= LONGWORD;
+
+END SYSTEM.
+
+

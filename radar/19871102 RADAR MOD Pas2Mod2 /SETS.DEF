@@ -1,0 +1,33 @@
+DEFINITION MODULE Sets;
+
+PROCEDURE In
+( InSet  : ARRAY OF BITSET;
+  Member : CARDINAL ) : BOOLEAN;
+
+PROCEDURE Incl
+( VAR InSet  : ARRAY OF BITSET;
+  Member     : CARDINAL );
+
+PROCEDURE Excl
+( VAR FromSet : ARRAY OF BITSET;
+  Member      : CARDINAL );
+
+PROCEDURE Union
+( Set1, Set2 : ARRAY OF BITSET;
+  VAR Result : ARRAY OF BITSET );
+
+PROCEDURE Inter
+( Set1, Set2 : ARRAY OF BITSET;
+  VAR Result : ARRAY OF BITSET );
+
+PROCEDURE Diff
+( Set1, Set2 : ARRAY OF BITSET;
+  VAR Result : ARRAY OF BITSET );
+
+PROCEDURE SymDiff
+( Set1, Set2 : ARRAY OF BITSET;
+  VAR Result : ARRAY OF BITSET );
+
+
+END Sets.
+

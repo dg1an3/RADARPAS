@@ -1,0 +1,80 @@
+DEFINITION MODULE EGALib;
+
+(*********************************************************)
+(* Created   : 12/2/86                                   *)
+(* Last Edit : 12/20/86                                  *)
+(* Author    : D. Lane                                   *)
+(* System    : LOGITECH MODULA-2/86                      *)
+(*                                                       *)
+(* Provides a set of routines for using the IBM EGA      *)
+(* graphics card.  Replaces standard input and output    *)
+(* routines for total control of EGA features in writing *)
+(* characters.                                           *)
+(*                                                       *)
+(*********************************************************)
+
+FROM SYSTEM IMPORT BYTE, ADDRESS;
+
+EXPORT QUALIFIED
+  PaletteType, clr, and, or, xor, SetPlane, EnablePlane,
+  SetFunc, SetPalette, FillArea, FillAreaFunc, Line, 
+  Window, ScrollUp, ScrollDown, GotoXY, Write, Read;
+
+TYPE
+  PaletteType = ARRAY[0..15] OF BYTE;
+
+CONST
+  clr = 00H;
+  and = 08H;
+  or  = 10H;
+  xor = 18H;
+
+PROCEDURE SetPlane(ToPlanes : BITSET);
+(* Selects planes for future writes *)
+
+PROCEDURE EnablePlane(ForPlanes : BITSET);
+(* Enables and disables particular planes *)
+
+PROCEDURE SetFunc(ToFunc : BYTE);
+(* Selects write mode for future writes *)
+
+PROCEDURE SetPalette(ToPalette : PaletteType);
+(* Sets up a new color palette *)
+
+PROCEDURE FillArea(X1,Y1,X2,Y2 : INTEGER; Value : BYTE);
+(* Fills rectangular area with Value.  Note that to use a function
+   set by SetFunc that you have to use FillAreaFunc below. *)
+
+PROCEDURE FillAreaFunc(X1,Y1,X2,Y2 : INTEGER; Value : BYTE; Func : BYTE);
+(* First, calls SetFunc(Func).  Then fills rectangular area with Value
+   using Func. *)
+
+PROCEDURE Line(X1,Y1,X2,Y2 : INTEGER);
+(* Draws a line from (X1,Y1) to (X2,Y2) *)
+
+PROCEDURE Window(XPos,YPos,XSize,YSize : INTEGER);
+(* Sets up window which all writes are mapped into *)
+
+PROCEDURE ScrollUp;
+(* Scrolls current window up one line *)
+
+PROCEDURE ScrollDown;
+(* Scrolls current window down one line *)
+
+PROCEDURE GotoXY(X,Y : INTEGER);
+(* Sets position for next write *)
+
+PROCEDURE Write(ForChar : CHAR);
+(* Writes a character at the current cursor position.  Characters
+   ASCII.cr, ASCII.lf, ASCII.bs, and ASCII.eol are interpreted.
+   This routine is set as the TermBase.AssignWrite procedure, so
+   all output procedures from InOut are routed through it. *)
+
+PROCEDURE Read(VAR ForChar : CHAR);
+(* Writes a cursor box at the current cursor position, then reads
+   a character from the keyboard and writes it in place of the cursor
+   box.  Note that this routine is set as the TermBase.AssignRead proc-
+   edure, so all read procedures from InOut are routed through it. *)
+
+END EGALib.
+

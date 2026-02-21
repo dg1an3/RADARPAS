@@ -1,0 +1,34 @@
+DEFINITION MODULE Timer;
+
+(*********************************************************)
+(* VERSION : 12/15/86                                    *)
+(* CREATED : 12/15/86                                    *)
+(*  AUTHOR : Derek Lane                                  *)
+(*  SYSTEM : LOGITECH MODULA-2/86                        *)
+(*                                                       *)
+(*  Provides a timer which can wake up a process after a *)
+(*  specified amount of time has elapsed.                *)
+(*                                                       *)
+(*  IMPORTS -                                            *)
+(*    Devices                                            *)
+(*                                                       *)
+(*  DEPENDS ON -                                         *)
+(*    IBM-PC timer interrupt 1CH.                        *)
+(*                                                       *)
+(*********************************************************)
+
+EXPORT QUALIFIED
+  Alarm, AlarmOff, TimeOut;
+
+PROCEDURE Alarm(ToProcess : PROCESS; Time : CARDINAL);
+(* After Time milliseconds passes, ToProcess is activated. *)
+
+PROCEDURE AlarmOff(ToProcess : PROCESS);
+(* The timer set for ToProcess is turned off prematurely. *)
+
+PROCEDURE TimeOut(ToProcess : PROCESS) : BOOLEAN;
+(* After a time out, a process can check to see if it was really
+   timed out by calling this function. *)
+
+END Timer.
+

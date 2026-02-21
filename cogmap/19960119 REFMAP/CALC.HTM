@@ -1,0 +1,206 @@
+<html>
+<head>
+
+<title>Postfix Notation Calculator </title>
+
+<script language="LiveScript">
+<!-- hide this script tag's contents from old browsers
+
+// keep track of whether we just computed display.value
+var computed = false
+
+function pushStack(form)
+{
+    form.stack.value = form.display.value
+    form.display.value = 0
+}
+
+//
+// Define a function to add a new character to the display
+//
+function addChar(input, character)
+{
+    // auto-push the stack if the last value was computed
+    if(computed) {
+	pushStack(input.form)
+	computed = false
+    }
+
+    // make sure input.value is a string
+    if(input.value == null || input.value == "0")
+        input.value = character
+    else
+        input.value += character
+}
+
+function deleteChar(input)
+{
+    input.value = input.value.substring(0, input.value.length - 1)
+}
+
+function add(form)
+{
+    form.display.value = (0 + form.stack.value) + form.display.value
+    computed = true
+}
+
+function subtract(form)
+{
+    form.display.value = form.stack.value - form.display.value
+    computed = true
+}
+
+function multiply(form)
+{
+    form.display.value = form.stack.value * form.display.value
+    computed = true
+}
+
+function divide(form)
+{
+    var divisor = 0 + form.display.value
+    if(divisor == 0) {
+	alert("Don't divide by zero, pal...");
+	return
+    }
+    form.display.value = form.stack.value / divisor
+    computed = true
+}
+
+function changeSign(input)
+{
+    // could use input.value = 0 - input.value, but let's show off substring
+    if(input.value.substring(0, 1) == "-")
+	input.value = input.value.substring(1, input.value.length)
+    else
+	input.value = "-" + input.value
+}
+
+<!-- done hiding from old browsers -->
+</script>
+</head>
+
+<body>
+<h1>Postfix Notation Calculator</h1>
+
+This Chouckulator(tm)-brand calculator uses postfix notation, and works a little differently from calculators you may have used. Suppose you want to add two numbers. Enter the first number. Press "Enter." This commits the first number into the calculator's memory. Then enter the second number. After that, enter the type of operation (such as "+") that you wish to perform.
+
+<form method="post">
+
+<table border="1" align=center>
+<tr align="center">
+<td colspan = 4>
+
+<table border="0">
+<tr>
+<td align=right>Stack:</td><td><input name="stack" value="0"></td>
+</tr>
+<tr>
+<td align=right>Accumulator:</td><td><input name="display" value="0"></td>
+</tr>
+</table>
+
+</td>
+</tr>
+
+<tr align=center>
+<td>
+<input type="button" value=" 7 "
+  onClick="addChar(this.form.display, '7')">
+</td>
+<td>
+<input type="button" value=" 8 "
+  onClick="addChar(this.form.display, '8')">
+</td>
+<td>
+<input type="button" value=" 9 "
+  onClick="addChar(this.form.display, '9')">
+</td>
+<td>
+<input type="button" value=" / "
+  onClick="divide(this.form)">
+</td>
+</tr>
+
+<tr align=center>
+<td>
+<input type="button" value=" 4 "
+  onClick="addChar(this.form.display, '4')">
+</td>
+<td>
+<input type="button" value=" 5 "
+  onClick="addChar(this.form.display, '5')">
+</td>
+<td>
+<input type="button" value=" 6 "
+  onClick="addChar(this.form.display, '6')">
+</td>
+<td>
+<input type="button" value=" * "
+  onClick="multiply(this.form)">
+</td>
+</tr>
+
+<tr align=center>
+<td>
+<input type="button" value=" 1 "
+  onClick="addChar(this.form.display, '1')">
+</td>
+<td>
+<input type="button" value=" 2 "
+  onClick="addChar(this.form.display, '2')">
+</td>
+<td>
+<input type="button" value=" 3 "
+  onClick="addChar(this.form.display, '3')">
+</td>
+<td>
+<input type="button" value=" - "
+  onClick="subtract(this.form)">
+</td>
+</tr>
+
+<tr align=center>
+<td>
+<input type="button" value=" 0 "
+  onClick="addChar(this.form.display, '0')"> 
+</td>
+<td>
+<input type="button" value=" . "
+  onClick="addChar(this.form.display, '.')"> 
+</td>
+<td>
+<input type="button" value="+/-"
+  onClick="changeSign(this.form.display)">
+</td>
+<td>
+<input type="button" value=" + "
+  onClick="add(this.form)">
+</td>
+</tr>
+
+
+<tr align=center>
+<td colspan="2">
+<input type="button" value=" Enter " name="enter"
+  onClick="pushStack(this.form)">
+</td>
+<td>
+<input type="button" value=" C "
+  onClick="this.form.display.value = 0 ">
+</td>
+<td>
+<input type="button" value=" <- "
+  onClick="deleteChar(this.form.display)">
+</td>
+</tr>
+
+</table>
+</form>
+
+
+This is a sample of JavaScript in action. If you view the source, you'll see that a number of functions, written in JavaScript, are located in the header of this HTML file. These functions are used to perform various math and formatting operations on the client machine. 
+
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+DEFINITION MODULE Interact;
+
+(*
+========================================================
+
+ Created   : 4/19/87
+ Last Edit : 4/19/87
+ Author    : Derek Lane
+ System    : LOGITECH MODULA-2/86
+
+ Interactive control of the radar.  CompletePicture is
+ TRUE if a complete picture was received from the radar.
+ The parameters of the radar can be found by reading 
+ RadarParams in module Control.
+
+========================================================
+*)
+
+VAR
+  CompletePicture : BOOLEAN;   (* TRUE if a complete picture was 
+                                  received from radar. *)
+
+PROCEDURE RadarInteract;
+(* Interactive control of radar. *)
+
+END Interact.
+

@@ -1,0 +1,47 @@
+// eevorg2d.h : interface of the Eevorg class
+//
+/////////////////////////////////////////////////////////////////////////////
+
+#ifndef __EEVORG2D_H__
+#define __EEVORG2D_H__
+
+#define WITH_MUTATION 1
+
+class Eevorg2d : public CObject
+{
+public:
+	Eevorg2d(Eevorg2d *fromParent, int mutFlag = !WITH_MUTATION);
+	Eevorg2d();	// create from serialization only
+	DECLARE_SERIAL(Eevorg2d)
+	
+// Attributes
+	Eevorg2d *parent;
+	CByteArray rule;
+	int maxRule;
+	CObArray genQuad;	// array containing one quadrant of each generation
+	int maxVal;
+	int score;
+	
+// Operations
+	int numOfGen()  { ASSERT(0); return 0; } // return genUpQuad.GetSize(); }
+    int nextGen();	// compute next generation and return
+    CByteArray *getGen(int forGen) { ASSERT(0); return 0; } // return (CByteArray *)gen.GetAt(forGen); }
+    // void mutate();
+
+	void drawAt(CDC *pDC, int atX, int atY, int hgt);
+
+    int getScore() { return score; }
+    void incScore() { score++; }
+    	
+// Implementation
+	virtual ~Eevorg2d();
+	virtual void Serialize(CArchive& ar);	// overridden for document i/o
+	
+#ifdef _DEBUG
+	virtual	void AssertValid() const;
+	virtual	void Dump(CDumpContext& dc) const;
+#endif
+};	// class Eevorg2d
+
+#endif
+/////////////////////////////////////////////////////////////////////////////

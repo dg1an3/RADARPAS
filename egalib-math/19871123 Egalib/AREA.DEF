@@ -1,0 +1,40 @@
+DEFINITION MODULE Area;
+
+(*
+========================================================
+
+ Created   : 8/4/87
+ Last Edit : 8/4/87
+ Author    : Derek Lane
+ System    : LOGITECH MODULA-2/86
+
+ This is a set of routines for moving and filling areas
+ on the EGA screen.  Note that it doesn't use the
+ windows set up by EGALib.
+========================================================
+*)
+
+FROM SYSTEM IMPORT
+  BYTE;
+
+EXPORT QUALIFIED
+  FillArea, MoveArea;
+
+PROCEDURE FillArea
+( X1, Y1, XSize, YSize : INTEGER;
+  Value                : BYTE );
+(* Fills the indicated area with Value. Note that each 
+   byte in the area is read, then Value is written, so
+   the function set in EGALib will work for the fill. *)
+
+PROCEDURE MoveArea
+( X1, Y1, XSize, YSize : INTEGER;
+  ToX, ToY             : INTEGER );
+(* Moves the indicated area so that its upper-left corner
+   as at (ToX,ToY).  Automatically decides which direction
+   to move so that an overlapping area is handled properly.
+   Probably won't work right unless EGALib.SetFunc(clr) is
+   used previously. *)
+
+END Area.
+

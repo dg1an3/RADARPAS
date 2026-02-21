@@ -1,0 +1,27 @@
+// oNode.cpp: implementation of the oNode class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "theWheel.h"
+#include "theWheelNode.h"
+
+#ifdef _DEBUG
+#undef THIS_FILE
+static char THIS_FILE[]=__FILE__;
+#define new DEBUG_NEW
+#endif
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+
+oNode::oNode()
+{
+
+}
+
+oNode::~oNode()
+{
+
+}

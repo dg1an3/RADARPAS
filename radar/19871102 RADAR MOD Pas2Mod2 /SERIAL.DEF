@@ -1,0 +1,109 @@
+DEFINITION MODULE Serial;
+
+(*********************************************************)
+(* VERSION : 12/12/86                                    *)
+(* CREATED : 12/12/86                                    *)
+(*  AUTHOR : Derek Lane                                  *)
+(*  SYSTEM : LOGITECH MODULA-2/86                        *)
+(*                                                       *)
+(*  Provides a powerful interface to the standard serial *)
+(*  cards of an IBM PC.  Has facilities for interupts,   *)
+(*  buffering, and timeouts.                             *)
+(*                                                       *)
+(*  IMPORTS -                                            *)
+(*    Devices                                            *)
+(*                                                       *)
+(*  DEPENDS ON -                                         *)
+(*    IBM serial card IO register positions.             *)
+(*                                                       *)
+(*********************************************************)
+
+FROM SYSTEM IMPORT ADDRESS;
+
+TYPE
+  EventCode = (dataReady,
+               overrunError,
+               parityError,
+               framingError,
+               breakInterrupt,
+               bufferEmpty,
+               deltaCTS,
+               deltaDSR,
+               deltaRI,
+               deltaCD,
+               timeOut);
+               
+PROCEDURE Init(ComPort : CARDINAL; (* COM1: or COM2: *)
+               Baud    : CARDINAL; (* Baud rate *)
+               Data    : CARDINAL; (* 5, 6, 7, or 8 data bits *)
+               Stop    : CARDINAL; (* 1 or 2 data bits *)
+               Parity  : BOOLEAN;  (* TRUE=Parity Enabled *)
+               Even    : BOOLEAN); (* TRUE=Parity even, if Parity=TRUE *)
+(* Initializes the specified serial port to the parameters indicated. *)
+
+PROCEDURE OnEvent(ComPort   : CARDINAL;
+                  Event     : EventCode; 
+                  DoProc    : PROC); 
+(* Sets an interrupt to DoProc to occur when Event occurs.  DoProc 
+   cannot use too much stack or local variable space, as it is using
+   a "borrowed" process from this module. *)
+
+PROCEDURE Timer(Time : CARDINAL);
+(* Sets the amount of time to wait for a character on the serial port,
+   in milliseconds. *)
+
+
+(***********************************************************************
+ * The following are procedures to fill buffers with serial data, or   *
+ * transmit buffers over the serial port.  They will accept a special  *
+ * procedure as a parameter which will be called after every character *
+ * sent or received.                                                   *
+ ***********************************************************************)
+
+TYPE
+  CheckProcedure = PROCEDURE(ADDRESS,CARDINAL,CARDINAL) : BOOLEAN;
+  (* This is the procedure type for the Chek procedures below.  The
+     parameters to this type of procedure correspond to:
+       ADDRESS  : Current buffer address, as given by the Buffer parameter
+       CARDINAL : Maximum buffer size
+       CARDINAL : Current position in buffer
+     If the procedure returns FALSE, the operation is aborted.  If Check
+     is a NIL procedure, it is not called.  *)
+
+PROCEDURE ReadToBuffer(ComPort    : CARDINAL;
+                       Buffer     : ADDRESS;
+                       BufferSize : CARDINAL;
+                       Check      : CheckProcedure;
+                   VAR Done       : BOOLEAN);
+(* Stores data in Buffer, until BufferSize is reached. Calls procedure
+   Check every time a character is stored, unless Check is NIL.  Takes
+   over DataReady event. *)
+
+PROCEDURE WriteFromBuffer(ComPort    : CARDINAL;
+                          Buffer     : ADDRESS;
+                          BufferSize : CARDINAL;
+                          Check      : CheckProcedure;
+                      VAR Done       : BOOLEAN);
+(* Transmits data in Buffer.  Calls Check after every byte sent, unless
+   Check is NIL.  Takes over BufferEmpty event. *)
+
+PROCEDURE CheckString(AtBuffer  : ADDRESS;
+                      Length    : CARDINAL;
+                      MaxLength : CARDINAL) : BOOLEAN;
+(* Use this as the Check parameter in ReadFromBuffer or WriteFromBuffer
+   to read or transmit a string *)
+
+(********************************************************************
+ * The following procedures control the special BREAK signal on the *
+ * serial line.                                                     *
+ ********************************************************************)
+
+PROCEDURE Break(ComPort : CARDINAL; Time : CARDINAL);
+(* Sets Break condition (Spacing on output line) for Time. *)
+
+PROCEDURE WaitBreak(ComPort : CARDINAL; Call : PROC);
+(* If Call is not NIL, sets interrupt to call Call on Break interrupt.
+   If Call is NIL, waits until Break and then returns. *)
+
+END Serial.
+

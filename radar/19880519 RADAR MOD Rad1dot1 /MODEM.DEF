@@ -1,0 +1,31 @@
+DEFINITION MODULE Modem; (* For E300 Radar Terminal *)
+
+EXPORT QUALIFIED 
+  ResultType, Result, StateType, State, Call, HangUp;
+
+TYPE
+  ResultType = (Connect300,
+                Connect1200,
+                Connect2400,
+                NoCarrier,
+                Error,
+                NoDialTone,
+                Busy,
+                NoAnswer);
+
+  StateType =  (Offline,
+                Online,
+                NoResponse);
+
+VAR
+  Result : ResultType;
+  State  : StateType;
+
+PROCEDURE Call(PhoneNum : ARRAY OF CHAR);
+  (* Dials PhoneNum, sets Connected if successful *)
+
+PROCEDURE HangUp;
+  (* Takes phone offline, resets Connected *)
+                     
+END Modem.
+

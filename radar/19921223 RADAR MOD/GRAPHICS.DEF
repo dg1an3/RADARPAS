@@ -1,0 +1,192 @@
+DEFINITION MODULE Graphics;
+
+(*  C R E A T E D : 6/7/88
+ *    E D I T E D : 6/7/88
+ *    A U T H O R : Derek Lane
+ *    S Y S T E M : Logitech Modula-2/86 version 3.03
+ *
+ *  General purpose graphics routines, for the EGA card.
+ *
+ *
+ *)
+
+FROM SYSTEM IMPORT
+  BYTE, ADDRESS;
+
+CONST
+  text40x25bw   = 0;
+  text40x25c    = 1;
+  text80x25bw   = 2;
+  text80x25c    = 3;
+  grph320x200c  = 4;
+  grph320x200bw = 5;
+  grph640x200bw = 6;
+  text80x25m    = 7;
+  grph640x200c  = 14;
+  grph640x350m  = 15;
+  grph640x350c  = 16;
+  
+PROCEDURE ScreenMode
+( ToMode : CARDINAL );
+(* Sets the screen mode. *)
+
+TYPE
+  PaletteType = ARRAY[0..15] OF BYTE;
+
+PROCEDURE SetPalette
+( ToPalette : PaletteType );
+(* Sets up the sixteen colors of the palette. *)
+
+PROCEDURE SetPlane
+( ToPlanes : BITSET );
+(* Sets the plane(s) for writing and reading. *)
+
+PROCEDURE GetPlane
+( VAR ToPlanes : BITSET );
+(* Returns planes set for writing or reading. *)
+
+PROCEDURE EnablePlane
+( ForPlanes : BITSET );
+(* Selects which plane or planes are to be shown on the screen *)
+
+TYPE
+  FuncType    = (clr, and, or, xor);
+  RotateRange = [ 0..7 ];
+
+PROCEDURE SetFunc
+( ToFunc : FuncType;
+  Rotate : RotateRange );
+(* Sets the function to use for writing. *)
+
+PROCEDURE GetFunc
+( VAR ToFunc : FuncType;
+  VAR Rotate : RotateRange );
+(* Returns the current function and rotate set.*)
+
+PROCEDURE SetWindow
+( X1, Y1,
+  XSize, YSize : INTEGER );
+(* Moves the coordinates (0,0) to the (X1,Y1), and prevents any
+   plotting beyond absolute coordinates (XSize,YSize). *)
+
+PROCEDURE GetWindow
+( VAR X1, Y1,
+  XSize, YSize : INTEGER );
+(* Returns the current window set. *)
+
+PROCEDURE Clip
+( X,Y : INTEGER ) : BOOLEAN;
+(* Returns TRUE if point is in current window, FALSE if not. *)
+
+PROCEDURE ClipLine
+( VAR X1, Y1, X2, Y2 : INTEGER ) : BOOLEAN;
+(* Returns line end points which lie within current window. *)
+
+PROCEDURE Point
+( X,Y : INTEGER );
+(* Plots the specified point. *)
+
+PROCEDURE AtPoint
+( X,Y : INTEGER ) : CARDINAL;
+(* Returns color at point (X,Y). *)
+
+PROCEDURE Line
+( X1,Y1,X2,Y2 : INTEGER );
+(* Draws the specified line. *)
+
+PROCEDURE Ellipse
+( X,Y        : INTEGER;
+  Radius     : CARDINAL;
+  Aspect     : REAL ); (* X/Y aspect ratio of ellipse.
+                          Use .7292 for circle on EGA. *)
+(* Draws the indicated ellipse. *)
+
+PROCEDURE Arc
+( X,Y        : INTEGER;
+  Radius     : CARDINAL;
+  Aspect     : REAL;
+  Start,End  : REAL ); (* Starting and ending angles in radians. *)
+(* Draws the indicated arc. *)
+
+PROCEDURE SetFont
+( Size : CARDINAL );
+(* Currently only supports 8 and 14 sizes. *)
+
+PROCEDURE SetPS
+( OnOff : BOOLEAN );
+(* Sets proportional font on or off. *)
+
+PROCEDURE SetBold
+( OnOff : BOOLEAN );
+(* Sets bold printing on or off. *)
+
+PROCEDURE SetItalic
+( OnOff : BOOLEAN );
+(* Sets italic printing on or off. *)
+
+PROCEDURE SetUnderline
+( OnOff : BOOLEAN );
+(* Sets underline on or off. *)
+
+PROCEDURE SetHalftone
+( OnOff : BOOLEAN );
+(* Sets half-tone printing on or off. *)
+
+PROCEDURE GotoRowCol
+( Row,Col : CARDINAL );
+(* Positions cursor at row and column specified in current
+   window.  X in [0..79], Y in [0..24] or [0..42], depending
+   on font. *)
+
+PROCEDURE GotoXY
+( X,Y : CARDINAL );
+(* Positions cursor at X and Y pixel positions in current
+   window.  X in [0..639], Y in [0..349]. *)
+
+PROCEDURE Write(ForChar : CHAR);
+(* This replaces standard output of InOut. *)
+
+PROCEDURE ReadChar( X, Y  :  CARDINAL ) : CHAR;
+(* Reads the character pattern at X, Y and matches
+   it with the internal character table *)
+
+PROCEDURE ScrollUp;
+(* Scrolls the current window up one line. *)
+
+PROCEDURE ScrollDown;
+(* Scrolls the current window down one line. *)
+
+PROCEDURE FillArea
+( X1, Y1, XSize, YSize : INTEGER;
+  Pattern              : ARRAY OF BYTE );
+(* Fills the indicated area with Value. Note that each
+   byte in the area is read, then Value is written, so
+   the function set in EGALib will work for the fill. *)
+
+PROCEDURE MoveArea
+( X1, Y1, XSize, YSize : INTEGER;
+  ToX, ToY             : INTEGER );
+(* Moves the indicated area so that its upper-left corner
+   as at (ToX,ToY).  Automatically decides which direction
+   to move so that an overlapping area is handled properly.
+   Probably won't work right unless EGALib.SetFunc(clr) is
+   used previously. *)
+
+PROCEDURE GetPicture
+( X1, Y1,
+  XSize, YSize : CARDINAL;
+  VAR ToBuffer : ADDRESS );
+(* Stores the area defined by (X1,Y1) to (X1+XSize,Y1+YSize)
+   in the buffer ToBuffer.  The variable Size tells how much
+   of ToBuffer was used.  If ToBuffer isn't big enough, then
+   Size will be zero. *)
+
+PROCEDURE PutPicture
+( X, Y       : CARDINAL;
+  FromBuffer : ADDRESS );
+(* Retrieves the picture previously stored in FromBuffer at
+   the position (X1,Y1). *)
+
+END Graphics.
+
+

@@ -1,0 +1,220 @@
+<HTML><HEAD>
+<TITLE>Using JavaScript in HTML</TITLE>
+</HEAD>
+
+<BODY>
+<H1>Using JavaScript in HTML</H1>
+
+<HR>
+<P>
+<B>Embedding JavaScript in documents</B>
+
+<P>
+A script is embedded in HTML within a SCRIPT tag.
+
+<DL>
+<DT><CODE>&lt;SCRIPT&gt;...&lt;/SCRIPT&gt;</CODE>
+<DD>The text of a script is inserted between SCRIPT and its end tag.
+</DL>
+
+<P>Attributes within the SCRIPT tag can be specified as follows:
+
+<DL>
+<DT><CODE>&lt;SCRIPT LANGUAGE="LiveScript"&gt;...&lt;/SCRIPT&gt;</CODE>
+<DD>The LANGUAGE attribute is mandatory unless the SRC attribute
+is present and specifies the scripting language. (Note: "LiveScript" is the valid tag for  Netscape Navigator 2.0b3. "JavaScript" or a similar tag will additionally become valid in Netscape Navigator 2.0b4, but users can assume "LiveScript" will stay valid for the foreseeable future.)
+
+<DT><CODE>&lt;SCRIPT SRC="http://myscript.ls"&gt;...&lt;/SCRIPT&gt;</CODE>
+<DD>The SRC attribute is optional and, if given, specifies a URL that
+loads the text of a script.
+ 
+<DT><CODE>&lt;SCRIPT LANGUAGE="language" SRC=url&gt;...&lt;/SCRIPT&gt;</CODE>
+<DD>Both attributes may be present.
+</DL>
+ 
+<HR>
+<B>Usage Notes</B>
+<UL>
+<LI>Scripts placed within SCRIPT tags are evaluated after the page
+loads. Functions are stored, but not executed. Functions are executed
+by events in the page.
+
+<LI>SRC URL information is read in and evaluated as script container
+content. SRC script is evaluated before in-page script.
+
+<LI>The SRC URL should use the <CODE>.ls</CODE> suffix.
+
+<LI> A named SCRIPT tag contains a function body that can be
+called in an ONCHANGE event or other event-handler attribute.
+
+<LI>Scripts may be placed inside comment fields to ensure that the script
+is not displayed when the page's HTML is viewed with a browser unaware
+of the SCRIPT tag. The entire script is encased by HTML comment tags:
+<PRE>&lt;!-- Begin to hide script contents from old browsers.
+// End the hiding here. --&gt;
+</PRE>
+
+<LI>Except for string literals, JavaScript is case-insensitive and treats
+all letters as lowercase.
+
+<LI>Single quotes may be used in JavaScript so that scripts can be
+distinguished from attribute values using double quotes.
+</UL>
+
+<HR>
+<P>
+<B>Example 1, a simple script.</B>
+<PRE>
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;SCRIPT LANGUAGE="LiveScript"&gt;
+document.write("Hello net.")
+&lt;/SCRIPT&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+That's all, folks.
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+
+<P>
+<B> Example 1 page display.</B>
+<P>
+Hello net. That's all folks.
+
+<HR>
+<P>
+<B>Example 2, a script with a function and comments.</B>
+<PRE>
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;SCRIPT LANGUAGE="LiveScript"&gt;
+&lt;!--  to hide script contents from old browsers
+  function square(i) {
+    document.write("The call passed ", i ," to the function.","&lt;BR&gt;")
+    return i * i
+  }
+  document.write("The function returned ",square(5),".")
+// end hiding contents from old browsers  --&gt;
+&lt;/SCRIPT&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;BR&gt;
+All done.
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+
+<P>
+<B> Example 2 page display.</B>
+<P>
+We passed 5 to the function.
+<BR>
+The function returned 25.
+<BR>
+All done.
+
+<HR>
+<P>
+<B>Example 3, a script with a form and an event handler attribute.</B>
+<PRE>
+&lt;HTML&gt;                                                           
+&lt;HEAD&gt;
+&lt;SCRIPT LANGUAGE="LiveScript"&gt;
+function compute(form) {
+   if (confirm("Are you sure?"))
+      form.result.value = eval(form.expr.value)
+   else
+      alert("Please come back again.")
+}
+&lt;/SCRIPT&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;FORM&gt;
+Enter an expression:
+&lt;INPUT TYPE="text" NAME="expr" SIZE=15 &gt;
+&lt;INPUT TYPE="button" VALUE="Calculate" ONCLICK="compute(this.form)"&gt;
+&lt;BR&gt;
+Result:
+&lt;INPUT TYPE="text" NAME="result" SIZE=15 &gt;
+&lt;BR&gt;
+&lt;/FORM&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+
+<P>
+<B>Example 3 page display.</B>
+<P>
+<FORM>
+Enter an expression: 9 + 5 
+<INPUT TYPE="button" VALUE="Calculate">
+</FORM>
+Result: 14
+
+<HR>
+<P>
+<B>Example 4, a script with a form and event handler attribute within a BODY tag.</B>
+<PRE>
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;SCRIPT LANGUAGE="LiveScript"&gt;
+function checkNum(str, min, max) {
+    if (str == "") {
+        alert("Enter a number in the field, please.")
+        return false
+    }
+    for (var i = 0; i &lt; str.length; i++) {
+        var ch = str.substring(i, i + 1)
+        if (ch &lt; "0" || ch &gt; "9") {
+            alert("Try a number, please.")
+            return false
+        }
+    }
+    var num = 0 + str
+    if (num &lt; min || num &gt; max) {
+        alert("Try a number from 1 to 10.")
+        return false
+    }
+    return true
+}
+function thanks() {
+    alert("Thanks for your input.")
+}
+&lt;/SCRIPT&gt;
+&lt;/HEAD&gt;
+
+&lt;BODY&gt;
+&lt;FORM&gt;
+Please enter a small number: 
+&lt;INPUT NAME="num"
+    ONCHANGE="if (!checkNum(this.value, 1, 10)) 
+        {this.focus();this.select();} else {thanks()}"
+    VALUE="0"&gt;
+&lt;/FORM&gt;
+&lt;SCRIPT LANGUAGE="LiveScript"&gt;
+document.write("&lt;PRE&gt;")
+document.writeln("Field name: " + document.forms[0].num.name)
+document.writeln("Field value: " + document.forms[0].num.value)
+document.write("&lt;/PRE&gt;")
+&lt;/SCRIPT&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</PRE>
+
+<P>
+<B>Example 4 page display.</B>
+<P>
+Please enter a small number: 7
+<BR>
+Field name: num
+<BR>
+Field value: 7
+
+
+<HR>
+</BODY>
+</HTML>
+
+

@@ -1,0 +1,10 @@
+DEFINITION MODULE Auto;
+
+
+PROCEDURE DoAuto;
+
+
+PROCEDURE ProgramMenu;
+
+
+END Auto.

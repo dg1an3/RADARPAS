@@ -1,0 +1,20 @@
+DEFINITION MODULE Options;
+
+VAR
+  ModemPort,
+  ModemBaud,
+  ModemType,
+  ClockType,
+  PrinterType : CARDINAL;
+  Programs    : ARRAY [ 1..882 ] OF BYTE;
+
+  OptFileName : ARRAY [ 0..63 ] OF CHAR;
+
+PROCEDURE OptionMenu;
+
+PROCEDURE SaveOptions;
+
+PROCEDURE LoadOptions;
+
+END Options.
+

@@ -1,0 +1,51 @@
+DEFINITION MODULE Sheet;
+
+(*
+========================================================
+
+ Created   : 5/4/87
+ Last Edit : 5/4/87
+ Author    : Derek Lane
+ System    : LOGITECH MODULA-2/86
+
+ Data entry library.  Allows installation of "demon"
+ procedures to be called when a cells value is changed.
+========================================================
+*)
+
+TYPE                 
+  Type          = (Boolean,Integer,Cardinal,Real,String);
+
+  CellRec       = RECORD
+    Row,Col     :   CARDINAL;
+    Size        :   CARDINAL;
+    WhenChanged :   PROC;
+    CASE CellType : Type OF
+      Boolean   :     
+        BoolVal : POINTER TO BOOLEAN; |
+      Integer   :     
+        IntVal  : POINTER TO INTEGER; |
+      Cardinal  :     
+        CardVal : POINTER TO CARDINAL; |
+      Real      :     
+        RealVal : POINTER TO REAL; |
+      String    :     
+        StrVal  : POINTER TO ARRAY[0..255] OF CHAR;
+    END; (* CASE *)
+  END; (* RECORD *)
+
+PROCEDURE WriteCell(ForCell : CellRec);
+(* Writes the current value associated with the cell ForCell. *)
+
+PROCEDURE ReadCell(ForCell : CellRec; Key : CHAR);
+(* Reads the cell ForCell, storing its value and calling the WhenChanged
+   demon. *)
+
+PROCEDURE RefreshSheet(ForSheet : ARRAY OF CellRec);
+(* Rewrites entire sheet. *)
+
+PROCEDURE EditSheet(ForSheet : ARRAY OF CellRec);
+(* Allows editing of an entire sheet, using cursor keys for movement. *)
+
+END Sheet.
+

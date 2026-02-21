@@ -1,11 +1,18 @@
-# E300PC
+# RetroEevorg Archive
+
+Synthetic git repository built from the RetroEevorg software archive (1984-2024).
+
+Each branch represents a software family. Each commit represents a dated snapshot.
+
+## E300PC / RADARPAS
+
 original Pascal and MODULA-2 code for the E300/E250 radar (see http://ewradar.com/)
 
 This is some very old code written when I was 15 years old.  I still have a version that runs on a DOS simulator (though it only shows canned data).
 
 Graphical Data Entry Manager (GDEM) 1.0 was a line-based digital map|geographic data entry and editing tool.
 
-GDEM’s input was a set of coordinates manually entered from chart derived measurements.  Protractor coordinates.  Acetate.
+GDEM's input was a set of coordinates manually entered from chart derived measurements.  Protractor coordinates.  Acetate.
 
 GDEM would output a binary formatted map, based on a pre-defined schema, using a third party EEPROM reader that Arnold had found.
 
@@ -19,7 +26,7 @@ RADARPAS was the name of the Turbo Pascal program that implemented the E300PC 1.
 
 TurboPascal / OpenObject
 
-RADARPAS’s input was data sent from the E300 radar system.  It would interact eith the system over a modem, abd then receive the current radar feed.
+RADARPAS's input was data sent from the E300 radar system.  It would interact eith the system over a modem, abd then receive the current radar feed.
 
 RADARPAS graphics library allowed visualization of radar images with a map overlay.
 
