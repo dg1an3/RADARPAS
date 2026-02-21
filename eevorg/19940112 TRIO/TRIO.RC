@@ -1,0 +1,60 @@
+#include <windows.h>
+#include <afxres.h>
+#include "resource.h"
+
+AFX_IDI_STD_FRAME   ICON    trio.ico
+
+MainMenu MENU
+{
+	POPUP "&File"
+	{
+	    MENUITEM "Print..." 	IDM_PRINT
+	    MENUITEM SEPARATOR
+	    MENUITEM "Exit"		IDM_EXIT
+	}
+	POPUP "&Contacts"
+	{
+	    MENUITEM "Browse &Contacts" IDM_BROWSE_CONTACTS
+	    MENUITEM "Browse &Messages" IDM_BROWSE_MESSAGES
+	    MENUITEM "Browse &Threads"	IDM_BROWSE_THREADS
+	    MENUITEM SEPARATOR
+	    MENUITEM "&New Contact"	IDM_NEW_CONTACT
+	    MENUITEM "&Edit Contact"	IDM_EDIT_CONTACT
+	}
+	POPUP "&Projects"
+	{
+	    MENUITEM "Browse &Projects" IDM_BROWSE_PROJECTS
+	    MENUITEM "Browse &Tasks"	IDM_BROWSE_TASKS
+	    MENUITEM SEPARATOR
+	    MENUITEM "New Project"	IDM_NEW_PROJECT
+	    MENUITEM "Edit Project"	IDM_EDIT_PROJECT
+	}
+	POPUP "&Accounts"
+	{
+	    MENUITEM "&Receivables"	IDM_RECEIVABLES
+	    MENUITEM "&Payables"	IDM_PAYABLES
+	    MENUITEM "General &Ledger"	IDM_LEDGER
+	    MENUITEM SEPARATOR
+	    MENUITEM "&Checking"	IDM_CHECKING
+	    MENUITEM "&Savings" 	IDM_SAVINGS
+	}
+	POPUP "&Windows"
+	{
+	    MENUITEM "Cascade"		IDM_CASCADE
+	    MENUITEM "Tile"		IDM_TILE
+	    MENUITEM "Arrange Icons"	IDM_ARRANGE
+	    MENUITEM SEPARATOR
+	    MENUITEM "Close"		IDM_CLOSE
+	}
+	POPUP        "&Help"
+	{
+		MENUITEM "&About Trio...\tF10", IDM_ABOUT
+	}
+}
+
+MainAccelTable ACCELERATORS
+{
+	VK_F10,      IDM_ABOUT,  VIRTKEY
+}
+
+rcinclude trio.dlg
