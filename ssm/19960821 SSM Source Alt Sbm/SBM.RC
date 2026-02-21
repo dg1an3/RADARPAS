@@ -1,0 +1,655 @@
+//Microsoft App Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+#ifdef APSTUDIO_INVOKED
+//////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""res\\sbm.rc2""  // non-App Studio edited resources\r\n"
+    "\r\n"
+    "#include ""afxres.rc""  // Standard components\r\n"
+    "#include ""afxprint.rc""  // printing/print preview resources\r\n"
+    "\0"
+END
+
+/////////////////////////////////////////////////////////////////////////////////////
+#endif    // APSTUDIO_INVOKED
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+IDR_MAINFRAME           ICON    DISCARDABLE     "RES\\SBM.ICO"
+IDR_SBMTYPE             ICON    DISCARDABLE     "RES\\SBMDOC.ICO"
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "RES\\TOOLBAR.BMP"
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About SBM...",               ID_APP_ABOUT
+    END
+END
+
+IDR_SBMTYPE MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "&Backup...",                  ID_FILE_BACKUP
+        MENUITEM "&Restore...",                 ID_FILE_RESTORE
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
+        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+    END
+    POPUP "&Fuel"
+    BEGIN
+        MENUITEM "&View Fuel Account",          ID_FUEL_VIEW
+        MENUITEM SEPARATOR
+        MENUITEM "&New Totalizer Readings",     ID_FUEL_NEWTOTALIZERREADINGS
+        MENUITEM "&Price Change",               ID_FUEL_PRICECHANGE
+    END
+    POPUP "&Income"
+    BEGIN
+        MENUITEM "&View Income Account",        ID_INCOME_VIEWINCOMEACCOUNT
+        MENUITEM "View &Month-to-date",         ID_INCOME_VIEWMONTHTODATE
+        MENUITEM "View &Year-to-date",          ID_INCOME_VIEWYEARTODATE
+        MENUITEM SEPARATOR
+        MENUITEM "&New Income Account",         ID_INCOME_NEWINCOMEACCOUNT
+    END
+    POPUP "&Payables"
+    BEGIN
+        MENUITEM "&View Payables",              ID_PAYABLES_VIEWPAYABLES
+        MENUITEM SEPARATOR
+        MENUITEM "&New Transaction",            ID_PAYABLES_NEWTRANSACTION
+        MENUITEM "&Print Checks",               ID_PAYABLES_PRINTCHECKS
+    END
+    POPUP "&Receivables"
+    BEGIN
+        MENUITEM "&View Receivables",           ID_RECEIVABLES_VIEWRECEIVABLES
+
+        MENUITEM SEPARATOR
+        MENUITEM "&New Transaction",            ID_RECEIVABLES_NEWTRANSACTION
+
+        MENUITEM "&Print Bills",                ID_RECEIVABLES_PRINTBILLS
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&New Window",                 ID_WINDOW_NEW
+        MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
+        MENUITEM "&Tile",                       ID_WINDOW_TILE_HORZ
+        MENUITEM "&Arrange Icons",              ID_WINDOW_ARRANGE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About SBM...",               ID_APP_ABOUT
+    END
+END
+
+IDR_AXACCTTYPE MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "&Close",                      ID_FILE_CLOSE
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
+        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&New Window",                 ID_WINDOW_NEW
+        MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
+        MENUITEM "&Tile",                       ID_WINDOW_TILE_HORZ
+        MENUITEM "&Arrange Icons",              ID_WINDOW_ARRANGE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About SBM...",               ID_APP_ABOUT
+    END
+END
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY,CONTROL
+    "O",            ID_FILE_OPEN,           VIRTKEY,CONTROL
+    "S",            ID_FILE_SAVE,           VIRTKEY,CONTROL
+    "P",            ID_FILE_PRINT,          VIRTKEY,CONTROL
+    "Z",            ID_EDIT_UNDO,           VIRTKEY,CONTROL
+    "X",            ID_EDIT_CUT,            VIRTKEY,CONTROL
+    "C",            ID_EDIT_COPY,           VIRTKEY,CONTROL
+    "V",            ID_EDIT_PASTE,          VIRTKEY,CONTROL
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY,ALT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY,SHIFT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY,CONTROL
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY,SHIFT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY 
+    VK_F6,          ID_PREV_PANE,           VIRTKEY,SHIFT
+END
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  34, 22, 217, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About SBM"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "SBM Application Version 1.0",IDC_STATIC,40,10,119,8
+    LTEXT           "Copyright \251 1996",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,176,6,32,14,WS_GROUP
+END
+
+IDD_TOTAL_READ DIALOG DISCARDABLE  0, 0, 199, 139
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Totalizer Readings"
+FONT 10, "Times New Roman"
+BEGIN
+    EDITTEXT        IDC_CURR1,88,29,46,9,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CURR2,88,37,46,9,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CURR3,88,45,46,9,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CURR4,88,53,46,9,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CURR5,88,61,46,9,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CURR6,88,69,46,9,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CURR7,88,77,46,9,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CURR8,88,85,46,9,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CURR9,88,93,46,9,ES_AUTOHSCROLL
+    EDITTEXT        IDC_CURR10,88,101,46,9,ES_AUTOHSCROLL
+    DEFPUSHBUTTON   "Fuel Payment Report",IDFUELPAYMENT,12,119,74,14
+    PUSHBUTTON      "Done",IDOK,97,119,36,14
+    PUSHBUTTON      "Cancel",IDCANCEL,144,119,36,14
+    EDITTEXT        IDC_DATE,25,4,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_TIME,86,4,35,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_SHIFT,150,4,35,12,ES_AUTOHSCROLL
+    RTEXT           "Date",IDC_STATIC,5,4,16,10
+    RTEXT           "Time",IDC_STATIC,65,4,17,10
+    RTEXT           "Shift",IDC_STATIC,129,4,17,10
+    GROUPBOX        "Pump",IDC_STATIC,4,19,28,95
+    CTEXT           "1",IDC_STATIC,13,29,12,8
+    CTEXT           "2",IDC_STATIC,13,37,12,8
+    CTEXT           "3",IDC_STATIC,13,45,12,8
+    CTEXT           "4",IDC_STATIC,13,53,12,8
+    CTEXT           "5",IDC_STATIC,13,61,12,8
+    CTEXT           "6",IDC_STATIC,13,69,12,8
+    CTEXT           "7",IDC_STATIC,13,77,12,8
+    CTEXT           "8",IDC_STATIC,13,85,12,8
+    CTEXT           "9",IDC_STATIC,13,93,12,8
+    CTEXT           "10",IDC_STATIC,13,101,12,8
+    GROUPBOX        "Current",IDC_STATIC,86,19,51,95
+    GROUPBOX        "Previous",IDC_STATIC,34,19,51,95
+    EDITTEXT        IDC_PREV1,36,29,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_PREV2,36,37,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_PREV3,36,45,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_PREV4,36,53,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_PREV5,36,61,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_PREV6,36,69,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_PREV7,36,77,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_PREV8,36,85,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_PREV9,36,93,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_PREV10,36,101,46,9,ES_AUTOHSCROLL | WS_DISABLED | 
+                    NOT WS_TABSTOP
+    GROUPBOX        "Difference",IDC_STATIC,138,19,51,95
+    EDITTEXT        IDC_DIFF1,140,28,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_DIFF2,140,36,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_DIFF3,140,44,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_DIFF4,140,52,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_DIFF5,140,60,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_DIFF6,140,68,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_DIFF7,140,76,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_DIFF8,140,84,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_DIFF9,140,92,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_DIFF10,140,100,46,9,ES_AUTOHSCROLL | WS_DISABLED | 
+                    NOT WS_TABSTOP
+END
+
+IDD_FUEL_PAYMENT DIALOG DISCARDABLE  0, 0, 231, 197
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Fuel Payment Report"
+FONT 10, "Times New Roman"
+BEGIN
+    DEFPUSHBUTTON   "Create Payment",IDCREATEPAYMENT,48,179,59,12
+    PUSHBUTTON      "Cancel",IDCANCEL,123,179,59,12
+    EDITTEXT        IDC_DATE,132,1,35,14,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_TIME,193,1,35,14,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    RTEXT           "Date",IDC_STATIC,112,1,16,12
+    RTEXT           "Time",IDC_STATIC,172,1,17,12
+    GROUPBOX        "",IDC_STATIC,6,15,223,78
+    GROUPBOX        "Plus",IDC_STATIC,37,19,60,72
+    RTEXT           "1",IDC_STATIC,40,29,5,8
+    RTEXT           "5",IDC_STATIC,40,38,5,8
+    GROUPBOX        "Unleaded",IDC_STATIC,101,19,60,72
+    RTEXT           "2",IDC_STATIC,103,29,5,8
+    RTEXT           "4",IDC_STATIC,103,38,5,8
+    GROUPBOX        "Premium",IDC_STATIC,165,19,60,72
+    RTEXT           "3",IDC_STATIC,168,29,5,8
+    RTEXT           "Total",IDC_STATIC,13,47,20,11
+    LTEXT           "Full Pump",IDC_STATIC,12,29,23,17
+    EDITTEXT        IDC_GAL2,110,29,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_GAL1,47,29,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_GAL3,175,29,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_GAL4,110,37,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_FULLPREM_TOT,175,47,46,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_FULLUN_TOT,110,47,46,9,ES_AUTOHSCROLL | WS_DISABLED | 
+                    NOT WS_TABSTOP
+    EDITTEXT        IDC_FULLPLUS_TOT,47,47,46,9,ES_AUTOHSCROLL | WS_DISABLED | 
+                    NOT WS_TABSTOP
+    EDITTEXT        IDC_GAL5,47,37,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    RTEXT           "6",IDC_STATIC,40,62,5,8
+    RTEXT           "10",IDC_STATIC,38,70,8,8
+    RTEXT           "7",IDC_STATIC,103,62,5,8
+    RTEXT           "9",IDC_STATIC,103,70,5,8
+    RTEXT           "8",IDC_STATIC,168,62,5,8
+    RTEXT           "Total",IDC_STATIC,13,80,20,11
+    LTEXT           "Self Pump",IDC_STATIC,12,61,23,17
+    EDITTEXT        IDC_GAL7,110,62,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_GAL6,47,62,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_GAL8,175,62,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_GAL9,110,70,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_SELFPREM_TOT,175,80,46,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_SELFUN_TOT,110,80,46,9,ES_AUTOHSCROLL | WS_DISABLED | 
+                    NOT WS_TABSTOP
+    EDITTEXT        IDC_SELFPLUS_TOT,47,80,46,9,ES_AUTOHSCROLL | WS_DISABLED | 
+                    NOT WS_TABSTOP
+    EDITTEXT        IDC_GAL10,47,70,46,9,ES_AUTOHSCROLL | WS_DISABLED | NOT 
+                    WS_TABSTOP
+    RTEXT           "Plus",IDC_STATIC,38,106,17,8
+    RTEXT           "Unleaded",IDC_STATIC,25,114,30,8
+    RTEXT           "Premium",IDC_STATIC,25,122,30,8
+    RTEXT           "Plus",IDC_STATIC,38,134,17,8
+    RTEXT           "Unleaded",IDC_STATIC,25,142,30,8
+    RTEXT           "Premium",IDC_STATIC,25,150,30,8
+    EDITTEXT        IDC_FULLPLUS_PRC,63,106,20,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_FULLUN_PRC,63,114,20,9,ES_AUTOHSCROLL | WS_DISABLED | 
+                    NOT WS_TABSTOP
+    EDITTEXT        IDC_FULLPREM_PRC,63,122,20,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_SELFPLUS_PRC,63,134,20,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_SELFUN_PRC,63,142,20,9,ES_AUTOHSCROLL | WS_DISABLED | 
+                    NOT WS_TABSTOP
+    EDITTEXT        IDC_SELFPREM_PRC,63,150,20,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_FULLPLUS_FED,86,106,20,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_FULLUN_FED,86,114,20,9,ES_AUTOHSCROLL | WS_DISABLED | 
+                    NOT WS_TABSTOP
+    EDITTEXT        IDC_FULLPREM_FED,86,122,20,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_SELFPLUS_FED,86,134,20,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_SELFUN_FED,86,142,20,9,ES_AUTOHSCROLL | WS_DISABLED | 
+                    NOT WS_TABSTOP
+    EDITTEXT        IDC_SELFPREM_FED,86,150,20,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_FULLPLUS_STATE,105,106,20,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_FULLUN_STATE,105,114,20,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_FULLPREM_STATE,105,122,20,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_SELFPLUS_STATE,105,134,20,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_SELFUN_STATE,105,142,20,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_SELFPREM_STATE,105,150,20,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_FULLPLUS_TOTPRC,128,106,20,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_FULLUN_TOTPRC,128,114,20,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_FULLPREM_TOTPRC,128,122,20,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_SELFPLUS_TOTPRC,128,134,20,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_SELFUN_TOTPRC,128,142,20,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_SELFPREM_TOTPRC,128,150,20,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    LTEXT           "Full",IDC_STATIC,12,106,17,8
+    LTEXT           "Self",IDC_STATIC,12,135,17,8
+    EDITTEXT        IDC_FULLPLUS_GAL,152,106,31,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_FULLUN_GAL,152,114,31,9,ES_AUTOHSCROLL | WS_DISABLED | 
+                    NOT WS_TABSTOP
+    EDITTEXT        IDC_FULLPREM_GAL,152,122,31,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_SELFPLUS_GAL,152,134,31,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_SELFUN_GAL,152,142,31,9,ES_AUTOHSCROLL | WS_DISABLED | 
+                    NOT WS_TABSTOP
+    EDITTEXT        IDC_SELFPREM_GAL,152,150,31,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_FULLPLUS_AMT,189,106,31,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_FULLUN_AMT,189,114,31,9,ES_AUTOHSCROLL | WS_DISABLED | 
+                    NOT WS_TABSTOP
+    EDITTEXT        IDC_FULLPREM_AMT,189,122,31,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_SELFPLUS_AMT,189,134,31,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_SELFUN_AMT,189,142,31,9,ES_AUTOHSCROLL | WS_DISABLED | 
+                    NOT WS_TABSTOP
+    EDITTEXT        IDC_SELFPREM_AMT,189,150,31,9,ES_AUTOHSCROLL | 
+                    WS_DISABLED | NOT WS_TABSTOP
+    EDITTEXT        IDC_TOT_AMT,189,163,31,9,ES_AUTOHSCROLL | WS_DISABLED | 
+                    NOT WS_TABSTOP
+    GROUPBOX        "",IDC_STATIC,6,92,222,83
+    CTEXT           "Price",IDC_STATIC,64,98,17,8
+    CTEXT           "Fed",IDC_STATIC,87,98,17,8
+    CTEXT           "State",IDC_STATIC,106,98,17,8
+    CTEXT           "Total",IDC_STATIC,129,98,17,8
+    CTEXT           "Gallons",IDC_STATIC,152,98,30,8
+    CTEXT           "Amount",IDC_STATIC,188,98,30,8
+    CTEXT           "Total Amount",IDC_STATIC,140,164,43,8
+END
+
+IDD_DAILY_INCOME DIALOG DISCARDABLE  0, 0, 135, 167
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+CAPTION "Daily Income Report"
+FONT 10, "Times New Roman"
+BEGIN
+    DEFPUSHBUTTON   "Done",IDOK,12,147,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,73,147,50,14
+    EDITTEXT        IDC_DATE,86,3,35,12,ES_AUTOHSCROLL
+    RTEXT           "Date",IDC_STATIC,69,4,16,12
+    EDITTEXT        IDC_OIL_PCT,100,38,26,10,ES_AUTOHSCROLL | NOT WS_TABSTOP
+    EDITTEXT        IDC_ACC_PCT,100,47,26,10,ES_AUTOHSCROLL | NOT WS_TABSTOP
+    EDITTEXT        IDC_LABOR_PCT,100,56,26,10,ES_AUTOHSCROLL | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_MMART_PCT,100,65,26,10,ES_AUTOHSCROLL | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_EMISS_PCT,100,74,26,10,ES_AUTOHSCROLL | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_KERO_PCT,100,83,26,10,ES_AUTOHSCROLL | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_WRECK_PCT,100,92,26,10,ES_AUTOHSCROLL | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_ROA_PCT,100,102,26,10,ES_AUTOHSCROLL | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_TAX_PCT,100,111,26,10,ES_AUTOHSCROLL | NOT 
+                    WS_TABSTOP
+    EDITTEXT        IDC_OIL_AMT,48,38,46,10,ES_AUTOHSCROLL
+    EDITTEXT        IDC_ACC_AMT,48,47,46,10,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LABOR_AMT,48,56,46,10,ES_AUTOHSCROLL
+    EDITTEXT        IDC_MMART_AMT,48,65,46,10,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EMISS_AMT,48,74,46,10,ES_AUTOHSCROLL
+    EDITTEXT        IDC_KERO_AMT,48,83,46,10,ES_AUTOHSCROLL
+    EDITTEXT        IDC_WRECK_AMT,48,92,46,10,ES_AUTOHSCROLL
+    EDITTEXT        IDC_ROA_AMT,48,102,46,10,ES_AUTOHSCROLL
+    EDITTEXT        IDC_TAX_AMT,48,111,46,10,ES_AUTOHSCROLL
+    CTEXT           "Amount",IDC_STATIC,50,17,41,8
+    CTEXT           "Percent",IDC_STATIC,99,17,26,8
+    RTEXT           "Category",IDC_STATIC,14,17,31,8
+    RTEXT           "Gasoline",IDC_STATIC,5,29,40,10
+    RTEXT           "Oil",IDC_STATIC,5,39,40,8
+    EDITTEXT        IDC_GAS_PCT,100,29,26,10,ES_AUTOHSCROLL | NOT WS_TABSTOP
+    EDITTEXT        IDC_GAS_AMT,48,29,46,10,ES_AUTOHSCROLL
+    RTEXT           "Accessories",IDC_STATIC,5,48,40,8
+    RTEXT           "Labor",IDC_STATIC,5,57,40,8
+    RTEXT           "MiniMart",IDC_STATIC,5,66,40,8
+    RTEXT           "Emissions",IDC_STATIC,5,75,40,8
+    RTEXT           "Kerosene",IDC_STATIC,5,84,40,8
+    RTEXT           "Wrecker",IDC_STATIC,5,93,40,8
+    RTEXT           "ROA",IDC_STATIC,5,103,40,8
+    RTEXT           "Tax",IDC_STATIC,5,112,40,8
+    EDITTEXT        IDC_TOTAL_AMT,48,124,46,10,ES_AUTOHSCROLL | NOT 
+                    WS_TABSTOP
+    RTEXT           "Total",IDC_STATIC,5,125,40,8
+    GROUPBOX        "",IDC_STATIC,2,23,131,117
+END
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "SBM Windows Application"
+    IDR_SBMTYPE             "\nSbm\nSBM Document"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "SBM Windows Application"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_NEW             "Create a new document"
+    ID_FILE_OPEN            "Open an existing document"
+    ID_FILE_CLOSE           "Close the active document"
+    ID_FILE_SAVE            "Save the active document"
+    ID_FILE_SAVE_AS         "Save the active document with a new name"
+    ID_FILE_PAGE_SETUP      "Change the printing options"
+    ID_FILE_PRINT_SETUP     "Change the printer and printing options"
+    ID_FILE_PRINT           "Print the active document"
+    ID_FILE_PRINT_PREVIEW   "Display full pages"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Display program information, version number and copyright"
+    ID_APP_EXIT             "Quit the application; prompts to save documents"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Open this document"
+    ID_FILE_MRU_FILE2       "Open this document"
+    ID_FILE_MRU_FILE3       "Open this document"
+    ID_FILE_MRU_FILE4       "Open this document"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane"
+    ID_PREV_PANE            "Switch back to the previous window pane"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WINDOW_NEW           "Open another window for the active document"
+    ID_WINDOW_ARRANGE       "Arrange icons at the bottom of the window"
+    ID_WINDOW_CASCADE       "Arrange windows so they overlap"
+    ID_WINDOW_TILE_HORZ     "Arrange windows as non-overlapping tiles"
+    ID_WINDOW_TILE_VERT     "Arrange windows as non-overlapping tiles"
+    ID_WINDOW_SPLIT         "Split the active window into panes"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Erase the selection"
+    ID_EDIT_CLEAR_ALL       "Erase everything"
+    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard"
+    ID_EDIT_CUT             "Cut the selection and put it on the Clipboard"
+    ID_EDIT_FIND            "Find the specified text"
+    ID_EDIT_PASTE           "Insert Clipboard contents"
+    ID_EDIT_REPEAT          "Repeat the last action"
+    ID_EDIT_REPLACE         "Replace specific text with different text"
+    ID_EDIT_SELECT_ALL      "Select the entire document"
+    ID_EDIT_UNDO            "Undo the last action"
+    ID_EDIT_REDO            "Redo the previously undone action"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Show or hide the toolbar"
+    ID_VIEW_STATUS_BAR      "Show or hide the status bar"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+    AFX_IDS_MDICHILD        "Activate this window"
+END
+
+
+#ifndef APSTUDIO_INVOKED
+////////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "res\sbm.rc2"  // non-App Studio edited resources
+
+#include "afxres.rc"  // Standard components
+#include "afxprint.rc"  // printing/print preview resources
+
+/////////////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

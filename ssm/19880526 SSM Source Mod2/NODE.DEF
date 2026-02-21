@@ -1,0 +1,30 @@
+DEFINITION MODULE Node;
+
+TYPE
+  NodeType    = (Symbol, String, Integer, Real, List, Subr, FSubr);
+
+  NodePtr     = POINTER TO NodeRec;
+
+  NodeRec     = RECORD
+    CASE Type :   NodeType OF
+      Symbol  :   Binding    : NodePtr; |
+                  PrintName  : ARRAY[0..255] OF CHAR;
+      String  :   StringVal  : ARRAY[0..255] OF CHAR; |
+      Integer :   IntegerVal : INTEGER; |
+      Real    :   RealVal    : REAL; |
+      List    :   MaxElement : CARDINAL;
+                  Element    : ARRAY[1..255] OF NodePtr; |
+      Subr,
+      FSubr   :   Body       : PROCEDURE(NodePtr) : NodePtr;
+                  LambdaExp  : NodePtr;  
+    END; (* CASE *)
+  END; (* RECORD *)
+
+PROCEDURE WriteNode(ForNode : NodePtr) : NodePtr;
+
+PROCEDURE ReadNode(ForNode : NodePtr) : NodePtr;
+
+PROCEDURE MakeNode(ForNode : NodePtr) : NodePtr;
+                                                
+END Node.
+
