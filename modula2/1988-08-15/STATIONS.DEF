@@ -1,0 +1,61 @@
+DEFINITION MODULE Stations;
+
+FROM Pictures IMPORT
+    PictureRec;
+
+TYPE
+
+  StationPtr   =   POINTER TO StationRec;
+
+  StationRec   =   RECORD
+
+
+               Next : StationPtr; (*    Pointer to the next
+                                       link in the linked list.  *)
+      StationNumber : CARDINAL; (*    Only used by StationMenu to
+                                          determine where to put the
+                                               selector.  *)
+        StationName : ARRAY[0..11] OF CHAR; (*   Station subdirectory name,
+                                                  including extension. *)
+              Phone : ARRAY[0..63] OF CHAR; (*   Phone number - may contain
+                                              Hayes dial modifiers.  *)
+      CurrentPicture,              (*     If this station is active,
+                                       the number of the picture being
+                                      displayed. *)
+      NumofPictures : CARDINAL;    (*    Amount of valid picture headers
+                                             in the picture list.  *)
+            Picture : ARRAY[1..100] OF PictureRec; (*   The picture list. *)
+
+  END (* RECORD *);
+
+PROCEDURE CallStation( VAR ForStation : StationRec ) : BOOLEAN;
+
+
+
+PROCEDURE SelectStation( VAR ForStation : StationRec );
+
+
+
+PROCEDURE AddStation(   VAR StationList : StationPtr;
+                      VAR NumofStations : CARDINAL );
+
+
+
+PROCEDURE DelStation(   VAR StationList : StationPtr;
+                             StationNum : CARDINAL;
+                      VAR NumofStations : CARDINAL );
+
+
+
+PROCEDURE StationMenu(   VAR StationList : StationPtr;
+                       VAR NumofStations : CARDINAL;
+                      VAR CurrentStation : StationPtr );
+
+
+
+PROCEDURE InitStationDir(   VAR StationList : StationPtr;
+                          VAR NumofStations : CARDINAL );
+
+
+
+END Stations.

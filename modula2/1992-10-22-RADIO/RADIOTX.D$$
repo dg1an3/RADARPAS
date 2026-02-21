@@ -1,0 +1,46 @@
+DEFINITION MODULE RadioTx;
+
+CONST
+  MaxFile     = 16;
+
+
+TYPE
+
+  PrefixRec      = RECORD
+
+        PrefixAt : LONGCARD;
+      PrefixData : ARRAY [ 0..6 ] OF BYTE;
+
+  END (* PrefixRec *);
+
+  PrefixTabPtr = POINTER TO ARRAY [ 0..250 ] OF PrefixRec;
+
+
+  DirEntryRec = RECORD
+
+        Class : CARDINAL;
+         Name : ARRAY [ 0..10 ] OF CHAR;
+         Time : CARDINAL;
+         Date : CARDINAL;
+         Size : LONGCARD;
+       Prefix : PrefixRec;
+
+  END (* DirEntry *);
+
+
+VAR
+
+  (* Directory variables *)
+  Directory : ARRAY [ 1..MaxFile ] OF DirEntryRec;
+  LastFile  : CARDINAL;
+
+
+PROCEDURE Transmit
+( VAR FileNum : CARDINAL;
+   VAR Buffer : ARRAY OF BYTE;
+         Size : LONGCARD;
+    PrefixTab : PrefixTabPtr );
+
+PROCEDURE FileAt( ForFile : CARDINAL ) : LONGCARD;
+
+END RadioTx.

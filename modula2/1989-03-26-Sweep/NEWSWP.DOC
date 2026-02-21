@@ -1,0 +1,95 @@
+Register assignment:
+  Var     Pointers    Data
+  Screen  DI          CX
+  Radar
+  [SI] = Current delta data
+  [DI] = Current screen data
+   AX  = Current radar data
+   BX  = Delta proc
+   CX  = Screen word
+
+
+AX = Data: Radar (Source)
+BX = Data: Delta proc
+DX = Data: Screen (Dest)
+CX =
+SI = Ptr: Radar (Source)
+DI = Ptr: Screen (Dest)
+BP = Ptr: Delta proc
+
+MOV DX,[DI]
+RCX DX,CL
+
+REPEAT
+
+MOV AX,[SI]
+REPEAT
+  MOV BL,ES:[BP]             15
+  ROL BX,3                    8
+  CALL BX                    13
+  ROR BX,3                    8
+  INC BP                      2
+  DEC CX                      2 = 48
+16 TIMES
+INC SI
+INC SI
+
+UNTIL SI > Max
+
+
+; There are 36 possible increment functions that might be called, 6 for
+; the first
+;
+; Ave. = 31.3
+
+
+INC_None
+  RCX AX,1                   2 x 25% = 0.5
+
+INC_X
+  RCX AX,1                   2
+  RCX DX,1                   2
+  DEC CX                     2 = 6 x 23.4% = 1.404
+
+
+INC_X_DI
+  RCX AX,1                   2
+  RCX DX,1                   2
+  MOV [DI],DX               14
+  ADD DI,XX                  4
+  MOV DX,[DI]               13
+  MOV CL,16                  4
+  RCX DX,1                   2 = 41 x 1.6% = 0.656
+
+INC_Y
+  RCX AX,1                   2
+  RCX DX,CL                 13
+  MOV [DI],DX               14
+  ADD DI,XX                  4
+  MOV DX,[DI]               13
+  RCX DX,CL                 13 = 59 x 25% = 14.75
+
+INC_X_Y
+  RCX AX,1                   2
+  RCX DX,CL                 13
+  DEC CX                     2
+  MOV [DI],DX               14
+  ADD DI,XX                  4
+  MOV DX,[DI]               13
+  RCX DX,CL                 13 = 61 x 23.4% = 14.274
+
+INC_X_DI_Y
+  RCX AX,1                   2
+  RCX DX,1                   2
+  DEC CX                     2
+  MOV [DI],DX               14
+  ADD DI,XX                  4
+  MOV DX,[DI]               13
+  RCX DX,1                   2 = 39 x 1.6% = 0.2283
+
+
+
+
+
+
+

@@ -1,0 +1,332 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix iao: <http://purl.obolibrary.org/obo/IAO_> .
+@prefix swo: <http://www.ebi.ac.uk/swo/> .
+@prefix schema: <http://schema.org/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+# RADARPAS Source Code Ontology
+@prefix radar: <http://example.org/radarpas/ontology#> .
+@prefix src: <http://example.org/radarpas/source#> .
+
+# Ontology Declaration
+radar: a owl:Ontology ;
+    dc:title "RADARPAS Source Code Ontology" ;
+    dc:description "An ontology for representing the RADARPAS weather radar terminal software codebase" ;
+    dc:creator "Derek Lane" ;
+    dcterms:created "2025-12-22"^^xsd:date ;
+    owl:versionInfo "1.0" .
+
+# =============================================================================
+# Core Classes for Source Code Representation
+# =============================================================================
+
+# Software Project (aligned with Dublin Core and SWO)
+radar:SoftwareProject a owl:Class ;
+    rdfs:label "Software Project" ;
+    rdfs:comment "A software development project containing source code and documentation" ;
+    rdfs:subClassOf prov:Entity, schema:SoftwareApplication .
+
+# Source Code File (aligned with IAO - Information Artifact Ontology)
+radar:SourceFile a owl:Class ;
+    rdfs:label "Source Code File" ;
+    rdfs:comment "A file containing source code in a programming language" ;
+    rdfs:subClassOf iao:0000310 .  # IAO: document
+
+radar:PascalFile a owl:Class ;
+    rdfs:label "Pascal Source File" ;
+    rdfs:subClassOf radar:SourceFile .
+
+radar:Modula2File a owl:Class ;
+    rdfs:label "Modula-2 Source File" ;
+    rdfs:subClassOf radar:SourceFile .
+
+radar:AssemblyFile a owl:Class ;
+    rdfs:label "Assembly Source File" ;
+    rdfs:subClassOf radar:SourceFile .
+
+radar:DefinitionFile a owl:Class ;
+    rdfs:label "Definition/Header File" ;
+    rdfs:subClassOf radar:SourceFile .
+
+# Module - a logical grouping of related code
+radar:Module a owl:Class ;
+    rdfs:label "Software Module" ;
+    rdfs:comment "A modular unit of source code, typically a compilation unit" ;
+    rdfs:subClassOf prov:Entity .
+
+# Program Unit types
+radar:Program a owl:Class ;
+    rdfs:label "Program" ;
+    rdfs:comment "A main executable program" ;
+    rdfs:subClassOf radar:Module .
+
+radar:Unit a owl:Class ;
+    rdfs:label "Unit" ;
+    rdfs:comment "A Pascal unit or Modula-2 module" ;
+    rdfs:subClassOf radar:Module .
+
+radar:Library a owl:Class ;
+    rdfs:label "Library" ;
+    rdfs:comment "A collection of reusable modules" ;
+    rdfs:subClassOf radar:Module .
+
+# =============================================================================
+# Procedural Code Elements
+# =============================================================================
+
+radar:Callable a owl:Class ;
+    rdfs:label "Callable" ;
+    rdfs:comment "Any callable code element (procedure or function)" .
+
+radar:Procedure a owl:Class ;
+    rdfs:label "Procedure" ;
+    rdfs:comment "A procedure that performs an action without returning a value" ;
+    rdfs:subClassOf radar:Callable .
+
+radar:Function a owl:Class ;
+    rdfs:label "Function" ;
+    rdfs:comment "A function that computes and returns a value" ;
+    rdfs:subClassOf radar:Callable .
+
+radar:InterruptHandler a owl:Class ;
+    rdfs:label "Interrupt Handler" ;
+    rdfs:comment "An interrupt service routine (ISR)" ;
+    rdfs:subClassOf radar:Procedure .
+
+# =============================================================================
+# Data Types
+# =============================================================================
+
+radar:DataType a owl:Class ;
+    rdfs:label "Data Type" ;
+    rdfs:comment "A type definition in source code" .
+
+radar:ScalarType a owl:Class ;
+    rdfs:label "Scalar Type" ;
+    rdfs:subClassOf radar:DataType .
+
+radar:EnumerationType a owl:Class ;
+    rdfs:label "Enumeration Type" ;
+    rdfs:subClassOf radar:DataType .
+
+radar:SubrangeType a owl:Class ;
+    rdfs:label "Subrange Type" ;
+    rdfs:subClassOf radar:DataType .
+
+radar:RecordType a owl:Class ;
+    rdfs:label "Record Type" ;
+    rdfs:comment "A composite data type with named fields" ;
+    rdfs:subClassOf radar:DataType .
+
+radar:ArrayType a owl:Class ;
+    rdfs:label "Array Type" ;
+    rdfs:subClassOf radar:DataType .
+
+radar:PointerType a owl:Class ;
+    rdfs:label "Pointer Type" ;
+    rdfs:subClassOf radar:DataType .
+
+radar:Field a owl:Class ;
+    rdfs:label "Record Field" ;
+    rdfs:comment "A field within a record type" .
+
+# =============================================================================
+# Constants and Variables
+# =============================================================================
+
+radar:Constant a owl:Class ;
+    rdfs:label "Constant" ;
+    rdfs:comment "A named constant value" .
+
+radar:Variable a owl:Class ;
+    rdfs:label "Variable" ;
+    rdfs:comment "A variable declaration" .
+
+radar:GlobalVariable a owl:Class ;
+    rdfs:label "Global Variable" ;
+    rdfs:subClassOf radar:Variable .
+
+radar:LocalVariable a owl:Class ;
+    rdfs:label "Local Variable" ;
+    rdfs:subClassOf radar:Variable .
+
+radar:Parameter a owl:Class ;
+    rdfs:label "Parameter" ;
+    rdfs:comment "A formal parameter of a procedure or function" ;
+    rdfs:subClassOf radar:Variable .
+
+# =============================================================================
+# Product/Version Classes
+# =============================================================================
+
+radar:ProductVersion a owl:Class ;
+    rdfs:label "Product Version" ;
+    rdfs:comment "A specific version of a software product" ;
+    rdfs:subClassOf prov:Entity .
+
+radar:Archive a owl:Class ;
+    rdfs:label "Source Archive" ;
+    rdfs:comment "A dated archive of source code" ;
+    rdfs:subClassOf prov:Collection .
+
+# =============================================================================
+# Functional Categories
+# =============================================================================
+
+radar:FunctionalCategory a owl:Class ;
+    rdfs:label "Functional Category" ;
+    rdfs:comment "A category of functionality (e.g., Graphics, Serial Communication)" .
+
+# Predefined categories
+radar:GraphicsCategory a radar:FunctionalCategory ;
+    rdfs:label "Graphics & Display" .
+
+radar:SerialCommCategory a radar:FunctionalCategory ;
+    rdfs:label "Serial Communication" .
+
+radar:FileIOCategory a radar:FunctionalCategory ;
+    rdfs:label "File I/O" .
+
+radar:ModemCategory a radar:FunctionalCategory ;
+    rdfs:label "Modem Control" .
+
+radar:PrintingCategory a radar:FunctionalCategory ;
+    rdfs:label "Printing" .
+
+radar:ConfigCategory a radar:FunctionalCategory ;
+    rdfs:label "Configuration" .
+
+radar:UICategory a radar:FunctionalCategory ;
+    rdfs:label "User Interface" .
+
+radar:ProtocolCategory a radar:FunctionalCategory ;
+    rdfs:label "Protocol Handling" .
+
+# =============================================================================
+# Object Properties (Relationships)
+# =============================================================================
+
+radar:containsModule a owl:ObjectProperty ;
+    rdfs:label "contains module" ;
+    rdfs:domain radar:SoftwareProject ;
+    rdfs:range radar:Module .
+
+radar:definedIn a owl:ObjectProperty ;
+    rdfs:label "defined in" ;
+    rdfs:comment "The source file where an element is defined" ;
+    rdfs:range radar:SourceFile .
+
+radar:imports a owl:ObjectProperty ;
+    rdfs:label "imports" ;
+    rdfs:comment "Module dependency" ;
+    rdfs:domain radar:Module ;
+    rdfs:range radar:Module .
+
+radar:exports a owl:ObjectProperty ;
+    rdfs:label "exports" ;
+    rdfs:comment "Callable exported by a module" ;
+    rdfs:domain radar:Module ;
+    rdfs:range radar:Callable .
+
+radar:containsCallable a owl:ObjectProperty ;
+    rdfs:label "contains callable" ;
+    rdfs:domain radar:Module ;
+    rdfs:range radar:Callable .
+
+radar:containsType a owl:ObjectProperty ;
+    rdfs:label "contains type" ;
+    rdfs:domain radar:Module ;
+    rdfs:range radar:DataType .
+
+radar:hasField a owl:ObjectProperty ;
+    rdfs:label "has field" ;
+    rdfs:domain radar:RecordType ;
+    rdfs:range radar:Field .
+
+radar:hasParameter a owl:ObjectProperty ;
+    rdfs:label "has parameter" ;
+    rdfs:domain radar:Callable ;
+    rdfs:range radar:Parameter .
+
+radar:hasReturnType a owl:ObjectProperty ;
+    rdfs:label "has return type" ;
+    rdfs:domain radar:Function ;
+    rdfs:range radar:DataType .
+
+radar:calls a owl:ObjectProperty ;
+    rdfs:label "calls" ;
+    rdfs:comment "One callable invokes another" ;
+    rdfs:domain radar:Callable ;
+    rdfs:range radar:Callable .
+
+radar:belongsToCategory a owl:ObjectProperty ;
+    rdfs:label "belongs to category" ;
+    rdfs:range radar:FunctionalCategory .
+
+radar:partOfVersion a owl:ObjectProperty ;
+    rdfs:label "part of version" ;
+    rdfs:domain radar:SourceFile ;
+    rdfs:range radar:ProductVersion .
+
+radar:partOfArchive a owl:ObjectProperty ;
+    rdfs:label "part of archive" ;
+    rdfs:domain radar:SourceFile ;
+    rdfs:range radar:Archive .
+
+radar:derivedFrom a owl:ObjectProperty ;
+    rdfs:label "derived from" ;
+    rdfs:comment "Version lineage" ;
+    rdfs:subPropertyOf prov:wasDerivedFrom ;
+    rdfs:domain radar:ProductVersion ;
+    rdfs:range radar:ProductVersion .
+
+# =============================================================================
+# Datatype Properties
+# =============================================================================
+
+radar:filePath a owl:DatatypeProperty ;
+    rdfs:label "file path" ;
+    rdfs:range xsd:string .
+
+radar:lineCount a owl:DatatypeProperty ;
+    rdfs:label "line count" ;
+    rdfs:range xsd:integer .
+
+radar:dateCreated a owl:DatatypeProperty ;
+    rdfs:label "date created" ;
+    rdfs:subPropertyOf dcterms:created ;
+    rdfs:range xsd:date .
+
+radar:programmingLanguage a owl:DatatypeProperty ;
+    rdfs:label "programming language" ;
+    rdfs:range xsd:string .
+
+radar:versionNumber a owl:DatatypeProperty ;
+    rdfs:label "version number" ;
+    rdfs:range xsd:string .
+
+radar:lineNumber a owl:DatatypeProperty ;
+    rdfs:label "line number" ;
+    rdfs:comment "Line number where element is defined" ;
+    rdfs:range xsd:integer .
+
+radar:lowBound a owl:DatatypeProperty ;
+    rdfs:label "low bound" ;
+    rdfs:comment "Lower bound of a subrange type" ;
+    rdfs:range xsd:integer .
+
+radar:highBound a owl:DatatypeProperty ;
+    rdfs:label "high bound" ;
+    rdfs:comment "Upper bound of a subrange type" ;
+    rdfs:range xsd:integer .
+
+radar:purpose a owl:DatatypeProperty ;
+    rdfs:label "purpose" ;
+    rdfs:comment "Description of the element's purpose" ;
+    rdfs:range xsd:string .

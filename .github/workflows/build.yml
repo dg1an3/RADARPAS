@@ -1,0 +1,51 @@
+name: FreePascal Build
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "**" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install FreePascal
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y fpc
+
+    - name: Show FreePascal version
+      run: fpc -i
+
+    - name: Build RADARPAS
+      run: make
+
+    - name: Run RADARPAS (non-interactive test)
+      run: echo "Q" | timeout 5 ./radarpas || true
+
+    - name: Upload binary artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: radarpas-binary
+        path: radarpas
+
+  docker-build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Build Docker image
+      run: docker build -t radarpas-fpc:latest .
+
+    - name: Compile in container
+      run: docker run --rm -v "$(pwd):/build" radarpas-fpc:latest make clean all
+
+    - name: Test run in container
+      run: echo "Q" | docker run --rm -i -v "$(pwd):/build" radarpas-fpc:latest ./radarpas || true

@@ -1,0 +1,7 @@
+DEFINITION MODULE PicAnal;
+
+
+PROCEDURE Analyze;
+
+
+END PicAnal.

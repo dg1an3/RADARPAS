@@ -1,0 +1,16 @@
+DEFINITION MODULE RadarTx;
+
+FROM RadioTx IMPORT
+    PrefixRec, PrefixTabPtr, Transmit, FileAt, Directory;
+
+PROCEDURE GenPrefixData( VAR ForPicture : ARRAY OF BYTE;
+                                PicSize : CARDINAL;
+                          VAR PrefixTab : PrefixTabPtr );
+
+
+PROCEDURE TransmitPic(    PicName : ARRAY OF CHAR;
+                       VAR ForPic : ARRAY OF BYTE;
+                          PicSize : CARDINAL );
+
+END RadarTx.
+

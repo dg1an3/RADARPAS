@@ -1,0 +1,16 @@
+# Docker ignore file for RADARPAS build
+
+# Git
+.git
+.gitignore
+
+# Build artifacts
+*.o
+*.ppu
+radarpas
+
+# Documentation
+documents/
+
+# README
+README.md

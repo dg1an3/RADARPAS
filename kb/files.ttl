@@ -1,0 +1,988 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix radar: <http://example.org/radarpas/ontology#> .
+@prefix src: <http://example.org/radarpas/source#> .
+
+# =============================================================================
+# RADARPAS Source File Inventory
+# =============================================================================
+
+# =============================================================================
+# Root Pascal Files
+# =============================================================================
+
+src:File_RADAR_PAS a radar:PascalFile ;
+    rdfs:label "19880114 RADAR.PAS" ;
+    dc:description "Original Turbo Pascal source - main RADARPAS terminal (final release)" ;
+    radar:filePath "19880114 RADAR.PAS" ;
+    radar:lineCount 1895 ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfVersion src:RADARPAS_v2_1 ;
+    radar:partOfArchive src:Archive_19880114 .
+
+src:File_radar_pas_fp a radar:PascalFile ;
+    rdfs:label "radar.pas (FreePascal)" ;
+    dc:description "FreePascal compatible version for modern compilation" ;
+    radar:filePath "radar.pas" ;
+    radar:lineCount 370 ;
+    radar:programmingLanguage "FreePascal" .
+
+# =============================================================================
+# Pascal Archive: 1987-04-16-RadioTx-Enhanced
+# =============================================================================
+
+src:File_1987_RADAR_PAS a radar:PascalFile ;
+    rdfs:label "RADAR.PAS (1987-04-16)" ;
+    radar:filePath "pascal/1987-04-16-RadioTx-Enhanced/RADAR.PAS" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfArchive src:Archive_19870416 .
+
+src:File_1987_RADIO_PAS a radar:PascalFile ;
+    rdfs:label "RADIO.PAS (1987-04-16)" ;
+    dc:description "Radio transmission module" ;
+    radar:filePath "pascal/1987-04-16-RadioTx-Enhanced/RADIO.PAS" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfArchive src:Archive_19870416 .
+
+# =============================================================================
+# Pascal Archive: 1988-02-26-SN8801
+# =============================================================================
+
+src:File_SN8801_RADAR_PAS a radar:PascalFile ;
+    rdfs:label "RADAR.PAS (SN8801)" ;
+    radar:filePath "pascal/1988-02-26-SN8801/RADAR.PAS" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfArchive src:Archive_19880226 .
+
+src:File_SN8801_RADIO_PAS a radar:PascalFile ;
+    rdfs:label "RADIO.PAS (SN8801)" ;
+    radar:filePath "pascal/1988-02-26-SN8801/RADIO.PAS" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfArchive src:Archive_19880226 .
+
+src:File_SN8801_MODEM_PAS a radar:PascalFile ;
+    rdfs:label "MODEM.PAS (SN8801)" ;
+    radar:filePath "pascal/1988-02-26-SN8801/MODEM.PAS" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfArchive src:Archive_19880226 .
+
+src:File_SN8801_CUSTOM_PAS a radar:PascalFile ;
+    rdfs:label "CUSTOM.PAS (SN8801)" ;
+    radar:filePath "pascal/1988-02-26-SN8801/CUSTOM.PAS" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfArchive src:Archive_19880226 .
+
+src:File_SN8801_RADART_PAS a radar:PascalFile ;
+    rdfs:label "RADART.PAS (SN8801)" ;
+    radar:filePath "pascal/1988-02-26-SN8801/RADART.PAS" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfArchive src:Archive_19880226 .
+
+src:File_SN8801_RADTEST_PAS a radar:PascalFile ;
+    rdfs:label "RADTEST.PAS (SN8801)" ;
+    radar:filePath "pascal/1988-02-26-SN8801/RADTEST.PAS" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfArchive src:Archive_19880226 .
+
+# =============================================================================
+# Pascal Archive: 1988-08-01-RADIO
+# =============================================================================
+
+src:File_1988_RADAR_PAS a radar:PascalFile ;
+    rdfs:label "RADAR.PAS (1988-08-01)" ;
+    radar:filePath "pascal/1988-08-01-RADIO/RADAR.PAS" ;
+    radar:lineCount 1137 ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfArchive src:Archive_19880801 .
+
+src:File_1988_RADTERM_PAS a radar:PascalFile ;
+    rdfs:label "RADTERM.PAS (1988-08-01)" ;
+    radar:filePath "pascal/1988-08-01-RADIO/RADTERM.PAS" ;
+    radar:lineCount 1137 ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfArchive src:Archive_19880801 .
+
+src:File_1988_RADIOTX_PAS a radar:PascalFile ;
+    rdfs:label "RADIOTX.PAS (1988-08-01)" ;
+    dc:description "Radio transmission module" ;
+    radar:filePath "pascal/1988-08-01-RADIO/RADIOTX.PAS" ;
+    radar:lineCount 56 ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfArchive src:Archive_19880801 .
+
+src:File_1988_RADIORX_PAS a radar:PascalFile ;
+    rdfs:label "RADIORX.PAS (1988-08-01)" ;
+    dc:description "Radio reception module" ;
+    radar:filePath "pascal/1988-08-01-RADIO/RADIORX.PAS" ;
+    radar:lineCount 57 ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfArchive src:Archive_19880801 .
+
+# =============================================================================
+# GDEM Archive
+# =============================================================================
+
+src:File_EME_PAS a radar:PascalFile ;
+    rdfs:label "EME.PAS" ;
+    dc:description "Graphical Data Entry Manager - Map Editor" ;
+    radar:filePath "gdem/1985-EME/EME.PAS" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfVersion src:GDEM_v2 .
+
+# =============================================================================
+# Modula-2 Archive: 1988-08-15 (Initial M2 Port)
+# =============================================================================
+
+src:File_MAIN_MOD_1988 a radar:Modula2File ;
+    rdfs:label "MAIN.MOD (1988-08-15)" ;
+    radar:filePath "modula2/1988-08-15/MAIN.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19880815 .
+
+src:File_PICTURES_MOD_1988 a radar:Modula2File ;
+    rdfs:label "PICTURES.MOD (1988-08-15)" ;
+    radar:filePath "modula2/1988-08-15/PICTURES.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19880815 .
+
+src:File_SCREENHA_MOD_1988 a radar:Modula2File ;
+    rdfs:label "SCREENHA.MOD (1988-08-15)" ;
+    radar:filePath "modula2/1988-08-15/SCREENHA.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19880815 .
+
+src:File_STATIONS_MOD_1988 a radar:Modula2File ;
+    rdfs:label "STATIONS.MOD (1988-08-15)" ;
+    radar:filePath "modula2/1988-08-15/STATIONS.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19880815 .
+
+src:File_LOCATOR_MOD_1988 a radar:Modula2File ;
+    rdfs:label "LOCATOR.MOD (1988-08-15)" ;
+    radar:filePath "modula2/1988-08-15/LOCATOR.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19880815 .
+
+src:File_MODEM_MOD_1988 a radar:Modula2File ;
+    rdfs:label "MODEM.MOD (1988-08-15)" ;
+    radar:filePath "modula2/1988-08-15/MODEM.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19880815 .
+
+src:File_AUTO_MOD_1988 a radar:Modula2File ;
+    rdfs:label "AUTO.MOD (1988-08-15)" ;
+    radar:filePath "modula2/1988-08-15/AUTO.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19880815 .
+
+# =============================================================================
+# Modula-2 Archive: 1989-03-14 (Pic-Analysis)
+# =============================================================================
+
+src:File_PICANAL_MOD a radar:Modula2File ;
+    rdfs:label "PICANAL.MOD" ;
+    dc:description "Picture analysis routines for storm detection" ;
+    radar:filePath "modula2/1989-03-14-Pic-Analysis/PICANAL.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19890314 .
+
+# =============================================================================
+# Modula-2 Archive: 1989-03-16 (RS811A-Interface)
+# =============================================================================
+
+src:File_RS811A_I_MOD a radar:Modula2File ;
+    rdfs:label "RS811A_I.MOD" ;
+    dc:description "RS-811A radar interface module" ;
+    radar:filePath "modula2/1989-03-16-RS811A-Interface/RS811A_I.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19890316 .
+
+# =============================================================================
+# Modula-2 Archive: 1989-03-19 (Sweep)
+# =============================================================================
+
+src:File_SWEEP_MOD a radar:Modula2File ;
+    rdfs:label "SWEEP.MOD" ;
+    dc:description "Sweep visualization module" ;
+    radar:filePath "modula2/1989-03-19-Sweep/SWEEP.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19890319 .
+
+# =============================================================================
+# Assembly Archive: 1989-03-26 (Sweep Optimization)
+# =============================================================================
+
+src:File_ALTSWP_ASM a radar:AssemblyFile ;
+    rdfs:label "ALTSWP.ASM" ;
+    dc:description "Alternative sweep implementation in x86 assembly" ;
+    radar:filePath "modula2/1989-03-26-Sweep/ALTSWP.ASM" ;
+    radar:programmingLanguage "x86 Assembly" ;
+    radar:partOfArchive src:Archive_19890326 .
+
+src:File_SWEEP2_ASM a radar:AssemblyFile ;
+    rdfs:label "SWEEP2.ASM" ;
+    dc:description "Core sweep algorithm in assembly" ;
+    radar:filePath "modula2/1989-03-26-Sweep/SWEEP2.ASM" ;
+    radar:programmingLanguage "x86 Assembly" ;
+    radar:partOfArchive src:Archive_19890326 .
+
+src:File_SWPLNE_ASM a radar:AssemblyFile ;
+    rdfs:label "SWPLNE.ASM" ;
+    dc:description "Sweep line drawing in assembly" ;
+    radar:filePath "modula2/1989-03-26-Sweep/SWPLNE.ASM" ;
+    radar:programmingLanguage "x86 Assembly" ;
+    radar:partOfArchive src:Archive_19890326 .
+
+src:File_GRAPH_ASM a radar:AssemblyFile ;
+    rdfs:label "GRAPH.ASM" ;
+    dc:description "Graphics primitives in assembly" ;
+    radar:filePath "modula2/1989-03-26-Sweep/GRAPH.ASM" ;
+    radar:programmingLanguage "x86 Assembly" ;
+    radar:partOfArchive src:Archive_19890326 .
+
+src:File_INCTABX_ASM a radar:AssemblyFile ;
+    rdfs:label "INCTABX.ASM" ;
+    dc:description "X increment lookup table" ;
+    radar:filePath "modula2/1989-03-26-Sweep/INCTABX.ASM" ;
+    radar:programmingLanguage "x86 Assembly" ;
+    radar:partOfArchive src:Archive_19890326 .
+
+src:File_INCTABY_ASM a radar:AssemblyFile ;
+    rdfs:label "INCTABY.ASM" ;
+    dc:description "Y increment lookup table" ;
+    radar:filePath "modula2/1989-03-26-Sweep/INCTABY.ASM" ;
+    radar:programmingLanguage "x86 Assembly" ;
+    radar:partOfArchive src:Archive_19890326 .
+
+# =============================================================================
+# Modula-2 Archive: 1992-10-23-AUTO
+# =============================================================================
+
+src:File_ANALYSIS_MOD a radar:Modula2File ;
+    rdfs:label "ANALYSIS.MOD" ;
+    dc:description "Real-time storm cell recognition" ;
+    radar:filePath "modula2/1992-10-23-AUTO/ANALYSIS.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921023 .
+
+src:File_AUTO_MOD a radar:Modula2File ;
+    rdfs:label "AUTO.MOD" ;
+    dc:description "Automated picture capture and processing" ;
+    radar:filePath "modula2/1992-10-23-AUTO/AUTO.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921023 .
+
+src:File_COMPR_MOD a radar:Modula2File ;
+    rdfs:label "COMPR.MOD" ;
+    dc:description "Picture compression/decompression" ;
+    radar:filePath "modula2/1992-10-23-AUTO/COMPR.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921023 .
+
+src:File_CONVERT_MOD a radar:Modula2File ;
+    rdfs:label "CONVERT.MOD" ;
+    dc:description "Data format conversion" ;
+    radar:filePath "modula2/1992-10-23-AUTO/CONVERT.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921023 .
+
+src:File_CRC_MOD a radar:Modula2File ;
+    rdfs:label "CRC.MOD" ;
+    dc:description "Cyclic redundancy check" ;
+    radar:filePath "modula2/1992-10-23-AUTO/CRC.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921023 .
+
+# =============================================================================
+# Modula-2 Archive: 1992-11-04-AUTO (Enhanced)
+# =============================================================================
+
+src:File_E300INTE_MOD a radar:Modula2File ;
+    rdfs:label "E300INTE.MOD" ;
+    dc:description "E300 hardware interface abstraction" ;
+    radar:filePath "modula2/1992-11-04-AUTO/E300INTE.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921104 .
+
+src:File_GRAPHICS_MOD a radar:Modula2File ;
+    rdfs:label "GRAPHICS.MOD" ;
+    dc:description "EGA graphics wrapper" ;
+    radar:filePath "modula2/1992-11-04-AUTO/GRAPHICS.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921104 .
+
+src:File_PICTURES_MOD a radar:Modula2File ;
+    rdfs:label "PICTURES.MOD" ;
+    dc:description "Picture file management and storage" ;
+    radar:filePath "modula2/1992-11-04-AUTO/PICTURES.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921104 .
+
+src:File_RADARRX_MOD a radar:Modula2File ;
+    rdfs:label "RADARRX.MOD" ;
+    dc:description "Radar data reception" ;
+    radar:filePath "modula2/1992-11-04-AUTO/RADARRX.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921104 .
+
+src:File_RADARTX_MOD a radar:Modula2File ;
+    rdfs:label "RADARTX.MOD" ;
+    dc:description "Radar command transmission" ;
+    radar:filePath "modula2/1992-11-04-AUTO/RADARTX.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921104 .
+
+src:File_RS_MOD a radar:Modula2File ;
+    rdfs:label "RS.MOD" ;
+    dc:description "RS-232 serial communication (primary)" ;
+    radar:filePath "modula2/1992-11-04-AUTO/RS.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921104 .
+
+src:File_RS2_MOD a radar:Modula2File ;
+    rdfs:label "RS2.MOD" ;
+    dc:description "RS-232 serial communication (secondary)" ;
+    radar:filePath "modula2/1992-11-04-AUTO/RS2.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921104 .
+
+src:File_SCREENHA_MOD a radar:Modula2File ;
+    rdfs:label "SCREENHA.MOD" ;
+    dc:description "Screen display and formatting" ;
+    radar:filePath "modula2/1992-11-04-AUTO/SCREENHA.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921104 .
+
+src:File_STATIONS_MOD a radar:Modula2File ;
+    rdfs:label "STATIONS.MOD" ;
+    dc:description "Station directory and calling" ;
+    radar:filePath "modula2/1992-11-04-AUTO/STATIONS.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921104 .
+
+# =============================================================================
+# Modula-2 Archive: 1992-12-23 (Library Standardization)
+# =============================================================================
+
+src:File_ASCII_MOD a radar:Modula2File ;
+    rdfs:label "ASCII.MOD" ;
+    dc:description "ASCII character constants" ;
+    radar:filePath "modula2/1992-12-23/MOD/ASCII.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921223 .
+
+src:File_FIO_MOD a radar:Modula2File ;
+    rdfs:label "FIO.MOD" ;
+    dc:description "File I/O abstraction" ;
+    radar:filePath "modula2/1992-12-23/MOD/FIO.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921223 .
+
+src:File_GRAPH_MOD a radar:Modula2File ;
+    rdfs:label "GRAPH.MOD" ;
+    dc:description "Low-level graphics primitives" ;
+    radar:filePath "modula2/1992-12-23/MOD/GRAPH.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921223 .
+
+src:File_IO_MOD a radar:Modula2File ;
+    rdfs:label "IO.MOD" ;
+    dc:description "Console I/O operations" ;
+    radar:filePath "modula2/1992-12-23/MOD/IO.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921223 .
+
+src:File_LIB_MOD a radar:Modula2File ;
+    rdfs:label "LIB.MOD" ;
+    dc:description "Low-level utility functions" ;
+    radar:filePath "modula2/1992-12-23/MOD/LIB.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921223 .
+
+src:File_PROCESS_MOD a radar:Modula2File ;
+    rdfs:label "PROCESS.MOD" ;
+    dc:description "Process and coroutine control" ;
+    radar:filePath "modula2/1992-12-23/MOD/PROCESS.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921223 .
+
+src:File_STORAGE_MOD a radar:Modula2File ;
+    rdfs:label "STORAGE.MOD" ;
+    dc:description "Memory allocation and management" ;
+    radar:filePath "modula2/1992-12-23/MOD/STORAGE.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921223 .
+
+src:File_STR_MOD a radar:Modula2File ;
+    rdfs:label "STR.MOD" ;
+    dc:description "String handling utilities" ;
+    radar:filePath "modula2/1992-12-23/MOD/STR.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921223 .
+
+src:File_TIMEDATE_MOD a radar:Modula2File ;
+    rdfs:label "TIMEDATE.MOD" ;
+    dc:description "Date and time utilities" ;
+    radar:filePath "modula2/1992-12-23/MOD/TIMEDATE.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921223 .
+
+# =============================================================================
+# Modula-2 Archive: 1992-12-28 (Final E300PC 3.1)
+# =============================================================================
+
+src:File_MAIN_MOD a radar:Modula2File ;
+    rdfs:label "MAIN.MOD (E300PC 3.1)" ;
+    dc:description "Master control loop and station management (final version)" ;
+    radar:filePath "modula2/1992-12-28/MAIN.MOD" ;
+    radar:lineCount 1057 ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfVersion src:E300PC_v3_1 ;
+    radar:partOfArchive src:Archive_19921228 .
+
+src:File_DB_MOD a radar:Modula2File ;
+    rdfs:label "DB.MOD" ;
+    dc:description "Database operations for stations and pictures" ;
+    radar:filePath "modula2/1992-12-28/DB.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921228 .
+
+src:File_LOCATOR_MOD a radar:Modula2File ;
+    rdfs:label "LOCATOR.MOD (final)" ;
+    dc:description "Cursor and bearing/range calculation" ;
+    radar:filePath "modula2/1992-12-28/LOCATOR.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921228 .
+
+# =============================================================================
+# E250Term Modules
+# =============================================================================
+
+src:File_E250TERM_MOD a radar:Modula2File ;
+    rdfs:label "E250TERM.MOD" ;
+    dc:description "Main E250 terminal program" ;
+    radar:filePath "modula2/E250Term/E250TERM.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfVersion src:E250Term_v3 .
+
+src:File_E250SCRN_MOD a radar:Modula2File ;
+    rdfs:label "E250SCRN.MOD" ;
+    dc:description "E250 screen handling" ;
+    radar:filePath "modula2/E250Term/E250SCRN.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfVersion src:E250Term_v3 .
+
+src:File_E250DRAW_MOD a radar:Modula2File ;
+    rdfs:label "E250DRAW.MOD" ;
+    dc:description "E250 drawing primitives" ;
+    radar:filePath "modula2/E250Term/E250DRAW.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfVersion src:E250Term_v3 .
+
+src:File_E250EDIT_MOD a radar:Modula2File ;
+    rdfs:label "E250EDIT.MOD" ;
+    dc:description "E250 editing features" ;
+    radar:filePath "modula2/E250Term/E250EDIT.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfVersion src:E250Term_v3 .
+
+src:File_SCRNSEND_MOD a radar:Modula2File ;
+    rdfs:label "SCRNSEND.MOD" ;
+    dc:description "TSR screen transmission module" ;
+    radar:filePath "modula2/E250Term/SCRNSEND.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfVersion src:E250Term_v3 .
+
+# =============================================================================
+# Resource and Data Files
+# =============================================================================
+
+src:File_SCREEN_RDR_SN8801 a radar:PascalFile ;
+    rdfs:label "SCREEN.RDR (SN8801)" ;
+    dc:description "Screen layout Pascal include file (.RDR extension)" ;
+    radar:filePath "pascal/1988-02-26-SN8801/SCREEN.RDR" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:purpose "Pascal source with non-standard .RDR extension" ;
+    radar:partOfArchive src:Archive_19880226 .
+
+src:File_GRAPH_BIN_SN8801 a radar:SourceFile ;
+    rdfs:label "GRAPH.BIN (SN8801)" ;
+    dc:description "Graphics data binary" ;
+    radar:filePath "pascal/1988-02-26-SN8801/GRAPH.BIN" ;
+    radar:programmingLanguage "Binary" ;
+    radar:partOfArchive src:Archive_19880226 .
+
+src:File_SCREEN_RDR_1988 a radar:PascalFile ;
+    rdfs:label "SCREEN.RDR (1988-08-01)" ;
+    dc:description "Screen layout Pascal include file (.RDR extension)" ;
+    radar:filePath "pascal/1988-08-01-RADIO/SCREEN.RDR" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:purpose "Pascal source with non-standard .RDR extension" ;
+    radar:partOfArchive src:Archive_19880801 .
+
+src:File_GRAPH_RDR_1988 a radar:PascalFile ;
+    rdfs:label "GRAPH.RDR (1988-08-01)" ;
+    dc:description "Graphics routines Pascal include file (.RDR extension)" ;
+    radar:filePath "pascal/1988-08-01-RADIO/GRAPH.RDR" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:purpose "Pascal source with non-standard .RDR extension" ;
+    radar:partOfArchive src:Archive_19880801 .
+
+src:File_GRAPHBAK_RDR_1988 a radar:PascalFile ;
+    rdfs:label "GRAPHBAK.RDR (1988-08-01)" ;
+    dc:description "Graphics routines backup Pascal include file" ;
+    radar:filePath "pascal/1988-08-01-RADIO/GRAPHBAK.RDR" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:purpose "Pascal source with non-standard .RDR extension" ;
+    radar:partOfArchive src:Archive_19880801 .
+
+src:File_MISC_RDR_1988 a radar:PascalFile ;
+    rdfs:label "MISC.RDR (1988-08-01)" ;
+    dc:description "Miscellaneous routines Pascal include file" ;
+    radar:filePath "pascal/1988-08-01-RADIO/MISC.RDR" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:purpose "Pascal source with non-standard .RDR extension" ;
+    radar:partOfArchive src:Archive_19880801 .
+
+src:File_E300DB_DAT a radar:SourceFile ;
+    rdfs:label "E300DB.DAT" ;
+    dc:description "E300 database configuration" ;
+    radar:filePath "modula2/1992-12-23/E300DB.DAT" ;
+    radar:programmingLanguage "Data File" ;
+    radar:partOfArchive src:Archive_19921223 .
+
+src:File_E300PC_DAT a radar:SourceFile ;
+    rdfs:label "E300PC.DAT" ;
+    dc:description "E300PC program configuration" ;
+    radar:filePath "modula2/1992-12-28/E300PC.DAT" ;
+    radar:programmingLanguage "Data File" ;
+    radar:partOfArchive src:Archive_19921228 .
+
+# =============================================================================
+# Additional Pascal Files - SN8801 Archive
+# =============================================================================
+
+src:File_SN8801_I_PAS a radar:PascalFile ;
+    rdfs:label "I.PAS (SN8801)" ;
+    dc:description "Interface module" ;
+    radar:filePath "pascal/1988-02-26-SN8801/I.PAS" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfArchive src:Archive_19880226 .
+
+src:File_SN8801_LISTT_PAS a radar:PascalFile ;
+    rdfs:label "LISTT.PAS (SN8801)" ;
+    dc:description "Listing utilities" ;
+    radar:filePath "pascal/1988-02-26-SN8801/LISTT.PAS" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfArchive src:Archive_19880226 .
+
+# =============================================================================
+# Additional Pascal Files - 1988-08-01 Archive
+# =============================================================================
+
+src:File_1988_RADIO_PAS a radar:PascalFile ;
+    rdfs:label "RADIO.PAS (1988-08-01)" ;
+    dc:description "Radio control module" ;
+    radar:filePath "pascal/1988-08-01-RADIO/RADIO.PAS" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfArchive src:Archive_19880801 .
+
+src:File_1988_RADARBAK_PAS a radar:PascalFile ;
+    rdfs:label "RADARBAK.PAS (1988-08-01)" ;
+    dc:description "RADAR backup file" ;
+    radar:filePath "pascal/1988-08-01-RADIO/RADARBAK.PAS" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfArchive src:Archive_19880801 .
+
+src:File_1988_CUSTOM_PAS a radar:PascalFile ;
+    rdfs:label "CUSTOM.PAS (1988-08-01)" ;
+    dc:description "Customization settings" ;
+    radar:filePath "pascal/1988-08-01-RADIO/CUSTOM.PAS" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfArchive src:Archive_19880801 .
+
+# =============================================================================
+# Modula-2 Archive: 1988-08-15 - Additional Files
+# =============================================================================
+
+src:File_MAIN2_MOD_1988 a radar:Modula2File ;
+    rdfs:label "MAIN2.MOD (1988-08-15)" ;
+    dc:description "Secondary main module" ;
+    radar:filePath "modula2/1988-08-15/MAIN2.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19880815 .
+
+src:File_SELECTOR_MOD_1988 a radar:Modula2File ;
+    rdfs:label "SELECTOR.MOD (1988-08-15)" ;
+    dc:description "Menu selection module" ;
+    radar:filePath "modula2/1988-08-15/SELECTOR.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19880815 .
+
+src:File_LOWLEVEL_MOD_1988 a radar:Modula2File ;
+    rdfs:label "LOWLEVEL.MOD (1988-08-15)" ;
+    dc:description "Low-level hardware operations" ;
+    radar:filePath "modula2/1988-08-15/LOWLEVEL.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19880815 .
+
+src:File_OLD_MAIN_MOD a radar:Modula2File ;
+    rdfs:label "MAIN.MOD (1988-08-15 OLD)" ;
+    dc:description "Previous version of main module" ;
+    radar:filePath "modula2/1988-08-15/OLD/MAIN.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19880815 .
+
+# =============================================================================
+# Modula-2 Archive: 1989-03-14 (Pic-Analysis) - Complete
+# =============================================================================
+
+src:File_PICANAL_DEF a radar:DefinitionFile ;
+    rdfs:label "PICANAL.DEF" ;
+    dc:description "Picture analysis definition file" ;
+    radar:filePath "modula2/1989-03-14-Pic-Analysis/PICANAL.DEF" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19890314 .
+
+# =============================================================================
+# Modula-2 Archive: 1989-03-26 (Sweep) - Additional Assembly Files
+# =============================================================================
+
+src:File_GENTAB_PAS a radar:PascalFile ;
+    rdfs:label "GENTAB.PAS" ;
+    dc:description "Table generation utility" ;
+    radar:filePath "modula2/1989-03-26-Sweep/GENTAB.PAS" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfArchive src:Archive_19890326 .
+
+src:File_SWEEP2_2_ASM a radar:AssemblyFile ;
+    rdfs:label "SWEEP2-2.ASM" ;
+    dc:description "Sweep variant 2" ;
+    radar:filePath "modula2/1989-03-26-Sweep/SWEEP2-2.ASM" ;
+    radar:programmingLanguage "x86 Assembly" ;
+    radar:partOfArchive src:Archive_19890326 .
+
+src:File_SWEEP3_ASM a radar:AssemblyFile ;
+    rdfs:label "SWEEP3.ASM" ;
+    dc:description "Three-dimensional sweep" ;
+    radar:filePath "modula2/1989-03-26-Sweep/SWEEP3.ASM" ;
+    radar:programmingLanguage "x86 Assembly" ;
+    radar:partOfArchive src:Archive_19890326 .
+
+src:File_SWEEP4_ASM a radar:AssemblyFile ;
+    rdfs:label "SWEEP4.ASM" ;
+    dc:description "Four-level sweep" ;
+    radar:filePath "modula2/1989-03-26-Sweep/SWEEP4.ASM" ;
+    radar:programmingLanguage "x86 Assembly" ;
+    radar:partOfArchive src:Archive_19890326 .
+
+src:File_SWEEP5_ASM a radar:AssemblyFile ;
+    rdfs:label "SWEEP5.ASM" ;
+    dc:description "Five-level sweep" ;
+    radar:filePath "modula2/1989-03-26-Sweep/SWEEP5.ASM" ;
+    radar:programmingLanguage "x86 Assembly" ;
+    radar:partOfArchive src:Archive_19890326 .
+
+src:File_SWPLNE2_ASM a radar:AssemblyFile ;
+    rdfs:label "SWPLNE2.ASM" ;
+    dc:description "Sweep line variant 2" ;
+    radar:filePath "modula2/1989-03-26-Sweep/SWPLNE2.ASM" ;
+    radar:programmingLanguage "x86 Assembly" ;
+    radar:partOfArchive src:Archive_19890326 .
+
+# =============================================================================
+# Modula-2 Archive: 1992-10-21 (Testchan)
+# =============================================================================
+
+src:File_TESTCHAN_MOD a radar:Modula2File ;
+    rdfs:label "TESTCHAN.MOD" ;
+    dc:description "Test channel module" ;
+    radar:filePath "modula2/1992-10-21-Testchan/TESTCHAN.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921021 .
+
+# =============================================================================
+# Modula-2 Archive: 1992-10-22 (RADIO)
+# =============================================================================
+
+src:File_1992_10_22_MAIN_MOD a radar:Modula2File ;
+    rdfs:label "MAIN.MOD (1992-10-22)" ;
+    dc:description "Main control module" ;
+    radar:filePath "modula2/1992-10-22-RADIO/MAIN.MOD" ;
+    radar:programmingLanguage "Modula-2" .
+
+src:File_1992_10_22_RADIO_MOD a radar:Modula2File ;
+    rdfs:label "RADIO.MOD (1992-10-22)" ;
+    dc:description "Radio control module" ;
+    radar:filePath "modula2/1992-10-22-RADIO/RADIO.MOD" ;
+    radar:programmingLanguage "Modula-2" .
+
+src:File_1992_10_22_TESTRX_MOD a radar:Modula2File ;
+    rdfs:label "TESTRX.MOD (1992-10-22)" ;
+    dc:description "Test receiver module" ;
+    radar:filePath "modula2/1992-10-22-RADIO/TESTRX.MOD" ;
+    radar:programmingLanguage "Modula-2" .
+
+src:File_1992_10_22_E300INTE_DEF a radar:DefinitionFile ;
+    rdfs:label "E300INTE.DEF (1992-10-22)" ;
+    dc:description "E300 interface definition" ;
+    radar:filePath "modula2/1992-10-22-RADIO/E300INTE.DEF" ;
+    radar:programmingLanguage "Modula-2" .
+
+# =============================================================================
+# Modula-2 Archive: 1992-10-23 (AUTO) - Additional Files
+# =============================================================================
+
+src:File_TESTRX_MOD_1023 a radar:Modula2File ;
+    rdfs:label "TESTRX.MOD (1992-10-23)" ;
+    dc:description "Test receiver module" ;
+    radar:filePath "modula2/1992-10-23-AUTO/TESTRX.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921023 .
+
+src:File_OPTIONS_MOD a radar:Modula2File ;
+    rdfs:label "OPTIONS.MOD" ;
+    dc:description "Program options implementation" ;
+    radar:filePath "modula2/1992-10-23-AUTO/OPTIONS.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921023 .
+
+src:File_OPTIONFI_MOD a radar:Modula2File ;
+    rdfs:label "OPTIONFI.MOD" ;
+    dc:description "Option file handling" ;
+    radar:filePath "modula2/1992-10-23-AUTO/OPTIONFI.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921023 .
+
+src:File_CDSCRN_MOD a radar:Modula2File ;
+    rdfs:label "CDSCRN.MOD" ;
+    dc:description "CD screen handling" ;
+    radar:filePath "modula2/1992-10-23-AUTO/CDSCRN.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921023 .
+
+src:File_MAIN2_MOD_1023 a radar:Modula2File ;
+    rdfs:label "MAIN2.MOD (1992-10-23)" ;
+    dc:description "Secondary main module" ;
+    radar:filePath "modula2/1992-10-23-AUTO/MAIN2.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921023 .
+
+src:File_RS2_MOD_1023 a radar:Modula2File ;
+    rdfs:label "RS2.MOD (1992-10-23)" ;
+    dc:description "Secondary RS-232 port" ;
+    radar:filePath "modula2/1992-10-23-AUTO/RS2.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921023 .
+
+# =============================================================================
+# Modula-2 Archive: 1992-11-04 (AUTO) - Additional Files
+# =============================================================================
+
+src:File_EXTENDKE_MOD a radar:Modula2File ;
+    rdfs:label "EXTENDKE.MOD (1992-11-04)" ;
+    dc:description "Extended keyboard handling" ;
+    radar:filePath "modula2/1992-11-04-AUTO/EXTENDKE.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921104 .
+
+src:File_1104_MAIN_MOD a radar:Modula2File ;
+    rdfs:label "MAIN.MOD (1992-11-04)" ;
+    dc:description "Main control module" ;
+    radar:filePath "modula2/1992-11-04-AUTO/MAIN.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921104 .
+
+src:File_RADIORX_MOD a radar:Modula2File ;
+    rdfs:label "RADIORX.MOD" ;
+    dc:description "Radio reception handling" ;
+    radar:filePath "modula2/1992-11-04-AUTO/RADIORX.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921104 .
+
+src:File_RADIOTX_MOD a radar:Modula2File ;
+    rdfs:label "RADIOTX.MOD" ;
+    dc:description "Radio transmission handling" ;
+    radar:filePath "modula2/1992-11-04-AUTO/RADIOTX.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921104 .
+
+# =============================================================================
+# Modula-2 Archive: 1992-12-23 - Additional Files
+# =============================================================================
+
+src:File_CREATDAT_MOD a radar:Modula2File ;
+    rdfs:label "CREATDAT.MOD" ;
+    dc:description "Create data file utility" ;
+    radar:filePath "modula2/1992-12-23/CREATDAT.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921223 .
+
+src:File_MAINRX_MOD a radar:Modula2File ;
+    rdfs:label "MAINRX.MOD" ;
+    dc:description "Main receiver program" ;
+    radar:filePath "modula2/1992-12-23/MAINRX.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921223 .
+
+src:File_LOCATOR_MOD_1223 a radar:Modula2File ;
+    rdfs:label "LOCATOR.MOD (1992-12-23)" ;
+    dc:description "Locator module" ;
+    radar:filePath "modula2/1992-12-23/LOCATOR.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921223 .
+
+src:File_PICTURES_MOD_1223 a radar:Modula2File ;
+    rdfs:label "PICTURES.MOD (1992-12-23)" ;
+    dc:description "Pictures module" ;
+    radar:filePath "modula2/1992-12-23/PICTURES.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921223 .
+
+src:File_SCREENHA_MOD_1223 a radar:Modula2File ;
+    rdfs:label "SCREENHA.MOD (1992-12-23)" ;
+    dc:description "Screen handler" ;
+    radar:filePath "modula2/1992-12-23/SCREENHA.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921223 .
+
+src:File_FRACGEN_MOD a radar:Modula2File ;
+    rdfs:label "FRACGEN.MOD" ;
+    dc:description "Fractal generation" ;
+    radar:filePath "modula2/1992-12-23/MOD/FRACGEN.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921223 .
+
+src:File_LIB_MOD a radar:Modula2File ;
+    rdfs:label "LIB.MOD" ;
+    dc:description "Low-level utility library" ;
+    radar:filePath "modula2/1992-12-23/MOD/LIB.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921223 .
+
+# =============================================================================
+# Modula-2 Archive: 1992-12-28 - Additional Files
+# =============================================================================
+
+src:File_ANALYSIS_MOD_1228 a radar:Modula2File ;
+    rdfs:label "ANALYSIS.MOD (1992-12-28)" ;
+    dc:description "Storm analysis module" ;
+    radar:filePath "modula2/1992-12-28/ANALYSIS.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921228 .
+
+src:File_E300INTE_MOD_1228 a radar:Modula2File ;
+    rdfs:label "E300INTE.MOD (1992-12-28)" ;
+    dc:description "E300 interface implementation" ;
+    radar:filePath "modula2/1992-12-28/E300INTE.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921228 .
+
+src:File_PICTURES_MOD_1228 a radar:Modula2File ;
+    rdfs:label "PICTURES.MOD (1992-12-28)" ;
+    dc:description "Pictures management" ;
+    radar:filePath "modula2/1992-12-28/PICTURES.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921228 .
+
+src:File_RS_MOD_1228 a radar:Modula2File ;
+    rdfs:label "RS.MOD (1992-12-28)" ;
+    dc:description "RS-232 serial communication" ;
+    radar:filePath "modula2/1992-12-28/RS.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921228 .
+
+src:File_RS2_MOD_1228 a radar:Modula2File ;
+    rdfs:label "RS2.MOD (1992-12-28)" ;
+    dc:description "Secondary RS-232 port" ;
+    radar:filePath "modula2/1992-12-28/RS2.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921228 .
+
+src:File_SCREENHA_MOD_1228 a radar:Modula2File ;
+    rdfs:label "SCREENHA.MOD (1992-12-28)" ;
+    dc:description "Screen handler" ;
+    radar:filePath "modula2/1992-12-28/SCREENHA.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921228 .
+
+src:File_TEST_MOD a radar:Modula2File ;
+    rdfs:label "TEST.MOD" ;
+    dc:description "Test module" ;
+    radar:filePath "modula2/1992-12-28/TEST.MOD" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921228 .
+
+src:File_E300INTE_DEF_1228 a radar:DefinitionFile ;
+    rdfs:label "E300INTE.DEF (1992-12-28)" ;
+    dc:description "E300 interface definition" ;
+    radar:filePath "modula2/1992-12-28/E300INTE.DEF" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921228 .
+
+src:File_DB_DEF a radar:DefinitionFile ;
+    rdfs:label "DB.DEF" ;
+    dc:description "Database module definition" ;
+    radar:filePath "modula2/1992-12-28/DB.DEF" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921228 .
+
+src:File_SCREENHA_DEF_1228 a radar:DefinitionFile ;
+    rdfs:label "SCREENHA.DEF (1992-12-28)" ;
+    dc:description "Screen handler definition" ;
+    radar:filePath "modula2/1992-12-28/SCREENHA.DEF" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfArchive src:Archive_19921228 .
+
+# =============================================================================
+# E250Term - Additional File
+# =============================================================================
+
+src:File_E250SCRN_DEF a radar:DefinitionFile ;
+    rdfs:label "E250SCRN.DEF" ;
+    dc:description "E250 screen handler definition" ;
+    radar:filePath "modula2/E250Term/E250SCRN.DEF" ;
+    radar:programmingLanguage "Modula-2" ;
+    radar:partOfVersion src:E250Term_v3 .
+
+# =============================================================================
+# Documents copy
+# =============================================================================
+
+src:File_documents_RADAR_PAS a radar:PascalFile ;
+    rdfs:label "19880114 RADAR.PAS (documents)" ;
+    dc:description "Copy of original RADAR.PAS in documents folder" ;
+    radar:filePath "documents/19880114 RADAR.PAS" ;
+    radar:programmingLanguage "Turbo Pascal" ;
+    radar:partOfVersion src:RADARPAS_v2_1 .
+
+# =============================================================================
+# Documentation Files
+# =============================================================================
+
+src:File_README a radar:SourceFile ;
+    rdfs:label "README.md" ;
+    dc:description "Project overview and history" ;
+    radar:filePath "README.md" .
+
+src:File_BUILD a radar:SourceFile ;
+    rdfs:label "BUILD.md" ;
+    dc:description "FreePascal build instructions" ;
+    radar:filePath "BUILD.md" .
+
+src:File_Dockerfile a radar:SourceFile ;
+    rdfs:label "Dockerfile" ;
+    dc:description "Docker container build configuration" ;
+    radar:filePath "Dockerfile" .
+
+src:File_Makefile a radar:SourceFile ;
+    rdfs:label "Makefile" ;
+    dc:description "Build system configuration" ;
+    radar:filePath "Makefile" .
+
+src:File_build_sh a radar:SourceFile ;
+    rdfs:label "build.sh" ;
+    dc:description "Automated build script" ;
+    radar:filePath "build.sh" .

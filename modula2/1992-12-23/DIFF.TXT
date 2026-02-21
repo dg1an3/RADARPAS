@@ -1,0 +1,257 @@
+
+SCREENHA.DEF  ..\e300-2\SCREENHA.DEF
+
+----------SCREENHA.DEF
+VAR
+    FullPic  :  BOOLEAN;
+
+PROCEDURE WritePic( VAR Buffer : ARRAY OF BYTE; BufSize : CARDINAL );
+
+----------..\e300-2\SCREENHA.DEF
+PROCEDURE WritePic( VAR Buffer : ARRAY OF BYTE; BufSize : CARDINAL );
+
+-----------------------------------------------
+
+SCREENHA.MOD  ..\e300-2\SCREENHA.MOD
+
+----------SCREENHA.MOD
+  SetFunc, clr, or, SetPlane, EnablePlane, FillArea, GotoXY,
+  GetWindow, SetWindow, SetFont;
+
+----------..\e300-2\SCREENHA.MOD
+  SetFunc, clr, or, xor, SetPlane, EnablePlane, FillArea, GotoXY,
+  GetWindow, SetWindow, SetFont;
+
+-----------------------------------------------
+
+----------SCREENHA.MOD
+
+
+----------..\e300-2\SCREENHA.MOD
+  ScaleChange : BOOLEAN;
+
+
+-----------------------------------------------
+
+----------SCREENHA.MOD
+  0 : Scale := 100 |
+  1 : Scale := 250 |
+  2 : Scale := 500 |
+  3 : Scale := 1000 |
+  4 : Scale := 2000
+  ELSE
+
+----------..\e300-2\SCREENHA.MOD
+  0 : IF Scale # 100 THEN Scale := 100; ScaleChange := TRUE; END |
+  1 : IF Scale # 250 THEN Scale := 250; ScaleChange := TRUE; END |
+  2 : IF Scale # 500 THEN Scale := 500; ScaleChange := TRUE; END |
+  3 : IF Scale # 1000 THEN Scale := 1000; ScaleChange := TRUE; END |
+  4 : IF Scale # 2000 THEN Scale := 2000; ScaleChange := TRUE; END
+  ELSE
+
+-----------------------------------------------
+
+----------SCREENHA.MOD
+      Graph.Ellipse(320,175,102, 75,4,FALSE);
+      Graph.Ellipse(320,175,154,112,4,FALSE);
+      Graph.Ellipse(320,175,205,149,4,FALSE);
+      Graph.Ellipse(320,175,256,186,4,FALSE);
+  ELSIF RngMksOn & ~ On THEN
+
+----------..\e300-2\SCREENHA.MOD
+(*      Graph.Ellipse(320,175, 50, 37,4,FALSE); *)
+      Graph.Ellipse(320,175,102, 75,4,FALSE);
+(*      Graph.Ellipse(320,175,101, 75,4,FALSE); *)
+      Graph.Ellipse(320,175,154,112,4,FALSE);
+(*      Graph.Ellipse(320,175,153,112,4,FALSE); *)
+      Graph.Ellipse(320,175,205,149,4,FALSE);
+(*      Graph.Ellipse(320,175,204,149,4,FALSE); *)
+      Graph.Ellipse(320,175,256,186,4,FALSE);
+(*      Graph.Ellipse(320,175,255,186,4,FALSE); *)
+  ELSIF RngMksOn & ~ On THEN
+
+-----------------------------------------------
+
+----------SCREENHA.MOD
+            X := 308+INTEGER(LONGINT(Cos[Bear])*LONGINT(Range) DIV LONGINT(Scale));
+            Y := 171-INTEGER(LONGINT(Sin[Bear])*LONGINT(Range) DIV LONGINT(Scale));
+
+----------..\e300-2\SCREENHA.MOD
+            X := 308-INTEGER(LONGINT(Cos[Bear])*LONGINT(Range) DIV LONGINT(Scale));
+            Y := 171-INTEGER(LONGINT(Sin[Bear])*LONGINT(Range) DIV LONGINT(Scale));
+
+-----------------------------------------------
+
+----------SCREENHA.MOD
+          END (* IF *);
+
+----------..\e300-2\SCREENHA.MOD
+(*            Message( Ident ); *)
+          END (* IF *);
+
+-----------------------------------------------
+
+----------SCREENHA.MOD
+            Graph.Line(X,Y,X2,Y2,4);
+(*            IF ABS(Y2-Y)>ABS(X2-X) THEN
+
+----------..\e300-2\SCREENHA.MOD
+            Graph.Line(X,Y,X2,Y2, 4);
+(*            IF ABS(Y2-Y)>ABS(X2-X) THEN
+
+-----------------------------------------------
+
+----------SCREENHA.MOD
+      GotoXY( 528, 42 );
+      WrStr( 'RúRange marks' );
+      GotoXY( 560, 84 );
+      WrStr(     'LúLocator' );
+      GotoXY( 560, 98 );
+      WrStr(     'GúAll gfx' );
+      GotoXY( 576, 56 );
+      WrStr(       '1úMap 1' );
+      GotoXY( 576, 70 );
+      WrStr(       '2úMap 2' );
+
+----------..\e300-2\SCREENHA.MOD
+      SetFunc( clr, 0 );
+      GotoXY( 528, 42 );
+      WrStr( 'RúRange marks' );
+      GotoXY( 560, 56 );
+      WrStr(     'LúLocator' );
+      GotoXY( 560, 70 );
+      WrStr(     'GúAll gfx' );
+      GotoXY( 576, 84 );
+      WrStr(       '1úMap 1' );
+      GotoXY( 576, 98 );
+      WrStr(       '2úMap 2' );
+
+-----------------------------------------------
+
+----------SCREENHA.MOD
+          WrStr( 'F1úPictures' );
+(*          GotoXY( 0, 56 );
+          WrStr( 'F2úDial' );
+
+----------..\e300-2\SCREENHA.MOD
+          WrStr( 'F1úStations' );
+          GotoXY( 0, 56 );
+          WrStr( 'F2úDial' );
+
+-----------------------------------------------
+
+----------SCREENHA.MOD
+          WrStr( 'F4úProgram' ); *)
+
+
+----------..\e300-2\SCREENHA.MOD
+          WrStr( 'F4úProgram' );
+
+
+-----------------------------------------------
+
+----------SCREENHA.MOD
+       2: GotoXY( 0, 14 );
+          WrStr( 'F1ú F2ú' );
+
+----------..\e300-2\SCREENHA.MOD
+(*       2: GotoXY( 0, 14 );
+          WrStr( 'F1ú F2ú' );
+
+-----------------------------------------------
+
+----------SCREENHA.MOD
+          WrStr( 'ESCúExit' );
+
+
+----------..\e300-2\SCREENHA.MOD
+          WrStr( 'ESCúExit' ); *)
+
+
+-----------------------------------------------
+
+----------SCREENHA.MOD
+      GotoXY( 528, 42 );
+      WrStr( '             ' );
+      GotoXY( 560, 84 );
+      WrStr(     '         ' );
+      GotoXY( 560, 98 );
+      WrStr(     '         ' );
+      GotoXY( 576, 56 );
+      WrStr(       '       ' );
+      GotoXY( 576, 70 );
+      WrStr(       '       ' );
+
+----------..\e300-2\SCREENHA.MOD
+      SetFunc( clr, 0 );
+      GotoXY( 528, 42 );
+      WrStr( '             ' );
+      GotoXY( 560, 56 );
+      WrStr(     '         ' );
+      GotoXY( 560, 70 );
+      WrStr(     '         ' );
+      GotoXY( 576, 84 );
+      WrStr(       '       ' );
+      GotoXY( 576, 98 );
+      WrStr(       '       ' );
+
+-----------------------------------------------
+
+----------SCREENHA.MOD
+  FullPic := ( LineAt >= 476 );
+
+
+----------..\e300-2\SCREENHA.MOD
+
+
+-----------------------------------------------
+
+----------SCREENHA.MOD
+PROCEDURE ClearScreen;
+BEGIN
+
+----------..\e300-2\SCREENHA.MOD
+VAR
+    ClearX, ClearWidth : ARRAY [ 0..349 ] OF CARDINAL;
+
+PROCEDURE ClearScreen;
+VAR
+    Count  :  CARDINAL;
+BEGIN
+
+-----------------------------------------------
+
+----------SCREENHA.MOD
+  Graph.Ellipse(320,175,256,186,0,TRUE);
+END ClearScreen;
+
+----------..\e300-2\SCREENHA.MOD
+(*  Graph.Ellipse(320,175,256,186,0,TRUE); *)
+  FOR Count := 0 TO 349 DO
+      Graph.HLine( ClearX[ Count ], Count, ClearWidth[ Count ], 0 );
+  END (* FOR *);
+END ClearScreen;
+
+-----------------------------------------------
+
+----------SCREENHA.MOD
+  FillArea(320-MessLength*4,336,MessLength*8,14,CARDINAL(0FFFFH));
+
+----------..\e300-2\SCREENHA.MOD
+  SetFunc(clr,0);
+  FillArea(320-MessLength*4,336,MessLength*8,14,CARDINAL(0FFFFH));
+
+-----------------------------------------------
+
+----------SCREENHA.MOD
+END ScreenHandler.
+
+----------..\e300-2\SCREENHA.MOD
+  FOR Count := 0 TO 349 DO
+      ClearX[ Count ] := 320 - TRUNC( MATHLIB.Sqrt( 66564.0 -
+          LONGREAL(Count-175)*LONGREAL(Count-175)*1.88 ) );
+      ClearWidth[ Count ] := 320 + TRUNC( MATHLIB.Sqrt( 66564.0 -
+          LONGREAL(Count-175)*LONGREAL(Count-175)*1.88 ) );
+  END (* FOR *);
+END ScreenHandler.
+n
