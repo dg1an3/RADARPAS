@@ -4,6 +4,21 @@ Synthetic git repository built from the RetroEevorg software archive (1984-2024)
 
 Each branch represents a software family. Each commit represents a dated snapshot.
 
+## Quick Overview
+
+The archive contains multiple generations of software, transitioning from 8-bit BASIC to Turbo Pascal, Modula-2, C++, and eventually .NET/Java.
+
+- **radar/** (1985–1992): **RADARPAS** - A commercial radar terminal for Ellason E300/E250 systems. Evolved from Turbo Pascal monolith to modular TopSpeed Modula-2.
+- **eevorg/** (1987–2007): **EEVORG** - Cellular automata research exploring the "edge of chaos" (entropy 0.5) using genetic algorithms.
+- **ssm/** (1986–1996): **Spreadsheet Management System** - A custom spreadsheet engine with formula evaluation.
+- **thewheel/** (1990–2000): **theWheel** - Knowledge visualization using spreading activation networks and visual graph browsing.
+- **kb/**: **Knowledge Base** - RDF/Turtle semantic metadata describing the archive's structure, modules, and functions. Queryable via Prolog.
+- **cogmap/** (1996): **Cognitive Map** - Web-based knowledge mapping experiments.
+- **gdem/** (1984–1985): **Graphical Data Entry Manager** - Mapping tools for radar overlays.
+- **egalib-math/**: Custom EGA graphics and mathematical utility libraries.
+- **misc/**: Miscellaneous projects including Browsee, Pic-Analysis, and TURING samples.
+- **bqtourn/**: Tournament bracket and scoring software.
+
 ## Archive Contents
 
 ### radar/ -- E300PC / RADARPAS (1985-1992)
