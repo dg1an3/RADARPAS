@@ -6,46 +6,57 @@
 @prefix src: <http://example.org/radarpas/source#> .
 
 # =============================================================================
-# RADARPAS Pascal Procedures and Functions
-# Organized by Functional Category
+# RADARPAS Procedures and Functions — Abstract Symbols
+# Each symbol represents the logical function across all snapshots.
+# Concrete file locations are tracked via SymbolOccurrence in occurrences.ttl.
 # =============================================================================
 
 # =============================================================================
-# DOS/BIOS Interface Routines
+# DOS/BIOS Interface Routines (Pascal-only)
 # =============================================================================
 
 src:Proc_SetDTA a radar:Procedure ;
     rdfs:label "SetDTA" ;
     dc:description "Set Disk Transfer Area for DOS file operations" ;
     radar:belongsToCategory radar:FileIOCategory ;
-    radar:definedIn src:File_RADAR_PAS ;
-    radar:purpose "Configure DOS DTA pointer for directory operations" .
+    radar:purpose "Configure DOS DTA pointer for directory operations" ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "procedure SetDTA(var DTA)" .
 
 src:Proc_SetDir a radar:Procedure ;
     rdfs:label "SetDir" ;
     dc:description "Initialize directory enumeration" ;
     radar:belongsToCategory radar:FileIOCategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "procedure SetDir(Mask, Attr)" .
 
 src:Func_DirEntry a radar:Function ;
     rdfs:label "DirEntry" ;
     dc:description "Get next directory entry" ;
     radar:belongsToCategory radar:FileIOCategory ;
-    radar:definedIn src:File_RADAR_PAS ;
-    radar:hasReturnType src:Type_Boolean .
+    radar:hasReturnType src:Type_Boolean ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "function DirEntry: LineType" .
 
 src:Func_ReadKbd a radar:Function ;
     rdfs:label "ReadKbd" ;
     dc:description "Read keyboard input without echo" ;
     radar:belongsToCategory radar:UICategory ;
-    radar:definedIn src:File_RADAR_PAS ;
-    radar:hasReturnType src:Type_Char .
+    radar:hasReturnType src:Type_Char ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "function ReadKbd: Char" .
 
 src:Proc_WriteTime a radar:Procedure ;
     rdfs:label "WriteTime" ;
     dc:description "Format and write time to screen" ;
     radar:belongsToCategory radar:UICategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "procedure WriteTime" .
 
 # =============================================================================
 # Graphics Routines (EGA 640x350 @ 16 colors)
@@ -55,190 +66,637 @@ src:Proc_InitEGA a radar:Procedure ;
     rdfs:label "InitEGA" ;
     dc:description "Initialize EGA graphics mode 0x10 (640x350, 16 colors)" ;
     radar:belongsToCategory radar:GraphicsCategory ;
-    radar:definedIn src:File_RADAR_PAS ;
-    radar:purpose "Set up EGA display with 4 VGA planes" .
+    radar:purpose "Set up EGA display with 4 VGA planes" ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure InitEGA" .
 
 src:Proc_SelectPlane a radar:Procedure ;
     rdfs:label "SelectPlane" ;
     dc:description "Select VGA write plane (0-3: Red, Green, Cyan, Status)" ;
     radar:belongsToCategory radar:GraphicsCategory ;
-    radar:definedIn src:File_RADAR_PAS ;
-    radar:hasParameter src:Param_PlaneNum .
+    radar:hasParameter src:Param_PlaneNum ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure SelectPlane(ForPlanes)" .
+
+src:Proc_ShowPlane a radar:Procedure ;
+    rdfs:label "ShowPlane" ;
+    dc:description "Show/hide VGA display plane" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:firstSeen "1987-04-12"^^xsd:date ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "procedure ShowPlane(ForPlanes)" .
+
+src:Proc_EnablePlane a radar:Procedure ;
+    rdfs:label "EnablePlane" ;
+    dc:description "Enable/disable VGA display plane (M2 replacement for ShowPlane)" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:renamedFrom src:Proc_ShowPlane ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure EnablePlane(ForPlanes: PlaneSet)" .
 
 src:Proc_SelectFunc a radar:Procedure ;
     rdfs:label "SelectFunc" ;
     dc:description "Set graphics raster operation (ROP) mode" ;
     radar:belongsToCategory radar:GraphicsCategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure SelectFunc(ForFunc)" .
+
+src:Proc_SetFunc a radar:Procedure ;
+    rdfs:label "SetFunc" ;
+    dc:description "Extended ROP mode with rotation (M2 only)" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure SetFunc(ToFunc: FuncType; Rotate: RotateRange)" .
 
 src:Proc_GRPlot a radar:Procedure ;
     rdfs:label "GRPlot" ;
     dc:description "Plot individual pixel at coordinates" ;
     radar:belongsToCategory radar:GraphicsCategory ;
-    radar:definedIn src:File_RADAR_PAS ;
-    radar:hasParameter src:Param_X, src:Param_Y .
+    radar:hasParameter src:Param_X, src:Param_Y ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure GRPlot(X, Y)" .
 
 src:Proc_GRLine a radar:Procedure ;
     rdfs:label "GRLine" ;
     dc:description "Draw line using Bresenham algorithm" ;
     radar:belongsToCategory radar:GraphicsCategory ;
-    radar:definedIn src:File_RADAR_PAS ;
-    radar:hasParameter src:Param_X1, src:Param_Y1, src:Param_X2, src:Param_Y2 .
+    radar:hasParameter src:Param_X1, src:Param_Y1, src:Param_X2, src:Param_Y2 ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure GRLine(X1, Y1, X2, Y2)" .
+
+src:Proc_Plot a radar:Procedure ;
+    rdfs:label "Plot" ;
+    dc:description "Color-aware pixel plot (M2 GRAPH module)" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure Plot(x, y, Color)" .
+
+src:Func_Point a radar:Function ;
+    rdfs:label "Point" ;
+    dc:description "Read pixel color at coordinates" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "function Point(x, y): CARDINAL" .
+
+src:Proc_HLine a radar:Procedure ;
+    rdfs:label "HLine" ;
+    dc:description "Horizontal line fill" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure HLine(x, y, x2, FillColor)" .
+
+src:Proc_Line a radar:Procedure ;
+    rdfs:label "Line" ;
+    dc:description "Color-aware line drawing (M2 GRAPH module)" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure Line(x1, y1, x2, y2, Color)" .
+
+src:Proc_Circle a radar:Procedure ;
+    rdfs:label "Circle" ;
+    dc:description "Circle via midpoint algorithm" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure Circle(x0, y0, r, c)" .
+
+src:Proc_Disc a radar:Procedure ;
+    rdfs:label "Disc" ;
+    dc:description "Filled circle" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure Disc(x0, y0, r, FillColor)" .
+
+src:Proc_Ellipse a radar:Procedure ;
+    rdfs:label "Ellipse" ;
+    dc:description "Ellipse drawing" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure Ellipse(x0, y0, rx, ry, c)" .
+
+src:Proc_Polygon a radar:Procedure ;
+    rdfs:label "Polygon" ;
+    dc:description "Filled polygon" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure Polygon(n, px, py, Fill)" .
+
+src:Proc_ScreenMode a radar:Procedure ;
+    rdfs:label "ScreenMode" ;
+    dc:description "Video mode abstraction" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure ScreenMode(ToMode)" .
+
+src:Proc_SetPalette a radar:Procedure ;
+    rdfs:label "SetPalette" ;
+    dc:description "Set 16-color EGA palette" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure SetPalette(ToPalette)" .
+
+src:Proc_SetWindow a radar:Procedure ;
+    rdfs:label "SetWindow" ;
+    dc:description "Set graphics clipping window" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure SetWindow(X1, Y1, XSize, YSize)" .
+
+src:Func_Clip a radar:Function ;
+    rdfs:label "Clip" ;
+    dc:description "Point-in-window clipping test" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "function Clip(X, Y): BOOLEAN" .
 
 src:Proc_DispLine a radar:Procedure ;
     rdfs:label "DispLine" ;
     dc:description "Decompress and display radar picture line" ;
     radar:belongsToCategory radar:GraphicsCategory ;
-    radar:definedIn src:File_RADAR_PAS ;
-    radar:purpose "Decode RLE compressed line data and render to screen" .
+    radar:purpose "Decode RLE compressed line data and render to screen" ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure DispLine(var LinePtr)" .
 
 src:Proc_ConOut a radar:Procedure ;
     rdfs:label "ConOut" ;
     dc:description "Output character to screen in graphics mode" ;
     radar:belongsToCategory radar:GraphicsCategory ;
-    radar:definedIn src:File_RADAR_PAS ;
-    radar:hasParameter src:Param_Char .
+    radar:hasParameter src:Param_Char ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure ConOut(ForChar)" .
 
 src:Proc_GRWrite a radar:Procedure ;
     rdfs:label "GRWrite" ;
     dc:description "Write graphical text string to screen" ;
     radar:belongsToCategory radar:GraphicsCategory ;
-    radar:definedIn src:File_RADAR_PAS ;
-    radar:hasParameter src:Param_Text .
+    radar:hasParameter src:Param_Text ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure GRWrite(ForStr, X, Y)" .
+
+src:Proc_GRMessage a radar:Procedure ;
+    rdfs:label "GRMessage" ;
+    dc:description "Display status bar message" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:firstSeen "1987-04-12"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure GRMessage(ForStr, WaitKey)" .
 
 src:Proc_Window a radar:Procedure ;
     rdfs:label "Window" ;
     dc:description "Create and manage text window on screen" ;
     radar:belongsToCategory radar:UICategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure Window(...)" .
 
 src:Proc_WriteRngMks a radar:Procedure ;
     rdfs:label "WriteRngMks" ;
     dc:description "Draw range circle overlay using lookup tables" ;
     radar:belongsToCategory radar:GraphicsCategory ;
-    radar:definedIn src:File_RADAR_PAS ;
-    radar:purpose "Render range markers at 10, 25, 50, 100, 200 nm" .
+    radar:purpose "Render range markers at 10, 25, 50, 100, 200 nm" ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure WriteRngMks" .
+
+src:Proc_DrawScale a radar:Procedure ;
+    rdfs:label "DrawScale" ;
+    dc:description "Draw range ring overlay" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure DrawScale" .
 
 src:Proc_WriteGfx a radar:Procedure ;
     rdfs:label "WriteGfx" ;
     dc:description "Render landmarks and map segments" ;
     radar:belongsToCategory radar:GraphicsCategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure WriteGfx(AtLand, AtSeg)" .
 
 src:Proc_WriteParams a radar:Procedure ;
     rdfs:label "WriteParams" ;
     dc:description "Display radar parameter values on screen" ;
     radar:belongsToCategory radar:UICategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure WriteParams(ForParams)" .
 
 src:Proc_WriteHelp a radar:Procedure ;
     rdfs:label "WriteHelp" ;
     dc:description "Display help screen with command reference" ;
     radar:belongsToCategory radar:UICategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure WriteHelp" .
+
+src:Proc_WritePic a radar:Procedure ;
+    rdfs:label "WritePic" ;
+    dc:description "Render full picture to screen (M2 only)" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure WritePic" .
 
 src:Proc_ClearScreen a radar:Procedure ;
     rdfs:label "ClearScreen" ;
     dc:description "Clear graphics screen" ;
     radar:belongsToCategory radar:GraphicsCategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure ClearScreen" .
+
+src:Proc_EpsonMX80PrtSc a radar:Procedure ;
+    rdfs:label "EpsonMX80PrtSc" ;
+    dc:description "Print screen to Epson MX80 dot matrix with RLE compression" ;
+    radar:belongsToCategory radar:PrintingCategory ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure EpsonMX80PrtSc" .
+
+src:Proc_ColorJetPrtSc a radar:Procedure ;
+    rdfs:label "ColorJetPrtSc" ;
+    dc:description "Print screen to color inkjet printer" ;
+    radar:belongsToCategory radar:PrintingCategory ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure ColorJetPrtSc" .
+
+src:Proc_SetMask a radar:Procedure ;
+    rdfs:label "SetMask" ;
+    dc:description "Set graphics write mask (Pascal only)" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:firstSeen "1987-04-12"^^xsd:date ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "procedure SetMask(ToMask)" .
+
+src:Proc_ToggleGraphics a radar:Procedure ;
+    rdfs:label "ToggleGraphics" ;
+    dc:description "Toggle graphics mode (Pascal only; removed in M2)" ;
+    radar:belongsToCategory radar:GraphicsCategory ;
+    radar:firstSeen "1988-08-01"^^xsd:date ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "procedure ToggleGraphics" .
 
 # =============================================================================
 # RS-232 Serial Communication (2400 baud)
 # =============================================================================
 
 src:Proc_RS232Interrupt a radar:InterruptHandler ;
-    rdfs:label "RS232Interrupt" ;
-    dc:description "Interrupt service routine for COM port" ;
+    rdfs:label "RS232Interupt" ;
+    dc:description "Interrupt service routine for COM port (Pascal ISR)" ;
     radar:belongsToCategory radar:SerialCommCategory ;
-    radar:definedIn src:File_RADAR_PAS ;
-    radar:purpose "Handle serial port receive interrupts and buffer data" .
+    radar:purpose "Handle serial port receive interrupts and buffer data" ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "procedure RS232Interupt" .
 
 src:Proc_Tx a radar:Procedure ;
     rdfs:label "Tx" ;
-    dc:description "Transmit single character over serial port" ;
+    dc:description "Transmit single character over serial port (Pascal)" ;
     radar:belongsToCategory radar:SerialCommCategory ;
-    radar:definedIn src:File_RADAR_PAS ;
-    radar:hasParameter src:Param_Char .
+    radar:hasParameter src:Param_Char ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "procedure Tx(Charac)" .
+
+src:Proc_TxChar a radar:Procedure ;
+    rdfs:label "TxChar" ;
+    dc:description "Transmit single character over serial port (M2)" ;
+    radar:belongsToCategory radar:SerialCommCategory ;
+    radar:renamedFrom src:Proc_Tx ;
+    radar:firstSeen "1988-03-29"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure TxChar(C: CHAR)" .
 
 src:Func_Rx a radar:Function ;
     rdfs:label "Rx" ;
-    dc:description "Receive character from serial buffer" ;
+    dc:description "Receive character from serial buffer (Pascal)" ;
     radar:belongsToCategory radar:SerialCommCategory ;
-    radar:definedIn src:File_RADAR_PAS ;
-    radar:hasReturnType src:Type_Char .
+    radar:hasReturnType src:Type_Char ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "function Rx: Char" .
+
+src:Func_RxChar a radar:Function ;
+    rdfs:label "RxChar" ;
+    dc:description "Receive character from serial buffer (M2)" ;
+    radar:belongsToCategory radar:SerialCommCategory ;
+    radar:renamedFrom src:Func_Rx ;
+    radar:firstSeen "1988-03-29"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "function RxChar(): CHAR" .
+
+src:Func_RxReady a radar:Function ;
+    rdfs:label "RxReady" ;
+    dc:description "Check if character available in receive buffer" ;
+    radar:belongsToCategory radar:SerialCommCategory ;
+    radar:firstSeen "1988-03-29"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "function RxReady(): BOOLEAN" .
+
+src:Func_TxEmpty a radar:Function ;
+    rdfs:label "TxEmpty" ;
+    dc:description "Check if transmit buffer empty" ;
+    radar:belongsToCategory radar:SerialCommCategory ;
+    radar:firstSeen "1988-03-29"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "function TxEmpty(): BOOLEAN" .
+
+src:Func_RxCount a radar:Function ;
+    rdfs:label "RxCount" ;
+    dc:description "Count characters in receive buffer" ;
+    radar:belongsToCategory radar:SerialCommCategory ;
+    radar:firstSeen "1988-03-29"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "function RxCount(): CARDINAL" .
+
+src:Proc_SetupRxInt a radar:Procedure ;
+    rdfs:label "SetupRxInt" ;
+    dc:description "Configure receive interrupt (M2 replacement for RS232Interupt)" ;
+    radar:belongsToCategory radar:SerialCommCategory ;
+    radar:renamedFrom src:Proc_RS232Interrupt ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure SetupRxInt(...)" .
+
+src:Proc_SetupTxInt a radar:Procedure ;
+    rdfs:label "SetupTxInt" ;
+    dc:description "Configure transmit interrupt" ;
+    radar:belongsToCategory radar:SerialCommCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure SetupTxInt(...)" .
 
 src:Func_SendCom a radar:Function ;
     rdfs:label "SendCom" ;
     dc:description "Send command and wait for response with timeout" ;
     radar:belongsToCategory radar:ProtocolCategory ;
-    radar:definedIn src:File_RADAR_PAS ;
     radar:hasReturnType src:Type_Boolean ;
-    radar:calls src:Proc_Tx, src:Func_Rx .
+    radar:calls src:Proc_Tx, src:Func_Rx ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure SendCom(Command, DelTime)" .
 
 src:Proc_SetParams a radar:Procedure ;
     rdfs:label "SetParams" ;
-    dc:description "Parse radar response and extract parameters" ;
+    dc:description "Parse radar response and extract parameters (Pascal only)" ;
     radar:belongsToCategory radar:ProtocolCategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "procedure SetParams(var ForBuf, Params)" .
 
 src:Proc_InitRS232 a radar:Procedure ;
     rdfs:label "InitRS232" ;
     dc:description "Initialize serial port (8 data, 1 stop, no parity, 2400 baud)" ;
     radar:belongsToCategory radar:SerialCommCategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "procedure InitRS232" .
 
 src:Proc_ResetBuf a radar:Procedure ;
     rdfs:label "ResetBuf" ;
-    dc:description "Clear serial receive buffer" ;
+    dc:description "Clear serial receive buffer (Pascal only)" ;
     radar:belongsToCategory radar:SerialCommCategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "procedure ResetBuf" .
 
 # =============================================================================
-# File Storage and Management
+# E300 Radar Interface (Modula-2 only)
+# =============================================================================
+
+src:Proc_GetParam a radar:Procedure ;
+    rdfs:label "GetParam" ;
+    dc:description "Read current radar state (tilt, range, gain, time, RT)" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure GetParam(VAR Tilt, Range, Gain, Time, RT)" .
+
+src:Proc_SetParam a radar:Procedure ;
+    rdfs:label "SetParam" ;
+    dc:description "Set radar parameters" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure SetParam(Tilt, Range, Gain, VAR Time, RT)" .
+
+src:Proc_MakePic a radar:Procedure ;
+    rdfs:label "MakePic" ;
+    dc:description "Initiate picture capture" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure MakePic()" .
+
+src:Func_PicReady a radar:Function ;
+    rdfs:label "PicReady" ;
+    dc:description "Poll for picture capture completion" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "function PicReady(): BOOLEAN" .
+
+src:Proc_GetLine a radar:Procedure ;
+    rdfs:label "GetLine" ;
+    dc:description "Retrieve one scan line from radar" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure GetLine(VAR LineNum, RedBitMap, GrnBitMap)" .
+
+src:Proc_AbortPic a radar:Procedure ;
+    rdfs:label "AbortPic" ;
+    dc:description "Cancel picture in progress" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure AbortPic()" .
+
+src:Func_CheckMaps a radar:Function ;
+    rdfs:label "CheckMaps" ;
+    dc:description "Verify map version currency" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "function CheckMaps(Map1): BOOLEAN" .
+
+src:Proc_GetMaps a radar:Procedure ;
+    rdfs:label "GetMaps" ;
+    dc:description "Download overlay maps from radar" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure GetMaps(VAR Map1, Map2)" .
+
+# =============================================================================
+# File Storage and Picture Management
 # =============================================================================
 
 src:Proc_FetchPic a radar:Procedure ;
     rdfs:label "FetchPic" ;
     dc:description "Load picture file from disk storage" ;
     radar:belongsToCategory radar:FileIOCategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure FetchPic" .
 
 src:Proc_SavePic a radar:Procedure ;
     rdfs:label "SavePic" ;
-    dc:description "Save received picture to disk" ;
+    dc:description "Save received picture to disk (Pascal)" ;
     radar:belongsToCategory radar:FileIOCategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "procedure SavePic(Size)" .
+
+src:Proc_M2_SavePicture a radar:Procedure ;
+    rdfs:label "SavePicture" ;
+    dc:description "Save picture to disk file in station directory (M2)" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:renamedFrom src:Proc_SavePic ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:lineNumber 136 ;
+    radar:signature "procedure SavePicture" .
 
 src:Proc_LoadStation a radar:Procedure ;
     rdfs:label "LoadStation" ;
-    dc:description "Load station maps and configuration data" ;
+    dc:description "Load station maps and configuration data (Pascal only)" ;
     radar:belongsToCategory radar:FileIOCategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "procedure LoadStation" .
 
 src:Proc_SelectStation a radar:Procedure ;
     rdfs:label "SelectStation" ;
     dc:description "Display station selection menu" ;
     radar:belongsToCategory radar:UICategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure SelectStation" .
 
 src:Proc_Storage a radar:Procedure ;
     rdfs:label "Storage" ;
-    dc:description "Picture gallery browser interface" ;
+    dc:description "Picture gallery browser interface (Pascal)" ;
     radar:belongsToCategory radar:UICategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "procedure Storage" .
 
 src:Proc_InsertPic a radar:Procedure ;
     rdfs:label "InsertPic" ;
-    dc:description "Insert picture into gallery" ;
+    dc:description "Insert picture into gallery (Pascal)" ;
     radar:belongsToCategory radar:FileIOCategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "procedure InsertPic(ForPic)" .
+
+src:Proc_M2_AddPicture a radar:Procedure ;
+    rdfs:label "AddPicture" ;
+    dc:description "Insert new picture into sorted position in picture list (M2)" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:renamedFrom src:Proc_InsertPic ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:lineNumber 315 ;
+    radar:signature "procedure AddPicture" .
 
 src:Proc_DeletePicture a radar:Procedure ;
     rdfs:label "DeletePicture" ;
     dc:description "Remove picture from gallery" ;
     radar:belongsToCategory radar:FileIOCategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure DeletePicture" .
+
+src:Proc_M2_SelectPicture a radar:Procedure ;
+    rdfs:label "SelectPicture" ;
+    dc:description "Display indicated picture, loading from disk if needed" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:calls src:Proc_M2_FileName, src:Proc_WriteParams, src:Proc_WritePic ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:lineNumber 244 ;
+    radar:signature "procedure SelectPicture" .
+
+src:Proc_M2_ReserveMem a radar:Procedure ;
+    rdfs:label "ReserveMem" ;
+    dc:description "Allocate memory for picture, purging oldest pictures if needed" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:calls src:Proc_M2_SavePicture ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:lineNumber 176 ;
+    radar:signature "procedure ReserveMem" .
+
+src:Proc_M2_FileName a radar:Procedure ;
+    rdfs:label "FileName" ;
+    dc:description "Generate filename for picture file from PictureRec" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:lineNumber 50 ;
+    radar:signature "procedure FileName" .
+
+src:Proc_M2_FileParam a radar:Procedure ;
+    rdfs:label "FileParam" ;
+    dc:description "Parse filename to extract picture parameters" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:lineNumber 96 ;
+    radar:signature "procedure FileParam" .
+
+src:Proc_M2_WritePictureEntry a radar:Procedure ;
+    rdfs:label "WritePictureEntry" ;
+    dc:description "Write one entry of picture list (date, time, tilt, range, gain)" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:lineNumber 450 ;
+    radar:signature "procedure WritePictureEntry" .
+
+src:Proc_M2_PictureMenu a radar:Procedure ;
+    rdfs:label "PictureMenu" ;
+    dc:description "Menu-driven picture management with select and delete operations" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:renamedFrom src:Proc_Storage ;
+    radar:calls src:Proc_M2_SelectPicture, src:Proc_DeletePicture ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:lineNumber 479 ;
+    radar:signature "procedure PictureMenu" .
+
+src:Proc_M2_DeletePicture a radar:Procedure ;
+    rdfs:label "DeletePicture" ;
+    dc:description "Delete picture from list and remove corresponding file (M2)" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:lineNumber 403 ;
+    radar:signature "procedure DeletePicture" .
 
 # =============================================================================
 # Modem Control
@@ -248,30 +706,66 @@ src:Proc_CallStation a radar:Procedure ;
     rdfs:label "CallStation" ;
     dc:description "Dial station via Hayes or Racal-Vadic modem" ;
     radar:belongsToCategory radar:ModemCategory ;
-    radar:definedIn src:File_RADAR_PAS ;
-    radar:calls src:Proc_Tx .
+    radar:calls src:Proc_Tx ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure CallStation" .
 
 src:Proc_HangUp a radar:Procedure ;
     rdfs:label "HangUp" ;
     dc:description "Disconnect call by dropping DTR/RTS" ;
     radar:belongsToCategory radar:ModemCategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure HangUp" .
 
-# =============================================================================
-# Screen Dump and Printing
-# =============================================================================
+src:Proc_AddStation a radar:Procedure ;
+    rdfs:label "AddStation" ;
+    dc:description "Add new station to directory" ;
+    radar:belongsToCategory radar:ModemCategory ;
+    radar:firstSeen "1987-04-12"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure AddStation" .
 
-src:Proc_EpsonMX80PrtSc a radar:Procedure ;
-    rdfs:label "EpsonMX80PrtSc" ;
-    dc:description "Print screen to Epson MX80 dot matrix with RLE compression" ;
-    radar:belongsToCategory radar:PrintingCategory ;
-    radar:definedIn src:File_RADAR_PAS .
+src:Proc_DelStation a radar:Procedure ;
+    rdfs:label "DelStation" ;
+    dc:description "Delete station from directory" ;
+    radar:belongsToCategory radar:ModemCategory ;
+    radar:firstSeen "1987-04-12"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure DelStation" .
 
-src:Proc_ColorJetPrtSc a radar:Procedure ;
-    rdfs:label "ColorJetPrtSc" ;
-    dc:description "Print screen to color inkjet printer" ;
-    radar:belongsToCategory radar:PrintingCategory ;
-    radar:definedIn src:File_RADAR_PAS .
+src:Proc_StationMenu a radar:Procedure ;
+    rdfs:label "StationMenu" ;
+    dc:description "Unified station UI (M2 only)" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure StationMenu(...)" .
+
+src:Proc_InitStationDir a radar:Procedure ;
+    rdfs:label "InitStationDir" ;
+    dc:description "Load station database (M2 replacement for LoadStation)" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure InitStationDir(...)" .
+
+src:Proc_Dial a radar:Procedure ;
+    rdfs:label "Dial" ;
+    dc:description "Hayes AT dial command (M2 MODEM module)" ;
+    radar:belongsToCategory radar:ModemCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure Dial(PhoneNumber)" .
+
+src:Func_WaitResult a radar:Function ;
+    rdfs:label "WaitResult" ;
+    dc:description "Parse modem response code" ;
+    radar:belongsToCategory radar:ModemCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "function WaitResult(): ResultCode" .
 
 # =============================================================================
 # Configuration
@@ -279,22 +773,38 @@ src:Proc_ColorJetPrtSc a radar:Procedure ;
 
 src:Proc_Config a radar:Procedure ;
     rdfs:label "Config" ;
-    dc:description "Display configuration options menu (modem type, port, printer, clock)" ;
+    dc:description "Display configuration options menu (Pascal)" ;
     radar:belongsToCategory radar:ConfigCategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "procedure Config" .
+
+src:Proc_M2_OptionMenu a radar:Procedure ;
+    rdfs:label "OptionMenu" ;
+    dc:description "Display and manage program options (M2 replacement for Config)" ;
+    radar:belongsToCategory radar:ConfigCategory ;
+    radar:renamedFrom src:Proc_Config ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:lineNumber 140 ;
+    radar:signature "procedure OptionMenu" .
 
 src:Proc_Initialize a radar:Procedure ;
     rdfs:label "Initialize" ;
     dc:description "Startup initialization sequence" ;
     radar:belongsToCategory radar:ConfigCategory ;
-    radar:definedIn src:File_RADAR_PAS ;
-    radar:calls src:Proc_InitEGA, src:Proc_InitRS232 .
+    radar:calls src:Proc_InitEGA, src:Proc_InitRS232 ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure Initialize" .
 
 src:Proc_DeInit a radar:Procedure ;
     rdfs:label "DeInit" ;
     dc:description "Shutdown cleanup and resource release" ;
     radar:belongsToCategory radar:ConfigCategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure DeInit" .
 
 # =============================================================================
 # Main Control Loops
@@ -304,193 +814,188 @@ src:Proc_ModemLoop a radar:Procedure ;
     rdfs:label "ModemLoop" ;
     dc:description "Main loop for modem idle state" ;
     radar:belongsToCategory radar:ProtocolCategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure ModemLoop" .
 
 src:Proc_InterLoop a radar:Procedure ;
     rdfs:label "InterLoop" ;
     dc:description "Connected/interactive mode loop with parameter control" ;
     radar:belongsToCategory radar:ProtocolCategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure InterLoop" .
 
 src:Proc_RxPicLoop a radar:Procedure ;
     rdfs:label "RxPicLoop" ;
     dc:description "Main picture reception loop" ;
     radar:belongsToCategory radar:ProtocolCategory ;
-    radar:definedIn src:File_RADAR_PAS ;
-    radar:calls src:Proc_DispLine .
+    radar:calls src:Proc_DispLine ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure RxPicLoop" .
 
 src:Proc_RxGraphLoop a radar:Procedure ;
     rdfs:label "RxGraphLoop" ;
     dc:description "Map overlay reception loop" ;
     radar:belongsToCategory radar:ProtocolCategory ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure RxGraphLoop" .
 
 src:Proc_ExecCom a radar:Procedure ;
     rdfs:label "ExecCom" ;
-    dc:description "Execute radar command" ;
+    dc:description "Execute radar command / dispatch key" ;
     radar:belongsToCategory radar:ProtocolCategory ;
-    radar:definedIn src:File_RADAR_PAS ;
-    radar:calls src:Func_SendCom .
+    radar:calls src:Func_SendCom ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure ExecCom" .
+
+src:Proc_M2_DoAuto a radar:Procedure ;
+    rdfs:label "DoAuto" ;
+    dc:description "Perform automatic picture capture on scheduled interval" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:calls src:Proc_CallStation, src:Proc_MakePic, src:Proc_M2_SavePicture ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:lineNumber 237 ;
+    radar:signature "procedure DoAuto" .
+
+src:Proc_M2_AutoMenu a radar:Procedure ;
+    rdfs:label "AutoMenu" ;
+    dc:description "Set automatic update interval via user prompt" ;
+    radar:belongsToCategory radar:ConfigCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:lineNumber 749 ;
+    radar:signature "procedure AutoMenu" .
+
+src:Proc_ProgramMenu a radar:Procedure ;
+    rdfs:label "ProgramMenu" ;
+    dc:description "Auto-capture settings menu" ;
+    radar:belongsToCategory radar:ConfigCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure ProgramMenu" .
+
+src:Func_Ask a radar:Function ;
+    rdfs:label "Ask" ;
+    dc:description "Yes/No prompt" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "function Ask(ForStr): boolean" .
 
 # =============================================================================
-# Modula-2 Analysis Module Functions
+# Analysis & Storm Tracking (Late additions)
 # =============================================================================
 
 src:Proc_LastMarker a radar:Procedure ;
     rdfs:label "LastMarker" ;
     dc:description "Track last storm marker position" ;
     radar:belongsToCategory radar:ProtocolCategory ;
-    radar:definedIn src:File_ANALYSIS_MOD .
+    radar:firstSeen "1992-10-23"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure LastMarker" .
 
 src:Proc_Trail a radar:Procedure ;
     rdfs:label "Trail" ;
     dc:description "Compute storm cell trail/trajectory" ;
     radar:belongsToCategory radar:ProtocolCategory ;
-    radar:definedIn src:File_ANALYSIS_MOD .
+    radar:firstSeen "1992-10-23"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure Trail" .
 
 src:Proc_DrawMarkers a radar:Procedure ;
     rdfs:label "DrawMarkers" ;
     dc:description "Render storm markers on display" ;
     radar:belongsToCategory radar:GraphicsCategory ;
-    radar:definedIn src:File_ANALYSIS_MOD .
-
-# =============================================================================
-# Modula-2 MAIN Module Procedures (E300PC 3.1)
-# =============================================================================
-
-src:Proc_M2_ExecCom a radar:Procedure ;
-    rdfs:label "ExecCom" ;
-    dc:description "Process regular key codes and execute corresponding commands" ;
-    radar:belongsToCategory radar:UICategory ;
-    radar:definedIn src:File_MAIN_MOD ;
-    radar:lineNumber 102 ;
-    radar:hasParameter src:Param_Key .
-
-src:Proc_M2_OptionMenu a radar:Procedure ;
-    rdfs:label "OptionMenu" ;
-    dc:description "Display and manage program options (baud rate, COM port, update interval, clock format)" ;
-    radar:belongsToCategory radar:ConfigCategory ;
-    radar:definedIn src:File_MAIN_MOD ;
-    radar:lineNumber 140 .
-
-src:Proc_M2_DoAuto a radar:Procedure ;
-    rdfs:label "DoAuto" ;
-    dc:description "Perform automatic picture capture on scheduled interval" ;
-    radar:belongsToCategory radar:ProtocolCategory ;
-    radar:definedIn src:File_MAIN_MOD ;
-    radar:lineNumber 237 ;
-    radar:calls src:Proc_M2_CallStation, src:Proc_M2_MakePic, src:Proc_M2_SavePicture .
-
-src:Proc_M2_InterLoop a radar:Procedure ;
-    rdfs:label "InterLoop" ;
-    dc:description "Interactive mode loop - connected station with parameter control and picture download" ;
-    radar:belongsToCategory radar:ProtocolCategory ;
-    radar:definedIn src:File_MAIN_MOD ;
-    radar:lineNumber 432 ;
-    radar:calls src:Proc_M2_CallStation, src:Proc_M2_ExecCom .
-
-src:Proc_M2_AutoMenu a radar:Procedure ;
-    rdfs:label "AutoMenu" ;
-    dc:description "Set automatic update interval via user prompt" ;
-    radar:belongsToCategory radar:ConfigCategory ;
-    radar:definedIn src:File_MAIN_MOD ;
-    radar:lineNumber 749 .
-
-src:Proc_M2_ModemLoop a radar:Procedure ;
-    rdfs:label "ModemLoop" ;
-    dc:description "Main modem idle state loop with keyboard input and cursor navigation" ;
-    radar:belongsToCategory radar:ProtocolCategory ;
-    radar:definedIn src:File_MAIN_MOD ;
-    radar:lineNumber 762 ;
-    radar:calls src:Proc_M2_DoAuto, src:Proc_M2_ExecCom, src:Proc_M2_InterLoop .
-
-# =============================================================================
-# Modula-2 PICTURES Module Procedures
-# =============================================================================
-
-src:Proc_M2_FileName a radar:Procedure ;
-    rdfs:label "FileName" ;
-    dc:description "Generate filename for picture file from PictureRec (time+tilt+range+gain.WX)" ;
-    radar:belongsToCategory radar:FileIOCategory ;
-    radar:definedIn src:File_PICTURES_MOD ;
-    radar:lineNumber 50 .
-
-src:Proc_M2_FileParam a radar:Procedure ;
-    rdfs:label "FileParam" ;
-    dc:description "Parse filename to extract picture parameters (reverse of FileName)" ;
-    radar:belongsToCategory radar:FileIOCategory ;
-    radar:definedIn src:File_PICTURES_MOD ;
-    radar:lineNumber 96 .
-
-src:Proc_M2_SavePicture a radar:Procedure ;
-    rdfs:label "SavePicture" ;
-    dc:description "Save picture to disk file in station directory" ;
-    radar:belongsToCategory radar:FileIOCategory ;
-    radar:definedIn src:File_PICTURES_MOD ;
-    radar:lineNumber 136 .
-
-src:Proc_M2_ReserveMem a radar:Procedure ;
-    rdfs:label "ReserveMem" ;
-    dc:description "Allocate memory for picture, purging oldest pictures if needed" ;
-    radar:belongsToCategory radar:FileIOCategory ;
-    radar:definedIn src:File_PICTURES_MOD ;
-    radar:lineNumber 176 ;
-    radar:calls src:Proc_M2_SavePicture .
-
-src:Proc_M2_SelectPicture a radar:Procedure ;
-    rdfs:label "SelectPicture" ;
-    dc:description "Display indicated picture, loading from disk if needed" ;
-    radar:belongsToCategory radar:UICategory ;
-    radar:definedIn src:File_PICTURES_MOD ;
-    radar:lineNumber 244 ;
-    radar:calls src:Proc_M2_FileName, src:Proc_M2_WriteParams, src:Proc_M2_WritePic .
-
-src:Proc_M2_AddPicture a radar:Procedure ;
-    rdfs:label "AddPicture" ;
-    dc:description "Insert new picture into sorted position in picture list" ;
-    radar:belongsToCategory radar:FileIOCategory ;
-    radar:definedIn src:File_PICTURES_MOD ;
-    radar:lineNumber 315 .
-
-src:Proc_M2_DeletePicture a radar:Procedure ;
-    rdfs:label "DeletePicture" ;
-    dc:description "Delete picture from list and remove corresponding file" ;
-    radar:belongsToCategory radar:FileIOCategory ;
-    radar:definedIn src:File_PICTURES_MOD ;
-    radar:lineNumber 403 .
-
-src:Proc_M2_WritePictureEntry a radar:Procedure ;
-    rdfs:label "WritePictureEntry" ;
-    dc:description "Write one entry of picture list (date, time, tilt, range, gain)" ;
-    radar:belongsToCategory radar:UICategory ;
-    radar:definedIn src:File_PICTURES_MOD ;
-    radar:lineNumber 450 .
-
-src:Proc_M2_PictureMenu a radar:Procedure ;
-    rdfs:label "PictureMenu" ;
-    dc:description "Menu-driven picture management with select and delete operations" ;
-    radar:belongsToCategory radar:UICategory ;
-    radar:definedIn src:File_PICTURES_MOD ;
-    radar:lineNumber 479 ;
-    radar:calls src:Proc_M2_SelectPicture, src:Proc_M2_DeletePicture .
-
-# =============================================================================
-# Modula-2 ANALYSIS Module Procedures
-# =============================================================================
+    radar:firstSeen "1992-10-23"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure DrawMarkers" .
 
 src:Proc_M2_DefineArea a radar:Procedure ;
     rdfs:label "DefineArea" ;
     dc:description "Define analysis area for storm cell detection" ;
     radar:belongsToCategory radar:ProtocolCategory ;
-    radar:definedIn src:File_ANALYSIS_MOD ;
-    radar:lineNumber 3 .
+    radar:firstSeen "1992-10-23"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:lineNumber 3 ;
+    radar:signature "procedure DefineArea" .
 
 src:Proc_M2_Analyze a radar:Procedure ;
     rdfs:label "Analyze" ;
     dc:description "Perform storm cell analysis on current picture" ;
     radar:belongsToCategory radar:ProtocolCategory ;
-    radar:definedIn src:File_ANALYSIS_MOD ;
-    radar:lineNumber 10 .
+    radar:firstSeen "1992-10-23"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:lineNumber 10 ;
+    radar:signature "procedure Analyze" .
+
+# =============================================================================
+# CRC & Compression (M2 only)
+# =============================================================================
+
+src:Func_CalcCRC a radar:Function ;
+    rdfs:label "CalcCRC" ;
+    dc:description "Block CRC calculation" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "function CalcCRC(BufAdr, BufSize): CARDINAL" .
+
+src:Proc_AddCRC a radar:Procedure ;
+    rdfs:label "AddCRC" ;
+    dc:description "Incremental CRC update" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure AddCRC(VAR crc, ch)" .
+
+src:Proc_Compress a radar:Procedure ;
+    rdfs:label "Compress" ;
+    dc:description "RLE compression" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure Compress(...)" .
+
+src:Proc_Decompress a radar:Procedure ;
+    rdfs:label "Decompress" ;
+    dc:description "RLE decompression" ;
+    radar:belongsToCategory radar:ProtocolCategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure Decompress(...)" .
+
+# =============================================================================
+# Locator Module (M2 only)
+# =============================================================================
+
+src:Proc_MoveCursor a radar:Procedure ;
+    rdfs:label "MoveCursor" ;
+    dc:description "Move cursor with arrow keys" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure MoveCursor" .
+
+src:Func_CalcBearing a radar:Function ;
+    rdfs:label "CalcBearing" ;
+    dc:description "Calculate bearing from cursor position" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "function CalcBearing" .
+
+src:Func_CalcRange a radar:Function ;
+    rdfs:label "CalcRange" ;
+    dc:description "Calculate range from cursor position" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "function CalcRange" .
 
 # =============================================================================
 # GDEM Functions
@@ -500,25 +1005,81 @@ src:Proc_DrawSegment a radar:Procedure ;
     rdfs:label "DrawSegment" ;
     dc:description "Draw map segment (landmark or line)" ;
     radar:belongsToCategory radar:GraphicsCategory ;
-    radar:definedIn src:File_EME_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1985"^^xsd:gYear ;
+    radar:signature "procedure DrawSegment" .
 
 src:Proc_EnterCoordinates a radar:Procedure ;
     rdfs:label "EnterCoordinates" ;
     dc:description "Input bearing/range coordinates from user" ;
     radar:belongsToCategory radar:UICategory ;
-    radar:definedIn src:File_EME_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1985"^^xsd:gYear ;
+    radar:signature "procedure EnterCoordinates" .
 
 src:Proc_SaveMap a radar:Procedure ;
     rdfs:label "SaveMap" ;
     dc:description "Save map to binary format" ;
     radar:belongsToCategory radar:FileIOCategory ;
-    radar:definedIn src:File_EME_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1985"^^xsd:gYear ;
+    radar:signature "procedure SaveMap" .
 
 src:Proc_LoadMap a radar:Procedure ;
     rdfs:label "LoadMap" ;
     dc:description "Load map from binary format" ;
     radar:belongsToCategory radar:FileIOCategory ;
-    radar:definedIn src:File_EME_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1985"^^xsd:gYear ;
+    radar:signature "procedure LoadMap" .
+
+# =============================================================================
+# Pascal-only utility routines
+# =============================================================================
+
+src:Func_IOError a radar:Function ;
+    rdfs:label "IOError" ;
+    dc:description "Inline I/O error check (Pascal only; M2 uses FIO.IOresult)" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "function IOError: boolean" .
+
+src:Func_ReadStr a radar:Function ;
+    rdfs:label "ReadStr" ;
+    dc:description "Read string from keyboard (Pascal only; M2 uses IO.RdStr)" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "function ReadStr(Len): LineType" .
+
+src:Proc_GotoXY a radar:Procedure ;
+    rdfs:label "GotoXY" ;
+    dc:description "Position cursor (Pascal only; absorbed into SCREENHA in M2)" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "procedure GotoXY(X, Y)" .
+
+src:Proc_SaveStation a radar:Procedure ;
+    rdfs:label "SaveStation" ;
+    dc:description "Save station data (Pascal only)" ;
+    radar:belongsToCategory radar:FileIOCategory ;
+    radar:firstSeen "1987-04-12"^^xsd:date ;
+    radar:lastSeen "1988-08-01"^^xsd:date ;
+    radar:signature "procedure SaveStation" .
+
+# =============================================================================
+# Selector Module (M2 only)
+# =============================================================================
+
+src:Proc_Select a radar:Procedure ;
+    rdfs:label "Select" ;
+    dc:description "Generic menu selection abstraction" ;
+    radar:belongsToCategory radar:UICategory ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date ;
+    radar:signature "procedure Select" .
 
 # =============================================================================
 # Parameters (representative examples)
@@ -560,3 +1121,7 @@ src:Param_Char a radar:Parameter ;
 src:Param_Text a radar:Parameter ;
     rdfs:label "Text" ;
     dc:description "Text string" .
+
+src:Param_Key a radar:Parameter ;
+    rdfs:label "Key" ;
+    dc:description "Keyboard key code" .

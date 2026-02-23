@@ -140,6 +140,30 @@ src:E250Term_v3 a radar:ProductVersion ;
 # Source Archives (Provenance Collections)
 # =============================================================================
 
+src:Archive_1985xxxx a radar:Archive ;
+    rdfs:label "1985 E300PC Demo" ;
+    dc:description "Genesis: all core routines in single RADAR.PAS, Turbo Pascal 3.0" ;
+    dcterms:created "1985"^^xsd:gYear ;
+    radar:partOfVersion src:RADARPAS_v1 .
+
+src:Archive_19870412 a radar:Archive ;
+    rdfs:label "1987-04-12 Radiotx" ;
+    dc:description "Split into RADAR + RADIO + RADIORX/TX + CUSTOM" ;
+    dcterms:created "1987-04-12"^^xsd:date ;
+    radar:partOfVersion src:RADARPAS_v2 .
+
+src:Archive_19870512 a radar:Archive ;
+    rdfs:label "1987-05-12 Tennterm" ;
+    dc:description "Tennessee deployment variant with TEMP.PAS scratch" ;
+    dcterms:created "1987-05-12"^^xsd:date ;
+    radar:partOfVersion src:RADARPAS_v2 .
+
+src:Archive_19871102 a radar:Archive ;
+    rdfs:label "1987-11-02 Pas2Mod2" ;
+    dc:description "THE PIVOT: RADAR.MOD + RADAR2.MOD alongside original .PAS" ;
+    dcterms:created "1987-11-02"^^xsd:date ;
+    radar:partOfVersion src:RADARPAS_v2 .
+
 src:Archive_19880114 a radar:Archive ;
     rdfs:label "1988-01-14 RADAR.PAS" ;
     dc:description "Original Turbo Pascal source - final release" ;
@@ -158,9 +182,21 @@ src:Archive_19880226 a radar:Archive ;
     dcterms:created "1988-02-26"^^xsd:date ;
     radar:partOfVersion src:RADARPAS_v2_1 .
 
+src:Archive_19880329 a radar:Archive ;
+    rdfs:label "1988-03-29 Tenn" ;
+    dc:description "M2 modules: ENVIRONM, MODEM, RS232, SCREEN, STORAGE" ;
+    dcterms:created "1988-03-29"^^xsd:date ;
+    radar:partOfVersion src:E300PC_v1 .
+
+src:Archive_19880519 a radar:Archive ;
+    rdfs:label "1988-05-19 Rad1dot1" ;
+    dc:description "Patch release" ;
+    dcterms:created "1988-05-19"^^xsd:date ;
+    radar:partOfVersion src:E300PC_v1 .
+
 src:Archive_19880801 a radar:Archive ;
     rdfs:label "1988-08-01 RADIO" ;
-    dc:description "Final Pascal generation" ;
+    dc:description "Final Pascal variant with 4 .RDR includes" ;
     dcterms:created "1988-08-01"^^xsd:date ;
     radar:partOfVersion src:RADARPAS_v2_1 .
 
@@ -169,6 +205,12 @@ src:Archive_19880815 a radar:Archive ;
     dc:description "Initial Modula-2 port" ;
     dcterms:created "1988-08-15"^^xsd:date ;
     radar:partOfVersion src:E300PC_v1 .
+
+src:Archive_19890101 a radar:Archive ;
+    rdfs:label "1989-01-01 v2.1" ;
+    dc:description "Version 2.1 label; 17 .PAS files (R87xx includes)" ;
+    dcterms:created "1989-01-01"^^xsd:date ;
+    radar:partOfVersion src:RADARPAS_v2_1 .
 
 src:Archive_19890314 a radar:Archive ;
     rdfs:label "1989-03-14 Pic-Analysis" ;
@@ -193,6 +235,18 @@ src:Archive_19890326 a radar:Archive ;
     dc:description "Optimized sweep in x86 assembly" ;
     dcterms:created "1989-03-26"^^xsd:date ;
     radar:partOfVersion src:E300PC_v2 .
+
+src:Archive_19910104 a radar:Archive ;
+    rdfs:label "1991-01-04 Cdscrn" ;
+    dc:description "Compiler change: Logitech -> TopSpeed Modula-2" ;
+    dcterms:created "1991-01-04"^^xsd:date ;
+    radar:partOfVersion src:E300PC_v3 .
+
+src:Archive_19910309 a radar:Archive ;
+    rdfs:label "1991-03-09 E250Term" ;
+    dc:description "E250 Doppler radar terminal; E250SCRN, E250DRAW, E250EDIT, SCRNSEND" ;
+    dcterms:created "1991-03-09"^^xsd:date ;
+    radar:partOfVersion src:E250Term_v3 .
 
 src:Archive_19921021 a radar:Archive ;
     rdfs:label "1992-10-21 Testchan" ;

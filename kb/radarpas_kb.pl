@@ -4,13 +4,14 @@
 %% This knowledge base uses SWI-Prolog's Semantic Web libraries to:
 %% 1. Load Turtle (.ttl) files containing RDF triples
 %% 2. Provide query predicates for exploring the codebase
-%% 3. Support reasoning about source code structure
+%% 3. Support reasoning about source code structure and symbol lineage
 %%
 %% Usage (SWI-Prolog):
 %%   ?- [radarpas_kb].
 %%   ?- load_radarpas_kb.
 %%   ?- list_modules.
 %%   ?- find_function(Name, Description).
+%%   ?- symbol_lineage('InitEGA', Occurrences).
 
 :- use_module(library(semweb/rdf_db)).
 :- use_module(library(semweb/turtle)).
@@ -44,6 +45,7 @@ load_radarpas_kb :-
     load_turtle_file('functions.ttl'),
     load_turtle_file('types.ttl'),
     load_turtle_file('files.ttl'),
+    load_turtle_file('occurrences.ttl'),
     rdf_statistics(triples(N)),
     format('Loaded ~w triples.~n', [N]).
 
@@ -117,7 +119,8 @@ list_functions :-
 find_function(Name, Description) :-
     rdf(Func, rdfs:label, literal(Name)),
     (rdf(Func, rdf:type, radar:'Function') ;
-     rdf(Func, rdf:type, radar:'Procedure')),
+     rdf(Func, rdf:type, radar:'Procedure') ;
+     rdf(Func, rdf:type, radar:'InterruptHandler')),
     rdf(Func, dc:description, literal(Description)).
 
 %% function_category/2
@@ -140,6 +143,101 @@ function_calls(FuncName, CalledFunc) :-
     rdf(Func, rdfs:label, literal(FuncName)),
     rdf(Func, radar:calls, Called),
     rdf(Called, rdfs:label, CalledFunc).
+
+%% =============================================================================
+%% Query Predicates - Symbol Lineage (NEW)
+%% =============================================================================
+
+%% symbol_lineage/2
+%% Trace a symbol through all its occurrences across archives.
+%% Returns a list of OccurrenceLabel-ArchiveLabel pairs.
+symbol_lineage(SymbolName, Occurrences) :-
+    rdf(Symbol, rdfs:label, literal(SymbolName)),
+    findall(OccLabel-ArchLabel,
+        (rdf(Occ, radar:ofSymbol, Symbol),
+         rdf(Occ, rdfs:label, literal(OccLabel)),
+         rdf(Occ, radar:inArchive, Archive),
+         rdf(Archive, rdfs:label, literal(ArchLabel))),
+        Occurrences).
+
+%% symbol_in_archive/3
+%% Find all symbols present in a specific archive.
+%% Returns SymbolName and optional Module.
+symbol_in_archive(ArchiveName, SymbolName, ModuleName) :-
+    rdf(Archive, rdfs:label, literal(ArchiveName)),
+    rdf(Occ, radar:inArchive, Archive),
+    rdf(Occ, radar:ofSymbol, Symbol),
+    rdf(Symbol, rdfs:label, literal(SymbolName)),
+    (   rdf(Occ, radar:inModule, Module),
+        rdf(Module, rdfs:label, literal(ModuleName))
+    ->  true
+    ;   ModuleName = none
+    ).
+
+%% symbol_migration/3
+%% Find renamed symbols: OldName was renamed to NewName.
+symbol_migration(OldName, NewName, Category) :-
+    rdf(NewSymbol, radar:renamedFrom, OldSymbol),
+    rdf(OldSymbol, rdfs:label, literal(OldName)),
+    rdf(NewSymbol, rdfs:label, literal(NewName)),
+    (   rdf(NewSymbol, radar:belongsToCategory, Cat),
+        rdf(Cat, rdfs:label, literal(Category))
+    ->  true
+    ;   Category = uncategorized
+    ).
+
+%% symbols_at_snapshot/2
+%% List all symbols (with language) present at a given archive.
+symbols_at_snapshot(ArchiveName, Symbols) :-
+    rdf(Archive, rdfs:label, literal(ArchiveName)),
+    findall(Name-Lang,
+        (rdf(Occ, radar:inArchive, Archive),
+         rdf(Occ, radar:ofSymbol, Symbol),
+         rdf(Symbol, rdfs:label, literal(Name)),
+         rdf(Occ, radar:programmingLanguage, literal(Lang))),
+        Symbols).
+
+%% lineage_chain/2
+%% Follow the succeeds chain from an occurrence backward.
+%% Returns a list of OccurrenceLabels from oldest to newest.
+lineage_chain(OccLabel, Chain) :-
+    rdf(Occ, rdfs:label, literal(OccLabel)),
+    lineage_chain_acc(Occ, RevChain),
+    reverse(RevChain, Chain).
+
+lineage_chain_acc(Occ, [Label|Rest]) :-
+    rdf(Occ, rdfs:label, literal(Label)),
+    (   rdf(Occ, radar:succeeds, Prev)
+    ->  lineage_chain_acc(Prev, Rest)
+    ;   Rest = []
+    ).
+
+%% symbol_first_last/3
+%% Get firstSeen and lastSeen for a symbol by name.
+symbol_first_last(Name, FirstSeen, LastSeen) :-
+    rdf(Symbol, rdfs:label, literal(Name)),
+    rdf(Symbol, radar:firstSeen, literal(FirstSeen)),
+    rdf(Symbol, radar:lastSeen, literal(LastSeen)).
+
+%% pascal_only_symbols/1
+%% Find symbols that only existed in Pascal (lastSeen <= 1988-08-01).
+pascal_only_symbols(Name) :-
+    rdf(Symbol, rdfs:label, literal(Name)),
+    (rdf(Symbol, rdf:type, radar:'Procedure') ;
+     rdf(Symbol, rdf:type, radar:'Function') ;
+     rdf(Symbol, rdf:type, radar:'InterruptHandler')),
+    rdf(Symbol, radar:lastSeen, literal(type(xsd:date, LastSeen))),
+    LastSeen @=< '1988-08-01'.
+
+%% migrated_symbols/1
+%% Find symbols that crossed the Pascal/Modula-2 boundary.
+migrated_symbols(Name) :-
+    rdf(Symbol, rdfs:label, literal(Name)),
+    (rdf(Symbol, rdf:type, radar:'Procedure') ;
+     rdf(Symbol, rdf:type, radar:'Function')),
+    rdf(Symbol, radar:firstSeen, literal(type(xsd:gYear, _))),
+    rdf(Symbol, radar:lastSeen, literal(type(xsd:date, LastSeen))),
+    LastSeen @> '1988-08-01'.
 
 %% =============================================================================
 %% Query Predicates - Data Types
@@ -171,6 +269,19 @@ record_fields(RecordName, FieldName) :-
     rdf(Record, rdf:type, radar:'RecordType'),
     rdf(Record, radar:hasField, Field),
     rdf(Field, rdfs:label, FieldName).
+
+%% type_migration/3
+%% Find renamed types: OldType was renamed to NewType.
+type_migration(OldName, NewName, Module) :-
+    rdf(NewType, radar:renamedFrom, OldType),
+    rdf(OldType, rdfs:label, literal(OldName)),
+    rdf(NewType, rdfs:label, literal(NewName)),
+    (   rdf(Occ, radar:ofSymbol, NewType),
+        rdf(Occ, radar:inModule, Mod),
+        rdf(Mod, rdfs:label, literal(Module))
+    ->  true
+    ;   Module = unknown
+    ).
 
 %% =============================================================================
 %% Query Predicates - Files
@@ -251,6 +362,16 @@ version_lineage(VersionName, DerivedFrom) :-
     rdf(Version, radar:derivedFrom, Parent),
     rdf(Parent, rdfs:label, DerivedFrom).
 
+%% list_archives/0
+%% List all archives with dates
+list_archives :-
+    format('~n=== Source Archives ===~n', []),
+    forall(
+        (rdf(Archive, rdf:type, radar:'Archive'),
+         rdf(Archive, rdfs:label, Label)),
+        format('  ~w~n', [Label])
+    ).
+
 %% =============================================================================
 %% Query Predicates - Functional Categories
 %% =============================================================================
@@ -322,14 +443,20 @@ kb_stats :-
     aggregate_all(count, rdf(_, rdf:type, radar:'Module'), ModCount),
     format('Modules: ~w~n', [ModCount]),
     aggregate_all(count, (rdf(_, rdf:type, T),
-        (T = radar:'Function' ; T = radar:'Procedure')), FuncCount),
+        (T = radar:'Function' ; T = radar:'Procedure' ; T = radar:'InterruptHandler')), FuncCount),
     format('Functions/Procedures: ~w~n', [FuncCount]),
     aggregate_all(count, (rdf(_, rdf:type, T),
         rdfs:subclass_of(T, radar:'DataType')), TypeCount),
     format('Data Types: ~w~n', [TypeCount]),
     aggregate_all(count, (rdf(_, rdf:type, T),
         rdfs:subclass_of(T, radar:'SourceFile')), FileCount),
-    format('Source Files: ~w~n', [FileCount]).
+    format('Source Files: ~w~n', [FileCount]),
+    aggregate_all(count, rdf(_, rdf:type, radar:'Archive'), ArchiveCount),
+    format('Archives: ~w~n', [ArchiveCount]),
+    aggregate_all(count, rdf(_, rdf:type, radar:'SymbolOccurrence'), OccCount),
+    format('Symbol Occurrences: ~w~n', [OccCount]),
+    aggregate_all(count, rdf(_, radar:renamedFrom, _), MigCount),
+    format('Symbol Migrations (renamedFrom): ~w~n', [MigCount]).
 
 %% =============================================================================
 %% Interactive Help
@@ -352,6 +479,16 @@ help :-
     format('  find_function(N, D)  - Find function by name~n', []),
     format('  function_category(C, F) - Functions by category~n', []),
     format('  function_calls(F, C) - What a function calls~n', []),
+    format('~nSymbol Lineage:~n', []),
+    format('  symbol_lineage(Name, Occs)       - Trace symbol across archives~n', []),
+    format('  symbol_in_archive(Arch, Sym, Mod) - Symbols in an archive~n', []),
+    format('  symbol_migration(Old, New, Cat)   - Find renamed symbols~n', []),
+    format('  symbols_at_snapshot(Arch, Syms)   - All symbols at a snapshot~n', []),
+    format('  lineage_chain(OccLabel, Chain)    - Follow succeeds chain~n', []),
+    format('  symbol_first_last(Name, F, L)     - First/last seen dates~n', []),
+    format('  pascal_only_symbols(Name)         - Symbols only in Pascal~n', []),
+    format('  migrated_symbols(Name)            - Symbols that crossed PAS->M2~n', []),
+    format('  type_migration(Old, New, Mod)     - Find renamed types~n', []),
     format('~nTypes:~n', []),
     format('  list_types           - List all data types~n', []),
     format('  type_info(Name, I)   - Get type information~n', []),
@@ -365,6 +502,7 @@ help :-
     format('  project_info         - Show project info~n', []),
     format('  list_versions        - List product versions~n', []),
     format('  version_lineage(V, P) - Version derivation~n', []),
+    format('  list_archives        - List all source archives~n', []),
     format('~nUtilities:~n', []),
     format('  describe(Label)      - Describe any resource~n', []),
     format('  search(Pattern)      - Search for resources~n', []),

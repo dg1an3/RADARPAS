@@ -1,0 +1,1025 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix radar: <http://example.org/radarpas/ontology#> .
+@prefix src: <http://example.org/radarpas/source#> .
+
+# =============================================================================
+# RADARPAS Symbol Occurrences
+#
+# Each SymbolOccurrence binds an abstract symbol to a specific archive/file.
+# Focused on 4 key snapshots where symbols change:
+#   1985xxxx  — Genesis (Turbo Pascal monolith)
+#   19871102  — Pas2Mod2 pivot
+#   19880815  — Full Modula-2 release
+#   19921228  — Final E300PC 3.1
+# Plus intermediate snapshots where specific symbols first appear or change.
+# =============================================================================
+
+# =============================================================================
+# 1. Graphics & Display
+# =============================================================================
+
+# --- InitEGA ---
+src:Occ_InitEGA_1985 a radar:SymbolOccurrence ;
+    rdfs:label "InitEGA @ 1985" ;
+    radar:ofSymbol src:Proc_InitEGA ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_InitEGA_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "InitEGA @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_InitEGA ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_GRAPHICS ;
+    radar:definedIn src:File_GRAPHICS_MOD ;
+    radar:succeeds src:Occ_InitEGA_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_InitEGA_19921228 a radar:SymbolOccurrence ;
+    rdfs:label "InitEGA @ 1992-12-28" ;
+    radar:ofSymbol src:Proc_InitEGA ;
+    radar:inArchive src:Archive_19921228 ;
+    radar:inModule src:Module_GRAPHICS ;
+    radar:succeeds src:Occ_InitEGA_19880815 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- SelectPlane ---
+src:Occ_SelectPlane_1985 a radar:SymbolOccurrence ;
+    rdfs:label "SelectPlane @ 1985" ;
+    radar:ofSymbol src:Proc_SelectPlane ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_SelectPlane_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "SelectPlane @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_SelectPlane ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_GRAPHICS ;
+    radar:succeeds src:Occ_SelectPlane_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- ShowPlane -> EnablePlane ---
+src:Occ_ShowPlane_19870412 a radar:SymbolOccurrence ;
+    rdfs:label "ShowPlane @ 1987-04-12" ;
+    radar:ofSymbol src:Proc_ShowPlane ;
+    radar:inArchive src:Archive_19870412 ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_EnablePlane_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "EnablePlane @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_EnablePlane ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_GRAPHICS ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- SelectFunc ---
+src:Occ_SelectFunc_1985 a radar:SymbolOccurrence ;
+    rdfs:label "SelectFunc @ 1985" ;
+    radar:ofSymbol src:Proc_SelectFunc ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_SelectFunc_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "SelectFunc @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_SelectFunc ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_GRAPHICS ;
+    radar:succeeds src:Occ_SelectFunc_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- GRPlot ---
+src:Occ_GRPlot_1985 a radar:SymbolOccurrence ;
+    rdfs:label "GRPlot @ 1985" ;
+    radar:ofSymbol src:Proc_GRPlot ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_GRPlot_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "GRPlot @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_GRPlot ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_GRAPHICS ;
+    radar:succeeds src:Occ_GRPlot_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- GRLine ---
+src:Occ_GRLine_1985 a radar:SymbolOccurrence ;
+    rdfs:label "GRLine @ 1985" ;
+    radar:ofSymbol src:Proc_GRLine ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_GRLine_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "GRLine @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_GRLine ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_GRAPHICS ;
+    radar:succeeds src:Occ_GRLine_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- DispLine ---
+src:Occ_DispLine_1985 a radar:SymbolOccurrence ;
+    rdfs:label "DispLine @ 1985" ;
+    radar:ofSymbol src:Proc_DispLine ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_DispLine_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "DispLine @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_DispLine ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_SCREENHA ;
+    radar:succeeds src:Occ_DispLine_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_DispLine_19921228 a radar:SymbolOccurrence ;
+    rdfs:label "DispLine @ 1992-12-28" ;
+    radar:ofSymbol src:Proc_DispLine ;
+    radar:inArchive src:Archive_19921228 ;
+    radar:inModule src:Module_SCREENHA ;
+    radar:definedIn src:File_SCREENHA_MOD_1228 ;
+    radar:succeeds src:Occ_DispLine_19880815 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- ConOut ---
+src:Occ_ConOut_1985 a radar:SymbolOccurrence ;
+    rdfs:label "ConOut @ 1985" ;
+    radar:ofSymbol src:Proc_ConOut ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_ConOut_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "ConOut @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_ConOut ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_SCREENHA ;
+    radar:succeeds src:Occ_ConOut_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- GRWrite ---
+src:Occ_GRWrite_1985 a radar:SymbolOccurrence ;
+    rdfs:label "GRWrite @ 1985" ;
+    radar:ofSymbol src:Proc_GRWrite ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_GRWrite_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "GRWrite @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_GRWrite ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_SCREENHA ;
+    radar:succeeds src:Occ_GRWrite_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- ClearScreen ---
+src:Occ_ClearScreen_1985 a radar:SymbolOccurrence ;
+    rdfs:label "ClearScreen @ 1985" ;
+    radar:ofSymbol src:Proc_ClearScreen ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_ClearScreen_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "ClearScreen @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_ClearScreen ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_SCREENHA ;
+    radar:succeeds src:Occ_ClearScreen_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- DrawScale ---
+src:Occ_DrawScale_1985 a radar:SymbolOccurrence ;
+    rdfs:label "DrawScale @ 1985" ;
+    radar:ofSymbol src:Proc_DrawScale ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_DrawScale_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "DrawScale @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_DrawScale ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_SCREENHA ;
+    radar:succeeds src:Occ_DrawScale_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- WriteRngMks ---
+src:Occ_WriteRngMks_1985 a radar:SymbolOccurrence ;
+    rdfs:label "WriteRngMks @ 1985" ;
+    radar:ofSymbol src:Proc_WriteRngMks ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_WriteRngMks_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "WriteRngMks @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_WriteRngMks ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_SCREENHA ;
+    radar:succeeds src:Occ_WriteRngMks_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- WriteGfx ---
+src:Occ_WriteGfx_1985 a radar:SymbolOccurrence ;
+    rdfs:label "WriteGfx @ 1985" ;
+    radar:ofSymbol src:Proc_WriteGfx ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_WriteGfx_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "WriteGfx @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_WriteGfx ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_SCREENHA ;
+    radar:succeeds src:Occ_WriteGfx_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- WriteParams ---
+src:Occ_WriteParams_1985 a radar:SymbolOccurrence ;
+    rdfs:label "WriteParams @ 1985" ;
+    radar:ofSymbol src:Proc_WriteParams ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_WriteParams_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "WriteParams @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_WriteParams ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_SCREENHA ;
+    radar:succeeds src:Occ_WriteParams_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- WriteHelp ---
+src:Occ_WriteHelp_1985 a radar:SymbolOccurrence ;
+    rdfs:label "WriteHelp @ 1985" ;
+    radar:ofSymbol src:Proc_WriteHelp ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_WriteHelp_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "WriteHelp @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_WriteHelp ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_SCREENHA ;
+    radar:succeeds src:Occ_WriteHelp_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- EpsonMX80PrtSc ---
+src:Occ_EpsonPrtSc_1985 a radar:SymbolOccurrence ;
+    rdfs:label "EpsonMX80PrtSc @ 1985" ;
+    radar:ofSymbol src:Proc_EpsonMX80PrtSc ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_EpsonPrtSc_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "EpsonMX80PrtSc @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_EpsonMX80PrtSc ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_SCREENHA ;
+    radar:succeeds src:Occ_EpsonPrtSc_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- Window -> WINDOWS module ---
+src:Occ_Window_1985 a radar:SymbolOccurrence ;
+    rdfs:label "Window @ 1985" ;
+    radar:ofSymbol src:Proc_Window ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+# --- M2-only GRAPH primitives (first appearance) ---
+src:Occ_Plot_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "Plot @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_Plot ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_GRAPH ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_Circle_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "Circle @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_Circle ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_GRAPH ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_Line_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "Line @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_Line ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_GRAPH ;
+    radar:programmingLanguage "Modula-2" .
+
+# =============================================================================
+# 2. RS-232 / Serial Communication
+# =============================================================================
+
+# --- RS232Interupt (Pascal ISR) ---
+src:Occ_RS232Int_1985 a radar:SymbolOccurrence ;
+    rdfs:label "RS232Interupt @ 1985" ;
+    radar:ofSymbol src:Proc_RS232Interrupt ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+# --- Tx (Pascal) -> TxChar (M2) ---
+src:Occ_Tx_1985 a radar:SymbolOccurrence ;
+    rdfs:label "Tx @ 1985" ;
+    radar:ofSymbol src:Proc_Tx ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_TxChar_19880329 a radar:SymbolOccurrence ;
+    rdfs:label "TxChar @ 1988-03-29" ;
+    radar:ofSymbol src:Proc_TxChar ;
+    radar:inArchive src:Archive_19880329 ;
+    radar:inModule src:Module_RS ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_TxChar_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "TxChar @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_TxChar ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_RS ;
+    radar:succeeds src:Occ_TxChar_19880329 ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_TxChar_19921228 a radar:SymbolOccurrence ;
+    rdfs:label "TxChar @ 1992-12-28" ;
+    radar:ofSymbol src:Proc_TxChar ;
+    radar:inArchive src:Archive_19921228 ;
+    radar:inModule src:Module_RS ;
+    radar:definedIn src:File_RS_MOD_1228 ;
+    radar:succeeds src:Occ_TxChar_19880815 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- Rx (Pascal) -> RxChar (M2) ---
+src:Occ_Rx_1985 a radar:SymbolOccurrence ;
+    rdfs:label "Rx @ 1985" ;
+    radar:ofSymbol src:Func_Rx ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_RxChar_19880329 a radar:SymbolOccurrence ;
+    rdfs:label "RxChar @ 1988-03-29" ;
+    radar:ofSymbol src:Func_RxChar ;
+    radar:inArchive src:Archive_19880329 ;
+    radar:inModule src:Module_RS ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_RxChar_19921228 a radar:SymbolOccurrence ;
+    rdfs:label "RxChar @ 1992-12-28" ;
+    radar:ofSymbol src:Func_RxChar ;
+    radar:inArchive src:Archive_19921228 ;
+    radar:inModule src:Module_RS ;
+    radar:succeeds src:Occ_RxChar_19880329 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- RxReady, TxEmpty, RxCount ---
+src:Occ_RxReady_19880329 a radar:SymbolOccurrence ;
+    rdfs:label "RxReady @ 1988-03-29" ;
+    radar:ofSymbol src:Func_RxReady ;
+    radar:inArchive src:Archive_19880329 ;
+    radar:inModule src:Module_RS ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_TxEmpty_19880329 a radar:SymbolOccurrence ;
+    rdfs:label "TxEmpty @ 1988-03-29" ;
+    radar:ofSymbol src:Func_TxEmpty ;
+    radar:inArchive src:Archive_19880329 ;
+    radar:inModule src:Module_RS ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- SetupRxInt ---
+src:Occ_SetupRxInt_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "SetupRxInt @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_SetupRxInt ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_RS2 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- InitRS232 (Pascal only) ---
+src:Occ_InitRS232_1985 a radar:SymbolOccurrence ;
+    rdfs:label "InitRS232 @ 1985" ;
+    radar:ofSymbol src:Proc_InitRS232 ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+# --- SendCom ---
+src:Occ_SendCom_1985 a radar:SymbolOccurrence ;
+    rdfs:label "SendCom @ 1985" ;
+    radar:ofSymbol src:Func_SendCom ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_SendCom_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "SendCom @ 1988-08-15" ;
+    radar:ofSymbol src:Func_SendCom ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_E300INTE ;
+    radar:succeeds src:Occ_SendCom_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# =============================================================================
+# 3. E300 Radar Interface (M2 only — all born at 19880815)
+# =============================================================================
+
+src:Occ_GetParam_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "GetParam @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_GetParam ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_E300INTE ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_SetParam_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "SetParam @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_SetParam ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_E300INTE ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_MakePic_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "MakePic @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_MakePic ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_E300INTE ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_PicReady_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "PicReady @ 1988-08-15" ;
+    radar:ofSymbol src:Func_PicReady ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_E300INTE ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_GetLine_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "GetLine @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_GetLine ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_E300INTE ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_AbortPic_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "AbortPic @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_AbortPic ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_E300INTE ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_CheckMaps_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "CheckMaps @ 1988-08-15" ;
+    radar:ofSymbol src:Func_CheckMaps ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_E300INTE ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_GetMaps_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "GetMaps @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_GetMaps ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_E300INTE ;
+    radar:programmingLanguage "Modula-2" .
+
+# =============================================================================
+# 4. Modem & Station Control
+# =============================================================================
+
+# --- HangUp ---
+src:Occ_HangUp_1985 a radar:SymbolOccurrence ;
+    rdfs:label "HangUp @ 1985" ;
+    radar:ofSymbol src:Proc_HangUp ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_HangUp_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "HangUp @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_HangUp ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_MODEM ;
+    radar:succeeds src:Occ_HangUp_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- CallStation ---
+src:Occ_CallStation_1985 a radar:SymbolOccurrence ;
+    rdfs:label "CallStation @ 1985" ;
+    radar:ofSymbol src:Proc_CallStation ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_CallStation_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "CallStation @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_CallStation ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_STATIONS ;
+    radar:succeeds src:Occ_CallStation_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- SelectStation ---
+src:Occ_SelectStation_1985 a radar:SymbolOccurrence ;
+    rdfs:label "SelectStation @ 1985" ;
+    radar:ofSymbol src:Proc_SelectStation ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_SelectStation_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "SelectStation @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_SelectStation ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_STATIONS ;
+    radar:succeeds src:Occ_SelectStation_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- Dial, WaitResult (M2 MODEM) ---
+src:Occ_Dial_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "Dial @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_Dial ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_MODEM ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_WaitResult_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "WaitResult @ 1988-08-15" ;
+    radar:ofSymbol src:Func_WaitResult ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_MODEM ;
+    radar:programmingLanguage "Modula-2" .
+
+# =============================================================================
+# 5. File Storage & Picture Management
+# =============================================================================
+
+# --- SavePic (PAS) -> SavePicture (M2) ---
+src:Occ_SavePic_1985 a radar:SymbolOccurrence ;
+    rdfs:label "SavePic @ 1985" ;
+    radar:ofSymbol src:Proc_SavePic ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_SavePicture_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "SavePicture @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_M2_SavePicture ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_PICTURES ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_SavePicture_19921228 a radar:SymbolOccurrence ;
+    rdfs:label "SavePicture @ 1992-12-28" ;
+    radar:ofSymbol src:Proc_M2_SavePicture ;
+    radar:inArchive src:Archive_19921228 ;
+    radar:inModule src:Module_PICTURES ;
+    radar:definedIn src:File_PICTURES_MOD_1228 ;
+    radar:succeeds src:Occ_SavePicture_19880815 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- InsertPic (PAS) -> AddPicture (M2) ---
+src:Occ_InsertPic_1985 a radar:SymbolOccurrence ;
+    rdfs:label "InsertPic @ 1985" ;
+    radar:ofSymbol src:Proc_InsertPic ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_AddPicture_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "AddPicture @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_M2_AddPicture ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_PICTURES ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- Storage (PAS) -> PictureMenu (M2) ---
+src:Occ_Storage_1985 a radar:SymbolOccurrence ;
+    rdfs:label "Storage @ 1985" ;
+    radar:ofSymbol src:Proc_Storage ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_PictureMenu_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "PictureMenu @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_M2_PictureMenu ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_PICTURES ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- FetchPic ---
+src:Occ_FetchPic_1985 a radar:SymbolOccurrence ;
+    rdfs:label "FetchPic @ 1985" ;
+    radar:ofSymbol src:Proc_FetchPic ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_FetchPic_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "FetchPic @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_FetchPic ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_PICTURES ;
+    radar:succeeds src:Occ_FetchPic_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- DeletePicture ---
+src:Occ_DeletePicture_1985 a radar:SymbolOccurrence ;
+    rdfs:label "DeletePicture @ 1985" ;
+    radar:ofSymbol src:Proc_DeletePicture ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_DeletePicture_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "DeletePicture @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_M2_DeletePicture ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_PICTURES ;
+    radar:programmingLanguage "Modula-2" .
+
+# =============================================================================
+# 6. Main Control Loop & Configuration
+# =============================================================================
+
+# --- Initialize ---
+src:Occ_Initialize_1985 a radar:SymbolOccurrence ;
+    rdfs:label "Initialize @ 1985" ;
+    radar:ofSymbol src:Proc_Initialize ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_Initialize_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "Initialize @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_Initialize ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_MAIN ;
+    radar:succeeds src:Occ_Initialize_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- ExecCom ---
+src:Occ_ExecCom_1985 a radar:SymbolOccurrence ;
+    rdfs:label "ExecCom @ 1985" ;
+    radar:ofSymbol src:Proc_ExecCom ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_ExecCom_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "ExecCom @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_ExecCom ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_MAIN ;
+    radar:succeeds src:Occ_ExecCom_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_ExecCom_19921228 a radar:SymbolOccurrence ;
+    rdfs:label "ExecCom @ 1992-12-28" ;
+    radar:ofSymbol src:Proc_ExecCom ;
+    radar:inArchive src:Archive_19921228 ;
+    radar:inModule src:Module_MAIN ;
+    radar:definedIn src:File_MAIN_MOD ;
+    radar:lineNumber 102 ;
+    radar:succeeds src:Occ_ExecCom_19880815 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- ModemLoop ---
+src:Occ_ModemLoop_1985 a radar:SymbolOccurrence ;
+    rdfs:label "ModemLoop @ 1985" ;
+    radar:ofSymbol src:Proc_ModemLoop ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_ModemLoop_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "ModemLoop @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_ModemLoop ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_MAIN ;
+    radar:succeeds src:Occ_ModemLoop_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_ModemLoop_19921228 a radar:SymbolOccurrence ;
+    rdfs:label "ModemLoop @ 1992-12-28" ;
+    radar:ofSymbol src:Proc_ModemLoop ;
+    radar:inArchive src:Archive_19921228 ;
+    radar:inModule src:Module_MAIN ;
+    radar:definedIn src:File_MAIN_MOD ;
+    radar:lineNumber 762 ;
+    radar:succeeds src:Occ_ModemLoop_19880815 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- InterLoop ---
+src:Occ_InterLoop_1985 a radar:SymbolOccurrence ;
+    rdfs:label "InterLoop @ 1985" ;
+    radar:ofSymbol src:Proc_InterLoop ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_InterLoop_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "InterLoop @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_InterLoop ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_MAIN ;
+    radar:succeeds src:Occ_InterLoop_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_InterLoop_19921228 a radar:SymbolOccurrence ;
+    rdfs:label "InterLoop @ 1992-12-28" ;
+    radar:ofSymbol src:Proc_InterLoop ;
+    radar:inArchive src:Archive_19921228 ;
+    radar:inModule src:Module_MAIN ;
+    radar:definedIn src:File_MAIN_MOD ;
+    radar:lineNumber 432 ;
+    radar:succeeds src:Occ_InterLoop_19880815 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- RxPicLoop ---
+src:Occ_RxPicLoop_1985 a radar:SymbolOccurrence ;
+    rdfs:label "RxPicLoop @ 1985" ;
+    radar:ofSymbol src:Proc_RxPicLoop ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_RxPicLoop_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "RxPicLoop @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_RxPicLoop ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_MAIN ;
+    radar:succeeds src:Occ_RxPicLoop_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- Config (PAS) -> OptionMenu (M2) ---
+src:Occ_Config_1985 a radar:SymbolOccurrence ;
+    rdfs:label "Config @ 1985" ;
+    radar:ofSymbol src:Proc_Config ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_OptionMenu_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "OptionMenu @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_M2_OptionMenu ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_MAIN ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_OptionMenu_19921228 a radar:SymbolOccurrence ;
+    rdfs:label "OptionMenu @ 1992-12-28" ;
+    radar:ofSymbol src:Proc_M2_OptionMenu ;
+    radar:inArchive src:Archive_19921228 ;
+    radar:inModule src:Module_MAIN ;
+    radar:definedIn src:File_MAIN_MOD ;
+    radar:lineNumber 140 ;
+    radar:succeeds src:Occ_OptionMenu_19880815 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- DoAuto (M2 only) ---
+src:Occ_DoAuto_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "DoAuto @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_M2_DoAuto ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_AUTO ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_DoAuto_19921228 a radar:SymbolOccurrence ;
+    rdfs:label "DoAuto @ 1992-12-28" ;
+    radar:ofSymbol src:Proc_M2_DoAuto ;
+    radar:inArchive src:Archive_19921228 ;
+    radar:inModule src:Module_MAIN ;
+    radar:definedIn src:File_MAIN_MOD ;
+    radar:lineNumber 237 ;
+    radar:succeeds src:Occ_DoAuto_19880815 ;
+    radar:programmingLanguage "Modula-2" .
+
+# =============================================================================
+# 7. Analysis & Storm Tracking (born 19921023)
+# =============================================================================
+
+src:Occ_DefineArea_19921023 a radar:SymbolOccurrence ;
+    rdfs:label "DefineArea @ 1992-10-23" ;
+    radar:ofSymbol src:Proc_M2_DefineArea ;
+    radar:inArchive src:Archive_19921023 ;
+    radar:inModule src:Module_ANALYSIS ;
+    radar:definedIn src:File_ANALYSIS_MOD ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_DefineArea_19921228 a radar:SymbolOccurrence ;
+    rdfs:label "DefineArea @ 1992-12-28" ;
+    radar:ofSymbol src:Proc_M2_DefineArea ;
+    radar:inArchive src:Archive_19921228 ;
+    radar:inModule src:Module_ANALYSIS ;
+    radar:definedIn src:File_ANALYSIS_MOD_1228 ;
+    radar:succeeds src:Occ_DefineArea_19921023 ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_Analyze_19921023 a radar:SymbolOccurrence ;
+    rdfs:label "Analyze @ 1992-10-23" ;
+    radar:ofSymbol src:Proc_M2_Analyze ;
+    radar:inArchive src:Archive_19921023 ;
+    radar:inModule src:Module_ANALYSIS ;
+    radar:definedIn src:File_ANALYSIS_MOD ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_Analyze_19921228 a radar:SymbolOccurrence ;
+    rdfs:label "Analyze @ 1992-12-28" ;
+    radar:ofSymbol src:Proc_M2_Analyze ;
+    radar:inArchive src:Archive_19921228 ;
+    radar:inModule src:Module_ANALYSIS ;
+    radar:definedIn src:File_ANALYSIS_MOD_1228 ;
+    radar:succeeds src:Occ_Analyze_19921023 ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_DrawMarkers_19921023 a radar:SymbolOccurrence ;
+    rdfs:label "DrawMarkers @ 1992-10-23" ;
+    radar:ofSymbol src:Proc_DrawMarkers ;
+    radar:inArchive src:Archive_19921023 ;
+    radar:inModule src:Module_ANALYSIS ;
+    radar:definedIn src:File_ANALYSIS_MOD ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_LastMarker_19921023 a radar:SymbolOccurrence ;
+    rdfs:label "LastMarker @ 1992-10-23" ;
+    radar:ofSymbol src:Proc_LastMarker ;
+    radar:inArchive src:Archive_19921023 ;
+    radar:inModule src:Module_ANALYSIS ;
+    radar:definedIn src:File_ANALYSIS_MOD ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_Trail_19921023 a radar:SymbolOccurrence ;
+    rdfs:label "Trail @ 1992-10-23" ;
+    radar:ofSymbol src:Proc_Trail ;
+    radar:inArchive src:Archive_19921023 ;
+    radar:inModule src:Module_ANALYSIS ;
+    radar:definedIn src:File_ANALYSIS_MOD ;
+    radar:programmingLanguage "Modula-2" .
+
+# =============================================================================
+# 8. CRC & Compression (born 19880815)
+# =============================================================================
+
+src:Occ_CalcCRC_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "CalcCRC @ 1988-08-15" ;
+    radar:ofSymbol src:Func_CalcCRC ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_CRC ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_AddCRC_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "AddCRC @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_AddCRC ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_CRC ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_Compress_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "Compress @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_Compress ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_MEMCOMPR ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_Decompress_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "Decompress @ 1988-08-15" ;
+    radar:ofSymbol src:Proc_Decompress ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_MEMCOMPR ;
+    radar:programmingLanguage "Modula-2" .
+
+# =============================================================================
+# 9. Data Type Occurrences
+# =============================================================================
+
+# --- TimeRec (PAS) -> Time (M2) ---
+src:Occ_TimeRec_1985 a radar:SymbolOccurrence ;
+    rdfs:label "TimeRec @ 1985" ;
+    radar:ofSymbol src:Type_TimeRec ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_Time_19880329 a radar:SymbolOccurrence ;
+    rdfs:label "Time @ 1988-03-29" ;
+    radar:ofSymbol src:Type_M2_Time ;
+    radar:inArchive src:Archive_19880329 ;
+    radar:inModule src:Module_TIMEDATE ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- PicRec (PAS) -> PictureRec (M2) ---
+src:Occ_PicRec_1985 a radar:SymbolOccurrence ;
+    rdfs:label "PicRec @ 1985" ;
+    radar:ofSymbol src:Type_PicRec ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_PictureRec_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "PictureRec @ 1988-08-15" ;
+    radar:ofSymbol src:Type_M2_PictureRec ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_PICTURES ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- StationRec ---
+src:Occ_StationRec_19870412 a radar:SymbolOccurrence ;
+    rdfs:label "StationRec @ 1987-04-12" ;
+    radar:ofSymbol src:Type_M2_StationRec ;
+    radar:inArchive src:Archive_19870412 ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_StationRec_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "StationRec @ 1988-08-15" ;
+    radar:ofSymbol src:Type_M2_StationRec ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_STATIONS ;
+    radar:succeeds src:Occ_StationRec_19870412 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- ModeType ---
+src:Occ_ModeType_1985 a radar:SymbolOccurrence ;
+    rdfs:label "ModeType @ 1985" ;
+    radar:ofSymbol src:Type_ModeType ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_ModeType_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "ModeType (M2) @ 1988-08-15" ;
+    radar:ofSymbol src:Type_M2_ModeType ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_MAIN ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- TiltType, RangeType, GainType ---
+src:Occ_TiltType_1985 a radar:SymbolOccurrence ;
+    rdfs:label "TiltType @ 1985" ;
+    radar:ofSymbol src:Type_TiltType ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_TiltType_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "TiltType @ 1988-08-15" ;
+    radar:ofSymbol src:Type_TiltType ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_E300INTE ;
+    radar:succeeds src:Occ_TiltType_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_RangeType_1985 a radar:SymbolOccurrence ;
+    rdfs:label "RangeType @ 1985" ;
+    radar:ofSymbol src:Type_RangeType ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_RangeType_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "RangeType @ 1988-08-15" ;
+    radar:ofSymbol src:Type_RangeType ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_E300INTE ;
+    radar:succeeds src:Occ_RangeType_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+src:Occ_GainType_1985 a radar:SymbolOccurrence ;
+    rdfs:label "GainType @ 1985" ;
+    radar:ofSymbol src:Type_GainType ;
+    radar:inArchive src:Archive_1985xxxx ;
+    radar:definedIn src:File_RADAR_PAS ;
+    radar:programmingLanguage "Turbo Pascal" .
+
+src:Occ_GainType_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "GainType @ 1988-08-15" ;
+    radar:ofSymbol src:Type_GainType ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_E300INTE ;
+    radar:succeeds src:Occ_GainType_1985 ;
+    radar:programmingLanguage "Modula-2" .
+
+# --- Options (M2 only) ---
+src:Occ_Options_19880815 a radar:SymbolOccurrence ;
+    rdfs:label "Options @ 1988-08-15" ;
+    radar:ofSymbol src:Type_M2_Options ;
+    radar:inArchive src:Archive_19880815 ;
+    radar:inModule src:Module_MAIN ;
+    radar:programmingLanguage "Modula-2" .

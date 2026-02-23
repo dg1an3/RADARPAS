@@ -6,7 +6,8 @@
 @prefix src: <http://example.org/radarpas/source#> .
 
 # =============================================================================
-# RADARPAS Data Types and Structures
+# RADARPAS Data Types and Structures — Abstract Symbols
+# Concrete file locations tracked via SymbolOccurrence in occurrences.ttl.
 # =============================================================================
 
 # =============================================================================
@@ -18,21 +19,24 @@ src:Type_TiltType a radar:SubrangeType ;
     dc:description "Radar tilt angle index (0-11 representing 0,1,2,3,4,5,6,8,10,12,15,20 degrees)" ;
     radar:lowBound 0 ;
     radar:highBound 11 ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
 
 src:Type_RangeType a radar:SubrangeType ;
     rdfs:label "RangeType" ;
     dc:description "Radar range index (0-4 representing 10, 25, 50, 100, 200 nautical miles)" ;
     radar:lowBound 0 ;
     radar:highBound 4 ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
 
 src:Type_GainType a radar:SubrangeType ;
     rdfs:label "GainType" ;
     dc:description "Radar gain level (1-17 preset or dynamic levels)" ;
     radar:lowBound 1 ;
     radar:highBound 17 ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
 
 # =============================================================================
 # Enumeration Types
@@ -42,30 +46,42 @@ src:Type_ModeType a radar:EnumerationType ;
     rdfs:label "ModeType" ;
     dc:description "Operating mode of the terminal" ;
     radar:hasEnumValue "Modem", "Interactive", "WaitPic", "RxPic", "RxGraph" ;
-    radar:definedIn src:File_RADAR_PAS .
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
 
 src:Type_M2_ModeType a radar:EnumerationType ;
     rdfs:label "ModeType (M2)" ;
-    dc:description "Operating mode in Modula-2 version" ;
+    dc:description "Operating mode in Modula-2 version (drops WaitPic)" ;
     radar:hasEnumValue "Modem", "Interactive", "RxPic", "RxGraph" ;
-    radar:definedIn src:File_MAIN_MOD .
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
 
 src:Type_RTState a radar:EnumerationType ;
     rdfs:label "RTState" ;
     dc:description "Real-time state of the radar" ;
-    radar:hasEnumValue "NoRT" ;
-    radar:definedIn src:File_E300INTE_MOD .
+    radar:hasEnumValue "NoRT", "RTOn", "RTOff", "RTFault" ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
 
 src:Type_ResultCode a radar:EnumerationType ;
     rdfs:label "ResultCode" ;
     dc:description "Modem result codes" ;
-    radar:definedIn src:File_MODEM_MOD .
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
 
 src:Type_PicFlag a radar:EnumerationType ;
     rdfs:label "PicFlag" ;
     dc:description "Picture status flags" ;
     radar:hasEnumValue "NotSaved" ;
-    radar:definedIn src:File_PICTURES_MOD .
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
+
+src:Type_FuncType a radar:EnumerationType ;
+    rdfs:label "FuncType" ;
+    dc:description "Graphics raster operation mode" ;
+    radar:hasEnumValue "clr", "and", "or", "xor" ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
 
 # =============================================================================
 # Record Types - Pascal
@@ -73,10 +89,11 @@ src:Type_PicFlag a radar:EnumerationType ;
 
 src:Type_TimeRec a radar:RecordType ;
     rdfs:label "TimeRec" ;
-    dc:description "Time and date record structure" ;
-    radar:definedIn src:File_RADAR_PAS ;
+    dc:description "Time and date record structure (Pascal)" ;
     radar:hasField src:Field_Hour, src:Field_Minute, src:Field_Month,
-                   src:Field_Day, src:Field_Year .
+                   src:Field_Day, src:Field_Year ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date .
 
 src:Field_Hour a radar:Field ;
     rdfs:label "Hour" ;
@@ -100,11 +117,12 @@ src:Field_Year a radar:Field ;
 
 src:Type_PicRec a radar:RecordType ;
     rdfs:label "PicRec" ;
-    dc:description "Picture metadata record" ;
-    radar:definedIn src:File_RADAR_PAS ;
+    dc:description "Picture metadata record (Pascal)" ;
     radar:hasField src:Field_PicFileName, src:Field_PicTime, src:Field_PicTilt,
                    src:Field_PicRange, src:Field_PicGain, src:Field_FileDate,
-                   src:Field_FileTime .
+                   src:Field_FileTime ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date .
 
 src:Field_PicFileName a radar:Field ;
     rdfs:label "FileName" ;
@@ -134,15 +152,49 @@ src:Field_FileTime a radar:Field ;
     rdfs:label "FileTime" ;
     dc:description "DOS file time" .
 
+src:Type_RadarParams a radar:RecordType ;
+    rdfs:label "RadarParams" ;
+    dc:description "Radar parameter set (Pascal)" ;
+    radar:hasField src:Field_RP_Station, src:Field_RP_Time, src:Field_RP_Range,
+                   src:Field_RP_Tilt, src:Field_RP_Gain, src:Field_RP_RT ;
+    radar:firstSeen "1987-04-12"^^xsd:date ;
+    radar:lastSeen "1988-08-01"^^xsd:date .
+
+src:Field_RP_Station a radar:Field ;
+    rdfs:label "Station" .
+
+src:Field_RP_Time a radar:Field ;
+    rdfs:label "Time" .
+
+src:Field_RP_Range a radar:Field ;
+    rdfs:label "Range" .
+
+src:Field_RP_Tilt a radar:Field ;
+    rdfs:label "Tilt" .
+
+src:Field_RP_Gain a radar:Field ;
+    rdfs:label "Gain" .
+
+src:Field_RP_RT a radar:Field ;
+    rdfs:label "RT" .
+
+src:Type_RegisterType a radar:RecordType ;
+    rdfs:label "RegisterType" ;
+    dc:description "DOS register set variant record (Pascal only)" ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date .
+
 # =============================================================================
 # Record Types - Modula-2
 # =============================================================================
 
 src:Type_M2_Time a radar:RecordType ;
     rdfs:label "Time" ;
-    dc:description "TimeDate module time structure" ;
-    radar:definedIn src:File_TIMEDATE_MOD ;
-    radar:hasField src:Field_M2_day, src:Field_M2_minute .
+    dc:description "TimeDate module time structure (M2 compressed form)" ;
+    radar:renamedFrom src:Type_TimeRec ;
+    radar:hasField src:Field_M2_day, src:Field_M2_minute ;
+    radar:firstSeen "1988-03-29"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
 
 src:Field_M2_day a radar:Field ;
     rdfs:label "day" ;
@@ -154,11 +206,13 @@ src:Field_M2_minute a radar:Field ;
 
 src:Type_M2_PictureRec a radar:RecordType ;
     rdfs:label "PictureRec" ;
-    dc:description "Picture record with metadata and data pointer" ;
-    radar:definedIn src:File_PICTURES_MOD ;
+    dc:description "Picture record with metadata and data pointer (M2)" ;
+    radar:renamedFrom src:Type_PicRec ;
     radar:hasField src:Field_M2_TimeofPic, src:Field_M2_Tilt, src:Field_M2_Range,
                    src:Field_M2_Gain, src:Field_M2_Data, src:Field_M2_Size,
-                   src:Field_M2_Flags, src:Field_M2_Purge .
+                   src:Field_M2_Flags, src:Field_M2_Purge ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
 
 src:Field_M2_TimeofPic a radar:Field ;
     rdfs:label "TimeofPic" ;
@@ -192,13 +246,26 @@ src:Field_M2_Purge a radar:Field ;
     rdfs:label "Purge" ;
     dc:description "Purge priority number for memory management" .
 
+src:Type_LandMarkRec a radar:RecordType ;
+    rdfs:label "LandMarkRec" ;
+    dc:description "Map landmark record" ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
+
+src:Type_SegmentRec a radar:RecordType ;
+    rdfs:label "SegmentRec" ;
+    dc:description "Map line segment record" ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
+
 src:Type_M2_StationRec a radar:RecordType ;
     rdfs:label "StationRec" ;
     dc:description "Station configuration and picture list" ;
-    radar:definedIn src:File_STATIONS_MOD ;
     radar:hasField src:Field_M2_StationName, src:Field_M2_PhoneNumber,
                    src:Field_M2_Picture, src:Field_M2_NumofPictures,
-                   src:Field_M2_CurrentPicture .
+                   src:Field_M2_CurrentPicture ;
+    radar:firstSeen "1987-04-12"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
 
 src:Field_M2_StationName a radar:Field ;
     rdfs:label "Name" ;
@@ -223,9 +290,10 @@ src:Field_M2_CurrentPicture a radar:Field ;
 src:Type_M2_Options a radar:RecordType ;
     rdfs:label "Options" ;
     dc:description "Program configuration options" ;
-    radar:definedIn src:File_MAIN_MOD ;
     radar:hasField src:Field_M2_Baud, src:Field_M2_ComPort, src:Field_M2_Update,
-                   src:Field_M2_ArmyTime, src:Field_M2_Maps, src:Field_M2_Banner .
+                   src:Field_M2_ArmyTime, src:Field_M2_Maps, src:Field_M2_Banner ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
 
 src:Field_M2_Baud a radar:Field ;
     rdfs:label "Baud" ;
@@ -251,6 +319,12 @@ src:Field_M2_Banner a radar:Field ;
     rdfs:label "Banner" ;
     dc:description "Custom banner text (40 chars max)" .
 
+src:Type_M2_MapEntry a radar:RecordType ;
+    rdfs:label "MapEntry" ;
+    dc:description "Variant record for map identification" ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
+
 # =============================================================================
 # Array Types
 # =============================================================================
@@ -259,25 +333,65 @@ src:Type_PictureArray a radar:ArrayType ;
     rdfs:label "Picture Array" ;
     dc:description "Array of up to 100 picture records per station" ;
     radar:lowBound 1 ;
-    radar:highBound 100 .
+    radar:highBound 100 ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
 
 src:Type_LandmarkArray a radar:ArrayType ;
     rdfs:label "Landmark Array" ;
     dc:description "Array of up to 100 landmarks per map" ;
     radar:lowBound 0 ;
-    radar:highBound 99 .
+    radar:highBound 99 ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
 
 src:Type_SegmentArray a radar:ArrayType ;
     rdfs:label "Segment Array" ;
     dc:description "Array of up to 1000 segments per map" ;
     radar:lowBound 0 ;
-    radar:highBound 999 .
+    radar:highBound 999 ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
 
 src:Type_LineBuffer a radar:ArrayType ;
     rdfs:label "Line Buffer" ;
     dc:description "Buffer for radar picture line (160 bytes each for Red and Green)" ;
     radar:lowBound 0 ;
-    radar:highBound 159 .
+    radar:highBound 159 ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
+
+src:Type_BufType_PAS a radar:ArrayType ;
+    rdfs:label "BufType (Pascal)" ;
+    dc:description "Serial receive buffer (2000 bytes)" ;
+    radar:lowBound 1 ;
+    radar:highBound 2000 ;
+    radar:firstSeen "1985"^^xsd:gYear ;
+    radar:lastSeen "1988-08-01"^^xsd:date .
+
+src:Type_MapArray a radar:ArrayType ;
+    rdfs:label "Map Array" ;
+    dc:description "Overlay map buffer (1024 entries)" ;
+    radar:lowBound 0 ;
+    radar:highBound 1023 ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
+
+src:Type_PaletteType a radar:ArrayType ;
+    rdfs:label "PaletteType" ;
+    dc:description "EGA 16-color palette" ;
+    radar:lowBound 0 ;
+    radar:highBound 15 ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
+
+src:Type_DBBufType a radar:ArrayType ;
+    rdfs:label "BufType (DB)" ;
+    dc:description "54KB database buffer" ;
+    radar:lowBound 0 ;
+    radar:highBound 54000 ;
+    radar:firstSeen "1992-12-23"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
 
 # =============================================================================
 # Set Types
@@ -286,12 +400,32 @@ src:Type_LineBuffer a radar:ArrayType ;
 src:Type_PicFlagSet a radar:DataType ;
     rdfs:label "PicFlagSet" ;
     dc:description "Set of PicFlag values for picture status" ;
-    radar:definedIn src:File_PICTURES_MOD .
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
 
 src:Type_PlaneSet a radar:DataType ;
     rdfs:label "PlaneSet" ;
     dc:description "Set of VGA plane numbers for drawing operations" ;
-    radar:definedIn src:File_GRAPHICS_MOD .
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
+
+src:Type_CHARSET a radar:DataType ;
+    rdfs:label "CHARSET" ;
+    dc:description "SET OF CHAR (string module)" ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
+
+# =============================================================================
+# Subrange Types (M2 only)
+# =============================================================================
+
+src:Type_RotateRange a radar:SubrangeType ;
+    rdfs:label "RotateRange" ;
+    dc:description "Bit rotation range for graphics patterns" ;
+    radar:lowBound 0 ;
+    radar:highBound 7 ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
 
 # =============================================================================
 # Pointer Types
@@ -299,13 +433,37 @@ src:Type_PlaneSet a radar:DataType ;
 
 src:Type_StationPtr a radar:PointerType ;
     rdfs:label "StationPtr" ;
-    dc:description "Pointer to StationRec" ;
-    radar:definedIn src:File_STATIONS_MOD .
+    dc:description "Pointer to StationRec (linked-list navigation in M2)" ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
 
 src:Type_ADDRESS a radar:PointerType ;
     rdfs:label "ADDRESS" ;
     dc:description "Generic memory address pointer from SYSTEM module" ;
-    radar:definedIn src:File_SYSTEM_MOD .
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
+
+src:Type_CP a radar:PointerType ;
+    rdfs:label "CP" ;
+    dc:description "POINTER TO CHAR (LOWLEVEL module)" ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
+
+# =============================================================================
+# Procedure Types (M2 only)
+# =============================================================================
+
+src:Type_CompareProc a radar:DataType ;
+    rdfs:label "CompareProc" ;
+    dc:description "Sort comparator function type (LIB module)" ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
+
+src:Type_SwapProc a radar:DataType ;
+    rdfs:label "SwapProc" ;
+    dc:description "Sort swap function type (LIB module)" ;
+    radar:firstSeen "1988-08-15"^^xsd:date ;
+    radar:lastSeen "1992-12-28"^^xsd:date .
 
 # =============================================================================
 # Constants

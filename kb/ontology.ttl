@@ -330,3 +330,66 @@ radar:purpose a owl:DatatypeProperty ;
     rdfs:label "purpose" ;
     rdfs:comment "Description of the element's purpose" ;
     rdfs:range xsd:string .
+
+# =============================================================================
+# Symbol Occurrence Tracking (Temporal Lineage)
+# =============================================================================
+
+radar:SymbolOccurrence a owl:Class ;
+    rdfs:label "Symbol Occurrence" ;
+    rdfs:comment "A specific instance of a symbol in a dated archive/snapshot" ;
+    rdfs:subClassOf prov:Entity .
+
+# --- Object Properties for Occurrences ---
+
+radar:ofSymbol a owl:ObjectProperty ;
+    rdfs:label "of symbol" ;
+    rdfs:comment "Links an occurrence to its abstract symbol (Callable or DataType)" ;
+    rdfs:domain radar:SymbolOccurrence .
+
+radar:inArchive a owl:ObjectProperty ;
+    rdfs:label "in archive" ;
+    rdfs:comment "The dated archive/snapshot containing this occurrence" ;
+    rdfs:domain radar:SymbolOccurrence ;
+    rdfs:range radar:Archive .
+
+radar:succeeds a owl:ObjectProperty ;
+    rdfs:label "succeeds" ;
+    rdfs:comment "Temporal lineage: this occurrence follows the referenced one within the same symbol" ;
+    rdfs:domain radar:SymbolOccurrence ;
+    rdfs:range radar:SymbolOccurrence .
+
+radar:inModule a owl:ObjectProperty ;
+    rdfs:label "in module" ;
+    rdfs:comment "The Modula-2 module containing this occurrence" ;
+    rdfs:domain radar:SymbolOccurrence ;
+    rdfs:range radar:Module .
+
+radar:renamedFrom a owl:ObjectProperty ;
+    rdfs:label "renamed from" ;
+    rdfs:comment "Cross-symbol migration: this symbol was renamed from the referenced one" ;
+    rdfs:domain radar:Callable ;
+    rdfs:range radar:Callable .
+
+radar:migratedTo a owl:ObjectProperty ;
+    rdfs:label "migrated to" ;
+    rdfs:comment "Inverse of renamedFrom: the referenced symbol replaced this one" ;
+    owl:inverseOf radar:renamedFrom .
+
+# --- Datatype Properties for Temporal Tracking ---
+
+radar:firstSeen a owl:DatatypeProperty ;
+    rdfs:label "first seen" ;
+    rdfs:comment "Earliest snapshot containing this symbol" ;
+    rdfs:range rdfs:Literal .
+
+radar:lastSeen a owl:DatatypeProperty ;
+    rdfs:label "last seen" ;
+    rdfs:comment "Latest snapshot containing this symbol" ;
+    rdfs:range rdfs:Literal .
+
+radar:signature a owl:DatatypeProperty ;
+    rdfs:label "signature" ;
+    rdfs:comment "Parameter signature text of a callable" ;
+    rdfs:domain radar:Callable ;
+    rdfs:range xsd:string .
