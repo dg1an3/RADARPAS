@@ -16,7 +16,7 @@
 Program Radar_Terminal;
 
 uses
-  Dos;
+  Dos, Crt;
 
 type
   TiltType         = 0..11;
@@ -108,6 +108,14 @@ var
 {*****************************************************************************}
 {* Miscellaneous Routines - Stubs for FreePascal                            *}
 {*****************************************************************************}
+
+{ MsDos interrupt calls are not available on non-DOS platforms }
+procedure MsDos(var Regs : RegisterType);
+  begin
+    { Stub - DOS interrupts not available in this build }
+    Regs.Flags := Regs.Flags or $01; { set error flag }
+  end;
+
 procedure SetDTA(var DTA);
   begin
     with Registers do begin
@@ -249,11 +257,14 @@ procedure GotoXY(X,Y : integer);
 
 { Most graphics routines are stubs since we don't have EGA hardware }
 procedure InitEGA;
+  var
+    Y, M, D, DOW : Word;
   begin
+    GetDate(Y, M, D, DOW);
     WriteLn('RADARPAS - Ellason E300 Radar Terminal');
     WriteLn('FreePascal Build - Graphics Disabled');
     WriteLn('Original: Copyright (C) 1987 D. G. Lane');
-    WriteLn('Build Date: ', DateToStr(Date));
+    WriteLn('Build Date: ', M, '/', D, '/', Y);
     CharSize:=14; XMax:=79; YMax:=24;
   end;
 
