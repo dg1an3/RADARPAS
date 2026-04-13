@@ -1,0 +1,35 @@
+DEFINITION MODULE Picture;
+
+(*********************************************************)
+(* VERSION : 1/26/87                                     *)
+(* CREATED : 1/26/87                                     *)
+(*  AUTHOR : Derek Lane                                  *)
+(*  SYSTEM : LOGITECH MODULA-2/86                        *)
+(*                                                       *)
+(*  Downloading and displaying the radar's picture.      *)
+(*  All of these procedures assume that the radar is     *)
+(*  connected and online.                                *)
+(*                                                       *)
+(*********************************************************)
+
+FROM SYSTEM IMPORT ADDRESS;
+
+EXPORT QUALIFIED
+  Done, Wait, Download, Display;
+
+VAR
+  Done : BOOLEAN;
+
+PROCEDURE Wait;
+(* Sends SendPic command and waits for ready code *)
+
+PROCEDURE Download(ToBuffer : ADDRESS; VAR Size : CARDINAL);
+(* Downloads the current radar picture into ToBuffer.  Size returns
+   how many bytes the picture took. *)
+
+PROCEDURE Display(Start, End : ADDRESS);
+(* Decompresses the picture at Start, until address count is greater
+   than End. *)
+
+END Picture.
+

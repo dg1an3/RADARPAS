@@ -1,0 +1,58 @@
+DEFINITION MODULE MenuUtility;
+
+(*
+========================================================
+
+ Created   : 6/18/87
+ Last Edit : 6/18/87
+ Author    : Derek Lane
+ System    : LOGITECH MODULA-2/86
+
+ System to implement menus and scrolling selectors.
+========================================================
+*)
+
+FROM ExtendKey IMPORT
+  KeyStroke;
+
+EXPORT QUALIFIED
+  Item,       (* RECORD TYPE*)
+  Menu,       (* RECORD TYPE*)
+  DoMenu,     (* PROCEDURE(Menu,BOOLEAN,CARDINAL,CARDINAL,CARDINAL) *)
+  SelectProc, (* ARRAY TYPE *)
+  DoSelect;   (* PROCEDURE(SelectProc,CARDINAL,CARDINAL,CARDINAL,CARDINAL) *)
+
+TYPE
+  Item          = RECORD
+    Name        :   ARRAY[0..15] OF CHAR; (* Name to appear on menu *)
+    Pos         :   CARDINAL;             (* Position of name in menu *)
+    Key         :   KeyStroke;            (* Key to activate selection *)
+    WhenSelect  :   PROC;                 (* Procedure to call when selected *)
+  END; (* RECORD *)
+
+  Menu          = ARRAY OF Item; (* Enunciate the obvious
+                                    Note that the keystroke to exit
+                                    has a NIL value for WhenSelect *)
+
+PROCEDURE DoMenu
+( ForMenu : Menu;     (* List of items to use *)
+  Bar     : BOOLEAN;  (* True to indicate bar-type menu *)
+  Width   : CARDINAL; (* Width of menu window 
+                         Set to 0 to have set to minimum *)
+  X,Y     : CARDINAL  (* X,Y position of menu window
+                         Set to 0 to have set to center *) 
+);
+
+TYPE
+  SelectProc = PROCEDURE(CARDINAL); (* Procedure to write a selection *)
+
+PROCEDURE DoSelector
+( ForSelector  : SelectProc; (* Procedure to write each selection *)
+  X,Y          : CARDINAL    (* X,Y position of menu window
+                                Set to 0 to have set to center *)
+  Width,Length : CARDINAL;   (* Width and length of window
+                                Set to 0 to have set to minimum/average *)
+);
+
+END MenuUtility.
+

@@ -1,0 +1,137 @@
+(* Copyright (C) 1987 Jensen & Partners International *)
+DEFINITION MODULE AsmLib;
+
+IMPORT SYSTEM;
+
+
+PROCEDURE HashString(S: ARRAY OF CHAR; Range: CARDINAL) : CARDINAL;
+
+PROCEDURE Move(Source,Dest: ADDRESS; Count: CARDINAL);
+
+PROCEDURE Fill(Dest: ADDRESS; Count: CARDINAL; Value: BYTE);
+
+PROCEDURE WordFill(Dest: ADDRESS; WordCount: CARDINAL; Value: WORD);
+
+PROCEDURE WordMove(Source,Dest: ADDRESS; WordCount: CARDINAL);
+
+
+PROCEDURE AddAddr(A: ADDRESS; increment: CARDINAL) : ADDRESS;
+
+PROCEDURE SubAddr(A: ADDRESS; decrement: CARDINAL) : ADDRESS;
+
+PROCEDURE IncAddr(VAR A: ADDRESS; increment: CARDINAL);
+
+PROCEDURE DecAddr(VAR A: ADDRESS; decrement: CARDINAL);
+
+
+PROCEDURE UserBreak;
+
+PROCEDURE FatalError(S: ARRAY OF CHAR);
+
+PROCEDURE Terminate(P: PROC; VAR C: PROC);
+
+PROCEDURE SetReturnCode(code: SHORTCARD);
+
+PROCEDURE EnableBreakCheck;
+
+PROCEDURE DisableBreakCheck;
+
+
+TYPE
+  LongLabel = ARRAY[0..3] OF CARDINAL ;
+
+(*$C 00*) (* save no registers *)
+PROCEDURE SetJmp (VAR Lbl: LongLabel) : CARDINAL;
+(*$C FF*) (* no return *)
+PROCEDURE LongJmp(VAR Lbl: LongLabel; result: CARDINAL);
+(*$C F0*) (* restore default register save mask *)
+
+
+PROCEDURE ScanR  (Dest: ADDRESS; Count: CARDINAL; Value: BYTE) : CARDINAL;
+
+PROCEDURE ScanL  (Dest: ADDRESS; Count: CARDINAL; Value: BYTE) : CARDINAL;
+
+PROCEDURE ScanNeR(Dest: ADDRESS; Count: CARDINAL; Value: BYTE) : CARDINAL;
+
+PROCEDURE ScanNeL(Dest: ADDRESS; Count: CARDINAL; Value: BYTE) : CARDINAL;
+
+PROCEDURE Compare(Source,Dest: ADDRESS; Len: CARDINAL) : CARDINAL;
+
+
+TYPE
+  CommandType = POINTER TO ARRAY[0..126] OF CHAR;
+
+VAR
+  PSP         : CARDINAL;
+  CommandLine : CommandType;
+
+PROCEDURE Environment(N: CARDINAL) : CommandType;
+
+PROCEDURE Dos(VAR R: SYSTEM.Registers); (* INT 21H Function Call *)
+
+PROCEDURE Intr(VAR R: SYSTEM.Registers; I: CARDINAL);
+
+PROCEDURE ParamStr(VAR S: ARRAY OF CHAR; N: CARDINAL);
+
+PROCEDURE ParamCount() : CARDINAL;
+
+PROCEDURE Delay(Time: CARDINAL);
+
+PROCEDURE Sound(FreqHz: CARDINAL);
+
+PROCEDURE NoSound;
+
+PROCEDURE Speaker(TotalTime,OnTime,OffTime: CARDINAL);
+
+
+(* Support Procedures for window handling *)
+
+PROCEDURE BufferToScreen ( X,Y : CARDINAL;     (* Destination co-ordinates *)
+                           Source : ADDRESS;   (* Address of source buffer *)
+                           Len : CARDINAL);    (* Length to write *)
+PROCEDURE ScreenToBuffer ( X,Y : CARDINAL;     (* Source co-ordinates *)
+                           Dest : ADDRESS;     (* Address of source buffer *)
+                           Len : CARDINAL);    (* Length to read  *)
+PROCEDURE BufferWrite    ( Buff : ADDRESS;     (* Destination *)
+                           Str : ADDRESS;      (* Source *)
+                           Len : CARDINAL;
+                           Attr : CARDINAL);   (* Attribute *)
+
+PROCEDURE SetVideoPage(page: CARDINAL);
+PROCEDURE PalXlat ( To      : ADDRESS ;    (* Destination *)
+                    From    : ADDRESS ;    (* Source *)
+                    Len     : CARDINAL ;
+                    Pallete : ADDRESS ) ; (* Attribute *)
+PROCEDURE ActivePage () : SHORTCARD ;
+PROCEDURE InitScreenType( IsSnow : BOOLEAN ) ;
+
+
+(* String procedures *)
+
+PROCEDURE Caps(VAR S: ARRAY OF CHAR);
+
+PROCEDURE CompareStr(S1,S2: ARRAY OF CHAR) : INTEGER;
+
+PROCEDURE Length(S : ARRAY OF CHAR) : CARDINAL;
+
+PROCEDURE Concat(VAR R: ARRAY OF CHAR; S1,S2: ARRAY OF CHAR);
+
+PROCEDURE Append(VAR R: ARRAY OF CHAR; S: ARRAY OF CHAR);
+
+PROCEDURE Copy  (VAR R: ARRAY OF CHAR; S: ARRAY OF CHAR);
+
+PROCEDURE Slice (VAR R: ARRAY OF CHAR; S: ARRAY OF CHAR; P,L: CARDINAL);
+
+PROCEDURE Pos(S,P: ARRAY OF CHAR) : CARDINAL;
+
+
+
+PROCEDURE DosExec(name: ARRAY OF CHAR; paramblock: ADDRESS) : CARDINAL;
+
+PROCEDURE Disable8087ContextSave;
+
+PROCEDURE SetInProgramFlag( on:BOOLEAN );
+PROCEDURE GetInProgramFlag():BOOLEAN;
+
+END AsmLib.
+

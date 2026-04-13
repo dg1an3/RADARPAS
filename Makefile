@@ -11,7 +11,7 @@ FPCFLAGS = -Mtp -O2 -vh -l
 TARGET = radarpas
 
 # Source file
-SRC = radar.pas
+SRC = radar/radar.pas
 
 # Default target
 all: $(TARGET)

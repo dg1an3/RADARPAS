@@ -1,0 +1,50 @@
+DEFINITION MODULE Control;
+
+(*********************************************************)
+(* VERSION : 1/26/87                                     *)
+(* CREATED : 1/26/87                                     *)
+(*  AUTHOR : Derek Lane                                  *)
+(*  SYSTEM : LOGITECH MODULA-2/86                        *)
+(*                                                       *)
+(*  Reading and setting the remote radar's parameters.   *)
+(*  All of these procedures assume that the radar is     *)
+(*  connected and online.                                *)
+(*                                                       *)
+(*  IMPORTS -                                            *)
+(*    Serial                                             *)
+(*                                                       *)
+(*  DEPENDS ON -                                         *)
+(*    E300 Radar parameter control commands.             *)
+(*                                                       *)
+(*********************************************************)
+
+FROM TimeDate IMPORT Time;
+
+EXPORT QUALIFIED
+  Delay, TimeRead,
+  ReadParam, GetParam, SetParam;
+
+PROCEDURE Delay(Milli : CARDINAL);
+(* Delays Milli milliseconds.  0<Milli<60000!!! *)
+
+PROCEDURE TimeRead(VAR ForChar : CHAR; Milli : CARDINAL);
+(* Reads a character from serial port, unless Milli milliseconds go
+   by. *)
+
+PROCEDURE ReadParam(VAR Tilt, Range, Gain : CARDINAL;
+                    VAR TimeofPic         : Time;
+                    VAR RTState           : CARDINAL);
+(* Read the parameters from radar, after sending a command *)
+
+PROCEDURE GetParam(VAR Tilt, Range, Gain : CARDINAL;
+                   VAR TimeofPic         : Time;
+                   VAR RTState           : CARDINAL);
+(* Sets the parameters passed to match the radar *)
+
+PROCEDURE SetParam(Tilt, Range, Gain : CARDINAL;
+               VAR TimeofPic : Time;
+               VAR RTState   : CARDINAL);
+(* Sets the radar to match the parameters given *)
+
+END Control.
+

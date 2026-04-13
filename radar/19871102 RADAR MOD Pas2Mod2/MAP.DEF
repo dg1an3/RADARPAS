@@ -1,0 +1,46 @@
+DEFINITION MODULE Map;
+
+(*********************************************************)
+(* VERSION : 1/26/86                                     *)
+(* CREATED : 1/26/86                                     *)
+(*  AUTHOR : Derek Lane                                  *)
+(*  SYSTEM : LOGITECH MODULA-2/86                        *)
+(*                                                       *)
+(*  Downloading and displaying the radar's map overlays. *)
+(*  Download procedure assumes that the radar is connect-*)
+(*  ed and online.                                       *)
+(*                                                       *)
+(*  IMPORTS -                                            *)
+(*    Graphics                                           *)
+(*    Serial                                             *)
+(*                                                       *)
+(*  DEPENDS ON -                                         *)
+(*    E300 Radar map checking and downloading protocol.  *)
+(*                                                       *)
+(*********************************************************)
+
+FROM SYSTEM IMPORT ADDRESS;
+
+EXPORT QUALIFIED
+  Done,
+  CheckMap, Download,
+  ClearScreen, Display;
+
+VAR
+  Done : BOOLEAN; (* Set to indicate outcome of a procedure *)
+
+PROCEDURE CheckMap(Map1 : ADDRESS) : BOOLEAN;
+(* Calls a map check for the remote radar to see if a new version
+   of the map needs to be downloaded. *)
+
+PROCEDURE Download(Map1, Map2 : ADDRESS);
+(* Downloads the radar's two maps into the two buffers indicated. *)
+
+PROCEDURE ClearScreen;
+(* Clears circular area of screen in which maps are located. *)
+
+PROCEDURE Display(AtMap : ADDRESS);
+(* Displays the map held at address AtMap. *)
+
+END Map.
+

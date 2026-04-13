@@ -1,0 +1,49 @@
+DEFINITION MODULE Screen; (* For E300 Radar Terminal *)
+
+FROM SYSTEM IMPORT ADDRESS;
+
+EXPORT QUALIFIED
+  Initialize, Deinit,
+  ToggleGraphics, ToggleRangeMarks, ToggleMap1, ToggleMap2,
+  WriteScreen, WriteParams,
+  DecompPic, DrawScale,
+  Message, Ask;
+
+PROCEDURE Initialize;
+  (* Initializes EGA and screen *)
+
+PROCEDURE Deinit;
+  (* Restores EGA state and clears screen *)
+
+PROCEDURE ToggleGraphics;
+  (* Toggles off all graphics except weather picture *)
+
+PROCEDURE ToggleRangeMarks;
+  (* Toggles concentric range marks *)
+
+PROCEDURE ToggleMap1;
+  (* Toggles map stored in data base 1 *)
+
+PROCEDURE ToggleMap2;
+  (* Toggles map stored in data base 2 *)
+
+PROCEDURE WriteScreen;
+  (* Redraws maps according to current range *)
+
+PROCEDURE WriteParams;
+  (* Writes the current parameters on the screen *)
+
+PROCEDURE DecompPic(ForPic : ADDRESS; Start, Max : CARDINAL);
+  (* Decompresses picture at ForPic, starting at Start, up to Max *)
+
+PROCEDURE DrawScale;
+  (* Draws scale along left edge of screen *)
+
+PROCEDURE Message(ForMessage : ARRAY OF CHAR);
+  (* Outputs message at bottom of screen *)
+
+PROCEDURE Ask(ForMessage : ARRAY OF CHAR) : BOOLEAN;
+  (* Outputs message, waits for Y or N, and returns accordingly *)
+
+END Screen.
+

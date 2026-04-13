@@ -137,8 +137,8 @@ The original software included:
 - `Dockerfile` - Container definition
 - `Makefile` - Build configuration
 - `build.sh` - Automated build script
-- `radar.pas` - FreePascal-compatible source
-- `19880114 RADAR.PAS` - Original Turbo Pascal source (preserved)
+- `radar/radar.pas` - FreePascal-compatible source
+- `radar/19880114 RADAR.PAS` - Original Turbo Pascal source (preserved)
 
 ## Historical Context
 

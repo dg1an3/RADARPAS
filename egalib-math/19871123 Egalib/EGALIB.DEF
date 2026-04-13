@@ -1,0 +1,78 @@
+DEFINITION MODULE EGALib;
+
+(*
+========================================================
+
+ Created   : 7/6/87
+ Last Edit : 7/8/87
+ Author    : Derek Lane
+ System    : LOGITECH MODULA-2/86
+
+ This is the 'base' layer for the graphics routines.
+ It supplies palette, plane, color, and function 
+ defining.
+========================================================
+*)
+
+FROM SYSTEM IMPORT BYTE, WORD;
+
+EXPORT QUALIFIED 
+  SetHiRes, PaletteType, SetPalette, PlaneRange,
+  PlaneSet, CurrentPlanes, SetPlane, CurrentPlanesEnabled,
+  EnablePlane, FuncType, RotateRange, CurrentFunc,
+  CurrentRotate, SetFunc, X1, Y1, X2, Y2, XSize, YSize,
+  SetWindow;
+
+PROCEDURE SetHiRes;
+(* Sets high resolution 640x350 mode. *)
+
+TYPE
+  PaletteType = ARRAY[0..15] OF BYTE;
+
+PROCEDURE SetPalette
+( ToPalette : PaletteType );
+(* Sets up the sixteen colors of the palette. *)
+
+TYPE
+  PlaneRange = [0..3];
+  PlaneSet   = SET OF PlaneRange;
+
+VAR
+  CurrentPlanes : PlaneSet;
+
+PROCEDURE SetPlane
+( ToPlanes : PlaneSet );
+(* Sets the plane(s) for writing and reading. *)
+
+VAR
+  CurrentPlanesEnabled : PlaneSet;
+
+PROCEDURE EnablePlane
+( ForPlanes : PlaneSet );
+(* Selects which plane or planes are to be shown on the screen *)
+
+TYPE
+  FuncType    = (clr, and, or, xor);
+  RotateRange = [0..7];
+
+VAR
+  CurrentFunc   : FuncType;
+  CurrentRotate : RotateRange;
+
+PROCEDURE SetFunc
+( ToFunc : FuncType;
+  Rotate : RotateRange );
+(* Sets the function to use for writing. *)
+
+VAR
+  X1, Y1, X2, Y2,
+  XSize, YSize    : CARDINAL; (* Dimensions of current window *)
+
+PROCEDURE SetWindow
+( ToX, ToY,
+  ToXSize, ToYSize : CARDINAL );
+(* Moves the coordinates (0,0) to the (X1,Y1), and prevents any
+   plotting beyond absolute coordinates (XSize,YSize). *)
+
+END EGALib.
+

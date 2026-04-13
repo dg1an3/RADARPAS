@@ -1,0 +1,89 @@
+DEFINITION MODULE Store;
+
+(*********************************************************)
+(* VERSION : 1/2/87                                      *)
+(* CREATED : 1/2/87                                      *)
+(*  AUTHOR : Derek Lane                                  *)
+(*  SYSTEM : LOGITECH MODULA-2/86                        *)
+(*                                                       *)
+(*  Picture storage and retrieval.  This version is a    *)
+(*  virtual memory version.                              *)
+(*                                                       *)
+(*  IMPORTS -                                            *)
+(*    Control                                            *)
+(*    Picture                                            *)
+(*                                                       *)
+(*  DEPENDS ON -                                         *)
+(*    PC-DOS 2.0 or higher for subdirectory support.     *)
+(*                                                       *)
+(*********************************************************)
+
+FROM SYSTEM IMPORT ADDRESS;
+FROM Control IMPORT ParamRec;
+
+EXPORT QUALIFIED
+  PicFlag, PicFlagSet,
+  PictureRec,
+  StationPtr, StationRec,
+  FirstStation, CurrStation,
+  SelectPicture, CreatePicture, DeletePicture,
+  SelectStation, CreateStation, DeleteStation,
+  Init;
+
+TYPE
+  (* Flags which indicate miscellaneous status about the picture *)
+  PicFlag         = (NotSaved,BeingDownLoaded);
+  PicFlagSet      = SET OF PicFlag;
+
+  (* The header for all pictures which exist.  The Purge number is used
+     by the virtual memory system to decide which picture was looked at
+     earliest, and that one is freed if more memory is needed.  The Size
+     is the amount of memory allocated to Data. *)
+  PictureRec      = RECORD
+    Param         :   ParamRec; (* Time, tilt, range, and gain of picture *)
+    Purge         :   CARDINAL;
+    Flags         :   PicFlagSet;
+    Size          :   CARDINAL;
+    Data          :   POINTER TO ARRAY[0..50000] OF BYTE;
+  END; (* RECORD *)
+
+  (* The header for all stations which exist *)
+  StationPtr      = POINTER TO StationRec;
+  StationRec      = RECORD
+    Next          :   StationPtr; (* Next in linked list, NIL if last *)
+    StationNumber :   CARDINAL; (* Indicates sequence in linked list *)
+    StationName   :   ARRAY[0..11] OF CHAR;
+    Phone         :   ARRAY[0..63] OF CHAR;
+    CurrentPicture,
+    NumofPictures :   CARDINAL;
+    Picture       :   ARRAY[1..100] OF PictureRec; (* 100 picture headers *)
+  END; (* RECORD *)
+
+VAR
+  FirstStation : StationPtr; (* Anchor for station linked list *)
+  CurrStation  : StationPtr; (* Currently selected station *)
+  CurrPicture  : CARDINAL;   (* Index of currently selected picture *)
+
+PROCEDURE SelectPicture(Number : CARDINAL);
+(* Displays CurrStation^.Picture[Number], and shows parameters *)
+
+PROCEDURE CreatePicture(WithParam : ParamRec);
+(* Adds a picture with parameters WithParam to CurrStation's picture list *)
+
+PROCEDURE DeletePicture(Number : CARDINAL);
+(* Removes picture number Number from CurrStation's picture list *)
+
+PROCEDURE SelectStation(Name : ARRAY OF CHAR);
+(* Selects station named Name as the current station *)
+
+PROCEDURE CreateStation(Name : ARRAY OF CHAR; Phone : ARRAY OF CHAR);
+(* Creates a station subdirectory with the indicated name and phone number *)
+
+PROCEDURE DeleteStation(Name : ARRAY OF CHAR);
+(* Deletes the station named Name, pictures, maps, and everything else
+   associated with it.  So be sure you really want Name deleted *)
+
+PROCEDURE Init;
+(* Reads all station subdirectories in the current directory *)
+
+END Store.

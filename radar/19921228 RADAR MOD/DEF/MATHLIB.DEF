@@ -1,0 +1,58 @@
+(* Copyright (C) 1987 Jensen & Partners International *)
+DEFINITION MODULE MATHLIB;
+
+IMPORT SYSTEM;
+IMPORT Lib;
+
+PROCEDURE Sin (A : LONGREAL) : LONGREAL;
+PROCEDURE Cos (A : LONGREAL) : LONGREAL;
+PROCEDURE Tan (A : LONGREAL) : LONGREAL;
+PROCEDURE SinH(A : LONGREAL) : LONGREAL;
+PROCEDURE CosH(A : LONGREAL) : LONGREAL;
+PROCEDURE TanH(A : LONGREAL) : LONGREAL;
+PROCEDURE ASin(A : LONGREAL) : LONGREAL;
+PROCEDURE ACos(A : LONGREAL) : LONGREAL;
+PROCEDURE ATan(A : LONGREAL) : LONGREAL;
+
+PROCEDURE Exp  (A : LONGREAL) : LONGREAL;
+PROCEDURE Log  (A : LONGREAL) : LONGREAL;
+PROCEDURE Log10(A : LONGREAL) : LONGREAL;
+PROCEDURE Pow(X,Y : LONGREAL) : LONGREAL;
+
+PROCEDURE ATan2(X,Y : LONGREAL) : LONGREAL;
+PROCEDURE Mod(X,Y : LONGREAL) : LONGREAL;
+PROCEDURE Rexp(VAR I : INTEGER;A : LONGREAL) : LONGREAL;
+PROCEDURE Sqrt(A : LONGREAL) : LONGREAL;
+
+(* 8087 instructions *)
+
+TYPE
+  PackedBcd   = ARRAY[0..9] OF SHORTCARD;
+  Environment = RECORD
+                  ControlWord  : BITSET;
+                  StatusWord   : BITSET;
+                  TagWord      : BITSET;
+                  IP           : CARDINAL;
+                  Opcode       : CARDINAL;
+                  DataPointer  : CARDINAL;
+                  R80287       : CARDINAL;
+                END;
+
+
+PROCEDURE LongToBcd(A: LONGREAL)  : PackedBcd;
+PROCEDURE BcdToLong(A: PackedBcd) : LONGREAL;
+
+PROCEDURE LoadControlWord(C : BITSET);
+PROCEDURE StoreControlWord() : BITSET;
+PROCEDURE ClearExceptions();
+PROCEDURE StoreEnvironment() : Environment;
+
+(* end of 8087 instructions *)
+
+
+VAR
+  MathError  : PROCEDURE (LONGREAL, ARRAY OF CHAR);
+  MathError2 : PROCEDURE (LONGREAL, LONGREAL, ARRAY OF CHAR);
+
+
+END MATHLIB.

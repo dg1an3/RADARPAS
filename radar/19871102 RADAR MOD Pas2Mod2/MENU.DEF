@@ -1,0 +1,46 @@
+DEFINITION MODULE Menu;
+
+(*
+========================================================
+
+ Created   : 4/1/87
+ Last Edit :
+ Author    : Derek Lane
+ System    : LOGITECH MODULA-2/86
+
+ Provides a system to set procedures to be called by
+ a particular key.
+
+========================================================
+*)
+
+CONST
+  F1 = 073c; F2 = 074c; F3 = 075c; F4 = 076c; F5 = 077c;
+  F6 = 100c; F7 = 101c; F8 = 102c; F9 = 103c; F10 = 104c;
+
+  sF1 = 073c; sF2 = 074c; sF3 = 075c; sF4 = 076c; sF5 = 077c;
+  sF6 = 100c; sF7 = 101c; sF8 = 102c; sF9 = 103c; sF10 = 104c;
+
+  cF1 = 073c; cF2 = 074c; cF3 = 075c; cF4 = 076c; cF5 = 077c;
+  cF6 = 100c; cF7 = 101c; cF8 = 102c; cF9 = 103c; cF10 = 104c;
+
+  aF1 = 073c; aF2 = 074c; aF3 = 075c; aF4 = 076c; aF5 = 077c;
+  aF6 = 100c; aF7 = 101c; aF8 = 102c; aF9 = 103c; aF10 = 104c;
+
+  LARR = 113c; RARR = 115c; UARR = 110c; DARR = 120c;
+  Home = 107c; End  = 117c; PgUp = 111c; PgDn = 111c;
+
+TYPE
+  Key = ARRAY[1..2] OF CHAR;
+
+  Selection = RECORD
+    ForKey  :   Key;
+    DoProc  :   PROC;
+  END; (* RECORD *)
+
+PROCEDURE Select(ForMenu : ARRAY OF Selection; Return : Key);
+(* Performs procedure according to key pressed.  Ends when
+   key stroke Return is detected. *)
+
+END Menu.
+

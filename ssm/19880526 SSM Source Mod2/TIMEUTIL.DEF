@@ -1,0 +1,86 @@
+DEFINITION MODULE TimeUtilities;
+
+(*
+========================================================
+
+ Created   : 8/3/87
+ Last Edit : 8/3/87
+ Author    : Derek Lane
+ System    : LOGITECH MODULA-2/86
+
+ Provides various formatting options for date and time.
+ Two formats for time and three for date.  Time and date
+ are passed as the Time record imported from TimeDate.
+========================================================
+*)
+
+FROM TimeDate IMPORT
+  Time;
+
+EXPORT QUALIFIED
+  Time12Hour, Time24Hour,
+  ShortDate, DayofWeek, DayPlusDate, LongDate;
+
+PROCEDURE Time12Hour(ForTime  : Time;
+                 VAR ToString : ARRAY OF CHAR);
+(* Provides time in format like 11:59pm.  All times returned
+   take seven spaces. *)
+
+PROCEDURE Time24Hour(ForTime  : Time;
+                 VAR ToString : ARRAY OF CHAR);
+(* Provides time in format like 23:59.  All times returned
+   take five spaces. *)
+
+PROCEDURE ShortDate(ForDate  : Time;
+                VAR ToString : ARRAY OF CHAR);
+(* Provides date in form 12/20/87.  If less than two digits
+   are used for month or day, the end of the string is 
+   padded, so that 1/1/87 will be returned rather than
+   1/ 1/87.  All dates in this format take eight spaces. *)
+
+PROCEDURE DayofWeek(ForDate  : Time;
+                VAR ToString : ARRAY OF CHAR);
+(* Returns the day of week for the indicated date.  The
+   returned string is the full name of the day of week, and
+   no padding is done, so the string is of variable length. *)
+
+PROCEDURE DayPlusDate(ForDate  : Time;
+                  VAR ToString : ARRAY OF CHAR);
+(* Returns the date in the form Wed 12/20/87.  All day of week
+   names are the first three letters only.  Padding is done on
+   date similar to MonthDayYear format. *)
+
+PROCEDURE LongDate(ForDate  : Time;
+               VAR ToString : ARRAY OF CHAR);
+(* Returns the date in the form Wednesday, December 20, 1987.
+   No padding is performed, so strings may be of variable 
+   length. *)
+
+PROCEDURE StringToTime(FromString : ARRAY OF CHAR;
+                   VAR ToTime     : Time;
+                   VAR OK         : BOOLEAN);
+(* Converts the time in FromString and stores it in the time record of
+   ToTime.  Searches for 'a' or 'p' at the end to indicate am or pm; if
+   none is found, assumes time is 24 hour time. *)
+
+PROCEDURE StringToDate(FromString : ARRAY OF CHAR;
+                   VAR ToDate     : Time;
+                   VAR OK         : BOOLEAN);
+(* Converts the date in FromString and stores it in the date record of
+   ToDate.  Month, day, and year can be separated by any non-numeric
+   character, such as '/','-', or even a space. *)
+
+PROCEDURE AddDays(ToDate : Time;
+                  Days   : INTEGER;
+              VAR Result : Time);
+(* Adds Days number of days to ToDate, returning the resulting date.
+   Days can be positive or negative. *)
+
+PROCEDURE SubDates(Date1,Date2 : Time;
+               VAR Difference  : INTEGER);
+(* Subtracts the two dates, returning the number of days difference
+   between the two.  If Date1 is earlier, Difference is positive,
+   otherwise it will be negative. *)
+
+END TimeUtilities.
+

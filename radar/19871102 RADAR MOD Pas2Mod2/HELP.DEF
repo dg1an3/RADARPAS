@@ -1,0 +1,29 @@
+DEFINITION MODULE Help;
+
+(*
+========================================================
+
+ Created   : 4/19/87
+ Last Edit : 4/19/87
+ Author    : Derek Lane
+ System    : LOGITECH MODULA-2/86
+
+ Provides a system to display help on the screen.
+
+========================================================
+*)
+
+TYPE
+  HelpText = RECORD
+    X,Y    :   CARDINAL;                 (* Position of help text *)
+    Text   :   ARRAY[1..20] OF CHAR;     (* Actual help text *)
+  END;
+
+PROCEDURE WriteHelp(ForHelp : ARRAY OF HelpText);
+(* Writes the help in the ForHelp array. *)
+
+PROCEDURE EraseHelp(ForHelp : ARRAY OF HelpText);
+(* Erases the help in the ForHelp array (presumably written earlier) *)
+
+END Help.
+
