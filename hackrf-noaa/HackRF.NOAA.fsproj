@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>HackRF.NOAA</RootNamespace>
+    <AssemblyName>hackrf-noaa</AssemblyName>
+    <LangVersion>preview</LangVersion>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Description>HackRF NOAA APT Satellite Image Receiver - Based on RADARPAS Signal Processing</Description>
+    <Authors>RADARPAS Project</Authors>
+    <Copyright>2024</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="src/CoreTypes.fs" />
+    <Compile Include="src/DSP.fs" />
+    <Compile Include="src/HackRFInterface.fs" />
+    <Compile Include="src/FMDemodulator.fs" />
+    <Compile Include="src/APTDecoder.fs" />
+    <Compile Include="src/ImageReconstructor.fs" />
+    <Compile Include="src/SatelliteTracker.fs" />
+    <Compile Include="src/Compression.fs" />
+    <Compile Include="src/Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- HackRF native library bindings -->
+    <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
+    <PackageReference Include="MathNet.Numerics.FSharp" Version="5.0.0" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.4" />
+    <PackageReference Include="Spectre.Console" Version="0.49.1" />
+    <PackageReference Include="System.IO.Ports" Version="8.0.0" />
+  </ItemGroup>
+
+</Project>
