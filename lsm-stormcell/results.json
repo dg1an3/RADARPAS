@@ -1,0 +1,49 @@
+{
+  "args": {
+    "train": 600,
+    "test": 120,
+    "frames": 10,
+    "horizon": 3,
+    "neurons": 2600,
+    "mean_weight": 0.02,
+    "beta": 0.05,
+    "threshold": 2.0,
+    "leak": 0.002,
+    "trace_tau": 8.0,
+    "steps_per_frame": 8,
+    "no_onset": false,
+    "hidden_only": false,
+    "rf_sigma": 2.5,
+    "max_cells": 1,
+    "ridge_alpha": 0.0,
+    "seed": 42,
+    "show": false
+  },
+  "reservoir": {
+    "num_inputs": 1920,
+    "mean_in_degree": 64.41692307692308,
+    "mean_spikes": 2495.2083333333335
+  },
+  "classical": {
+    "n": 120,
+    "detected": 0.825,
+    "position_mae_km": 0.07708211759311775,
+    "speed_mae_kmh": 7.108276626330612,
+    "direction_mae_deg": 15.794118992004071,
+    "nowcast_mae_km": 0.4103927766241794,
+    "persistence_nowcast_mae_km": 11.036399617422008,
+    "octant_accuracy": 0.8416666666666667
+  },
+  "lsm": {
+    "n": 120,
+    "detected": 1.0,
+    "position_mae_km": 10.635663632444913,
+    "speed_mae_kmh": 15.88176269415515,
+    "direction_mae_deg": 19.89790006651056,
+    "nowcast_mae_km": 15.467653375936653,
+    "persistence_nowcast_mae_km": 11.036399617422008,
+    "octant_accuracy": 0.65
+  },
+  "fit_seconds": 8.786828517913818,
+  "predict_seconds": 1.762364149093628
+}
