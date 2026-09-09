@@ -38,6 +38,9 @@ The modern `radar/radar.pas` is a FreePascal-compatible stub — it compiles but
 - **bqtourn/**: Tournament bracket and scoring software.
 - **kb/**: **Knowledge Base** - RDF/Turtle semantic metadata describing the archive's structure, modules, and functions. Queryable via Prolog.
 - **documents/**: PDF documentation and historical records.
+- **hackrf-noaa/** (2026): **HackRF NOAA** - F# software-defined-radio receiver for NOAA APT weather satellite images; a modern sibling of the RADARPAS receiver chain.
+- **lsm-stormcell/** (2026): **LSM StormCell** - Python prototype that performs RADARPAS storm cell analysis with a liquid state machine (after Ruggero Freddi's LSM-Robustness reservoir), scored against the classical two-marker method from ANALYSIS.MOD.
+- **umap/**: Semantic map of every software family, module and callable in the archive (ollama embeddings -> two-stage UMAP -> Three.js viewer). See `umap/README.md`.
 
 ## Knowledge Base (kb/)
 

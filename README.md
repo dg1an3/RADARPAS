@@ -18,6 +18,9 @@ The archive contains multiple generations of software, transitioning from 8-bit 
 - **egalib-math/**: Custom EGA graphics and mathematical utility libraries.
 - **misc/**: Miscellaneous projects including Browsee, Pic-Analysis, and TURING samples.
 - **bqtourn/**: Tournament bracket and scoring software.
+- **hackrf-noaa/** (2026): **HackRF NOAA** - F# software-defined-radio receiver for NOAA APT weather satellite images.
+- **lsm-stormcell/** (2026): **LSM StormCell** - Liquid state machine prototype for RADARPAS storm cell analysis (Python).
+- **umap/**: Semantic UMAP map of every software family, module and callable in the archive, with a Three.js viewer.
 
 ## Archive Contents
 
@@ -106,6 +109,18 @@ This is some very old code written when I was 15 years old. I still have a versi
 ### bqtourn/ -- BQ Tournament
 
 - Tournament bracket/scoring software.
+
+### hackrf-noaa/ -- HackRF NOAA APT Receiver (2026)
+
+F# / .NET 8 software-defined-radio chain for NOAA-15/18/19 APT images with a HackRF One: FM demodulation, APT sync and line decoding, image reconstruction, SGP4 pass prediction. See `hackrf-noaa/README.md`.
+
+### lsm-stormcell/ -- LSM StormCell (2026)
+
+Prototype that fills in the empty `Analyze` stub of the 1992 `ANALYSIS.MOD`: synthetic E300 two-bit pictures are spike-encoded into a leaky integrate-and-fire small-world reservoir (after Ruggero Freddi's LSM-Robustness model), and a linear readout estimates the dominant storm cell's position, speed, direction and a 15-minute nowcast. Scored side by side with the classical `DrawMarkers` two-marker method. See `lsm-stormcell/README.md`.
+
+### umap/ -- Archive UMAP
+
+Semantic map of the whole archive: one node per software family, per module and per procedure/function/method (3,000+ nodes across Turbo Pascal, Modula-2, assembly, C++, Java, F# and Python), embedded with ollama `nomic-embed-text`, laid out with a two-stage UMAP and browsed in a Three.js viewer with spreading activation. See `umap/README.md`.
 
 ### kb/ -- Knowledge Base
 
