@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "public": "umap_3d_viewer",
+    "ignore": ["serve.py", "cert.pem", "key.pem", "**/.*", "**/__pycache__/**"],
+    "cleanUrls": true,
+    "headers": [
+      { "source": "/data.json", "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600" }] },
+      { "source": "/index.html", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] }
+    ]
+  }
+}

@@ -1,0 +1,2322 @@
+{
+"mod:BQ Tournament:Bible_Quiz_Tournament_Manager": {
+"hash": "8a07cd573a4d2cc2",
+"description": "Manages tournament data, displays standings, handles team and individual stats, and supports scoring and reporting for bible quiz competitions.",
+"model": "qwen3-coder:30b"
+},
+"mod:BQ Tournament:TEMP": {
+"hash": "505f84b35a319616",
+"description": "Handles temporary data storage and basic tournament operations for the Bible quiz software. Contains procedures for managing quiz brackets and scoring during tournaments.",
+"model": "qwen3-coder:30b"
+},
+"mod:CogMap:DUMITEMS": {
+"hash": "007348ad59ba8212",
+"description": "Initializes and configures a set of word items with correlation values for cognitive mapping experiments.",
+"model": "qwen3-coder:30b"
+},
+"mod:EEVORG:AssemblyInfo": {
+"hash": "ec3c75bdc420b3b4",
+"description": "Contains assembly metadata and configuration for the Eevorg application, including version, copyright, and COM visibility settings.",
+"model": "qwen3-coder:30b"
+},
+"mod:EEVORG:EevorgRenderer": {
+"hash": "4f5067086398eec5",
+"description": "Renders cellular automata patterns and their hierarchical children using scaled visualizations and color mappings.",
+"model": "qwen3-coder:30b"
+},
+"mod:EEVORG:NetworkEditor": {
+"hash": "40d31a14e09babaf",
+"description": "Edits cellular automata network structures, loads and saves configurations, provides main program loop and user menu interface.",
+"model": "qwen3-coder:30b"
+},
+"mod:EEVORG:o": {
+"hash": "47095ca3e9f93e8d",
+"description": "Linked object class managing peer connections and labels; used in cellular automata simulations.",
+"model": "qwen3-coder:30b"
+},
+"mod:EEVORG:oImage": {
+"hash": "67630528beb3200a",
+"description": "Image processing and manipulation utilities for cellular automata visualization and genetic algorithm simulations within EEVORG research framework.",
+"model": "qwen3-coder:30b"
+},
+"mod:EEVORG:oLink": {
+"hash": "8c5f1d3ccdd8fcb0",
+"description": "Link class encapsulating references to other objects with optional weights, used for network connections in cellular automata simulations.",
+"model": "qwen3-coder:30b"
+},
+"mod:EEVORG:oMatrix": {
+"hash": "7bc2692cc5fbedd2",
+"description": "Matrix operations class for cellular automata simulations, handling state transitions and rule applications in artificial life research experiments.",
+"model": "qwen3-coder:30b"
+},
+"mod:EEVORG:oTriadView": {
+"hash": "64f3da64920114f1",
+"description": "Displays a triad of o objects in a GUI frame with labeled buttons, updating button labels from triad data. Handles user interactions via action listeners on three buttons.",
+"model": "qwen3-coder:30b"
+},
+"mod:EEVORG:oVector": {
+"hash": "df452c04707b52cc",
+"description": "Vector mathematics operations for cellular automata simulations, including coordinate transformations and geometric calculations used in EEVORG's artificial life research. Provides core mathematical utilities for chaos-based genetic algorithm implementations.",
+"model": "qwen3-coder:30b"
+},
+"mod:EEVORG:PulseBox": {
+"hash": "7cf74859ea76335d",
+"description": "PulseBox represents animated, mouse-responsive elements with wave-like activation effects. It handles visual display and mouse interaction for cellular automata simulations.",
+"model": "qwen3-coder:30b"
+},
+"mod:EEVORG:Ripple": {
+"hash": "540b81d8f70c66ee",
+"description": "Generates animated ripple-like visual patterns using sine wave modulation and scalar fields. Provides real-time color pixel computation and rendering through a dedicated thread.",
+"model": "qwen3-coder:30b"
+},
+"mod:EEVORG:TestJIT": {
+"hash": "2a14f37049792d38",
+"description": "Tests JIT compilation performance by measuring execution time of a loop before and after explicit compilation enablement.",
+"model": "qwen3-coder:30b"
+},
+"mod:EEVORG:TRIO": {
+"hash": "187d65905b444a8d",
+"description": "Windows GUI application module for TRIO, handling main window creation, painting, and about box dialog; part of cellular automata research system.",
+"model": "qwen3-coder:30b"
+},
+"mod:EEVORG:WindowCloser": {
+"hash": "1eb7133d1690cea2",
+"description": "Handles window closing events by disposing the window and exiting the application when a close request is received.",
+"model": "qwen3-coder:30b"
+},
+"mod:EGALib & Math:Clock": {
+"hash": "0c505bf77c461c33",
+"description": "Clock draws analog clock hands on screen using trigonometric calculations for second, minute, and hour indicators based on current time.",
+"model": "qwen3-coder:30b"
+},
+"mod:EGALib & Math:Dub": {
+"hash": "43dcbfabad4d7d34",
+"description": "Handles EGA graphics tasks and register management for fractal and automata visualizations. Contains basic task record structure and startup procedures.",
+"model": "qwen3-coder:30b"
+},
+"mod:EGALib & Math:EasterEggs": {
+"hash": "e8b84574d1af2f04",
+"description": "Draws a fractal egg pattern using sine waves and color mapping via EGA graphics primitives.",
+"model": "qwen3-coder:30b"
+},
+"mod:EGALib & Math:ECE17p2": {
+"hash": "bb11f9d913745149",
+"description": "Calculates volume under a surface defined by function z using numerical integration. Reads parameters a,b,c,d to define integration bounds and step sizes.",
+"model": "qwen3-coder:30b"
+},
+"mod:EGALib & Math:FracGen": {
+"hash": "63643996d7c8b11a",
+"description": "Generates fractal patterns using complex number iterations; calculates and stores square data for fractal visualization.",
+"model": "qwen3-coder:30b"
+},
+"mod:EGALib & Math:FracPlot": {
+"hash": "c03e3c50683109f4",
+"description": "Loads fractal square data from files, supports plotting and visualization of fractal images using EGA graphics.",
+"model": "qwen3-coder:30b"
+},
+"mod:EGALib & Math:JuliaC": {
+"hash": "917992bde3e2c97f",
+"description": "Calculates and draws Julia set fractal plots using graphical and mathematical routines from EGALib and MATHLIB.",
+"model": "qwen3-coder:30b"
+},
+"mod:EGALib & Math:Lines": {
+"hash": "f9bb6fac5865d3ec",
+"description": "Updates line coordinates and handles bouncing within bounds; draws lines on screen using EGA graphics routines.",
+"model": "qwen3-coder:30b"
+},
+"mod:EGALib & Math:MODEL": {
+"hash": "af0e00c7371970c9",
+"description": "Defines data type layouts for binary arithmetic operations and graphics handling within EGALib math utilities.",
+"model": "qwen3-coder:30b"
+},
+"mod:EGALib & Math:ModGraphBase": {
+"hash": "0b43c70de4918ca4",
+"description": "Base graphics module defining video modes and providing Plot and SetMode procedures for EGA and CGA displays.",
+"model": "qwen3-coder:30b"
+},
+"mod:EGALib & Math:Music": {
+"hash": "0cb915f7d09dac7b",
+"description": "Plays a descending musical scale using tone generator functions with decreasing delay between notes.",
+"model": "qwen3-coder:30b"
+},
+"mod:EGALib & Math:OmegaCall": {
+"hash": "4adae0bb7707c505",
+"description": "Calls a modem to dial a number and hangs up. Uses Modem module for telecommunications functions.",
+"model": "qwen3-coder:30b"
+},
+"mod:EGALib & Math:Pinball": {
+"hash": "bbe2a9c02f7b2e67",
+"description": "Implements pinball ball physics and rendering using EGA graphics, with NextState procedure updating position and handling collisions.",
+"model": "qwen3-coder:30b"
+},
+"mod:EGALib & Math:Selector": {
+"hash": "c13034215e65640a",
+"description": "Offers a selectable list interface using arrow keys for item navigation and selection, integrating with EGALib for display and KeyDispatch for input handling.",
+"model": "qwen3-coder:30b"
+},
+"mod:GDEM:Map_Editor": {
+"hash": "da9e82e0aa17a305",
+"description": "Map editor for digitizing radar overlays; reads user input for landmarks and segments, writes data to storage.",
+"model": "qwen3-coder:30b"
+},
+"mod:Pic-Analysis:PicAnal": {
+"hash": "c426563c7eb97d33",
+"description": "Performs image analysis operations using graphics data. Contains procedure to analyze picture information from imported graphics modules.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:Analysis": {
+"hash": "2e9de4bd04a52ed6",
+"description": "Handles radar storm cell analysis and display marking within the weather radar terminal system. Provides procedures for defining analysis areas and drawing markers on sweep displays.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:Auto": {
+"hash": "7ab5117d06303dbf",
+"description": "Handles automatic program execution and menu navigation for the weather radar terminal, managing program lists and parameter settings during automated operations.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:COMPR": {
+"hash": "50635e9f95c72ce6",
+"description": "Compression routine for radar sweep data; processes color intensity arrays into compressed byte streams for storage or transmission.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:Convert": {
+"hash": "6026a64b00ddd788",
+"description": "Converts radar data lines into red and green bitmaps for display, handling binary file parsing and bit manipulation for EGA graphics output.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:CreatDat": {
+"hash": "d45a80a59b1f23a5",
+"description": "Creates configuration data file for E300DB radar terminal; initializes settings like baud rate, COM port, and banner text.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:CUSTOM": {
+"hash": "e90ab8fbd0f13024",
+"description": "Displays station identification header on EGA screen during startup initialization.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:E250DRAW": {
+"hash": "cc7e79958ef29fa2",
+"description": "Draws radar maps and locator indicators on screen using EGA graphics; handles map table data for storm cell analysis and sweep display.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:E250Edit": {
+"hash": "b4a0c6a64314720b",
+"description": "Edit mode cursor control and comment management for radar display; handles user input for positioning and text annotation on storm cell analysis.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:E300Interface": {
+"hash": "efd7cf1cb892b6fb",
+"description": "Interface to E300 radar for parameter control and picture data download via serial link. Provides procedures to set/get radar settings, initiate image capture, and retrieve scan lines.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:FracGen": {
+"hash": "d893197327f83fe7",
+"description": "Generates fractal square data for radar displays using complex number iterations; calculates and stores intensity values for graphical rendering.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:I": {
+"hash": "6f61523905067884",
+"description": "Initializes radar display system, handles EGA graphics setup, RS-232 communication with weather radar for sweep display and storm cell analysis.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:INCTABX": {
+"hash": "d7cac5fd004b84cc",
+"description": "Table of incremental values for radar sweep display timing adjustments. Used by interrupt service routines managing EGA graphics updates.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:INCTABY": {
+"hash": "bcf1101e25cb243c",
+"description": "Table of Y increment values for radar sweep display, used in graphics rendering loop. Provides fixed-point delta calculations for vertical motion.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:Interact": {
+"hash": "e386313311facda6",
+"description": "Interactive radar control module, handles user interaction and calls RadarInteract procedure. Depends on RadarTerminal and RadarVersion2point0 modules.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:INTR": {
+"hash": "ef047e5ff8469696",
+"description": "Handles RS-232 interrupts and keyboard input; includes low-level port I/O for modem status and data reception.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:ListModule": {
+"hash": "df34fd50043ac5fc",
+"description": "Handles list-related operations and data structures for radar display and storm cell analysis within the RADARPAS terminal system.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:Locator": {
+"hash": "aa2202f8f43a6d81",
+"description": "Provides cursor drawing and range/bearing display for radar interface. Handles user cursor positioning and coordinate display during map overlay operations.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:MainRx": {
+"hash": "b771d38d085f36a8",
+"description": "Handles modem communication loop for radar data transfer, integrates with E300 interface and storage modules.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:MODTEST": {
+"hash": "ffcab6b85a89acc2",
+"description": "Handles remote diagnostic communication with radar station, enabling interactive character-by-character test of serial link and error counting during modem sessions.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:OptionFile": {
+"hash": "a33d8bfa342ea516",
+"description": "Handles loading and saving of program options from a file, defining configurable variables and their storage locations.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:R8701": {
+"hash": "719d57a6ffe33806",
+"description": "Displays department header information during program initialization. Shows district details and module identifier in formatted window layout.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:R8702": {
+"hash": "204515061a8387c7",
+"description": "Displays department header information during program initialization. Shows station identification and department details on EGA graphics screen.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:R8703": {
+"hash": "baf29f956f353d27",
+"description": "Displays static maintenance information screen with department details and serial number 8703 during system initialization.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:R8707": {
+"hash": "009a1be2bf45a8ac",
+"description": "Displays offshore radar shell interface with version information and system identifier. Shows startup window with equipment serial number 8707.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:R8708": {
+"hash": "87b4be12cb9eae67",
+"description": "Displays mobile radar identification banner during system startup. Shows unit serial number 8708 on EGA graphics screen.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:R8709": {
+"hash": "8aeda732c1575be7",
+"description": "Displays company identification banner during system startup. Shows TENNECO header with serial number 8709 on EGA graphics window.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:R8710": {
+"hash": "a7d172eeb2e4bacc",
+"description": "Displays radar system startup screen and identification banner during terminal initialization. Shows Woodward Broadcasting header with serial number 8710 on EGA graphics window.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:R8711": {
+"hash": "c00ea7a4a38f4b01",
+"description": "Displays initial startup screen with TVA identification and serial number 8711 on EGA graphics. Module appears to handle basic terminal initialization and branding display.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:R8712": {
+"hash": "8b39c2f3c9012437",
+"description": "Displays department header information during system initialization. Shows maintenance district details and equipment serial number on EGA graphics screen.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:R8713": {
+"hash": "a4c1851e8864eb79",
+"description": "Displays radar system identification header on screen during initialization. Shows department information and module serial number 8713.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:R8714": {
+"hash": "2f07d3e6892120d7",
+"description": "Displays static radar system identification header information during program initialization. Shows department details and unit serial number on EGA screen.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:R8801": {
+"hash": "a37b1beec26daa13",
+"description": "Displays static radar station identification information and copyright notice during system startup. Shows highway department details and SN 8801 model identifier in a formatted window.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:R8802": {
+"hash": "63be078ec7e9c520",
+"description": "Displays station identification banner during system startup. Shows location and equipment details for PARAGON RANCH weather radar terminal.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:RADAR": {
+"hash": "df4373338eb4f246",
+"description": "Handles EGA graphics display, keyboard input, and modem communication for the radar terminal interface. Provides sweep display, map overlays, and storm cell analysis functions.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:RadarStore": {
+"hash": "c987c4086f3b443b",
+"description": "Handles storage and retrieval of radar pictures and station data, manages picture flags and memory allocation for stored images.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:RadarTerminal": {
+"hash": "9438939ca0e23c09",
+"description": "Handles user interaction for radar terminal, manages modem connection and parameter exchange with weather radar system.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:RadarTx": {
+"hash": "31252fcfe1c43f33",
+"description": "Generates prefix data for radar picture transmission and handles the actual transmission of picture data via radio link. Provides procedures to prepare and send weather radar images using RadioTx's transmit functions.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:RADCGA": {
+"hash": "f0f3d2242fde5c98",
+"description": "Displays radar sweep data from a binary file using EGA graphics, drawing colored lines for each sweep segment until 460 lines are rendered or keypress detected.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:RADIO": {
+"hash": "3235e15d782f0a67",
+"description": "Handles continuous RS-232 transmission of radar sweep data lines with checksums, supporting manual abort and port switching during transfer.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:Selector": {
+"hash": "2c826cecef5bce4b",
+"description": "Handles user selection from a list of items in a window, using arrow keys for navigation and any other key to confirm choice. Provides a highlighted bar display for item selection.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:Sets": {
+"hash": "f7f57c1d0166099b",
+"description": "Bit set operations for managing radar data regions and storm cell tracking; used by graphics and storage modules for sweep analysis and display.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:STRIP": {
+"hash": "920028187bc7e2ce",
+"description": "Strips data from PIC.DAT file, copying to PIC.BAK until delimiter $1818 found, then writes delimiter value and continues. Processes radar sweep data records.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:TEMP": {
+"hash": "9bb8eb51a9252cd6",
+"description": "Handles serial communication transmission for radar terminal. Procedure Tx sends individual characters via RS-232 port with status polling.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:TestRx": {
+"hash": "4753d670e0ea6853",
+"description": "Tests and displays radar data buffer status, allowing file reset and quit via keypress. Shows buffer contents and position indicators.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:TR": {
+"hash": "bfece2f2dc557f66",
+"description": "Handles low-level processor register operations and bit manipulation for hardware interaction within the radar terminal system. Contains record definition for accessing CPU registers by both 16-bit and 8-bit names.",
+"model": "qwen3-coder:30b"
+},
+"mod:RADARPAS:WORK": {
+"hash": "1e94a40d630cee29",
+"description": "Handles serial data reception from radar system, processes incoming sweep data packets, and manages display updates for weather radar imagery.",
+"model": "qwen3-coder:30b"
+},
+"mod:SIGNAL:SIGNAL": {
+"hash": "efc0489f258e93e6",
+"description": "Signal processing class with histogram support, used by filter nodes and synthesis module for signal manipulation and analysis.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:Accounts_Payable": {
+"hash": "a6cb01b3fe048a9c",
+"description": "Handles accounts payable record management including loading, saving, and maintaining vendor account data within the SSM spreadsheet system.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:APCHECK": {
+"hash": "ae30bd72565c6293",
+"description": "Converts numeric check amounts to textual dollar-and-cents format for printing on documents.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:APCUS102": {
+"hash": "de27d1e81a049b47",
+"description": "Accounts payable module for SSM spreadsheet system; handles vendor accounts, balances, and transaction tracking with display and print functions.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:APCUS103": {
+"hash": "d77404194f46e384",
+"description": "Handles accounts payable display and management within the SSM spreadsheet system, showing vendor details and balances in a formatted window layout.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:APCUSTOM": {
+"hash": "acc822e3a9d0c992",
+"description": "Customizable display and editing of accounts payable data, integrated with ledger views and account management functions.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:ARBILL": {
+"hash": "ccd3f020a36d1cda",
+"description": "Handles printing account statements and check bills. Processes transaction lists for given accounts, calculates balances, and formats output for mailing.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:ARCUSTOM": {
+"hash": "d3d0340c3361f131",
+"description": "Handles accounts receivable window display and user interactions for viewing, adding, editing, and deleting customer accounts and bills.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:ARMENU": {
+"hash": "00f18f4b19b14757",
+"description": "Menu and account display routines for navigating and editing account information within the spreadsheet system's accounting module.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:AXLEDGER": {
+"hash": "3aae8e8378fc3de4",
+"description": "Handles account ledger operations including initialization, viewing, and printing of account data from .dat files.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:BACKUP": {
+"hash": "7fc9f05350e9c04d",
+"description": "Handles backup and restore operations for SSM data files across multiple disks, supporting incremental backups and file metadata recording.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:CHDIR": {
+"hash": "c81f424ae9699f91",
+"description": "Changes working directory to specified year subdirectory under DATA_PATH, creating it if needed. Handles missing directory error by prompting user to create it.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:DATAREC": {
+"hash": "b116c33185f2ccd0",
+"description": "Data record definition for financial transaction processing. Contains fields for balances, charges, totals, and various expense categories used in accounting applications.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:DATEUTIL": {
+"hash": "061b28afd8c5c0f4",
+"description": "Date handling routines for SSM, including date arithmetic, parsing, and formatting utilities used across spreadsheet and accounting modules.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:DISKUTIL": {
+"hash": "6e7575172b122af9",
+"description": "Disk utility routines for file searching and manipulation, used by backup and ledger modules. Provides low-level DOS file operations via INT 21h calls.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:DRCUSTOM": {
+"hash": "9a171d11ff984d27",
+"description": "Custom report formatting and display module for SSM spreadsheet system, handles daily report window setup and data presentation layout.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:DREDIT": {
+"hash": "6a7de30c4e764439",
+"description": "Handles DIR (daily income report) window display, data entry, and log management for the spreadsheet system. Provides procedures to create the DIR window, load and save DIR data, and update totals. Uses DRFORM, IAEDIT, UIUTIL, UTILITY2 modules for formatting, editing, and utility functions.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:DRFORM": {
+"hash": "14e651fe5b2fd753",
+"description": "Handles directory log record editing and display for financial data entries. Provides procedures to write log information to screen.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:DRLOG": {
+"hash": "719cdd3ddeef4726",
+"description": "Handles display and manipulation of log entries in a spreadsheet-based accounting system, supporting date navigation and editing within a windowed interface.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:DRMENU": {
+"hash": "8c48d3f336fbc3f4",
+"description": "Handles display and highlighting of log entries in a menu window, with support for navigation and optional edit commands.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:DRSUM": {
+"hash": "1128f7e757c68984",
+"description": "Produces monthly financial summaries from logged data records, aggregating various cash and expense categories for reporting.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:FICUSTOM": {
+"hash": "02b0087f8b9d5444",
+"description": "Custom spreadsheet engine module for FIM, handling formula evaluation and data management in inventory and financial applications.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:FIDELIV": {
+"hash": "d6e0ccbedc4aa99f",
+"description": "Handles delivery record input, display, and calculation for fuel inventory in the spreadsheet system.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:FIMENU": {
+"hash": "6b3bd5fa597572eb",
+"description": "Handles log management for spreadsheet entries, supporting various sheet types and displaying log details in a formatted menu interface.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:FIMMP": {
+"hash": "5101bf2245bafd19",
+"description": "Handles MMP (Monthly Management Plan) and price table data storage, including loading, saving, and editing of financial records and pricing structures.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:FITR": {
+"hash": "571ad761252eb672",
+"description": "Handles pump totalizer readings and sales data for fuel transactions; manages reading entries, shifts, and related calculations.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:Fuel_Inventory_Manager": {
+"hash": "8ef310824bcc971d",
+"description": "Manages fuel inventory data, handles file operations and menu navigation for the spreadsheet-based SSM system.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:IACUSTOM": {
+"hash": "339c9105a41e212c",
+"description": "Custom report formatting and display routines for income account data within the SSM spreadsheet system.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:IAEDIT": {
+"hash": "a30360d132c4c098",
+"description": "Handles editing of account data and maintains log records for transactions. Provides procedures to display and update account information in a windowed interface.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:IAMENU": {
+"hash": "dec063a161103801",
+"description": "Handles logging display and highlighting within the spreadsheet system's user interface. Provides procedures to write, draw, and manage log entries, including highlighting the current log entry.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:IASUMMRY": {
+"hash": "2ad9c93b90f9e43e",
+"description": "Handles monthly and yearly summary reports for financial data in the SSM spreadsheet system. Provides account balancing and printing functions for period-end reporting.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:INCLUDE": {
+"hash": "f815ed65e3ab897c",
+"description": "Common data types, constants, and shared variables for SSM spreadsheet modules. Provides basic date, string, and register record definitions used across components.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:Mailing_Labels": {
+"hash": "448b98f5e5490de7",
+"description": "Handles mailing label generation, printing, and address management for the spreadsheet system's reporting and communication modules.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:Node": {
+"hash": "4e2fdfe7c1a22589",
+"description": "Handles node creation, reading, and writing for a spreadsheet engine's abstract syntax tree, supporting various data types and subroutines.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:ServiceStationManager": {
+"hash": "8100e75a133a2e43",
+"description": "Manages service station operations including pump readings, deliveries, fuel payments, and reports. Handles display and input for these functions.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:TEMP": {
+"hash": "8eba96f81e2fa302",
+"description": "Handles file attribute operations. SetAttribute modifies file permissions using DOS interrupt $21, function $43. Reads error status from DOS flags.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:Test": {
+"hash": "5f0fb8ca7669abd6",
+"description": "Converts numbers to English text representation, used for generating checks. Provides NumberText function for currency display.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:TransferAccounts": {
+"hash": "90af13ad6aec55d3",
+"description": "Transfers account data between modules. Provides directory listing and file access routines for account management.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:UIUTIL": {
+"hash": "78dc8c855cb86fb6",
+"description": "User interface routines for keyboard input and screen display, including window management and basic editing functions.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:UTILITY": {
+"hash": "44ddb2aeae814f43",
+"description": "General purpose utilities for date handling, keyboard input, and screen operations; supports spreadsheet date functions and user interaction.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:UTILITY2": {
+"hash": "6c2b1ce7a4b490f1",
+"description": "General purpose utilities for date handling, keyboard input, screen control, and system operations; used across multiple modules in the spreadsheet and accounting system.",
+"model": "qwen3-coder:30b"
+},
+"mod:SSM:WINSSM": {
+"hash": "b230dd74ed9e04f2",
+"description": "Defines Windows application parameters for Phone Book Database, specifying execution type, heap/stack sizes, and linking stub file.",
+"model": "qwen3-coder:30b"
+},
+"mod:TURING:turing": {
+"hash": "63cc6dbaaee022ba",
+"description": "Simulates a Turing machine with a fixed-state table and binary tape, executing steps until halt direction is encountered. Processes input tape from initial position, modifying symbols and moving head left or right.",
+"model": "qwen3-coder:30b"
+},
+"mod:TURING:TuringMachine": {
+"hash": "c83bd23d39d2e4a2",
+"description": "Simulates a Turing machine with editable states, tape, and instructions; provides editing, execution, and debugging capabilities.",
+"model": "qwen3-coder:30b"
+},
+"mod:theWheel:linkList": {
+"hash": "cfceb831fe5ab440",
+"description": "Manages linked list structures for document connections with weight-based activation spreading; supports graph navigation and network visualization.",
+"model": "qwen3-coder:30b"
+},
+"mod:theWheel:Mapdoc": {
+"hash": "247ff8bc56af69ab",
+"description": "Manages map document contents including items and stimuli, handles insertion commands and simulation updates.",
+"model": "qwen3-coder:30b"
+},
+"mod:theWheel:Node": {
+"hash": "017cb8e1e769c46b",
+"description": "Provides the CNode class for representing individual objects in spreading activation networks, with methods for managing children and links.",
+"model": "qwen3-coder:30b"
+},
+"mod:theWheel:NodeLink": {
+"hash": "615804271fbef6f6",
+"description": "Represents links between nodes in a spreading activation network, storing target node pointers and link weights for graph traversal and activation propagation.",
+"model": "qwen3-coder:30b"
+},
+"mod:theWheel:NodeView": {
+"hash": "39357e57589a3e59",
+"description": "View class for individual nodes in a spreading activation network, handling display and activation state management within a space view.",
+"model": "qwen3-coder:30b"
+},
+"mod:theWheel:oItem": {
+"hash": "9e5b593cfa26b967",
+"description": "Handles individual objects within theWheel's spreading activation network, managing their visual representation and interaction within document views.",
+"model": "qwen3-coder:30b"
+},
+"mod:theWheel:Space": {
+"hash": "4e06260d446bea31",
+"description": "Manages a collection of interconnected nodes for spreading activation networks; provides node storage, retrieval, and deletion within the visualization framework.",
+"model": "qwen3-coder:30b"
+},
+"mod:theWheel:SpaceView": {
+"hash": "7a56e180763dfb02",
+"description": "Handles visualization and layout of spreading activation network spaces, rendering nodes and links with dynamic positioning based on activation levels and spatial relationships.",
+"model": "qwen3-coder:30b"
+},
+"mod:theWheel:wluser": {
+"hash": "1634331255ce4f54",
+"description": "Manages user session lifecycle including logging start/end times and version information. Handles session initialization and termination tasks.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:Browse": {
+"hash": "c54067cb4111baf0",
+"description": "Displays tournament data on screen for review before saving to file. Works with global data structures and screen output.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:DrawLine": {
+"hash": "ac046eb036040ae3",
+"description": "Writes 78-character line to specified screen line using absolute array access. Works with screen memory structure, copies data from local array to video buffer at given line address.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:Edit": {
+"hash": "21334ed07ce5956b",
+"description": "Edits tournament data values in memory. Works with screen display and QType data structure for quiz scores and rankings.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:FillName": {
+"hash": "75ea2d90a74bd69e",
+"description": "Pads string with spaces to specified size for display formatting in tournament standings and statistics listings. Works with screen output strings.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:LoadData": {
+"hash": "06dc29cbe52a92b5",
+"description": "Loads tournament data from a .DAT file, initializes team records, reads team names and tournament title, handles file I/O errors by creating default teams.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:LoadNames": {
+"hash": "9d6ea38e8d44937c",
+"description": "Loads contestant names from file into memory structure. Reads name data from input file, processes line by line into internal name array for tournament scoring operations.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:LstIndivid": {
+"hash": "282a4b79cae781b7",
+"description": "Displays individual standings for a Bible quiz tournament round, showing scores in descending order via serial port output. Uses team data structures and reads keyboard input to proceed.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:LstTeamStand": {
+"hash": "111d4fe39f2bc7d9",
+"description": "Displays team standings for a Bible quiz tournament, showing records and coaches, sorted by performance percentage. Writes to screen, reads keyboard input. Uses Team data structure and serial port for output.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:LstTeamStat": {
+"hash": "f100265904c127db",
+"description": "Outputs tournament and team statistics including opponent records and individual player scores to the user screen.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:LstTourn": {
+"hash": "64faab935f5a010b",
+"description": "Displays report selection menu on screen, toggles flags for team standings, individual standings, team stats, tournament stats, and printer output. Uses keyboard input to set flags, then calls listed procedures to generate reports based on selections.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:QOut": {
+"hash": "6f515d20c5b782bb",
+"description": "Checks team quiz scores across three rounds, returns true if total points >= 6, flashes bell character for exceptional scores, works with internal team data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:ReadKbd": {
+"hash": "4fa3038aab783840",
+"description": "Reads keyboard input from Kbd unit, sets escape flag when key press detected. Works with screen keyboard input.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:ReCalc": {
+"hash": "6af3503f4712e4a7",
+"description": "Recalculates team statistics and scores across all rounds, updating wins, losses, and question-level performance data in the Team structure. Works with internal round and team data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:Report": {
+"hash": "1c2317aa0d2c20ce",
+"description": "Displays tournament information on screen or serial port using data from current tournament structure. Processes round-by-round results for output.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:SaveData": {
+"hash": "c617d7639ca3172d",
+"description": "Saves team data to a .DAT file, updates tournament name, works with screen and file I/O, uses Team and TournName data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:ShowStats": {
+"hash": "043bec272c16c0cf",
+"description": "Displays team statistics and scores for the current round on screen, including member totals, final bell, and overall standings. Works with screen output and internal data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:ShowWind": {
+"hash": "63c72ba79bff2ca4",
+"description": "Displays stored window data on screen using screen buffer coordinates. Works with current window structure and 80x24 text mode display.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:Skip": {
+"hash": "df5af5f9093a2dba",
+"description": "Reads tournament data from a .BQ file, parsing team names, coaches, members, and match brackets into internal structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:UsrOutRoutine": {
+"hash": "20bb28cdcd8424c1",
+"description": "Writes a character to screen and optionally to serial port and file when enabled. Works with output streams and data structure flags.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:WriteScore": {
+"hash": "7b013c994dee5c5f",
+"description": "Updates team scores on screen during quiz tournament, handling individual member points and total calculations. Works with screen display and keyboard input.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:WriteScreen": {
+"hash": "fc18a419311875d8",
+"description": "Writes a string to the screen buffer at specified coordinates, clearing remaining space up to given length. Works with screen memory directly.",
+"model": "qwen3-coder:30b"
+},
+"fn:BQ Tournament:Bible_Quiz_Tournament_Manager:WrRound": {
+"hash": "1ff76bacbdcc244d",
+"description": "Writes round numbers to screen display, manages team selection and round navigation in a quiz tournament bracket, updates screen based on keyboard input from team data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:CogMap:REFMAVW:CRefmapView::ChangeSelectionNextRow": {
+"hash": "c19ad340275190be",
+"description": "Updates active row selection based on direction flag, works with document's row data structure. Called from keyboard handler for navigation.",
+"model": "qwen3-coder:30b"
+},
+"fn:CogMap:REFMAVW:CRefmapView::GetActiveRow": {
+"hash": "4ff242697d790b16",
+"description": "Returns the index of the currently active reference row from the view's data structure, used to track user selection during drawing and updates.",
+"model": "qwen3-coder:30b"
+},
+"fn:CogMap:REFMAVW:CRefmapView::GetRowCount": {
+"hash": "ae9daae28ff2f9e1",
+"description": "Returns the number of references in the document for view row calculations. Works with the document's data structure to provide row count for display and printing.",
+"model": "qwen3-coder:30b"
+},
+"fn:CogMap:ROWVIEW:CRowView::LastViewableRow": {
+"hash": "1680c7e72504e1b4",
+"description": "Returns the index of the last fully visible row based on current scroll position and row height. Works with screen coordinates and viewable area calculations.",
+"model": "qwen3-coder:30b"
+},
+"fn:CogMap:ROWVIEW:CRowView::OnLButtonDblClk": {
+"hash": "9ed89de5125e5d02",
+"description": "Handles double-clicks in the row view to edit the corresponding data row based on screen coordinates. Works with client device context and row data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:CogMap:ROWVIEW:CRowView::OnRefDel": {
+"hash": "8d2752094df8d239",
+"description": "Handles reference deletion requests from the row view, forwarding the operation to the reference map view's deletion handler. Works with reference data structures within the cognitive mapping interface.",
+"model": "qwen3-coder:30b"
+},
+"fn:CogMap:ROWVIEW:CRowView::OnRefSwap": {
+"hash": "1585ba378fd6585c",
+"description": "Swaps rows in the cognitive map view. Works with the data structure representing the map layout. Called from the reference mapping view implementation.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:EEVORG:Eevorg::getLeftChild": {
+"hash": "fabd67050d60cc00",
+"description": "Returns the left child entity, creating it via mutation if it doesn't exist. Works with the Eevorg data structure for genetic algorithm operations.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:EEVORG:Eevorg::getMidChild": {
+"hash": "5c292e037e1f50e2",
+"description": "Returns middle child organism, creating it by mutating parent if nonexistent. Works with Eevorg data structure for genetic algorithm operations.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:EEVORG:Eevorg::getRightChild": {
+"hash": "d9750313713d148e",
+"description": "Returns the right child node of an Eevorg object, creating it via mutation if it doesn't exist. Works with Eevorg data structures during cellular automata evolution.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:NetworkEditor:NetworkEditor.loadNetwork": {
+"hash": "2963d90908b0c849",
+"description": "Loads network data from a file, returns new network object for display or processing in EEVORG cellular automata simulations.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:NetworkEditor:NetworkEditor.main": {
+"hash": "1c60558407e1936d",
+"description": "Entry point accepting network file argument, loads network from file and launches main interactive menu for network editing and manipulation.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:NetworkEditor:NetworkEditor.mainMenu": {
+"hash": "6f5e9cb5b273b205",
+"description": "Displays main menu options for network editing. Works with network data structure and screen output.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:NetworkEditor:NetworkEditor.saveNetwork": {
+"hash": "b4ea060958e0cf3b",
+"description": "Saves network data to a file. Works with oNetwork data structure and specified filename parameter.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:oNetwork:oNetwork.getRandomNode": {
+"hash": "2763a843cfab6c96",
+"description": "Returns next node from nodes collection, advancing internal counter. Works with nodes data structure containing network elements.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:oNetwork:oNetwork.getTriad": {
+"hash": "9b3cba3a7b19f714",
+"description": "Returns array of three random nodes from network structure. Works with internal node data structure to assemble triad samples for analysis.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:oNetwork:oNetwork.loadNetwork": {
+"hash": "898faecfbbb9bea7",
+"description": "Loads network data from a file into memory for visualization in triad view. Works with file input and screen display structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:oNetwork:oNetwork.saveNetwork": {
+"hash": "ecb3fb0945e24293",
+"description": "Saves current network state to specified file. Works with data structure and file I/O operations.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:Organism:_setcolor": {
+"hash": "e7ff3141d62045d4",
+"description": "Sets organism color for visualization in plotat. Works with screen display coordinates and rendering structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:Organism:_setpixel": {
+"hash": "a93514f200b2c21a",
+"description": "Sets pixel value at current coordinates, works with screen display buffer. Called by plotat to update visual representation during simulation.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:Organism:getch": {
+"hash": "39b5f37dfc5209f1",
+"description": "Returns space character; stub implementation likely for input handling in evolutionary algorithm loop.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:oTriadView:oTriadView.actionPerformed": {
+"hash": "9eded12cc1eb89e5",
+"description": "Handles left button press by printing message and updating button label with first triad element's text. Works with GUI button components and triad data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:oTriadView:oTriadView.oTriadView": {
+"hash": "07c44efb85bf7cb6",
+"description": "Constructor for triad view window displaying network triad data with navigation buttons. Creates GUI elements and registers window closer.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:PulseBox:PulseBox.dActivation": {
+"hash": "70a292e7560297f1",
+"description": "Updates activation counters based on delta time and current total activation. Works with internal activation state variables.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:PulseBox:PulseBox.main": {
+"hash": "c511538e5ea49cb8",
+"description": "Initializes a graphical frame with pulse objects and mouse listeners for wavefield interaction simulation.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:PulseBox:PulseBox.mouseMoved": {
+"hash": "1ab282df14155bb3",
+"description": "Handles mouse movement to calculate distance from center, update activation field, and adjust component size and position based on wave propagation calculations using square lookup table and wave field data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:PulseBox:PulseBox.normSize": {
+"hash": "5fe408e578f5bd78",
+"description": "Returns normalized dimensions based on activation ratios for display scaling. Works with activation data structure to calculate proportional width and height values.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:PulseBox:PulseBox.paint": {
+"hash": "2fae3b7447663825",
+"description": "Draws a black border rectangle around the component's visible area using the graphics context. Works with screen coordinates and component dimensions.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:PulseBox:PulseBox.PulseBox": {
+"hash": "76679f841c193086",
+"description": "Constructor initializes 50x50 pixel box and registers mouse motion listener for waver interaction.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:Rider:Rider.Rider": {
+"hash": "8524c9c458dc5f0a",
+"description": "Constructor initializes rider with a name string. Works with name parameter to set instance variable.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:Ripple:Ripple.computePixels": {
+"hash": "270ff16b06a6f3ed",
+"description": "Computes pixel colors from red, green, and blue scalar fields, combining them into a single integer value for display. Works with screen pixel buffer and 2D scalar field data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:Ripple:Ripple.main": {
+"hash": "9caac7c91fff3fae",
+"description": "Initializes and displays a ripple effect simulation in a GUI frame using ScalarField2D data structure and ImagePanel for rendering.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:Ripple:Ripple.Ripple": {
+"hash": "abe322926ada7d96",
+"description": "Constructor initializes ripple simulation with given dimensions, allocates pixel buffer, and starts animation thread using default color model.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:Ripple:Ripple.run": {
+"hash": "d80e4c948e7c598a",
+"description": "Loop continuously updating time-based parameters and rendering pixels. Works with screen data structure through computePixels call.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:Ripple:Ripple.ScalarField2D": {
+"hash": "14186242acac59c9",
+"description": "Constructor initializing the scalar field value v. Works with 2D grid data structure for cellular automata simulations.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:Ripple:Ripple.setPolar": {
+"hash": "1aa67d7fc7c041ad",
+"description": "Initializes polar coordinate fields from frequency and orientation parameters for 2D scalar field computation.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:Ripple:Ripple.value": {
+"hash": "75ad822bcbc96c7c",
+"description": "Returns sine grating pattern value at position (x,y) using frequency fields and phase offset. Works with 2D scalar field data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:TestJIT:TestJIT.main": {
+"hash": "07586dd115f2d4c0",
+"description": "Tests JIT compilation timing by measuring execution time before and after compiling the TestJIT class, printing compiler information and elapsed time measurements to standard output.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:TestJIT:TestJIT.test": {
+"hash": "9e882cc74be3f264",
+"description": "Tests CPU multiplication performance by squaring integers from 0 to 999999, returns execution time in milliseconds. Works with basic integer arithmetic and system timing.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:WindowCloser:WindowCloser.WindowCloser": {
+"hash": "b703f3913170f8e7",
+"description": "Registers a window listener to handle window closing events for the provided window instance.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:WindowCloser:WindowCloser.windowClosing": {
+"hash": "d443152e3c204880",
+"description": "Handles window closing events by disposing the window and exiting the application. Works with the GUI window component to terminate the program cleanly.",
+"model": "qwen3-coder:30b"
+},
+"fn:EEVORG:WINORVW:CWinorgView::OnLButtonDown": {
+"hash": "bfb472bc8dd07d76",
+"description": "Handles left mouse button clicks to increment score and update the view. Works with the document's data structure and view hierarchy.",
+"model": "qwen3-coder:30b"
+},
+"fn:EGALib & Math:Clock:DrawHourHand": {
+"hash": "11305e34d2a5c00d",
+"description": "Draws an hour hand on a clock face using graphics primitives, positioned according to input seconds. Works with EGA display coordinates and trigonometric calculations.",
+"model": "qwen3-coder:30b"
+},
+"fn:EGALib & Math:Clock:DrawMinuteHand": {
+"hash": "032927b04c1be51b",
+"description": "Draws a minute hand on screen using three line segments; called by hour hand drawer.",
+"model": "qwen3-coder:30b"
+},
+"fn:EGALib & Math:Clock:DrawSecondHand": {
+"hash": "190c8675a62c7e67",
+"description": "Draws a second hand on the clock face using line graphics. Calculates hand position based on seconds value and draws from center to tip coordinates.",
+"model": "qwen3-coder:30b"
+},
+"fn:EGALib & Math:EasterEggs:DrawEgg": {
+"hash": "df8a2e7215570b26",
+"description": "Draws a fractal egg pattern on screen using sine wave calculations and color mapping. Works with EGA graphics planes and point plotting.",
+"model": "qwen3-coder:30b"
+},
+"fn:EGALib & Math:ECE17p2:CalcVolume": {
+"hash": "ae7a5ee177ba879f",
+"description": "Calculates volume using rectangular integration with variables a,b,c,d as coordinates. Works with screen coordinate system for EGA graphics rendering.",
+"model": "qwen3-coder:30b"
+},
+"fn:EGALib & Math:ECE17p2:z": {
+"hash": "05c9fd169a2dc4dd",
+"description": "Computes z coordinate for fractal surface plot. Works with x,y screen coordinates to generate 3D surface values for rendering.",
+"model": "qwen3-coder:30b"
+},
+"fn:EGALib & Math:FracGen:Mult": {
+"hash": "ff5f3a3922dcdda3",
+"description": "Complex number multiplication routine for fractal generation calculations. Works with COMPLEX data structure containing real and imaginary components.",
+"model": "qwen3-coder:30b"
+},
+"fn:EGALib & Math:Lines:UpDate": {
+"hash": "a9b447d8a59b913f",
+"description": "Updates coordinate and delta values, keeping coordinates within bounds and reversing delta on boundary hit. Used for line animation in EGA graphics display.",
+"model": "qwen3-coder:30b"
+},
+"fn:EGALib & Math:ModGraphBase:Plot": {
+"hash": "733d6da4c0d83ca7",
+"description": "Plots a point at coordinates (X, Y) on the graphics screen using the current color setting from the global variable PlotColor.",
+"model": "qwen3-coder:30b"
+},
+"fn:EGALib & Math:ModGraphBase:SetMode": {
+"hash": "37e4c9f6ad2d01d4",
+"description": "Sets graphics mode by installing procedure pointers for initialization, bit mapping, function selection, clearing, and plotting operations within the graphics data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:EGALib & Math:SUPRO_DIOS:Copy": {
+"hash": "0c4463c0dda557c3",
+"description": "Copy performs file copy operations within a disk directory management system, working with disk sectors and directory structures. It integrates with ReadSector and ShowDir procedures for file system navigation and display.",
+"model": "qwen3-coder:30b"
+},
+"fn:EGALib & Math:Windows:OpenWindow": {
+"hash": "80c607fba621fd8b",
+"description": "Initializes a graphics window at specified coordinates and size using EGA display planes. Sets up video mode for graphic operations.",
+"model": "qwen3-coder:30b"
+},
+"fn:GDEM:Map_Editor:WriteSegment": {
+"hash": "17f71a56c6247ed6",
+"description": "Writes a segment to the screen using trigonometric calculations based on bearing and range values from a SegmentRec record.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:CoreTypes:bind": {
+"hash": "e22b0899430944e3",
+"description": "Binds success values with function f, propagating failures. Works with Success/Failure data structures containing processed radio data from HackRF receiver.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:CoreTypes:CircularBuffer.Available": {
+"hash": "659cc930a5e084c6",
+"description": "Returns number of elements available for reading from circular buffer. Works with internal read/write position pointers and capacity field.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:CoreTypes:CircularBuffer.Free": {
+"hash": "e33bd61dcbc3c379",
+"description": "Returns available space for writing new data into the circular buffer structure, calculated as capacity minus available items minus one. Works with in-memory circular buffer data structure during serial port data acquisition.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:CoreTypes:CircularBuffer.Write": {
+"hash": "828f402eb4a1f067",
+"description": "Writes data to a circular buffer, advancing write position and returning number of elements written, up to available space. Works with internal buffer structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:CoreTypes:ComplexSample.Phase": {
+"hash": "c7d86759a97e7491",
+"description": "Returns phase angle from I/Q quadrature components using arctangent2. Works with complex number data structure containing I and Q members for signal demodulation.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:CoreTypes:GroundStationLocatio": {
+"hash": "a2dfc527104bfb9e",
+"description": "Represents a ground station's geographic location with latitude, longitude, and altitude values. Works with satellite tracking and image reconstruction data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:CoreTypes:NOAASatellite.Name": {
+"hash": "d8e4895755deea30",
+"description": "Returns the human-readable name for NOAA satellite enum values. Works with satellite type enumerations to map to standard NOAA-15, -18, and -19 identifiers.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:CoreTypes:toOptio": {
+"hash": "c7fcbe42de740681",
+"description": "Converts success/failure results to optional values, returning some value on success or none on failure. Works with result types containing screen, serial port, or file data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:DSP:ComplexFIRFilter.ProcessSample": {
+"hash": "1a543ebf95717005",
+"description": "Processes individual complex samples through I/Q filters, returning filtered float32 complex values for subsequent demodulation stages in the FM signal chain.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:DSP:NCO.Mix": {
+"hash": "374001108ce1407f",
+"description": "Mixes input signal with local oscillator sample. Works with complex-valued radio frequency data from HackRF device.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:DSP:NCO.NextSample": {
+"hash": "55b5a71cd8920049",
+"description": "Generates next I/Q sample for frequency demodulation. Works with phase accumulator state, returns complex sample for Mix function.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:DSP:normalizedLo": {
+"hash": "0dfe4f0cf8a31de6",
+"description": "Normalizes low cutoff frequency value by sample rate for FM demodulation filter setup in NOAA APT receiver pipeline.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:FileSDRSource.Close": {
+"hash": "1fc53b72f85370ad",
+"description": "Closes the file stream and stops the streaming thread if active. Works with file stream and streaming thread state management.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:FileSDRSource.Configure": {
+"hash": "1d6d6b0a3684610d",
+"description": "Configures the HackRF device settings from a configuration structure. Updates the current configuration state with the provided parameters.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:FileSDRSource.GetConfig": {
+"hash": "64c6d611dbc2bc27",
+"description": "Returns the current configuration data structure used for HackRF device settings and receiver parameters during NOAA APT image processing.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:FileSDRSource.IsStreaming": {
+"hash": "d278aa8578d4bf82",
+"description": "Returns current streaming state flag indicating whether radio receiver is actively acquiring data from HackRF device. Works with hardware interface and internal state tracking.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:FileSDRSource.Open": {
+"hash": "9bc0fc9143bc6e1c",
+"description": "Opens a file stream for reading satellite data from the specified file path, returning success or failure. Works with file I/O operations and handles file access exceptions.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:HackRFSource.Close": {
+"hash": "7f30a3cdbbe8004d",
+"description": "Stops reception and closes the HackRF device handle, clearing streaming and open state flags. Works with the device handle and native HackRF API functions.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:HackRFSource.Configure": {
+"hash": "b84ee4d2a4883dda",
+"description": "Configures HackRF device settings like frequency, sample rate, and gain values from a configuration structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:HackRFSource.GetConfig": {
+"hash": "c34ec4eb36baf9b6",
+"description": "Returns current configuration data structure holding receiver settings and state information for NOAA APT image processing pipeline.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:HackRFSource.IsStreaming": {
+"hash": "40f43e8061723a21",
+"description": "Returns current streaming state flag indicating whether radio receiver is actively acquiring data from HackRF device. Works with hardware device state management.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:HackRFSource.Open": {
+"hash": "7d5f412bf4cb2382",
+"description": "Initializes HackRF library and opens device handle for subsequent operations. Returns success or failure with error details.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:HackRFSource.StartReceive": {
+"hash": "630ed2e493772000",
+"description": "Starts receiving complex samples via callback. Currently throws exception; native streaming unimplemented, use FileSource for testing. Works with complex sample arrays.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:HackRFSource.StopReceive": {
+"hash": "c8ba37e505153594",
+"description": "Stops receiving data from the HackRF device if currently streaming. Updates the streaming state flag to reflect the stopped condition. Works with the device handle and streaming status flag.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:SimulatedSource.Close": {
+"hash": "d2b144ef437df978",
+"description": "Closes the simulated HackRF source by stopping the streaming thread and updating the streaming state flag. Works with the stream thread and isStreaming data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:SimulatedSource.Configure": {
+"hash": "22c119ac573659c6",
+"description": "Configures the HackRF device settings from the provided configuration structure. Updates the current configuration state with the new settings.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:SimulatedSource.Dispose": {
+"hash": "0233999657f2b618",
+"description": "Disposes the simulated source by closing the underlying SDR connection. Works with the HackRF One device through the ISDRSource interface.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:SimulatedSource.GetConfig": {
+"hash": "6557232f98fb5b3e",
+"description": "Returns the current configuration data structure holding receiver settings and parameters for NOAA APT image processing.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:SimulatedSource.IsStreaming": {
+"hash": "d718463b8f423683",
+"description": "Returns current streaming state flag indicating whether radio receiver is actively acquiring NOAA APT satellite data frames. Works with internal isStreaming boolean data structure tracking acquisition status.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:SimulatedSource.StopReceive": {
+"hash": "57d26f0320bb9e59",
+"description": "Stops the receive operation and waits for the streaming thread to finish. Updates the streaming state to false after stopping. Works with the stream thread and isStreaming flag.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:WavFileSource.Close": {
+"hash": "6d217726a8297f83",
+"description": "Closes the WAV file source, stops the streaming thread, and disposes of the file stream and binary reader resources.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:WavFileSource.Configure": {
+"hash": "7f7ef5c82a19c61b",
+"description": "Updates the current HackRF configuration with a new sample rate value converted to Hz units, returning success status. Works with HackRFConfig data structure containing radio settings.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:WavFileSource.GetConfig": {
+"hash": "a51a5fbd99692e94",
+"description": "Returns the current configuration data structure used for HackRF device settings and NOAA APT decoding parameters.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:WavFileSource.IsStreaming": {
+"hash": "ad67ec5ab53dc4bf",
+"description": "Returns current streaming state flag indicating whether audio data reception is active. Works with internal isStreaming boolean variable tracking receiver status.",
+"model": "qwen3-coder:30b"
+},
+"fn:HackRF NOAA:HackRFInterface:WavFileSource.StopReceive": {
+"hash": "29187a58572b939e",
+"description": "Stops the audio stream reception thread and updates the streaming status flag. Works with the stream thread and isStreaming data structure to manage receiver state.",
+"model": "qwen3-coder:30b"
+},
+"fn:LSM StormCell:encoding:num_inputs": {
+"hash": "3b26c1764c0f83b0",
+"description": "Returns number of input channels for the reservoir, either double the rate inputs if onset channels are used, or single rate inputs otherwise. Works with radar data input structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:LSM StormCell:run_prototype:ascii_frame": {
+"hash": "7eb06ccdb7e3fdd8",
+"description": "Converts radar frame data to ASCII art representation for display or logging. Takes numpy array input, returns newline-separated string with characters \" .:#\" mapping intensity values.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Analysis:Analyze": {
+"hash": "ebdc7b07098faf34",
+"description": "Analyzes radar data from serial port input, updates screen display and file structures. Works with EGA graphics, RS-232 modem link, sweep data buffers.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Analysis:DefineArea": {
+"hash": "5051a5f5702a59ff",
+"description": "Defines area boundaries for radar analysis, working with screen display and serial port data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Analysis:DrawMarkers": {
+"hash": "8eb3f31fde6478f4",
+"description": "Draws radar marker trails and calculates speed/direction from last two points; updates display with computed values. Works with screen graphics and trail data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Auto:UpdateTimes": {
+"hash": "e9de3b22df1b94b4",
+"description": "Updates program schedule times based on current time, adjusting day and minute fields within the Programs array structure. Works with time data structures and modifies scheduled update times for radar programs.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:CDScrn:WriteGrid": {
+"hash": "3b3ce1c827c9b71f",
+"description": "Draws grid lines on the radar screen display for spatial reference during storm cell analysis. Works with EGA graphics buffer and sweep data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:E250DRAW:DrawLocator": {
+"hash": "f3e171a14b0c4457",
+"description": "Draws locator indicator on screen; works with EGA graphics buffer and serial port data from radar system.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:E250Edit:DrawCursor": {
+"hash": "a168c3852df2bb7e",
+"description": "Draws a cursor on screen either as a crosshair or plus sign depending on edit mode; works with graphics routines and cursor position variables.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:E250Edit:WriteComment": {
+"hash": "01dbd716c53e0b9f",
+"description": "Writes text comment to screen at specified coordinates using graphics functions, clears background, operates on current comment data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:E300_Radar_Terminal:Rx": {
+"hash": "2813c09d648e67e8",
+"description": "Reads next character from circular buffer, updating buffer pointer. Works with serial port receive buffer for radar data communication.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:E300_Radar_Terminal:RxPicLoop": {
+"hash": "a4bebf578a0e0847",
+"description": "Handles reception and display of radar sweep data during RxPic mode, processing serial input and updating screen graphics with sweep lines and scale markers.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:E300_Radar_Terminal:Sync": {
+"hash": "2e9d3d920ab26d94",
+"description": "Synchronizes radar data reception from serial port, updates screen display and parameters, handles buffer overflow and user commands during EGA graphics sweep rendering.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:E300_Radar_Terminal:WriteHelp": {
+"hash": "0bd737f02f533187",
+"description": "Writes help text to screen based on current mode, displaying different messages for modem, interactive, wait picture, and receive picture/graph states using ANSI escape sequences for cursor positioning.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:E300Interface:GetParam": {
+"hash": "7e59b3b847565263",
+"description": "Retrieves radar parameter settings via serial communication; reads tilt, range, gain, time, and RT state from E300 system.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:E300PC:Storage": {
+"hash": "e533f289538125f8",
+"description": "Handles storage operations for radar stations, managing serial communication and screen display of station data. Works with station records, serial port, and EGA graphics.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Environment:ColAdj": {
+"hash": "7c627481aae8620c",
+"description": "Adjusts color index for screen display, wrapping from 0 to ColMax-1. Works with EGA graphics color palette.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Environment:CursorOn": {
+"hash": "d5c44e1c06241631",
+"description": "Turns cursor on in text mode by calling BIOS interrupt 10h with function 1, setting cursor shape and visibility. Works with video display hardware through BIOS services.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Environment:Delay": {
+"hash": "1ef5ad0fc01f7a3c",
+"description": "Delays execution by specified milliseconds using system time polling; used for timing delays in serial communications, screen updates, and data processing.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Environment:DetermineComputer": {
+"hash": "f12a1703b344baac",
+"description": "Determines computer type by reading BIOS signature at fixed memory location. Works with hardware memory structure to identify PC models from XT to AT series.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Environment:GetScreenAdr": {
+"hash": "b5fa92cbc8b086c9",
+"description": "Determines video screen type and returns pointer to screen memory. Reads BIOS interrupt 11h to identify mono/color display, sets global ScreenType flag accordingly.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Environment:Pause": {
+"hash": "38e2033aee7fb7e1",
+"description": "Pauses execution for a specified number of seconds using screen timing. Works with system time functions and display updates.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Environment:Peek": {
+"hash": "e05342bc4a3a14f6",
+"description": "Reads a 16-bit value from specified memory segment and offset; used to access hardware registers or memory-mapped I/O for display and communication control.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Environment:Ptr": {
+"hash": "8b3383da89c0bedf",
+"description": "Converts far pointer segment and offset values into a single address value for memory access. Works with hardware screen addressing and low-level memory operations.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Environment:RowAdj": {
+"hash": "514c05015417e8bc",
+"description": "Adjusts row index for circular buffer wrapping in display routines. Works with screen row coordinates, returns next valid row number.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Environment:ToneInit": {
+"hash": "40d2ad52875322ea",
+"description": "Initializes tone generation settings for radar display using serial port communication to configure screen, refresh rate, and mode parameters via bitset configuration.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:FracGen:Mult": {
+"hash": "2fedade1a05795ad",
+"description": "Multiplies two complex numbers representing radar signal amplitudes and phases for display processing. Works with COMPLEX data structures containing real and imaginary components.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:GenTable:Hex": {
+"hash": "81ad63f43006dd18",
+"description": "Converts byte value to 2-character hexadecimal string using global HexDig array; works with screen display output in radar data table formatting.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:GenTable:MakeXTable": {
+"hash": "a659df5ef8757581",
+"description": "Generates X table entries for radar sweep display using sine wave calculations. Works with global Table data structure and outputs via OutTable procedure.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:GenTable:MakeYTable": {
+"hash": "70326811b7f10f85",
+"description": "Generates Y increment tables for radar sweep display, writing values to assembly output files. Works with screen display and file I/O structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:GenTable:OutTable": {
+"hash": "77007eb66e70b3ae",
+"description": "Outputs table data as hexadecimal word values to a file, formatting 16-bit values in DW directive syntax for assembly consumption. Works with global TableData array and OutFile stream.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Graphics:WriteString": {
+"hash": "22ca8f37b97af895",
+"description": "Writes a character string to the current output device, stopping at null or carriage return; used for screen display and data output.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Main:AutoMenu": {
+"hash": "58680123e825c0bd",
+"description": "Sets automatic update interval for radar display; prompts user via screen for time value, handles conversion and error recovery.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:OptionFile:LoadOptions": {
+"hash": "bb69f4cdbc203589",
+"description": "Loads saved options from a file into memory variables for display and processing in the radar terminal's configuration window.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:OptionFile:SaveOptions": {
+"hash": "060d70b3e97d0ab4",
+"description": "Saves all option variables to a binary file. Works with option data structure and file I/O. Called during window save operation.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:OptionFile:SetOptions": {
+"hash": "bb5d925e7b2a9965",
+"description": "Sets terminal options for radar display and data communication. Works with EGA screen, RS-232 port, and configuration data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Options:LoadOptions": {
+"hash": "dcb3e0557cb30c56",
+"description": "Loads user options from a file into memory; initializes default settings if file fails. Reads modem port and baud rate, clock type from file or sets defaults. Works with option file, serial port configuration, and program data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Options:SaveOptions": {
+"hash": "440a69b4b03e48c8",
+"description": "Saves current modem port configuration to options file. Writes 892 bytes of port settings to specified file handle.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Options:WriteOptionEntry": {
+"hash": "9b1a69db9ce9a678",
+"description": "Writes formatted option setting strings to screen display; works with global modem and clock configuration variables.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:RADAR:GRLine": {
+"hash": "dad90cde6c5f6abb",
+"description": "Draws a line between two points using digital differential analyzer algorithm, plotting pixels via GRPlot function on screen graphics.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:RADAR:GRMessage": {
+"hash": "3cff9ac66805b45e",
+"description": "Displays a message on the screen window, clears previous message, optionally waits for keypress, handles screen positioning and plane selection for EGA graphics.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:RADAR:ResetBuf": {
+"hash": "651b2ab3e5fcffb6",
+"description": "Initializes buffer pointers to start position for data reception from weather radar system. Resets circular buffer state for incoming sweep data processing.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:RADAR:RxPicLoop": {
+"hash": "390deb73b6bef617",
+"description": "Receives radar picture data via serial port, displays sweep lines on screen, handles abort requests, saves completed picture to memory buffer.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:RADAR:SelectFunc": {
+"hash": "714afa65c709b076",
+"description": "Sets video controller register to select raster function for EGA display; updates current function mask used in graphics operations.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:RADAR:SelectStation": {
+"hash": "ab853fa56e14e328",
+"description": "Selects weather radar station from serial input, updates display screen and data structures during modem communication loop.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:RADAR:SetMask": {
+"hash": "d02d25dd2efd0aac",
+"description": "Sets video mask register for radar display; works with EGA graphics hardware through port I/O, updates current mask value in data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:RADAR:SetParams": {
+"hash": "ebaf8bc2dfdae289",
+"description": "Processes incoming serial commands to update radar parameters like gain, tilt, range, and time; checks checksums and matches graphics configuration data.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:RADAR:Storage": {
+"hash": "9d39ed63353d5350",
+"description": "Displays stored radar pictures, allows selection, deletion, and loading via keyboard; works with screen, file system, and Pic[] data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:RADAR:ToggleGraphics": {
+"hash": "db095425864c0911",
+"description": "Toggles graphics display on/off by calling ShowPlane with different line ranges. Works with screen display and graphics state variable.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:RADAR:UnWindow": {
+"hash": "cd4749b7019d88c4",
+"description": "Restores normal display mode after radar window operations, redraws map overlays and range markers if enabled, resets cursor position. Works with EGA graphics screen and serial port communication.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:RADAR:WriteGfx": {
+"hash": "9722e06261dd3f8e",
+"description": "Writes radar map data including landmarks and line segments to the display using graphics routines and trigonometric calculations based on range and bearing values from a passed data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:RADAR:WriteParams": {
+"hash": "9d1fcfeea41fa25f",
+"description": "Writes current radar parameters (tilt, time, range, gain, mode) to screen display using EGA graphics routines and data from Pic array.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:AddStation": {
+"hash": "e67cbdd9b99361c7",
+"description": "Adds a new station by creating a directory and storing a phone number for modem communication.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:Ask": {
+"hash": "30a6716272d78738",
+"description": "Displays a yes/no prompt on screen, reads keyboard input, returns true if user presses 'Y'. Works with screen display and keyboard input.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:CallStation": {
+"hash": "99791a0fd0d35431",
+"description": "Dials a phone number via serial port, displays modem status messages on screen, handles connection states and errors during terminal communication.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:ClearScreen": {
+"hash": "84f7625e6bc78946",
+"description": "ClearScren clears the EGA screen by zeroing raster rows, working with video memory and Circle1 lookup table for sweep display redraw.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:ConOut": {
+"hash": "7b923e5a84075c5b",
+"description": "Handles console output to EGA screen or serial command input, managing character display, cursor positioning, and terminal control sequences.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:DDelay": {
+"hash": "c71287234295ff25",
+"description": "Delays execution by given real number of ticks, handling keyboard input; works with screen display and serial communication via EGA graphics and RS-232 modem link.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:DemoLoop": {
+"hash": "79b4c186b3e4c287",
+"description": "Displays radar sweep data on screen while handling serial port communication and file I/O for demo mode operation. Works with EGA graphics buffer, RS-232 modem interface, and storm cell data structures during automated display loops.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:DispMess": {
+"hash": "cf53e7b0d3f9a000",
+"description": "Displays formatted text messages on screen from serial port input, handling multi-line message boundaries with cursor positioning and size tracking.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:EraseMess": {
+"hash": "295da5ce6d1ab310",
+"description": "Clears a rectangular screen area defined by global XSt, YSt, XSz, YSz coordinates using direct video memory access via SelectPlane for EGA display.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:GotoXY": {
+"hash": "922cbf41da7ebf1c",
+"description": "Sets cursor position for text output on EGA screen by calculating byte offset into character buffer using row and column coordinates. Works with video memory character buffer structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:GRPlot": {
+"hash": "8d7a28c5d9338f0b",
+"description": "Plots a pixel at coordinates X,Y on the EGA screen by setting the appropriate bit in video memory. Works directly with EGA video memory addressing and bit manipulation.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:RxGraphLoop": {
+"hash": "213c21f4588339c3",
+"description": "Receives radar map overlay data via serial link, displays it on screen, handles user abort and save/load operations. Works with graphics buffer, serial port, and station data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:SavePic": {
+"hash": "c28f01c14e42799e",
+"description": "Saves radar picture data to a file with a generated name based on time, tilt, range, and gain settings. Works with screen buffer data, file I/O, and serial port communication.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:SaveStation": {
+"hash": "bda841403cdabdf9",
+"description": "Saves station data including precipitation overrides and grid segments to a .STA file. Works with file I/O and global data structures containing radar display information.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:SelectPlane": {
+"hash": "6c9849852c62184c",
+"description": "Selects display plane by writing data to VGA attribute controller. Works with EGA graphics hardware through port I/O, updates current plane variable.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:SetMask": {
+"hash": "f03069a93243fe22",
+"description": "Sets video mask register via port I/O; updates current mask value. Works with EGA display hardware through VGA ports, affects screen pixel masking during graphics rendering.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:ShowLoop": {
+"hash": "47b5f0bb8dc1e8fc",
+"description": "Displays radar sweep images from files, handles user input for station selection and commands, supports serial communication and screen output.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:ShowPlane": {
+"hash": "f81d62f0c6a0bb5f",
+"description": "Sets EGA display attributes for radar plane data via port I/O operations, using byte values from a plane set structure to configure display parameters through VGA controller registers.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:WriteGfx": {
+"hash": "4219b64145119c20",
+"description": "Writes radar graphics data to screen, processing land marks and segments for display using EGA graphics routines and range/bearing calculations.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:WriteParams": {
+"hash": "8328c839ef40b934",
+"description": "Writes radar parameters to screen display, including tilt, time, range, gain, and RT status, with optional graphics overlay from data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal:WriteRngMks": {
+"hash": "32d2f23cc0e2c98e",
+"description": "Draws range markers on radar display using precomputed sine values and graphics plotting functions. Works with EGA screen coordinates and circle data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal_Zoom_Test:getarea": {
+"hash": "d731b5593a9ab3a0",
+"description": "Allocates memory buffers and reads 175x40 pixel data from EGA video memory maps 0 and 1, storing them in redbuf and grnbuf arrays for radar display processing.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Radar_Terminal_Zoom_Test:setpix": {
+"hash": "676efa7da7a80ffe",
+"description": "Sets pixel at coordinates x,y with color value V, handling plane selection based on V then plotting the pixel on screen. Works with EGA graphics display and raster coordinates.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:RadarTerminal:Interactive": {
+"hash": "ce9e28b769063ffc",
+"description": "Initiates modem connection to download weather parameters; handles serial communication with radar system, writes received data to screen using parameter structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:RadarTx:GenPrefixData": {
+"hash": "17f5666425d211d5",
+"description": "Generates prefix data for radar picture transmission, fills array with header information before image data is sent to serial port. Works with picture buffer and prefix table structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:RadarTx:SetPrefix": {
+"hash": "6bdbc721b7a7e2f6",
+"description": "Initializes prefix table entries for radar sweep data, processing picture buffer to record position and length information for data segments transmitted via serial port. Works with screen-based radar data structures and RS-232 modem link.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:RadarVersion2point0:StationMenu": {
+"hash": "034c167262ab0c27",
+"description": "Handles station selection menu display and input processing using EGA graphics buffer, with serial communication support for radar data exchange.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:RADCGA:DispLine": {
+"hash": "c6f801f699a80b57",
+"description": "Displays radar sweep lines from buffered serial data on EGA screen; processes 1280-byte line structures with color-coded ranges, handles 460-line display loop from PIC4.DAT file.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:RadioTx:SendPic": {
+"hash": "8f131add2103b32c",
+"description": "Sends radar picture data via serial port; converts 2048-byte blocks to 2052-byte frames with padding. Works with PictureRec structures and serial transmit routine.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:rs2:ReportBreak": {
+"hash": "9c056fc15073addd",
+"description": "Maintains circular buffer of received data positions for serial interrupt handling. Updates buffer index and count when break condition detected during RS-232 communication.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:SCREEN:ClearScreen": {
+"hash": "e061927c703ffd2e",
+"description": "Clears the screen display; called during terminal updates and data reception. Works with EGA graphics buffer and serial communication state.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:SCREEN:EGAOut": {
+"hash": "109f79c40b230da2",
+"description": "Outputs character to EGA screen buffer at current cursor position, handling backspace, line feed, and carriage return control characters. Updates cursor position and wraps to next line when end of row reached.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:ScreenHandler:DrawRangeMarks": {
+"hash": "35113486502befc2",
+"description": "Draws range marks on screen display. Works with EGA graphics buffer and sweep data structures. Called by ToggleRangeMarks procedure.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:ScreenHandler:SetHelpMode": {
+"hash": "1554d5427ffcd9b4",
+"description": "Sets the help mode state used for display and serial terminal responses. Works with screen display and RS232 communication interface.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Sets:Diff": {
+"hash": "e47329dd217962df",
+"description": "Computes difference of two bitset arrays, storing result in third array. Works with internal data structures representing radar sweep data for storm cell analysis.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Sets:Excl": {
+"hash": "2c4d86d22a64f304",
+"description": "Removes a member from a bitset array used for picture state management. Works with screen display data structures and serial port communication flags.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Sets:In": {
+"hash": "90c619dd7b15ccc6",
+"description": "Tests membership of a cardinal value in an array of bitsets representing radar data regions. Works with bitset structures containing sweep data from serial input.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Sets:Incl": {
+"hash": "21b7364f947954af",
+"description": "Includes a cardinal member value into the bitset array structure, updating the set membership bits for the specified index. Works with bitset data structures used for radar cell tracking and storm analysis.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Sets:Inter": {
+"hash": "eaf8cc147f25abd1",
+"description": "Computes intersection of two bitset arrays, useful for combining storm cell data from multiple sweeps. Works with radar sweep data structures containing BITSET elements.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Sets:SymDiff": {
+"hash": "50068ad6594fb99a",
+"description": "Computes symmetric difference of two bitset arrays, useful for comparing storm cell data between successive radar sweeps. Works with internal radar data structures during sweep processing.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Sets:Union": {
+"hash": "b99a415f2ea0c458",
+"description": "Computes union of two bitset arrays representing radar sweep data regions. Works with internal radar data structures during storm cell analysis processing.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Sweep:DrawSweep": {
+"hash": "49f5affab34fc52c",
+"description": "Draws radar sweep data from ScreenTable, plotting points based on bit decisions to render a radial pattern on screen. Uses EGA graphics and calls CalcTable for data preparation.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Windows:CloseWindow": {
+"hash": "c01a95173fda2255",
+"description": "Closes a window and saves its data to the specified address. Works with screen display and serial port communication structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:RADARPAS:Windows:OpenWindow": {
+"hash": "f3755a4eacac3f27",
+"description": "Allocates and initializes a rectangular display window on the EGA screen for radar data visualization. Saves underlying screen content for later restoration. Works with video memory and graphics routines.",
+"model": "qwen3-coder:30b"
+},
+"fn:SIGNAL:FILTNODE:FilterNode::getOutput": {
+"hash": "8ff025ff775258f9",
+"description": "Returns the output signal pointer, updating internal state if necessary. Works with FilterNode's internal signal data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:SIGNAL:FILTNODE:FilterNode::setNext": {
+"hash": "f32c7111663c4019",
+"description": "Sets the next filter node in the processing chain. Works with filter node data structures to link consecutive processing elements.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:Accounts_Payable:AccountFileName": {
+"hash": "c4f6ebe5ebce3367",
+"description": "Creates filename for account data file from account number. Works with account data structure to generate .DAT filenames.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:ARMENU:DrawLog": {
+"hash": "f164e781f4cada5e",
+"description": "Displays account log entries in a window, showing current account and surrounding entries, with highlighting. Works with screen display and account data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:ARMENU:EditAccount": {
+"hash": "7fcfe4d3e4bdccb8",
+"description": "Edits account details in a screen-based interface, updating fields like number, name, address, city, and phone. Uses keyboard input and screen highlighting for field navigation and data entry.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:ARMENU:HiLiteLog": {
+"hash": "4f8d3a4334f77835",
+"description": "Highlights current account text on screen using highlight colors, then writes account data. Works with screen output and account data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:ARMENU:LoLiteLog": {
+"hash": "98b9090a02733598",
+"description": "Clear current screen line and write account information to standard output. Works with screen display and account data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIDELIV:EditDelivery": {
+"hash": "a9105de240434668",
+"description": "Edits delivery records including ticket number and fuel quantities for regular, premium, and unleaded fuels, with screen highlighting and file logging.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIDELIV:EnterDelivery": {
+"hash": "69111766877e099a",
+"description": "Enters and edits delivery records, handling screen display, keyboard input, and file I/O through LoadDelivery, EditDelivery, and SaveDelivery routines.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIDELIV:LoadDelivery": {
+"hash": "efa053dbf68495bb",
+"description": "Loads delivery record from DELIV.DAT file into memory structure, positioned according to log pointer value, or clears record if pointer is zero. Works with delivery data file and log tracking structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIDELIV:SaveDelivery": {
+"hash": "5f6185b4d3fddf39",
+"description": "Saves delivery record to DELIV.DAT file, updating log pointer. Works with delivery data structure and log management system.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIDELIV:Stick": {
+"hash": "0f11a1549cb9dba5",
+"description": "Looks up fuel chart values by inches and fuel type, returning -1 for invalid inch values. Works with internal Chart data structure containing fuel delivery measurements.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIDELIV:WriteDelivery": {
+"hash": "3f52bae6a2d8ad55",
+"description": "Writes delivery ticket information to screen display using date/time utilities and delivery row data from log structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIDELIV:WriteDeliveryRow": {
+"hash": "9d57e1a0c7e71809",
+"description": "Writes delivery fuel data to screen display at positions based on fuel type and calculated values. Works with screen coordinates and global delivery variables.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIMENU:EnterMMP": {
+"hash": "3e0b202db99adb02",
+"description": "EnterMMP handles menu input processing for the spreadsheet system. Works with screen display and keyboard input to manage user navigation through application menus and options.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIMENU:EnterTR": {
+"hash": "87263ae12ce8ce64",
+"description": "Reads transaction records from serial port into memory buffer for processing by LoadMMP. Handles data input from external accounting system.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIMENU:NewLog": {
+"hash": "72991a64f2d3bdf2",
+"description": "Checks if all pointers for a given log number are cleared, indicating the log is available for reuse. Works with internal data structure Log array. Returns true if no active pointers exist.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIMENU:NullLog": {
+"hash": "b80e91d3c318168b",
+"description": "Checks if specified log entry has no data in any of five pointer fields. Works with internal log data structure, returns TRUE if all pointers are zero.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIMENU:WriteEditLine": {
+"hash": "a895b3e7d3443a2c",
+"description": "Displays edit mode prompt line showing available actions; works with screen output and log data structure to indicate restore/delete options based on current sheet pointer position.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIMENU:WriteKeyLine": {
+"hash": "4b40db61d35376a4",
+"description": "Displays menu key instructions on screen, optionally including edit function based on change status flag. Works with screen output through Message procedure.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIMMP:CalcMMP": {
+"hash": "7e5e21c5d9a4827a",
+"description": "Calculates MMP (Monthly Management Payment) amounts based on current and previous readings, applies pricing and credit card fees to generate total charges. Works with internal data structures containing readings and pricing information.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIMMP:EditMMP": {
+"hash": "5b5c8d678fbce1a0",
+"description": "Edits MMP record fields for credit card and check number; updates related data structures and displays changes on screen.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIMMP:EnterMMP": {
+"hash": "be1c1a85f947677f",
+"description": "Handles MMP data entry and editing, manages screen display and file I/O through keyboard commands, works with log and summary data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIMMP:LoadMMP": {
+"hash": "6cc41a0e1c6ceac3",
+"description": "Loads MMP and Price data from files using log pointers; updates screen display via CalcMMP.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIMMP:LoadPrice": {
+"hash": "8b3500232172be39",
+"description": "Loads price data from file at specified log pointer position into Price structure, or clears Price if pointer is zero. Works with PriceFile and Log[CurrentLog].Pointer[Pricet] data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIMMP:SaveMMP": {
+"hash": "778279b84d4a2489",
+"description": "Saves current MMP data structure to file at logged pointer position, updates log with new pointer value. Works with MMP file and log data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIMMP:SavePrice": {
+"hash": "437eae098febd25e",
+"description": "Saves price data to a file at a specified pointer location, updating log metadata. Works with price file and log structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIMMP:ViewMMPSummary": {
+"hash": "5b305c6bd05ff759",
+"description": "Displays monthly and yearly fuel sales summaries on screen from log data, updating totals for regular and premium fuels, cash, credit card transactions, and fees.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIMMP:WriteMMP": {
+"hash": "e7be0a24649e11a7",
+"description": "Writes MMP transaction data to screen or output device using formatted positions and date/time utilities, working with global transaction and log structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FIMMP:WritePrices": {
+"hash": "75287b477f6b002b",
+"description": "Writes fuel price details to screen or output device using positioned I/O based on fuel type index. Works with data structure Price and global formatting variables.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FITR:CalcTR": {
+"hash": "7500b4c344a2cd13",
+"description": "Initializes pump readings from TR.Readings array, setting up 10 pump data points for current transaction. Works with internal data structure containing reading values.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FITR:EnterTR": {
+"hash": "a3679109ce6d43c9",
+"description": "Enters transaction record editing mode, loads and displays current transaction, handles user commands for editing, printing, or exiting, and saves changes if needed. Works with screen display, keyboard input, and transaction data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FITR:SaveDLMFI": {
+"hash": "5f8e8209f249cba9",
+"description": "Saves DLMFI data structure to file during TR save operation. Works with file I/O and internal data representation.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FITR:SetReading": {
+"hash": "59b15dd3fc052e8f",
+"description": "Updates pump readings in transaction data structure, calculates sales, validates increasing values, and displays error messages for decreasing readings. Works with internal TR data structure and screen output.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FITR:WriteTR": {
+"hash": "560cebfb9a821872",
+"description": "Writes transaction record data to user display screen, showing date, time, shift, and ten rows of transaction details using helper routines and date formatting utilities.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:FITR:WriteTRRow": {
+"hash": "a6112ad7b84b15d8",
+"description": "Writes pump reading data to screen at specified row positions for Usr, AuxTR, and Sales fields using WGoto for positioning. Works with screen output via Usr file handle.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:Mailing_Labels:EditAddress": {
+"hash": "fb843d7ca5fa91ce",
+"description": "Edits address fields (name, street, city) in a screen-based form, with cursor navigation and input validation. Works with screen display and keyboard input, updates data structure fields.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:MainMenu:NewDisk": {
+"hash": "bb340d93f04b5dca",
+"description": "Creates new disk file structure for spreadsheet data storage. Works with file system and data structures. Empty implementation shown.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:MainMenu:SetDefaults": {
+"hash": "6c670a312cb03e9e",
+"description": "Sets color and drive defaults for the main menu interface, updating screen display and saving changes to configuration.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:Node:NodeSize": {
+"hash": "bd45f781a1a2aeb3",
+"description": "Returns size in bytes of a node's data structure for memory management. Works with internal node records containing symbols, strings, numbers, lists, and subroutines.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:ServiceStationManager:AccountsReceivable": {
+"hash": "3b30d435de7c670d",
+"description": "Displays accounts receivable report using ACC102.DSP template file. Opens display file, shows frame sequence, then closes file.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:TEMP:CheckKeyFile": {
+"hash": "fe65cd931e89ebb0",
+"description": "Checks for existence of key file resource; sets flag indicating availability for subsequent file operations. Works with data file KEYFILE.DAT in program path.",
+"model": "qwen3-coder:30b"
+},
+"fn:SSM:TransferAccounts:DirEntry": {
+"hash": "b6dcca532190a885",
+"description": "Reads directory entry from DTA buffer, constructs filename, and processes account data file by resetting balances. Works with file I/O and account records.",
+"model": "qwen3-coder:30b"
+},
+"fn:TURING:turing:main": {
+"hash": "7b59df2745c65634",
+"description": "Initializes and runs a Turing machine simulation using hardcoded tape and state table data, printing initial and final tape states to screen.",
+"model": "qwen3-coder:30b"
+},
+"fn:TURING:turing:TuringMachine::getSymbol": {
+"hash": "613f3dc74c56acfb",
+"description": "Returns symbol from tape at given position, extending tape dynamically as needed. Works with internal tape data structure, handles negative and out-of-bounds indices.",
+"model": "qwen3-coder:30b"
+},
+"fn:TURING:turing:TuringMachine::setSymbol": {
+"hash": "e148e00210d528db",
+"description": "Sets a symbol on the tape at the given position, returning the symbol written. Works with the internal tape data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:TURING:turing:TuringMachine::step": {
+"hash": "7a97aebe5d09715b",
+"description": "Advances the Turing machine by one step using the state table, modifying tape symbol and position based on current state and input symbol.",
+"model": "qwen3-coder:30b"
+},
+"fn:TURING:turing:TuringMachine::tapeString": {
+"hash": "414fc90a2e491d39",
+"description": "Converts tape contents to string of 0s and 1s for display. Works with internal tape data structure, returns dynamically allocated character string.",
+"model": "qwen3-coder:30b"
+},
+"fn:TURING:TuringMachine:CountSym": {
+"hash": "caee180e088a2a08",
+"description": "Counts consecutive identical symbols around current tape position, displays count at cursor, waits for keypress before clearing display. Works with tape data structure and screen output.",
+"model": "qwen3-coder:30b"
+},
+"fn:TURING:TuringMachine:Cursor": {
+"hash": "5695e0f039fbe7d0",
+"description": "Sets cursor visibility range on screen display using BIOS interrupt $10. Parameters define start and end scan lines for cursor appearance.",
+"model": "qwen3-coder:30b"
+},
+"fn:TURING:TuringMachine:DrawMachine": {
+"hash": "948a22207275cd48",
+"description": "Draws Turing machine instruction table on screen grid, showing state-symbol combinations and their instructions from data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:TURING:TuringMachine:DrawTape": {
+"hash": "5165431c5a90bee2",
+"description": "Draws tape contents on screen starting at position At using Translator table. Updates LeftPosition to track displayed range. Works with Screen array and Tape data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:TURING:TuringMachine:EditInstruct": {
+"hash": "776a888e4d8a01b4",
+"description": "Edits a Turing machine instruction at the current state and symbol position, updating screen display and handling state transitions. Works with screen coordinates and internal machine data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:TURING:TuringMachine:ExecuteInstruct": {
+"hash": "dabd049a42ae3bb8",
+"description": "Executes a single instruction from the Turing machine program, updating the tape, state, and carriage position. Works with screen display and keyboard input during trace mode.",
+"model": "qwen3-coder:30b"
+},
+"fn:TURING:TuringMachine:Initialize": {
+"hash": "074bb81c2245e872",
+"description": "Initializes Turing machine state, sets default values for tape, machine name, and edit flag, then draws initial tape and machine display.",
+"model": "qwen3-coder:30b"
+},
+"fn:TURING:TuringMachine:LoadMachine": {
+"hash": "acbfa9e13ba3f589",
+"description": "Loads Turing machine instructions from a file into memory, displays the machine name and initial state, and prepares the machine for editing or execution. Works with file I/O and screen display.",
+"model": "qwen3-coder:30b"
+},
+"fn:TURING:TuringMachine:LoadTape": {
+"hash": "3a37d9d66fee3854",
+"description": "Loads tape data from a file into memory, displays the filename, and updates the tape display. Works with file I/O and screen output.",
+"model": "qwen3-coder:30b"
+},
+"fn:TURING:TuringMachine:NullInstruct": {
+"hash": "adaeec80c82bee8e",
+"description": "Initializes a Turing machine instruction table entry for a null instruction, setting write symbol, next state, and move direction. Works with the internal machine state data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:TURING:TuringMachine:ReadKbd": {
+"hash": "efaae4ba661bb65d",
+"description": "Reads keyboard input from Kbd file handle, detects escape key presses, sets Escape flag accordingly. Works with standard input device.",
+"model": "qwen3-coder:30b"
+},
+"fn:TURING:TuringMachine:SaveMachine": {
+"hash": "f23b73234c5dd60d",
+"description": "Saves current machine state to a file with specified name. Works with screen input, data structure, and file I/O.",
+"model": "qwen3-coder:30b"
+},
+"fn:TURING:TuringMachine:SaveTape": {
+"hash": "5b7f9e92d2093418",
+"description": "Saves current tape segment to a file with specified name. Works with tape data structure and screen input editing.",
+"model": "qwen3-coder:30b"
+},
+"fn:TURING:TuringMachine:WriteInstruct": {
+"hash": "7a6d3c90c68b76bf",
+"description": "Writes Turing machine instruction to screen display at position determined by state and symbol. Works with global Machine data structure and screen output.",
+"model": "qwen3-coder:30b"
+},
+"fn:TURING:TuringMachine:WriteScreen": {
+"hash": "b6f7567670c6166c",
+"description": "Copies the Turing machine window contents to the screen buffer for display. Works with screen and TuringWindow data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:oItem:dActivation": {
+"hash": "ecea1b110c32eac3",
+"description": "Updates item activation value and propagates change to parent view's total activation. Works with activation data structure and view hierarchy.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:oItem:Dump": {
+"hash": "d777cac6c8e565ac",
+"description": "Outputs object state information during debugging via dump context, typically to screen or debug output stream.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:oItem:getWidth": {
+"hash": "ba53808b74f04aa8",
+"description": "Returns scaled width for an item based on its activation relative to parent's total activation, using a global SCALE factor. Works with activation data structures during layout calculations.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:oView:OnEditClear": {
+"hash": "28e572309aef3ea2",
+"description": "Clears current selection from view, deletes associated data structure, and updates all document views to reflect removal. Works with in-memory selection data structure and document view system.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:oView:OnEditCopy": {
+"hash": "7a382c743265b5f9",
+"description": "Copies selected items to the clipboard. Works with the current selection data structure and clipboard functionality.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:oView:OnLButtonDblClk": {
+"hash": "953312e1ac026697",
+"description": "Handles double-clicking on selected items, opening them with primary or open verb based on control key state, then calls base class implementation. Works with view selection and OLE verbs.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:oView:OnLButtonDown": {
+"hash": "bf5a6942e6c72d0d",
+"description": "Handles left mouse button down events for item selection and potential resizing within the visualization window. Works with screen coordinates and item data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:oView:OnUpdateEditClear": {
+"hash": "6eb10a5740550d97",
+"description": "Enables or disables the edit clear command based on whether a selection exists. Works with the mySelection data structure to determine state.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:oView:OnUpdateEditCopy": {
+"hash": "f38c4a6c989fd3e6",
+"description": "Enables or disables the Edit/Copy menu item based on whether a selection exists. Works with the mySelection data structure and UI command update mechanism.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:oView:oView::OnEditClear": {
+"hash": "3ea15ea371d68910",
+"description": "Clears current selection from view, removes it from document, and updates all views to reflect the change. Works with selection data structure and document's view system.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:oView:oView::OnEditCopy": {
+"hash": "8154db3d779620c7",
+"description": "Copies selected items to the clipboard. Works with the current selection data structure and clipboard.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:oView:oView::OnLButtonDblClk": {
+"hash": "7ba315673985986f",
+"description": "Handles left mouse button double-click to open selected item with primary or open verb based on control key state, then calls base class implementation. Works with screen coordinates and selection data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:oView:oView::OnLButtonDown": {
+"hash": "e7807f4b9115ee0e",
+"description": "Handles left mouse button down events for item selection and potential resizing within the view. Works with screen coordinates and item data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:oView:oView::OnUpdateEditClear": {
+"hash": "7aeb9b122ff6a63f",
+"description": "Enables or disables the edit clear command based on whether a selection exists. Works with the mySelection data structure to determine state.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:oView:oView::OnUpdateEditCopy": {
+"hash": "881256486784de04",
+"description": "Enables or disables the Edit/Copy menu item based on whether a selection exists. Works with the mySelection data structure to determine copy availability.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:oView:oView::SetupTracker": {
+"hash": "9af0e2240e290b78",
+"description": "Configures a rectangle tracker for visual item editing, setting style and positioning based on item type and state. Works with screen display elements and item data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:oView:SetupTracker": {
+"hash": "56468b7c5ac7249d",
+"description": "Configures a rectangle tracker for visual item editing, setting its style and constraints based on item type, selection state, and display requirements. Works with screen rendering structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:theWheel:theWheelApp::IsIdleMessage": {
+"hash": "e2e2547476a722b7",
+"description": "Filters out idle messages and timer messages, returning false for these cases to prevent unnecessary processing during application idle time. Works with Windows message queue during application runtime.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:theWheel:theWheelApp::OnFileNew": {
+"hash": "4e6c3f797e92e7b3",
+"description": "Creates a new root object and initializes child views in the main frame window. Works with wlEevorg objects and wlChildView elements in the spreading activation network visualization.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:theWheel.~cp:branch": {
+"hash": "be3a88dae637cb2d",
+"description": "Creates branching child elements in a spreading activation network visualization, recursively building hierarchical structures from a parent node. Works with wlFrameView, wlEevorg, and wlChildView objects to generate nested visual representations.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:theWheel.~cp:theWheelApp::Run": {
+"hash": "e2d0a626f220fe8c",
+"description": "Main message loop handler managing window messages and idle processing for theWheel application's graphical interface and data visualization.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlChild:wlChild::updateSize": {
+"hash": "0de6ba8c79ad09d1",
+"description": "Updates the size of a child window based on mouse position and spreading activation network calculations, modifying visual representation during graph browsing.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlchildv:wlChildView": {
+"hash": "49a1fde2213c3e1c",
+"description": "Constructs a child view for a wheel object, initializes position and size based on aspect hint, and creates the window within the frame view.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlchildv:wlChildView::Draw": {
+"hash": "be08599bd682bc43",
+"description": "Draws object content to a compatible DC and stretches it to target bounds for screen display. Uses off-screen buffer for rendering, works with CDC device contexts and object data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlChildW:computeAlphaBeta": {
+"hash": "328340760e070eed",
+"description": "Computes alpha and beta values using square root of discriminant. Works with spring constant and damping coefficient values.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlChildW:computeCaCb": {
+"hash": "a960e97a62cc94e3",
+"description": "Computes coefficients c_a and c_b for spring force calculation using current position and velocity. Works with spring geometry and damping parameters from wlSpring object.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlChildW:dydt": {
+"hash": "87d5cef6ff1d2c43",
+"description": "Computes derivative of spring force using exponential decay table lookup. Works with spring dynamics in spreading activation network visualization.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlChildW:y": {
+"hash": "c55568e426c7d5af",
+"description": "Returns y-coordinate for spring animation at time t using exponential decay functions and lookup table for smooth motion interpolation.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:Wldoc:getAt": {
+"hash": "addb1d4cabb04c64",
+"description": "Retrieves a character from a square matrix stored in memory, using offset coordinates relative to matrix center. Works with character matrices representing visual data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:Wldoc:wlObject::grow": {
+"hash": "b79c465121047bb4",
+"description": "Grows a cellular automaton grid by one unit in each direction, applying transition rules based on neighboring cell sums. Works with internal char grid structure using getAt/setAt accessors.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlEevorg:nextGen": {
+"hash": "90bd71601e5e8844",
+"description": "Generates next sequence in cellular automaton rule application, working with byte arrays for state transitions and rule lookups.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlEevorg:Serialize": {
+"hash": "4c57124c5e9c242f",
+"description": "Serializes maxVal and maxRule values, along with rule data structure to/from archive files during save/load operations.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wleevorg:wlEevorg::AssertValid": {
+"hash": "bb4155038bcdb048",
+"description": "Validates internal state of eevorg object, checking rule limits against rule set size and calling base class validation. Works with internal data structure containing rules and their constraints.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wleevorg:wlEevorg::Dump": {
+"hash": "51999c57e8baad45",
+"description": "Outputs object state information during debugging. Works with dump context for serialization of internal data structure contents.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wleevorg:wlEevorg::nextGen": {
+"hash": "6a79ba53349ce548",
+"description": "Generates next sequence in cellular automaton rule application, working with byte arrays for state transitions and rule lookup.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wleevorg:wlEevorg::Serialize": {
+"hash": "1bfb52da227b752c",
+"description": "Serializes maxVal, maxRule, and rule members to/from archive for file-based persistence of organization data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlFrame:wlFrame::Dump": {
+"hash": "f498f6d6d0a78d9d",
+"description": "Outputs frame state information during debugging. Works with dump context for serialization.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlframev:wlFrameView": {
+"hash": "c90a8d4c0995d648",
+"description": "Constructor initializes frame view members, sets child pointers to NULL, and total area to zero. Works with MDI child views and manages their layout within the frame window.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlframev:wlFrameView::AssertValid": {
+"hash": "afbdce77e709ad95",
+"description": "Validates frame view's child objects and area integrity, called during debugging to check internal state consistency.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlframev:wlFrameView::setChild": {
+"hash": "436c1a3fe9fd5906",
+"description": "Sets a child view in the next available slot of the child array. Works with the internal data structure managing multiple child views.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlObject:delLink": {
+"hash": "b56d22ed039aa335",
+"description": "Removes a link to the specified object from this object's link collection. Works with internal data structure of links, returns true if link was present and removed.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlObject:getAspectHint": {
+"hash": "e365ff4fe776ba1a",
+"description": "Calculates square aspect ratio for given area, returns rectangle dimensions for object sizing during visualization updates. Works with screen coordinates and layout calculations.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlObject:getNextLink": {
+"hash": "41d488a5434ce752",
+"description": "Returns next link in object's association list during iteration, works with internal wlObjectLink data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlObject:operator=": {
+"hash": "12b0f424175c1831",
+"description": "Assignment operator for object link, copies target reference and weight values from another link object. Works with internal data structure representing network connections.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlobject:wlObject::getAspectHint": {
+"hash": "8833e9cbd05e148f",
+"description": "Calculates square aspect ratio for given area, returns rectangle dimensions for object sizing during visualization updates. Works with screen area measurements and CRect data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlObject:wlObject::getLinkByTarget": {
+"hash": "56c5586e1f5f9f6c",
+"description": "Returns link object pointing to specified target object, or NULL if no such link exists. Works with internal object link collection data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlobject:wlObject::OnNewDocument": {
+"hash": "bfed5e08ffadd1dd",
+"description": "Initializes a new document for the knowledge visualization system. Handles basic document creation setup for spreading activation network editing with CoolDraw rendering.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlobject:wlObjectLink": {
+"hash": "629199844a1c36bd",
+"description": "Constructs a link to another object with specified weight; initializes target pointer and weight value for spreading activation network connections.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlobject:wlObjectLink::Serialize": {
+"hash": "f577857cd54a6f1e",
+"description": "Serializes link weight data; reads or writes to archive during file operations.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlpyram:wlPyramid::initKernels": {
+"hash": "2534a91a06136d2b",
+"description": "Initializes Gaussian kernel arrays for pyramid processing. Creates three kernels for normal, first derivative, and second derivative Gaussian functions using precomputed values.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlpyram:wlPyramid::original": {
+"hash": "a542e64ee5e8d2bc",
+"description": "Returns first element of g array. Works with internal data structure array g, accessed by index 0.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlpyram:wlPyramid::update": {
+"hash": "6540ec75593da39b",
+"description": "Updates pyramid by convolving and decimating signals across levels using Gaussian kernels. Works with internal signal data structures.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlsignal:wlSignal::addSample": {
+"hash": "f040168acdef0ec5",
+"description": "Maintains a sliding window of signal samples, shifting old values and storing new ones. Works with internal sample array, updates counter.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlsignal:wlSignal::convolve": {
+"hash": "2c6c3a40256b7954",
+"description": "Convolve applies a kernel filter to signal samples, sliding window convolution operation on internal signal data structure.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlsignal:wlSignal::decimate": {
+"hash": "df2235efe1ce2d58",
+"description": "Reduces signal sample rate by half, keeping every second sample. Works with internal sample buffer s, updates rate and count variables.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlSpring:eval": {
+"hash": "39c01ac9a238fc72",
+"description": "Evaluates spring force terms using exponential decay functions. Computes position and velocity based on time input and spring parameters.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlSpring:reset": {
+"hash": "eb85e5a88a2d2ba6",
+"description": "Initializes spring parameters using evaluation at start time. Sets up spring dynamics with given initial time and position values.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlSpring:wlSpring": {
+"hash": "373de56336c2132d",
+"description": "Destructor for wlSpring class, handles cleanup of spreading activation network spring-based graph elements and their visual representations in CoolDraw rendering.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wluser:beginSession": {
+"hash": "48f109651958cb3c",
+"description": "Initializes a user session, logs version and start time information to the session log file.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wluser:endSession": {
+"hash": "08b60e9d592c3e73",
+"description": "Ends the user session by logging termination time to the session log file. Works with the sessionLog data structure and writes timestamp information.",
+"model": "qwen3-coder:30b"
+},
+"fn:theWheel:wlView:wlView::removeReferences": {
+"hash": "47d5075b7b33fb94",
+"description": "Removes references from views in a map by calling delLink on each, clearing associations between view objects and the current view. Works with CMapPtrToPtr data structure containing view-object mappings.",
+"model": "qwen3-coder:30b"
+}
+}

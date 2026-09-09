@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RADARPAS Archive UMAP — modules &amp; functions</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #0a0c12; }
+  canvas { -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
+  #info {
+    position: absolute; top: 12px; left: 14px; z-index: 10;
+    font: 13px/1.5 ui-monospace, "Cascadia Code", monospace; color: #aeb6c4;
+    pointer-events: none; text-shadow: 0 1px 3px #000;
+  }
+  #info b { color: #e8edf5; }
+  #hint { opacity: .6; font-size: 11px; }
+  #controls {
+    position: absolute; top: 12px; right: 14px; z-index: 10;
+    display: flex; flex-direction: column; gap: 8px; align-items: flex-end;
+  }
+  #search {
+    background: #161a24; border: 1px solid #2c3342; color: #e8edf5;
+    font: 12px ui-monospace, monospace; padding: 6px 9px; border-radius: 5px; width: 200px;
+  }
+  #toggle {
+    background: #1d2230; border: 1px solid #3a4255; color: #e8edf5;
+    font: 12px ui-monospace, monospace; padding: 6px 12px; border-radius: 5px; cursor: pointer;
+  }
+  #toggle:hover { background: #2a3142; }
+  #density {
+    background: #1d2230; border: 1px solid #3a4255; color: #e8edf5;
+    font: 12px ui-monospace, monospace; padding: 5px 8px; border-radius: 5px; cursor: pointer;
+  }
+  #legend {
+    position: absolute; bottom: 14px; left: 14px; z-index: 10;
+    font: 12px ui-monospace, monospace; color: #c8d0dc;
+    background: rgba(12,14,20,.6); padding: 9px 11px; border-radius: 7px;
+    display: grid; grid-template-columns: auto auto; gap: 3px 14px;
+  }
+  .lg { display: flex; align-items: center; gap: 7px; cursor: pointer; user-select: none; }
+  .lg.off { opacity: .35; }
+  .sw { width: 11px; height: 11px; border-radius: 3px; flex: none; }
+  #legendBtn {
+    background: #1d2230; border: 1px solid #3a4255; color: #e8edf5;
+    font: 12px ui-monospace, monospace; padding: 5px 10px; border-radius: 5px; cursor: pointer;
+  }
+  #legend.hidden { display: none; }
+  /* phone layout (?mobile, or a coarse pointer on a small screen): no legend by
+     default, no XR button, fewer controls, bigger touch targets */
+  body.mobile #info { font-size: 12px; left: 10px; top: 8px; max-width: 55vw; }
+  body.mobile #info .long, body.mobile #hint { display: none; }
+  body.mobile #controls { top: 8px; right: 8px; gap: 6px; }
+  body.mobile #search { width: 130px; font-size: 14px; padding: 7px 9px; }
+  body.mobile #toggle, body.mobile #legendBtn { font-size: 14px; padding: 7px 12px; }
+  body.mobile #density { display: none; }
+  body.mobile #legend { bottom: 8px; left: 8px; font-size: 13px; gap: 6px 14px; }
+  body.mobile .lg { padding: 2px 0; }
+</style>
+</head>
+<body>
+<div id="info">
+  <b>RADARPAS Archive UMAP</b> <span class="long">(software → modules → callables) — 768d → 5d →</span> <span id="mode">3d</span> &nbsp;·&nbsp; <span id="count"></span> nodes<br>
+  <span id="hint">drag to orbit · scroll to zoom · right-drag to pan</span>
+</div>
+<div id="controls">
+  <button id="toggle">switch to 2D</button>
+  <select id="density" title="how many labels to show: nearest and most salient first">
+    <option value="60">60 labels</option>
+    <option value="150" selected>150 labels</option>
+    <option value="400">400 labels</option>
+    <option value="1000">1000 labels</option>
+    <option value="99999">all labels</option>
+  </select>
+  <input id="search" placeholder="filter labels…" autocomplete="off">
+  <button id="legendBtn">legend</button>
+</div>
+<div id="legend"></div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+}}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { VRButton } from 'three/addons/webxr/VRButton.js';
+
+// ?mobile forces the phone layout, ?desktop forces the full one; otherwise a
+// coarse pointer (touch) on a small screen decides.
+const qs = new URLSearchParams(location.search);
+const MOBILE = qs.has('mobile') || (!qs.has('desktop') && matchMedia('(pointer: coarse)').matches
+                                    && Math.min(innerWidth, innerHeight) < 700);
+if (MOBILE) document.body.classList.add('mobile');
+
+const data = await fetch('./data.json').then(r => r.json());
+document.getElementById('count').textContent = data.length;
+
+// categorical palette
+const PALETTE = {
+  'RADARPAS': '#e6194B', 'SSM': '#3cb44b', 'theWheel': '#f58231',
+  'CogMap': '#42d4f4', 'EEVORG': '#ffe119', 'EGALib & Math': '#b15ee0',
+  'HackRF NOAA': '#4363d8', 'LSM StormCell': '#00e5b0', 'GDEM': '#bfef45',
+  'BQ Tournament': '#fabed4', 'TURING': '#9A6324', 'Pic-Analysis': '#aaffc3',
+  'SIGNAL': '#dcbeff', 'Browsee': '#ffd8b1', 'Misc': '#888888', 'Other': '#888888',
+};
+const categories = [...new Set(data.map(d => d.category))]
+  .sort((a, b) => data.filter(d => d.category === b).length - data.filter(d => d.category === a).length);
+const enabled = new Set(categories);
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x0a0c12, 0.0015);
+
+// All data objects live in `world` so WebXR can scale the ±100-unit cloud
+// down to human scale and place it at eye height. Identity on desktop.
+const world = new THREE.Group();
+scene.add(world);
+
+const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 6000);
+const HOME3 = new THREE.Vector3(160, 110, 220);
+const HOME2 = new THREE.Vector3(0, 0, 320);
+const HOMEG = new THREE.Vector3(0, 45, 255);   // globe: side-on so the +y pole reads vertical
+const GLOBE_TILT = 0.7;                          // max polar tilt off the equator in globe mode (~40°)
+camera.position.copy(HOME3);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(devicePixelRatio);
+renderer.setSize(innerWidth, innerHeight);
+renderer.xr.enabled = true;
+document.body.appendChild(renderer.domElement);
+if (!MOBILE) document.body.appendChild(VRButton.createButton(renderer));
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.mouseButtons.RIGHT = null;  // free the right button for node activation
+
+scene.add(new THREE.AmbientLight(0xffffff, 1.0));
+const key = new THREE.PointLight(0xffffff, 0.5); key.position.set(200, 300, 200);
+scene.add(key);
+
+// --- nodes: transparent instanced spheres so labels read through them ---
+const sphereGeo = new THREE.SphereGeometry(0.8, 16, 12);
+const sphereMat = new THREE.MeshStandardMaterial({
+  roughness: 0.4, metalness: 0.0, transparent: true, opacity: 0.45, depthWrite: false,
+});
+const mesh = new THREE.InstancedMesh(sphereGeo, sphereMat, data.length);
+mesh.renderOrder = 1;
+const dummy = new THREE.Object3D();
+const color = new THREE.Color();
+data.forEach((d, i) => {
+  mesh.setColorAt(i, color.set(PALETTE[d.category] || PALETTE.Other));
+});
+world.add(mesh);
+
+// --- word-wrapped billboard labels: one canvas Sprite per node ---
+const MAX_W = 150;        // wrap width in canvas px
+const LABEL_SIZE = 0.02;  // world units per canvas px; 0.02 makes a one-line elliptangle about sphere-height (sphere r=0.8)
+const TIER_PRIORITY = { software: 40, module: 6 };   // label ranking weight by node tier (callables = 1)
+let LABEL_BUDGET = 150;   // max badges shown at once (see #density)
+document.getElementById('density').onchange = e => { LABEL_BUDGET = +e.target.value; };
+// break an identifier that is wider than maxW at natural seams: after '.',
+// '::' or '_', and at camelCase boundaries; hard-break by character if a
+// segment is still too wide (e.g. Radar_Terminal.DrawScale -> Radar_Terminal. / DrawScale)
+function splitIdent(ctx, word, maxW) {
+  const segs = word
+    .replace(/(::|\.|_)/g, '$1')
+    .replace(/([a-z0-9])([A-Z])/g, '$1$2')
+    .split('').filter(Boolean);
+  const out = [];
+  let cur = '';
+  for (const seg of segs) {
+    if (ctx.measureText(cur + seg).width <= maxW) { cur += seg; continue; }
+    if (cur) out.push(cur);
+    cur = '';
+    let piece = seg;
+    while (ctx.measureText(piece).width > maxW && piece.length > 1) {   // hard break
+      let k = piece.length - 1;
+      while (k > 1 && ctx.measureText(piece.slice(0, k)).width > maxW) k--;
+      out.push(piece.slice(0, k));
+      piece = piece.slice(k);
+    }
+    cur = piece;
+  }
+  if (cur) out.push(cur);
+  return out;
+}
+function wrap(ctx, text, maxW) {
+  // split on spaces, then break any single word that does not fit on a line
+  const words = [];   // {t, sep}: sep is '' for pieces broken out of one identifier
+  for (const w of text.split(' ')) {
+    if (ctx.measureText(w).width > maxW) {
+      splitIdent(ctx, w, maxW).forEach((p, i) => words.push({ t: p, sep: i ? '' : ' ' }));
+    } else words.push({ t: w, sep: ' ' });
+  }
+  const lines = [];
+  let cur = words.length ? words[0].t : '';
+  for (let i = 1; i < words.length; i++) {
+    const test = cur + words[i].sep + words[i].t;
+    if (ctx.measureText(test).width > maxW) { lines.push(cur); cur = words[i].t; }
+    else cur = test;
+  }
+  if (cur) lines.push(cur);
+  return lines;
+}
+const CURVE = 10;   // outward bow of the elliptangle sides (canvas px)
+// trace a rectangle whose 4 sides bow outward via quadratic curves
+function elliptanglePath(ctx, x, y, w, h, curve) {
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.quadraticCurveTo(x + w / 2, y - curve, x + w, y);          // top
+  ctx.quadraticCurveTo(x + w + curve, y + h / 2, x + w, y + h);  // right
+  ctx.quadraticCurveTo(x + w / 2, y + h + curve, x, y + h);      // bottom
+  ctx.quadraticCurveTo(x - curve, y + h / 2, x, y);             // left
+  ctx.closePath();
+}
+// lighten (amt>0, toward white) or darken (amt<0, toward black) a #rrggbb
+function shade(hex, amt) {
+  const n = parseInt(hex.slice(1), 16);
+  let r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+  const t = amt < 0 ? 0 : 255, p = Math.abs(amt);
+  r = Math.round((t - r) * p + r);
+  g = Math.round((t - g) * p + g);
+  b = Math.round((t - b) * p + b);
+  return `rgb(${r},${g},${b})`;
+}
+function makeLabel(text, hex) {
+  const pad = 8, font = 24, lh = font + 6, curve = CURVE, sw = 3;
+  const c = document.createElement('canvas');
+  const ctx = c.getContext('2d');
+  ctx.font = `${font}px ui-monospace, monospace`;
+  const lines = wrap(ctx, text, MAX_W);
+  const rw = Math.min(MAX_W, Math.max(...lines.map(l => ctx.measureText(l).width))) + pad * 2;
+  const rh = lines.length * lh + pad * 2;
+  // pad the canvas so the outward bow + stroke aren't clipped
+  const m = curve + sw;
+  c.width = rw + 2 * m;
+  c.height = rh + 2 * m;
+  const ox = m, oy = m;  // inner-rect origin
+
+  ctx.font = `${font}px ui-monospace, monospace`;
+  ctx.lineJoin = 'round';
+  ctx.lineCap = 'round';
+  ctx.lineWidth = sw;
+
+  // dark fill for text legibility
+  elliptanglePath(ctx, ox, oy, rw, rh, curve);
+  ctx.fillStyle = 'rgba(8,10,16,0.78)';
+  ctx.fill();
+
+  // two-tone bevel strokes in the category color (top/left light, bottom/right dark)
+  const light = shade(hex, 0.35), dark = shade(hex, -0.35);
+  const TL = { x: ox, y: oy }, TR = { x: ox + rw, y: oy };
+  const BR = { x: ox + rw, y: oy + rh }, BL = { x: ox, y: oy + rh };
+  ctx.strokeStyle = light;
+  ctx.beginPath(); ctx.moveTo(TL.x, TL.y); ctx.quadraticCurveTo(ox + rw / 2, oy - curve, TR.x, TR.y); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(BL.x, BL.y); ctx.quadraticCurveTo(ox - curve, oy + rh / 2, TL.x, TL.y); ctx.stroke();
+  ctx.strokeStyle = dark;
+  ctx.beginPath(); ctx.moveTo(TR.x, TR.y); ctx.quadraticCurveTo(ox + rw + curve, oy + rh / 2, BR.x, BR.y); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(BR.x, BR.y); ctx.quadraticCurveTo(ox + rw / 2, oy + rh + curve, BL.x, BL.y); ctx.stroke();
+
+  // text
+  ctx.fillStyle = '#eef2f8';
+  ctx.textBaseline = 'middle';
+  lines.forEach((l, i) => ctx.fillText(l, ox + pad, oy + pad + lh * i + lh / 2));
+
+  const tex = new THREE.CanvasTexture(c);
+  tex.minFilter = THREE.LinearFilter;
+  const baseW = c.width * LABEL_SIZE, baseH = c.height * LABEL_SIZE;
+  // A plane mesh (not a Sprite) so it can be oriented tangent to the sphere in
+  // globe mode and manually billboarded in 2D/3D. The geometry is translated so
+  // the elliptangle's lower-left corner sits at the local origin (the anchor),
+  // keeping that corner pinned to the node under any scale or orientation.
+  const cx = m / c.width, cy = m / c.height;   // corner, normalized (0,0 = lower-left)
+  const geo = new THREE.PlaneGeometry(baseW, baseH);
+  geo.translate((0.5 - cx) * baseW, (0.5 - cy) * baseH, 0);
+  // depthTest:true so the opaque globe occludes far-side labels; nothing else
+  // writes depth (spheres are depthWrite:false), so 2D/3D labels still never clip.
+  const mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false, depthTest: true, side: THREE.DoubleSide });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.renderOrder = 2;
+  mesh.userData.baseW = baseW;   // already world units (geometry is base-sized)
+  mesh.userData.baseH = baseH;
+  return mesh;
+}
+
+const labels = data.map((d, i) => {
+  const spr = makeLabel(d.name, PALETTE[d.category] || PALETTE.Other);
+  spr.userData.name = d.name.toLowerCase();
+  spr.userData.cat = d.category;
+  spr.userData.idx = i;            // for right-drag activation picking
+  world.add(spr);
+  return spr;
+});
+
+// --- opaque world sphere for the haversine view ---
+// The latitude is halved so all nodes pack into the northern hemisphere, then
+// each is replicated at its antipode (copy B = flipped latitude + 180° longitude),
+// so longitude wraps around instead of reflecting. With an opaque globe exactly
+// one of each antipodal pair faces the camera from any angle.
+const R = 100;        // data coords are scaled to ±100 in the pipeline (SCALE)
+const GLOBE_R = 97;          // opaque sphere radius — ~97% of the node shell (R=100)
+const GLOBE_NODE_SCALE = 2.0; // node spheres drawn larger in globe mode
+// pole = world +y so the rotation axis is vertical; y is "north".
+// GLOBE_WRAP picks which axis is halved + replicated:
+//   'latitude'  -> nodes pack into one hemisphere; copy B is the antipode.
+//   'longitude' -> full pole-to-pole latitude, longitude squeezed into a half
+//                  wedge; copy B is the same point at longitude + 180°.
+const GLOBE_WRAP = 'longitude';
+const POLE_GAP = 0.5;   // keep nodes at least this many radians (~29°) from each pole
+// remap a polar angle from [0,π] into [POLE_GAP, π-POLE_GAP] (symmetric about the equator)
+const polar = t => POLE_GAP + (t / Math.PI) * (Math.PI - 2 * POLE_GAP);
+const sph = (th, ph) => new THREE.Vector3(R * Math.sin(th) * Math.cos(ph), R * Math.cos(th), R * Math.sin(th) * Math.sin(ph));
+const globeA = [], globeB = [];
+data.forEach(d => {
+  const theta = Math.acos(THREE.MathUtils.clamp(d.zs / R, -1, 1));  // polar angle from the data's z
+  const phi = Math.atan2(d.ys, d.xs);
+  if (GLOBE_WRAP === 'latitude') {
+    const th = theta * 0.5;
+    globeA.push(sph(polar(th), phi));
+    globeB.push(sph(polar(Math.PI - th), phi + Math.PI));   // antipode (polar() preserves it)
+  } else {
+    const ph = phi * 0.5;
+    globeA.push(sph(polar(theta), ph));
+    globeB.push(sph(polar(theta), ph + Math.PI));           // opposite longitude
+  }
+});
+
+// opaque occluder, radius just inside the node radius so near nodes sit outside it
+const globe = new THREE.Mesh(
+  new THREE.SphereGeometry(GLOBE_R, 64, 48),
+  new THREE.MeshStandardMaterial({ color: 0x141a26, roughness: 0.95, metalness: 0.0, side: THREE.FrontSide })
+);
+globe.renderOrder = 0;
+globe.visible = false;
+world.add(globe);
+
+// copy-B spheres at the southern mirror positions (static; shown only in globe mode)
+const meshB = new THREE.InstancedMesh(sphereGeo, sphereMat, data.length);
+meshB.renderOrder = 1;
+meshB.visible = false;
+const _tb = new THREE.Object3D();
+_tb.scale.setScalar(GLOBE_NODE_SCALE);   // copy B only shows in globe mode -> larger
+data.forEach((d, i) => {
+  _tb.position.copy(globeB[i]); _tb.updateMatrix(); meshB.setMatrixAt(i, _tb.matrix);
+  meshB.setColorAt(i, color.set(PALETTE[d.category] || PALETTE.Other));
+});
+meshB.instanceMatrix.needsUpdate = true;
+world.add(meshB);
+
+// copy-B labels, cloned with their own material (independent opacity/scale)
+// but sharing the canvas texture, positioned at the antipode.
+const labelsB = labels.map((l, i) => {
+  const c = l.clone();
+  c.material = l.material.clone();   // independent opacity; map texture stays shared
+  c.position.copy(globeB[i]);
+  c.visible = false;
+  world.add(c);
+  return c;
+});
+
+// --- layout state: cycle 3D cloud -> 2D flat -> haversine globe ---
+const MODES = [
+  { key: '3d',    label: 'switch to 2D',  hint: 'drag orbit · scroll zoom · right-drag / hold a node = activate', home: HOME3 },
+  { key: '2d',    label: 'switch to globe', hint: 'scroll zoom · drag pan · right-drag / hold a node = activate',                       home: HOME2 },
+  { key: 'globe', label: 'switch to 3D',  hint: 'drag to spin · scroll zoom · right-drag / hold a node = activate',                    home: HOMEG },
+];
+let mode = 0;
+function targetPos(d, i) {
+  const morphed = actLayout && d.xa != null;   // activation-conditioned layout, if baked
+  if (MODES[mode].key === '3d')    return morphed ? new THREE.Vector3(d.xa, d.ya, d.za) : new THREE.Vector3(d.x, d.y, d.z);
+  if (MODES[mode].key === '2d')    return morphed ? new THREE.Vector3(d.xa2, d.ya2, 0) : new THREE.Vector3(d.x2, d.y2, 0);
+  return globeA[i];  // globe: northern (halved-latitude) copy
+}
+// current animated positions
+const cur = data.map(d => new THREE.Vector3(d.x, d.y, d.z));
+function layout() {
+  const tmp = new THREE.Object3D();
+  const ns = (MODES[mode].key === 'globe') ? GLOBE_NODE_SCALE : 1;
+  data.forEach((d, i) => {
+    cur[i].lerp(targetPos(d, i), 0.12);
+    const sf = ns * (sizeBySalience ? SAL_SPHERE[0] + (SAL_SPHERE[1] - SAL_SPHERE[0]) * Math.pow(salience[i], SAL_GAMMA) : 1);
+    tmp.scale.setScalar(sf);
+    tmp.position.copy(cur[i]); tmp.updateMatrix();
+    mesh.setMatrixAt(i, tmp.matrix);
+    tmp.position.copy(globeB[i]); tmp.updateMatrix();   // copy B (globe antipode), same scale
+    meshB.setMatrixAt(i, tmp.matrix);
+    labels[i].position.copy(cur[i]);  // elliptangle's lower-left corner sits on the node
+  });
+  mesh.instanceMatrix.needsUpdate = true;
+  meshB.instanceMatrix.needsUpdate = true;
+}
+
+const toggle = document.getElementById('toggle');
+function setMode(i) {
+  mode = i;
+  const m = MODES[mode];
+  toggle.textContent = m.label;
+  document.getElementById('mode').textContent = m.key;
+  document.getElementById('hint').textContent = m.hint;
+  controls.target.set(0, 0, 0);
+  camera.position.copy(m.home);
+  if (m.key === 'globe') {                        // keep the +y pole ~vertical: limit tilt off the equator
+    controls.minPolarAngle = Math.PI / 2 - GLOBE_TILT;
+    controls.maxPolarAngle = Math.PI / 2 + GLOBE_TILT;
+  } else {
+    controls.minPolarAngle = 0;
+    controls.maxPolarAngle = Math.PI;
+  }
+  if (cascade) propagate();   // the cascade's last hop lives in the layout that just changed
+}
+toggle.onclick = () => setMode((mode + 1) % MODES.length);
+
+// --- legend (click a category to toggle it; the button shows/hides it) ---
+const legend = document.getElementById('legend');
+const legendBtn = document.getElementById('legendBtn');
+legendBtn.onclick = () => legend.classList.toggle('hidden');
+if (MOBILE) legend.classList.add('hidden');
+categories.forEach(cat => {
+  const row = document.createElement('div');
+  row.className = 'lg';
+  row.innerHTML = `<span class="sw" style="background:${PALETTE[cat] || PALETTE.Other}"></span>${cat}`;
+  row.onclick = () => {
+    if (enabled.has(cat)) { enabled.delete(cat); row.classList.add('off'); }
+    else { enabled.add(cat); row.classList.remove('off'); }
+  };
+  legend.appendChild(row);
+});
+
+// --- search filter ---
+const search = document.getElementById('search');
+let filter = '';
+search.addEventListener('input', () => { filter = search.value.trim().toLowerCase(); });
+
+// --- spreading activation: right-drag a node to set its activation; propagate
+//     via proximity in a chosen high-D space (5D/8D/11D/768D), normalize, resize labels.
+//     Cascade mode instead chains one propagation hop per mapping stage:
+//     768D latent -> selected mid-D UMAP space -> the on-screen layout.
+const HD = { '5d': data.map(d => d.v5), '8d': data.map(d => d.v8), '11d': data.map(d => d.v11) };
+if (data[0].v768) HD['768d'] = data.map(d => d.v768);
+// the displayed layouts double as propagation spaces for the cascade's last hop
+const LAY = {
+  lay3d: data.map(d => [d.x, d.y, d.z]),
+  lay2d: data.map(d => [d.x2, d.y2]),
+  layglobe: data.map(d => [d.xs, d.ys, d.zs]),
+};
+if (data[0].xa != null) {  // activation-conditioned layouts (umap_activated_layout.py)
+  LAY.laya3d = data.map(d => [d.xa, d.ya, d.za]);
+  LAY.laya2d = data.map(d => [d.xa2, d.ya2]);
+}
+const seed = new Float64Array(data.length);   // user-set per node, [0,1]
+const act  = new Float64Array(data.length);   // propagated + normalized field, [0,1]
+let actMean = 0;                               // baseline; sizes are taken relative to this
+let actSpace = '5d';
+let cascade = false;                           // chain 768D -> mid-D -> layout
+let actLayout = false;                         // morph nodes to the activation-conditioned layout
+const Wcache = {};                             // affinity matrices, built lazily per space
+const ACT_GAIN = 2.4;                          // billboard growth at full activation
+const salience = new Float64Array(data.length);// per-node salience (hand-authored in salience.json), [0,1]
+data.forEach((d, i) => { salience[i] = (d.salience != null) ? d.salience : 0.4; });
+let sizeBySalience = false;                     // when on: salience drives node + label size and activation
+const SAL_GAMMA  = 1.8;                          // >1: most nodes shrink; only top salience stays near max
+const SAL_SPHERE = [0.3, 1.15];                  // sphere scale range across salience^gamma
+const SAL_LABEL  = [0.45, 1.1];                  // billboard scale range across salience^gamma
+
+function buildAffinity(X) {
+  const n = X.length, K = 7;
+  const d2 = (a, b) => { let s = 0; for (let k = 0; k < a.length; k++) { const t = a[k] - b[k]; s += t * t; } return s; };
+  const sig = new Float64Array(n);             // self-tuning local scale = dist to K-th neighbour
+  for (let i = 0; i < n; i++) {
+    const ds = [];
+    for (let j = 0; j < n; j++) if (j !== i) ds.push(d2(X[i], X[j]));
+    ds.sort((a, b) => a - b);
+    sig[i] = Math.sqrt(ds[Math.min(K, ds.length - 1)]) || 1e-6;
+  }
+  const W = [];
+  for (let i = 0; i < n; i++) {
+    const row = new Float64Array(n);
+    for (let j = 0; j < n; j++)
+      row[j] = (i === j) ? 1 : Math.exp(-d2(X[i], X[j]) / (sig[i] * sig[j]));
+    W.push(row);
+  }
+  return W;
+}
+function getW(space) {
+  if (!Wcache[space]) Wcache[space] = buildAffinity(LAY[space] || HD[space]);
+  return Wcache[space];
+}
+function applyW(W, src) {                      // one propagation hop, peak-normalized to 1
+  const n = src.length, out = new Float64Array(n);
+  let mx = 1e-9;
+  for (let i = 0; i < n; i++) {
+    let s = 0; const row = W[i];
+    for (let j = 0; j < n; j++) s += row[j] * src[j];
+    out[i] = s; if (s > mx) mx = s;
+  }
+  for (let i = 0; i < n; i++) out[i] /= mx;
+  return out;
+}
+const layoutKey = () => {                          // lay3d / lay2d / layglobe (laya* when morphed)
+  const k = MODES[mode].key;
+  return (actLayout && LAY['laya' + k]) ? 'laya' + k : 'lay' + k;
+};
+function propagate() {
+  const n = data.length;
+  if (cascade && HD['768d']) {
+    // one hop per mapping stage, peak-normalized between stages so no stage saturates
+    let s = applyW(getW('768d'), seed);                     // full latent space
+    if (actSpace !== '768d') s = applyW(getW(actSpace), s); // mid-D UMAP space
+    s = applyW(getW(layoutKey()), s);                       // the layout on screen
+    let smax = 0;                                // rescale so a partial seed stays partial
+    for (let i = 0; i < n; i++) if (seed[i] > smax) smax = seed[i];
+    let sum = 0;
+    for (let i = 0; i < n; i++) { act[i] = s[i] * smax; sum += act[i]; }
+    actMean = sum / n;
+    return;
+  }
+  const W = getW(actSpace);
+  let mx = 1e-9;
+  for (let i = 0; i < n; i++) {
+    let s = 0; const row = W[i];
+    for (let j = 0; j < n; j++) s += row[j] * seed[j];
+    act[i] = s; if (s > mx) mx = s;
+  }
+  const div = Math.max(1, mx);                 // single seed stays responsive; many seeds bounded
+  let sum = 0;
+  for (let i = 0; i < n; i++) { act[i] /= div; sum += act[i]; }
+  actMean = sum / n;                           // baseline -> sizes are conserved around normal
+}
+
+// right-drag (desktop) or long-press (touch): pick a node, drag up/down to set its seed
+const ray2 = new THREE.Raycaster();
+const ndc = new THREE.Vector2();
+function pickNode(e) {
+  const r = renderer.domElement.getBoundingClientRect();
+  ndc.x = ((e.clientX - r.left) / r.width) * 2 - 1;
+  ndc.y = -((e.clientY - r.top) / r.height) * 2 + 1;
+  ray2.setFromCamera(ndc, camera);
+  // pick the nearest *visible* elliptangle billboard under the cursor
+  const hits = ray2.intersectObjects(labels, false);
+  for (const h of hits) {
+    if (h.object.visible && h.object.material.opacity > 0.05) return h.object.userData.idx;
+  }
+  return -1;
+}
+let drag = null;
+let press = null;        // pending touch long-press {node, x, y, pid, timer}
+const PRESS_MS = 350;    // hold this long without sliding to grab a node on touch
+const PRESS_SLOP = 8;    // px of finger travel that cancels the press (it's an orbit)
+const readout = document.createElement('div');
+readout.style.cssText = 'font:11px ui-monospace,monospace;color:#8fd0ff;text-align:right;min-height:14px;max-width:460px;white-space:pre-wrap;line-height:1.35;';
+// name + activation, then the header comment (~ marks one synthesized by synthesize_comments.py)
+// and the static call-graph summaries from extract_callables.py
+function describe(i) {
+  const d = data[i];
+  const out = [`${d.name}  ▸ ${seed[i].toFixed(2)}`];
+  if (d.description) out.push((d.description_source === 'synthesized' ? '~ ' : '') + d.description);
+  if (d.calls_summary) out.push('calls: ' + d.calls_summary);
+  if (d.callers_summary) out.push('called by: ' + d.callers_summary);
+  if (d.uses_modules && d.uses_modules.length) out.push('calls into: ' + d.uses_modules.join(', '));
+  if (d.used_by_modules && d.used_by_modules.length) out.push('used by: ' + d.used_by_modules.join(', '));
+  return out.join('\n');
+}
+renderer.domElement.addEventListener('contextmenu', e => e.preventDefault());
+function startDrag(node, y, pid) {
+  renderer.domElement.setPointerCapture(pid);
+  controls.enabled = false;
+  drag = { node, pid, startY: y, startSeed: seed[node] };
+  readout.textContent = describe(node);
+}
+function cancelPress() { if (press) { clearTimeout(press.timer); press = null; } }
+renderer.domElement.addEventListener('pointerdown', e => {
+  if (e.pointerType === 'touch') {             // touch: long-press a node to activate
+    if (!e.isPrimary) { cancelPress(); return; }  // second finger = pinch, not a press
+    const id = pickNode(e);
+    if (id < 0) return;
+    press = { node: id, x: e.clientX, y: e.clientY, pid: e.pointerId };
+    press.timer = setTimeout(() => {           // held still long enough -> steal from orbit
+      const p = press; press = null;
+      try { startDrag(p.node, p.y, p.pid); }
+      catch (_) {}                             // pointer already released — nothing to activate
+    }, PRESS_MS);
+    return;                                    // until the timer fires, OrbitControls owns the touch
+  }
+  if (e.button !== 2) return;                  // mouse: right button only
+  const id = pickNode(e);
+  if (id < 0) return;                          // empty space -> nothing (right button is activation-only)
+  e.preventDefault(); e.stopPropagation();
+  try { startDrag(id, e.clientY, e.pointerId); } catch (_) {}
+}, true);
+renderer.domElement.addEventListener('pointermove', e => {
+  if (press && e.pointerId === press.pid &&
+      Math.hypot(e.clientX - press.x, e.clientY - press.y) > PRESS_SLOP) cancelPress();
+  if (!drag || e.pointerId !== drag.pid) return;
+  seed[drag.node] = THREE.MathUtils.clamp(drag.startSeed + (drag.startY - e.clientY) * 0.005, 0, 1);
+  propagate();
+  readout.textContent = describe(drag.node);
+});
+function endDrag(e) {
+  if (press && e.pointerId === press.pid) cancelPress();
+  if (drag && e.pointerId === drag.pid) drag = null;
+  if (!drag && !press) controls.enabled = true;  // safety: re-enable whenever nothing is active
+}
+renderer.domElement.addEventListener('pointerup', endDrag);
+renderer.domElement.addEventListener('pointercancel', endDrag);
+window.addEventListener('pointerup', endDrag);   // catch releases outside the canvas
+
+// activation controls: proximity space + clear
+const actBar = document.createElement('div');
+actBar.style.cssText = 'display:flex;gap:8px;align-items:center;justify-content:flex-end;';
+const lbl = document.createElement('span');
+lbl.textContent = 'prox'; lbl.style.cssText = 'font:11px ui-monospace,monospace;color:#aeb6c4;';
+const spaceSel = document.createElement('select');
+Object.keys(HD).forEach(s => { const o = document.createElement('option'); o.value = s; o.textContent = s.toUpperCase(); spaceSel.appendChild(o); });
+spaceSel.value = actSpace;
+spaceSel.style.cssText = 'background:#161a24;border:1px solid #2c3342;color:#e8edf5;font:12px ui-monospace,monospace;padding:4px;border-radius:5px;';
+const btnCss = 'border:1px solid #3a4255;color:#e8edf5;font:12px ui-monospace,monospace;padding:5px 10px;border-radius:5px;cursor:pointer;';
+function applySalience() { for (let i = 0; i < seed.length; i++) seed[i] = salience[i]; propagate(); }  // load salience into activation
+const salBtn = document.createElement('button');
+salBtn.textContent = 'salience';
+salBtn.style.cssText = 'background:#1d2230;' + btnCss;
+salBtn.onclick = () => {
+  sizeBySalience = !sizeBySalience;
+  salBtn.style.background = sizeBySalience ? '#2a4a6a' : '#1d2230';
+  if (sizeBySalience) applySalience();
+  else { seed.fill(0); act.fill(0); actMean = 0; }
+};
+// act layout: morph node positions to the activation-conditioned UMAP layouts,
+// where the baked field acta was an input column to every UMAP stage
+const layBtn = document.createElement('button');
+layBtn.textContent = 'act layout';
+layBtn.style.cssText = 'background:#1d2230;' + btnCss;
+layBtn.onclick = () => {
+  actLayout = !actLayout;
+  layBtn.style.background = actLayout ? '#2a4a6a' : '#1d2230';
+  if (actLayout) {       // show the baked field that shaped these layouts
+    let sum = 0;
+    for (let i = 0; i < data.length; i++) { act[i] = data[i].acta || 0; sum += act[i]; }
+    actMean = sum / data.length;
+  } else if (sizeBySalience) applySalience(); else propagate();
+};
+// cascade: propagate through every mapping stage (768D -> mid-D -> layout)
+const cascBtn = document.createElement('button');
+cascBtn.textContent = 'cascade';
+cascBtn.style.cssText = 'background:#1d2230;' + btnCss;
+cascBtn.onclick = () => {
+  cascade = !cascade;
+  cascBtn.style.background = cascade ? '#2a4a6a' : '#1d2230';
+  if (sizeBySalience) applySalience(); else propagate();
+};
+const clearBtn = document.createElement('button');
+clearBtn.textContent = 'clear';
+clearBtn.style.cssText = 'background:#1d2230;' + btnCss;
+clearBtn.onclick = () => { seed.fill(0); act.fill(0); actMean = 0; sizeBySalience = false; salBtn.style.background = '#1d2230'; readout.textContent = ''; };
+spaceSel.onchange = () => { actSpace = spaceSel.value; if (sizeBySalience) applySalience(); else propagate(); };
+actBar.append(lbl, spaceSel, ...(data[0].xa != null ? [layBtn] : []), ...(HD['768d'] ? [cascBtn] : []), salBtn, clearBtn);
+document.getElementById('controls').append(actBar, readout);
+if (MOBILE) {                 // phone: drop the proximity-space picker and cascade, start with salience on
+  lbl.remove(); spaceSel.remove(); cascBtn.remove();
+  LABEL_BUDGET = 60;        // fewer labels on a small screen
+  setMode(1);               // start flat: 2D pans and pinch-zooms, no orbit to get lost in
+  salBtn.onclick();         // salience drives size and activation from the start
+}
+
+// --- WebXR: shrink + place the cloud at eye height; grab-to-move with a trigger ---
+const XR_SCALE = 0.01;                                  // 100 data units -> 1 m
+const XR_HOME = new THREE.Vector3(0, 1.45, -1.0);       // chest height, ~1 m ahead
+renderer.xr.addEventListener('sessionstart', () => {
+  world.position.copy(XR_HOME);
+  world.scale.setScalar(XR_SCALE);
+  world.quaternion.identity();
+});
+renderer.xr.addEventListener('sessionend', () => {
+  world.position.set(0, 0, 0);
+  world.scale.setScalar(1);
+  world.quaternion.identity();
+});
+
+// controllers: a pointing line + squeeze/trigger to grab the whole cloud
+function addController(i) {
+  const c = renderer.xr.getController(i);
+  const line = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, -1)]),
+    new THREE.LineBasicMaterial({ color: 0x66ccff, transparent: true, opacity: 0.6 }));
+  line.scale.z = 2;
+  c.add(line);
+  const grab = () => c.attach(world);     // reparent cloud to controller (keeps world transform)
+  const drop = () => scene.attach(world); // release where left
+  c.addEventListener('selectstart', grab);
+  c.addEventListener('selectend', drop);
+  c.addEventListener('squeezestart', grab);
+  c.addEventListener('squeezeend', drop);
+  scene.add(c);
+}
+addController(0);
+addController(1);
+
+// --- render loop (setAnimationLoop is required for WebXR) ---
+const _vp = new THREE.Vector3(), _sp = new THREE.Vector3();
+const _camQ = new THREE.Quaternion(), _wQ = new THREE.Quaternion(), _bbQ = new THREE.Quaternion();
+const _n = new THREE.Vector3(), _u = new THREE.Vector3(), _rt = new THREE.Vector3(), _basis = new THREE.Matrix4();
+function viewerWorldPos() {
+  const cam = renderer.xr.isPresenting ? renderer.xr.getCamera() : camera;
+  return cam.getWorldPosition(_vp);
+}
+function render() {
+  layout();  // eases node positions toward the active mode
+  const inGlobe = MODES[mode].key === 'globe';
+  globe.visible = inGlobe;     // opaque occluder, only in globe mode
+  meshB.visible = inGlobe;     // southern-mirror spheres
+  if (!renderer.xr.isPresenting) controls.update();
+
+  const vp = viewerWorldPos();
+  const invScale = 1 / (world.scale.x || 1);  // measure distance in data units in both modes
+  // local-space quaternion that makes a plane face the camera (world rotation compensated for XR)
+  (renderer.xr.isPresenting ? renderer.xr.getCamera() : camera).getWorldQuaternion(_camQ);
+  world.getWorldQuaternion(_wQ).invert();
+  _bbQ.copy(_wQ).multiply(_camQ);
+  const orient = (lab) => {
+    if (inGlobe) {                                 // lie tangent to the sphere surface
+      _n.copy(lab.position).normalize();           // radial out = plane normal
+      _u.set(0, 1, 0).addScaledVector(_n, -_n.y);  // north pole (+y) projected onto the tangent plane
+      if (_u.lengthSq() < 1e-6) _u.set(1, 0, 0);   // at the poles, pick any tangent
+      _u.normalize();
+      _rt.crossVectors(_u, _n).normalize();
+      _basis.makeBasis(_rt, _u, _n);
+      lab.quaternion.setFromRotationMatrix(_basis);
+    } else {
+      lab.quaternion.copy(_bbQ);                    // billboard (face camera) in 2D/3D
+    }
+  };
+  // Label budget: with thousands of nodes every badge cannot be shown at once,
+  // so rank candidates by distance divided by priority (software > module >
+  // callable, boosted by activation and salience) and show only the first
+  // LABEL_BUDGET. Activated nodes (reveal) and filter matches bypass the budget.
+  const budgetKeys = new Float64Array(data.length).fill(Infinity);
+  labels.forEach((spr, i) => {
+    if (!enabled.has(spr.userData.cat)) return;
+    if (filter && !spr.userData.name.includes(filter)) return;
+    const dist = spr.getWorldPosition(_sp).distanceTo(vp) * invScale;
+    const pri = TIER_PRIORITY[data[i].kind] || 1;
+    const ai = act[i] - actMean;
+    budgetKeys[i] = dist / (pri * (1 + 3 * Math.max(0, ai)) * (0.5 + salience[i]));
+  });
+  const order = Array.from(budgetKeys.keys()).sort((a, b) => budgetKeys[a] - budgetKeys[b]);
+  const inBudget = new Uint8Array(data.length);
+  for (let k = 0; k < Math.min(LABEL_BUDGET, order.length); k++) {
+    if (budgetKeys[order[k]] === Infinity) break;
+    inBudget[order[k]] = 1;
+  }
+  labels.forEach((spr, i) => {
+    const catOn = enabled.has(spr.userData.cat);
+    const match = !filter || spr.userData.name.includes(filter);
+    const ai = act[i] - actMean;                                  // deviation from the baseline
+    const f = THREE.MathUtils.clamp(1 + ACT_GAIN * ai, 0.5, 2.6); // grow above / shrink below baseline
+    const reveal = (catOn && ai > 0.02) ? Math.min(1, 0.4 + 0.6 * ai) : 0;
+    const lf = sizeBySalience ? SAL_LABEL[0] + (SAL_LABEL[1] - SAL_LABEL[0]) * Math.pow(salience[i], SAL_GAMMA) : 1;
+    // size/opacity are distance-based, computed per copy so apparent size is constant
+    const apply = (lab, on) => {
+      if (!on) { lab.visible = false; return; }
+      const dist = lab.getWorldPosition(_sp).distanceTo(vp) * invScale;
+      let op = (catOn && match && inBudget[i]) ? THREE.MathUtils.clamp(1.7 - dist / 280, 0, 1) : 0;
+      if (filter && match && catOn) op = 1;
+      op = Math.max(op, reveal);
+      lab.material.opacity = op;
+      lab.visible = op > 0.02;
+      const s = THREE.MathUtils.clamp(dist / 190, 0.55, 2.4) * f * lf;
+      lab.scale.set(s, s, 1);   // geometry is already base-sized; scale uniformly
+      orient(lab);
+    };
+    apply(spr, true);                 // copy A
+    apply(labelsB[i], inGlobe);       // copy B (antipode) only in globe mode
+  });
+  // dim disabled categories; brighten above-baseline spheres (both copies)
+  data.forEach((d, i) => {
+    const on = enabled.has(d.category);
+    color.set(PALETTE[d.category] || PALETTE.Other).multiplyScalar(on ? 1 : 0.12);
+    const ai = act[i] - actMean;
+    if (on && ai > 0.02) color.multiplyScalar(1 + 0.9 * ai);
+    mesh.setColorAt(i, color);
+    meshB.setColorAt(i, color);
+  });
+  mesh.instanceColor.needsUpdate = true;
+  meshB.instanceColor.needsUpdate = true;
+
+  renderer.render(scene, camera);
+}
+layout();
+renderer.setAnimationLoop(render);
+
+addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+</script>
+</body>
+</html>

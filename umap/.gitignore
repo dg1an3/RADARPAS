@@ -1,0 +1,9 @@
+# regenerable pipeline outputs (large); data.json is kept so the viewer works from a clone
+callables.json
+callables_embeddings.json
+callables_embeddings.npy
+embed_cache.json
+embed.log
+umap_projections/
+*.log
+.firebase/
