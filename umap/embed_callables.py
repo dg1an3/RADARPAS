@@ -9,6 +9,7 @@ in the same order, which umap_layout.py consumes.
 Embeddings are cached in embed_cache.json keyed by node id + text hash, so
 re-running after extract_callables.py picks up new/changed nodes only.
 """
+import argparse
 import hashlib
 import json
 import time
@@ -23,9 +24,15 @@ MODEL = "nomic-embed-text"
 BATCH = 64
 
 HERE = Path(__file__).resolve().parent
-IN_JSON = HERE / "callables.json"
-OUT_JSON = HERE / "callables_embeddings.json"
-OUT_NPY = HERE / "callables_embeddings.npy"
+# --variant nobody reads callables_nobody.json (see strip_bodies.py) and writes
+# callables_embeddings_nobody.*; the cache is shared since it keys on id + text hash.
+_ap = argparse.ArgumentParser()
+_ap.add_argument("--variant", default="", help="suffix of callables_<variant>.json to embed")
+_args = _ap.parse_args()
+SFX = f"_{_args.variant}" if _args.variant else ""
+IN_JSON = HERE / f"callables{SFX}.json"
+OUT_JSON = HERE / f"callables_embeddings{SFX}.json"
+OUT_NPY = HERE / f"callables_embeddings{SFX}.npy"
 CACHE = HERE / "embed_cache.json"
 META_KEYS = ("id", "kind", "software", "module", "language", "signature",
              "lines", "snapshots", "first", "last", "file", "line", "salience", "variants",

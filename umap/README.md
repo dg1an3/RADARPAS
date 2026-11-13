@@ -56,6 +56,26 @@ firebase deploy --only hosting        # -> https://radarpas-umap.web.app
 `embed_callables.py` caches by node id and text hash in `embed_cache.json`,
 so re-running after adding a project only embeds the new nodes.
 
+### Variant without procedure bodies
+
+A callable's embedded text is its header block (name, signature, header comment,
+call-graph summaries) followed by a blank line and the procedure body, cut at
+3500 characters. To see how the map looks when only the header block is
+embedded:
+
+```bash
+python strip_bodies.py                     # callables.json -> callables_nobody.json (bodies dropped)
+python embed_callables.py --variant nobody # -> callables_embeddings_nobody.{json,npy} (shared cache)
+python umap_layout.py --variant nobody     # -> umap_projections_nobody/, umap_3d_viewer/data_nobody.json
+```
+
+then open `http://localhost:8777/?data=nobody`. The default map and its files
+are untouched; `?data=<name>` loads `data_<name>.json` for any variant.
+
+The viewer shows the exact embedded text of the node under the mouse (the
+"hover: embedded text" checkbox turns it off); `umap_layout.py` copies it into
+`data.json` as `text`.
+
 ## Call graph and synthesized comments
 
 `extract_callables.py` derives a static call graph by name: a callable whose

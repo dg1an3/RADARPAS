@@ -45,6 +45,16 @@
     font: 12px ui-monospace, monospace; padding: 5px 10px; border-radius: 5px; cursor: pointer;
   }
   #legend.hidden { display: none; }
+  /* hover tooltip: the exact text that was embedded for the node under the mouse */
+  #tip {
+    position: absolute; z-index: 20; pointer-events: none; display: none;
+    max-width: min(560px, 60vw); max-height: 60vh; overflow: hidden;
+    font: 11px/1.4 ui-monospace, "Cascadia Code", monospace; color: #d6dde8;
+    background: rgba(12,14,20,.92); border: 1px solid #3a4255; border-radius: 6px;
+    padding: 8px 10px; white-space: pre-wrap; word-break: break-word;
+  }
+  #tip .tiphead { color: #8fd0ff; margin-bottom: 4px; }
+  body.mobile #hoverLbl { display: none; }
   /* phone layout (?mobile, or a coarse pointer on a small screen): no legend by
      default, no XR button, fewer controls, bigger touch targets */
   body.mobile #info { font-size: 12px; left: 10px; top: 8px; max-width: 55vw; }
@@ -59,7 +69,7 @@
 </head>
 <body>
 <div id="info">
-  <b>RADARPAS Archive UMAP</b> <span class="long">(software → modules → callables) — 768d → 5d →</span> <span id="mode">3d</span> &nbsp;·&nbsp; <span id="count"></span> nodes<br>
+  <b>RADARPAS Archive UMAP</b> <span class="long">(software → modules → callables) — 768d → 5d →</span> <span id="mode">3d</span> &nbsp;·&nbsp; <span id="count"></span> nodes<span id="variant"></span><br>
   <span id="hint">drag to orbit · scroll to zoom · right-drag to pan</span>
 </div>
 <div id="controls">
@@ -72,9 +82,11 @@
     <option value="99999">all labels</option>
   </select>
   <input id="search" placeholder="filter labels…" autocomplete="off">
+  <label id="hoverLbl" style="font:12px ui-monospace,monospace;color:#c8d0dc;cursor:pointer" title="show the text that was embedded for the node under the mouse"><input type="checkbox" id="hoverTxt" checked> hover: embedded text</label>
   <button id="legendBtn">legend</button>
 </div>
 <div id="legend"></div>
+<div id="tip"></div>
 
 <script type="importmap">
 { "imports": {
@@ -95,7 +107,10 @@ const MOBILE = qs.has('mobile') || (!qs.has('desktop') && matchMedia('(pointer: 
                                     && Math.min(innerWidth, innerHeight) < 700);
 if (MOBILE) document.body.classList.add('mobile');
 
-const data = await fetch('./data.json').then(r => r.json());
+// ?data=nobody loads data_nobody.json (embeddings without procedure bodies; see strip_bodies.py)
+const VARIANT = (qs.get('data') || '').replace(/[^\w-]/g, '');
+const data = await fetch(VARIANT ? `./data_${VARIANT}.json` : './data.json').then(r => r.json());
+if (VARIANT) document.getElementById('variant').textContent = ` · ${VARIANT}`;
 document.getElementById('count').textContent = data.length;
 
 // categorical palette
@@ -606,6 +621,44 @@ function endDrag(e) {
 renderer.domElement.addEventListener('pointerup', endDrag);
 renderer.domElement.addEventListener('pointercancel', endDrag);
 window.addEventListener('pointerup', endDrag);   // catch releases outside the canvas
+
+// mouse hover: show the text that was embedded for the node under the cursor
+// (data[i].text, the input to nomic-embed-text). Picking is deferred to the next
+// frame so a fast mouse does not raycast 2k billboards on every event.
+const tip = document.getElementById('tip');
+const hoverTxt = document.getElementById('hoverTxt');
+let hoverEv = null, hoverIdx = -1;
+function showTip(i, x, y) {
+  const d = data[i];
+  if (i !== hoverIdx) {
+    hoverIdx = i;
+    tip.textContent = '';
+    const head = document.createElement('div'); head.className = 'tiphead';
+    head.textContent = `${d.name} · ${d.kind} · ${d.category}` + (d.file ? ` · ${d.file}` : '');
+    tip.append(head, document.createTextNode(d.text || '(no embedded text)'));
+    tip.style.display = 'block';
+  }
+  const pad = 14, W = tip.offsetWidth, H = tip.offsetHeight;
+  let left = x + pad, top = y + pad;
+  if (left + W > innerWidth - 8) left = Math.max(8, x - pad - W);
+  if (top + H > innerHeight - 8) top = Math.max(8, innerHeight - 8 - H);
+  tip.style.left = left + 'px'; tip.style.top = top + 'px';
+}
+function hideTip() { if (hoverIdx >= 0) { hoverIdx = -1; tip.style.display = 'none'; } }
+if (!MOBILE) {
+  renderer.domElement.addEventListener('pointermove', e => {
+    if (e.pointerType === 'touch') return;
+    if (!hoverEv) requestAnimationFrame(() => {
+      const ev = hoverEv; hoverEv = null;
+      if (!hoverTxt.checked || drag || renderer.xr.isPresenting) { hideTip(); return; }
+      const i = pickNode(ev);
+      if (i < 0) hideTip(); else showTip(i, ev.clientX, ev.clientY);
+    });
+    hoverEv = e;
+  });
+  renderer.domElement.addEventListener('pointerleave', hideTip);
+  hoverTxt.addEventListener('change', () => { if (!hoverTxt.checked) hideTip(); });
+}
 
 // activation controls: proximity space + clear
 const actBar = document.createElement('div');

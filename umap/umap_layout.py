@@ -24,9 +24,6 @@ import numpy as np
 import umap
 
 HERE = Path(__file__).resolve().parent
-EMB_NPY = HERE / "callables_embeddings.npy"
-EMB_JSON = HERE / "callables_embeddings.json"
-PROJ_DIR = HERE / "umap_projections"
 OUT_DIR = HERE / "umap_3d_viewer"
 
 SEED = 42
@@ -43,8 +40,17 @@ ap.add_argument("--salience-space", type=float, default=0.0, help="strength of p
 ap.add_argument("--min-dist", type=float, default=0.5, help="stage 2 UMAP min_dist (3D); 2D uses 1.5x")
 ap.add_argument("--spacing", type=float, default=1.0,
                 help="kd-tree relaxation: minimum spacing as a multiple of the uniform-packing spacing (0=off)")
+ap.add_argument("--variant", default="", help="suffix of callables_<variant>.json / callables_embeddings_<variant>.*")
 ap.add_argument("--reuse-hd", action="store_true", help="skip stage 1 and reuse umap_projections/*.npy")
 args = ap.parse_args()
+# --variant nobody lays out callables_embeddings_nobody.* (from strip_bodies.py +
+# embed_callables.py --variant nobody) into umap_projections_nobody/ and data_nobody.json,
+# leaving the default map untouched; the viewer loads it with ?data=nobody.
+SFX = f"_{args.variant}" if args.variant else ""
+EMB_NPY = HERE / f"callables_embeddings{SFX}.npy"
+EMB_JSON = HERE / f"callables_embeddings{SFX}.json"
+SRC_JSON = HERE / f"callables{SFX}.json"   # the `text` that was embedded, shown on hover in the viewer
+PROJ_DIR = HERE / f"umap_projections{SFX}"
 
 
 def norm_scale(Y):
@@ -141,6 +147,7 @@ def salience_space(Y, sal, strength, iters=60):
 def main():
     X = np.load(EMB_NPY).astype(np.float64)
     recs = json.loads(EMB_JSON.read_text(encoding="utf-8"))
+    texts = {nd["id"]: nd.get("text", "") for nd in json.loads(SRC_JSON.read_text(encoding="utf-8"))}
     n = len(recs)
     assert X.shape[0] == n, (X.shape, n)
     print(f"{n} nodes x {X.shape[1]}D")
@@ -191,6 +198,7 @@ def main():
                                      "module", "language", "signature", "lines", "first", "last",
                                      "file", "line", "description_source", "calls_summary",
                                      "callers_summary", "uses_modules", "used_by_modules")}
+        rec["text"] = texts.get(r["id"], "")   # exactly what nomic-embed-text saw for this node
         rec["snapshots"] = len(r.get("snapshots") or [])
         variants = r.get("variants") or []
         rec["n_variants"] = 1 + len(variants)
@@ -209,7 +217,7 @@ def main():
         data.append(rec)
 
     OUT_DIR.mkdir(exist_ok=True)
-    out = OUT_DIR / "data.json"
+    out = OUT_DIR / f"data{SFX}.json"
     out.write_text(json.dumps(data, separators=(",", ":")), encoding="utf-8")
     cats = sorted({d["category"] for d in data})
     print(f"wrote {out} ({len(data)} nodes, {len(cats)} categories, {out.stat().st_size / 1e6:.1f} MB)")
