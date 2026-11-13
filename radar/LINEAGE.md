@@ -310,8 +310,8 @@ The radar PPI (Plan Position Indicator) display required real-time pixel drawing
 | File | Description |
 |---|---|
 | `CDSCRN.MOD` | "Created: 11/14/90, Author: D. Lane, System: TopSpeed Modula-2." Screen handler for SCA (Subscription) cable-delivered radar terminal. |
-| `SCADB2.MOD` | SCA database module |
-| `TESTDB.MOD` | Database test harness |
+| `SCADB2.MOD` | `MODULE SCADB` — "SCA Digital Broadcasting Protocol, version B.2". Terminate-and-stay-resident broadcast kernel driving the COM port (the "DB" is Digital Broadcasting, not database). See [WLLX and the SCA Subcarrier Link](#wllx-and-the-sca-subcarrier-link). |
+| `TESTDB.MOD` | "Tests the Digital Broadcast Kernel as a transient program." Documents the six-stage host pipeline (File, Frame, Encrypt, Error-codes, Loop-check, RS-232); stage 4 is implemented as a CRC-16 per 128-byte block. |
 
 ### 19910309 RADAR E250Term
 
@@ -400,6 +400,107 @@ Evidence of parallel development branches.
 | `E300PC.DAT` | 49-byte binary configuration blob. Contains truncated procedure name fragments (`GetPosL`, `Rename`, `InitBufInfo`, `Assign`). |
 | `M2.SES` | Logitech M2 IDE session. Working directory: `C:\M2\E300-2`. Cursor positioned in function `main`. |
 | `DEF/`, `MOD/` subdirectories | Reorganized build structure for definition and implementation files |
+
+---
+
+## WLLX and the SCA Subcarrier Link
+
+A thread that runs through the archive from April 1987 to December 1992: a
+one-way broadcast of E300 radar pictures from WLLX Radio in Lawrenceburg,
+Tennessee, carried on a subcarrier of the station's FM signal. "SCA" in the
+source is Subsidiary Communications Authorization, the FCC term for an FM
+subcarrier service.
+
+### What the source shows
+
+| Snapshot | Evidence |
+|---|---|
+| `19870412 RADARPAS Radiotx` | First appearance. `RADIO.PAS` has a "Continuous Transmission" `RadioTx` that loops over the saved picture, sending each line with tilt, range, gain and time plus an additive checksum byte, out of the other COM port (it swaps COM1/COM2 for the duration). `RADIOTX.PAS` / `RADIORX.PAS` send and receive files in 128-byte blocks via `TxBlock_with_Check` / `RxBlock_with_Check`. `CUSTOM.PAS` carries the "WLLX RADIO" banner. |
+| `19870416 RADARPAS RadioTx Enhanced` | Follow-up four days later. |
+| `19870512 RADARPAS Tennterm` | Receive terminal; banner "WLLX RADIO" (`RADAR.PAS:821`). Header quoted in `radar_lts_19870512_radiorx.pl` as "SN 8705 -- WLLX RADIO LAWRENCEBURG". |
+| `19880329 RADARPAS Tenn`, `19880801 RADARPAS RADIO` | Later Pascal versions; the second adds `RADTERM.PAS`. |
+| `19880815 RADAR MOD` | Modula-2 port: `RADIO.MOD`, `RADIOTX.MOD/.DEF`, `RADARTX.MOD/.DEF`, with `CalcCRC` (CRC-16) replacing the additive checksum. |
+| `19890319 RADAR MOD Release` | `PICTURES.MOD:393` block marked `(* SCA TRANSMISSION *)`. |
+| `19910104 RADARDB Cdscrn` | `SCADB2.MOD` — "SCA Digital Broadcasting Protocol, version B.2", a TSR broadcast kernel; `TESTDB.MOD` runs the same kernel as a transient program. |
+| `19921022 RADARPAS RADIO` | Full TX/RX pairs; `MAIN.MOD:766` banner "WLLX RADIO, Lawrenceburg TN". |
+| `19921228 RADAR MOD` | Final version. `MAIN.MOD:1009-1014` banner: "ELLASON E300 RADAR TERMINAL, ver 3.1 / WLLX RADIO, Lawrenceburg TN / Revision 11/30/92 / Modified for SCA Data Transmission". `MAIN.MOD:1047` calls `DB.InstallTx` ("Install SCA transmitter"); `DB.MOD` runs a background process that re-sends the current picture buffer continuously at 9600 baud over the second serial port, and a matching `InstallRx` / `RxProcess` on the receive side. |
+
+The design is a broadcast carousel: the transmitter repeats the current picture
+indefinitely, and a receiver that tunes in at any point picks up the next
+complete copy. There is no return channel, so there is no retransmission
+request; integrity is by per-block check only.
+
+### Public record on WLLX
+
+Collected 2026-11-13. None of these sources mention this software or its
+author; the connection to the code above is the station name and location in
+the banners.
+
+- Wikipedia's WLLX article (lead section, no inline citation) states that the
+  station "was one of the first in the nation to own and operate a live, color
+  weather radar system and distribute the images to its listeners via a
+  subcarrier on the primary FM signal." WLLX is 97.5 FM, Lawrenceburg,
+  Tennessee, first on air February 20, 1981, now owned by Prospect
+  Communications. <https://en.wikipedia.org/wiki/WLLX>
+- Wikipedia's Tennessee Valley Weather article (also uncited on this point)
+  says WLLX "has owned a weather radar since 1987 for general precipitation
+  observation." That year matches the first WLLX snapshots here (April 1987,
+  serial number SN 8705). <https://en.wikipedia.org/wiki/Tennessee_Valley_Weather>
+- The same articles record the later history: WLLX was a parent company of
+  Tennessee Valley Weather (launched April 2, 2020), and in 2020, after an EF-1
+  tornado struck Lawrenceburg on February 5, bought a Furuno WR2120
+  dual-polarimetric Doppler radar.
+- A fan-maintained technical profile describes WLLX as the first radio station
+  to acquire its own colour weather radar system. Seen only as a search-result
+  summary; the page itself refused the fetch.
+  <https://www.almediapage.info/profiles/wllx.html>
+- For context on how new this was: US patent 5,023,934 (Radair, Inc., San
+  Antonio; filed 1988, granted 1991) claims transmission of digitized,
+  compacted graphic data over an FM station's SCA subcarrier. The first WLLX
+  transmit code in this archive is dated April 1987. Unrelated company; cited
+  only to date the idea. <https://patents.google.com/patent/US5023934A>
+- The radar itself: World Radio History hosts a scanned facsimile of the
+  operating handbook for the earlier Ellason 200 — "Ellason 200 Color Radar
+  System, Ground Based Weather Radar, OPERATING HANDBOOK", Ellason Avionics,
+  739 Spirit of Saint Louis Boulevard, Chesterfield, Missouri 63017 (34 pages,
+  with handwritten installation notes on the cover and page 2). The foreword on
+  page 4 is written in the first person by the system's designer ("my purpose
+  in designing the controls for this system was to have a radar that was easy
+  to operate") and is signed **Arnold Q. Lane** — the same Arnold credited in
+  the top-level `README.md` with finding the EEPROM reader used by GDEM.
+  <https://www.worldradiohistory.com/Archive-Catalogs/Miscellaneous-Manufacturers/Ellason-200-Color-Radar-.pdf>
+  A copy downloaded 2026-11-13 is kept at
+  `documents/Ellason 200 Color Radar Operating Handbook.pdf` (1,107,563 bytes,
+  SHA-256 `edb29c56…53e2bb97`).
+
+The "first in the nation" claims are uncited on Wikipedia and should be treated
+as the station's reputation rather than an established fact; a contemporary
+trade-press or newspaper source would be needed to firm them up.
+
+### Reed-Solomon coding (author's recollection, not in the archive)
+
+D. G. Lane recalls doing Reed-Solomon error-correction work for this link
+(recollection recorded 2026-11-13). No Reed-Solomon source survives in the
+archive:
+
+- `TESTDB.MOD:55-67` reserves stage 4 of the broadcast pipeline for
+  "Error-codes: Add error-correction codes", but `GetErrorCodes`
+  (`TESTDB.MOD:123-130`) only computes a CRC-16 — detection, not correction.
+- `SCADB2.MOD` and `RS.MOD` have a `Noise` constant that, when set, corrupts
+  roughly 1 in 500 received bytes, a hook suited to testing error handling.
+- `RS.MOD` / `RS2.MOD` are the RS-232 serial drivers, not Reed-Solomon.
+
+The reference used was a book borrowed from the Washington University library,
+remembered as titled "Error Correcting Codes" or similar, practical and focused,
+with a blue cover. A possible candidate is Richard E. Blahut, *Theory and
+Practice of Error Control Codes* (Addison-Wesley, 1983). This is unconfirmed:
+Peterson & Weldon, *Error-Correcting Codes* (MIT Press, 2nd ed. 1972) matches
+the remembered title exactly, and Lin & Costello, *Error Control Coding*
+(Prentice-Hall, 1983) is another possibility.
+
+### Hill country blues as a subcarrier form
+
+North Mississippi hill country blues — Mississippi Fred McDowell, R. L. Burnside, Junior Kimbrough — tends to stay on one chord, holding a droning, repetitive figure rather than moving through the twelve-bar changes. Read as a signal, that drone is a carrier: monotonous, steady, and uninteresting in itself, there to be modulated. The music is what rides on it — the vocal line, slide inflections and rhythmic displacements are small deviations from the drone, in the way the radar picture here is small deviations impressed on a subcarrier that would otherwise be a featureless tone. Take the carrier away and there is nothing for the information to be measured against; listen only to the carrier and you hear nothing happening.
 
 ---
 
